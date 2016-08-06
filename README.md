@@ -1,6 +1,6 @@
 # planty
 
-A website about house plants.
+A website about house plants🌱.
 
 
 ## License
