@@ -101,6 +101,6 @@ if __name__ == "__main__":
 
     # Create our tables and some sample data
     db.create_all()
-    example_data()
+    #example_data()
 
     print "Connected to DB."
