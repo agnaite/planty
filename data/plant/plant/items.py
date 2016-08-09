@@ -5,7 +5,6 @@ from scrapy.item import Item, Field
 
 class PlantItem(scrapy.Item):
     name = Field()
-    #alt_name = Field()
     species = Field()
-    key = Field()
-    value = Field()
+    title = Field()
+    description = Field()
