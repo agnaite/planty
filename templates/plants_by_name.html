@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
   
   <h1>Plants by name:</h1><br>
   <ul>
     {% for plant in plants %}
-        <li>{{ plant.name }}</li>
+      <li>{{ plant.name }}</li>
     {% endfor %}
   </ul>
 

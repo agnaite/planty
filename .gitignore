@@ -2,3 +2,4 @@ env/
 *.pyc
 secret.py
 .DS_Store
+.webassets-cache

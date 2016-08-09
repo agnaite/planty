@@ -1,0 +1,24 @@
+$menlo: 'Menlo', sans-serif;
+$green: #7FD279;
+$hover-green: #6BCC66;
+$white: #fff;
+
+.container {
+  font-family: $menlo;
+  width: 100%;
+  padding: 0;
+
+  .navbar {
+    background: $white;
+    border: none;
+  }
+  .navbar-default .navbar-brand {
+      color: $green;
+      font-size: 1.5em;
+
+      &:hover {
+        color: $hover-green;
+      }
+    }
+}
+
