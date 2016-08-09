@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, jsonify
 from model import connect_to_db, db, Plant, User, PlantUser
 from flask_assets import Environment, Bundle
 import secret
@@ -26,9 +26,19 @@ def index_page():
 def search_for_plant():
     """Displays search results."""
 
-    search_term = request.args.get('plant_name')
-    print search_term
-    return "done"
+    # gets the user's search term from app.js and queries the db
+    search_term = request.args.get('plant-name')
+    results = Plant.query.filter(Plant.name.ilike('%' + search_term + '%')).all()
+
+    plants_found = {}
+
+    # for each plant in the results, make dictionary using plant's id as key
+    # and plant's name as value
+    for plant in results:
+        plants_found[plant.plant_id] = plant.name
+
+    return jsonify(plants_found)
+
 
 @app.route('/all_plants')
 def show_all_plants_by_name():

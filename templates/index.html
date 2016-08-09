@@ -4,10 +4,14 @@
 {% block content %}
 
 <div class='home-search'>
-  <form action='/search' method='GET'>
-    <input type='text' name='plant_name'>
-    <input type='submit'>
+  <form>
+    <input type='text' name='plant-name' id='search-field' placeholder='Enter plant name'>
+    <button type='submit' id='search-btn'>Search</button>
   </form>
+
+  <div class='search-result-wrapper'>
+    <ul id="search-results"></ul>
+  </div>
 </div>
 
 {% endblock %}

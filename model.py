@@ -24,8 +24,8 @@ class Plant(db.Model):
     soil = db.Column(db.String(32))
     misc = db.Column(db.UnicodeText)
 
-    def __repr__(self):
-        return "<{}, {}.>".format(self.name.encode('utf-8').strip(), self.species.encode('utf-8').strip())
+    # def __repr__(self):
+    #     return "<{}, {}.>".format(self.name.encode('utf-8').strip(), self.species.encode('utf-8').strip())
 
 
 class User(db.Model):
