@@ -1,28 +1,19 @@
+# scrapy crawl plant -o with_urls.json
+
 from scrapy.spiders import BaseSpider
 from scrapy.selector import HtmlXPathSelector
 from plant.items import PlantItem
+from pprint import pprint
 import json
-
-# from HTMLParser import HTMLParser
-
-
-# class MLStripper(HTMLParser):
-#     def __init__(self):
-#         self.reset()
-#         self.fed = []
-
-#     def handle_data(self, d):
-#         self.fed.append(d)
-
-#     def get_data(self):
-#         return ''.join(self.fed)
+import re
 
 
-# def strip_tags(html):
-#     s = MLStripper()
-#     s.feed(html)
-#     return s.get_data()
+from itertools import izip_longest
 
+def grouper(n, iterable, fillvalue=None):
+    "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
+    args = [iter(iterable)] * n
+    return izip_longest(fillvalue=fillvalue, *args)
 
 def get_urls():
     """Parse a json file to pull out all the urls and save them in a list"""
@@ -44,39 +35,32 @@ class MySpider(BaseSpider):
     start_urls = get_urls()
 
     def parse(self, response):
-        hxs = HtmlXPathSelector(response)
-        addresses = hxs.xpath("//div[@id='bodycontent']")
-        items = []
-        for address in addresses:
 
-            item = PlantItem()
-            # item["name"] = address.select("div[@class='post']/div[@class='pagebanner']/h2/text()").extract()
-            # item["species"] = address.select("div[@class='post']/div[@class='pagebanner']/div[@class='clear resultSpecies']/text()").extract()
-            # item["title"] = address.select("div[@class='post']/div[@class='contents']/div[@id='tabbedinfo']/div[@class='tabscontain']/div[@class='tabs']/div[@class='post-meta']/div[@class='post-meta-key']/text()").extract()
-            item["description"] = address.select("div[@class='post']/div[@class='contents']/div[@id='tabbedinfo']/div[@class='tabscontain']/div[@class='tabs']/div[@class='post-meta']/div[@class='post-meta-value']/child::node()").extract()   
+        # TODO get the plant name
 
-            d = item["description"]
-            print("-"*80)
-            print('{} {}'.format(type(item["description"]), len(item["description"])))
-            print(item["description"])
-            print("-"*80)
+        keys = response.xpath("//div[@class='post-meta-key']")
+        values = response.xpath("//div[@class='post-meta-value']")
 
-            # my_whole_paragraph = []
+        response.select("//div[@class='post']/div[@class='pagebanner']/h2/text()").extract()
 
-            # for node in my_nodes:
-            #     some_text = node.select('text()').extract()
-            #     my_whole_paragraph.append(some_text)
-            #     some_links = node.select('a/text()').extract()
-            #     my_whole_paragraph.append(some_links)
-            #     some_spans = node.select('span/text()').extract()
-            #     my_whole_paragraph.append(some_spans)
-                # if some_text:
-                #     my_whole_paragraph.append(some_text)
-                # else:
-                #     my_whole_paragraph.append(node.select("a/text()").extract())
+        assert len(keys) == len(values)
 
-            # item["description"] = my_whole_paragraph
+        results = []
 
-            items.append(item)
+        for key, value in zip(keys, values):
 
-        return items
+            foo = value.xpath('.//text()').extract()
+
+            bar = [foo[0]]
+            for z in grouper(3, foo[1:-1]):
+                bar.append(z[0])
+
+
+            key_title = key.xpath('.//text()').extract()[0]
+
+            result = { response.title: { str(key_title): '\n'.join(bar) } }
+            print(result)
+            print('-'*80)
+            results.append(result)
+
+        return results
