@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, request, redirect, jsonify
-from model import connect_to_db, db, Plant, User, PlantUser
 from flask_assets import Environment, Bundle
+
+from jinja2 import StrictUndefined
+
+from model import connect_to_db, db, Plant, User, PlantUser
 import secret
 
 app = Flask(__name__)
 assets = Environment(app)
 app.secret_key = secret.APP_KEY
+
+app.jinja_env.undefined = StrictUndefined
 
 # compile sass from sass.scss to all.css
 assets.url = app.static_url_path
@@ -38,6 +43,15 @@ def search_for_plant():
         plants_found[plant.plant_id] = plant.name
 
     return jsonify(plants_found)
+
+
+@app.route('/plant/<plant_id>')
+def show_plant_details(plant_id):
+    """Show individual plant's page"""
+
+    plant = Plant.query.get(plant_id)
+
+    return render_template('plant.html', plant=plant.name)
 
 
 @app.route('/all_plants')

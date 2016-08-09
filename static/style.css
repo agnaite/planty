@@ -12,7 +12,7 @@
         color: #6BCC66; }
   .container .home-search {
     width: 80%;
-    margin: 200px auto 0 auto; }
+    margin: 260px auto 0 auto; }
     .container .home-search #search-field {
       width: 90%;
       padding: 15px;
@@ -24,12 +24,11 @@
         font-size: 1.25em; }
         .container .home-search .search-result-wrapper {
           width: 60%;
-          margin-top: 50px; }
+          margin-top: 20px; }
           .container .home-search .search-result-wrapper ul {
-            padding: 0;
-            margin: 0; }
+            padding-left: 2px; }
             .container .home-search .search-result-wrapper ul li {
               list-style: none;
-              line-height: 1.5; }
+              line-height: 2; }
               .container .home-search .search-result-wrapper ul li a {
                 font-size: 1.25em; }
