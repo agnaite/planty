@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>{% block title %}{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   {% assets "scss_all" %}
     <link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
@@ -22,6 +23,16 @@
       </div>
     </div>
   </nav>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
 
   {% block content %}{% endblock %}
 

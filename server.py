@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, redirect, jsonify, flash
 from flask_assets import Environment, Bundle
 
 from jinja2 import StrictUndefined
@@ -35,14 +35,17 @@ def search_for_plant():
     search_term = request.args.get('plant-name')
     results = Plant.query.filter(Plant.name.ilike('%' + search_term + '%')).all()
 
-    plants_found = {}
+    if len(results) > 0:
+        plants_found = {}
 
-    # for each plant in the results, make dictionary using plant's id as key
-    # and plant's name as value
-    for plant in results:
-        plants_found[plant.plant_id] = plant.name
+        # for each plant in the results, make dictionary using plant's id as key
+        # and plant's name as value
+        for plant in results:
+            plants_found[plant.plant_id] = plant.name
 
-    return jsonify(plants_found)
+        return jsonify(plants_found)
+    else:
+        return "No plants found " + '<span>' + u'😣' + '</span>'
 
 
 @app.route('/plant/<plant_id>')
@@ -51,7 +54,9 @@ def show_plant_details(plant_id):
 
     plant = Plant.query.get(plant_id)
 
-    return render_template('plant.html', plant=plant.name)
+    return render_template('plant.html',
+                            plant_name=plant.name,
+                            plant_species=plant.species)
 
 
 @app.route('/all_plants')

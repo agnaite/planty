@@ -1,13 +1,14 @@
 $menlo: 'Menlo', sans-serif;
 $green: #7FD279;
 $hover-green: #6BCC66;
-$white: #fff;
+$white: #FFF;
+$gray: #A9A9A9;
 
 .container {
   font-family: $menlo;
   width: 100%;
   padding: 0;
-
+// *************************** BASE STYLES ***************************
   .navbar {
     background: $white;
     border: none;
@@ -20,6 +21,9 @@ $white: #fff;
         color: $hover-green;
       }
     }
+
+  // *************************** HOME STYLES ***************************
+    
   .home-search {
     width: 80%;
     margin: 260px auto 0 auto;
@@ -39,18 +43,36 @@ $white: #fff;
     .search-result-wrapper {
       width: 60%;
       margin-top: 20px; 
-      // margin: 50px auto;
-      ul {
+      #search-results {
         padding-left: 2px;
         li {
           list-style: none;
           line-height: 2;
-          a {
+          font-size: 1.5em;
+          color: tomato;
+          span {
             font-size: 1.25em;
+          }
+          a {
+            color: $gray;
+            &:hover {
+              text-decoration: none;
+              color: $green;
+            }
           }
         }
       }
     } 
+  }
+  // *************************** PLANT VIEW STYLES ***************************
+  .plant-view-wrapper {
+    width: 90%;
+    margin: 80px auto;
+
+    .plant-img {
+      max-width: 100%;
+    }
+    
   }
 }
 

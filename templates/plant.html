@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}{{ plant }}{% endblock %}
+{% block title %}{{ plant_name }}{% endblock %}
 
 {% block content %}
+
+<div class='plant-view-wrapper row'>
+    <img class='plant-img col-md-4 col-sm-12' src="/static/img/placeholder-image.png">
+    <div class='plant-title-text col-md-4 col-sm-12'>
+      <h3>{{ plant_name }}</h3>
+      <h5>{{ plant_species }}</h5>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

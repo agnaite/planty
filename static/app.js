@@ -1,15 +1,18 @@
 function searchPlant(results) {
   var result_urls = [];
 
-  // for each result item, makes an href link with plant name
-  for(var plant in results) {
-    result_urls.push("<li><a href='/plant/" + plant + "'>" + results[plant] +
+  if (typeof(results) === "string") {
+    $('#search-results').html("<li>" + results + "<li>");
+  } else {
+    // for each result item, makes an href link with plant name
+    for(var plant in results) {
+      result_urls.push("<li><a href='/plant/" + plant + "'>" + results[plant] +
                      "</a></li>");
-  }
-
-  // appends each link in the list to the search result div
-  for(var i = 0; i < result_urls.length; i++) {
-    $('#search-results').append(result_urls[i]);
+    }
+    // appends each link in the list to the search result div
+    for(var i = 0; i < result_urls.length; i++) {
+      $('#search-results').append(result_urls[i]);
+    }
   }
 }
 
