@@ -45,7 +45,8 @@ def search_for_plant():
 
         return jsonify(plants_found)
     else:
-        return "No plants found " + '<span>' + u'😣' + '</span>'
+        return "No plants found "
+
 
 
 @app.route('/plant/<plant_id>')

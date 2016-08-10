@@ -2,7 +2,7 @@ function searchPlant(results) {
   var result_urls = [];
 
   if (typeof(results) === "string") {
-    $('#search-results').html("<li>" + results + "<li>");
+    $('#search-results').html("<li>" + results + "<i class='fa fa-frown-o fa-lg' aria-hidden='true'></i>" + "<li>");
   } else {
     // for each result item, makes an href link with plant name
     for(var plant in results) {

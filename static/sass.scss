@@ -50,9 +50,6 @@ $gray: #A9A9A9;
           line-height: 2;
           font-size: 1.5em;
           color: tomato;
-          span {
-            font-size: 1.25em;
-          }
           a {
             color: $gray;
             &:hover {
@@ -72,7 +69,11 @@ $gray: #A9A9A9;
     .plant-img {
       max-width: 100%;
     }
-    
+    .plant-title-text {
+      i {
+        padding-right: 16px;
+      }
+    }
   }
 }
 

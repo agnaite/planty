@@ -32,15 +32,15 @@
               line-height: 2;
               font-size: 1.5em;
               color: tomato; }
-              .container .home-search .search-result-wrapper #search-results li span {
-                font-size: 1.25em; }
-                .container .home-search .search-result-wrapper #search-results li a {
-                  color: #A9A9A9; }
-                  .container .home-search .search-result-wrapper #search-results li a:hover {
-                    text-decoration: none;
-                    color: #7FD279; }
+              .container .home-search .search-result-wrapper #search-results li a {
+                color: #A9A9A9; }
+                .container .home-search .search-result-wrapper #search-results li a:hover {
+                  text-decoration: none;
+                  color: #7FD279; }
   .container .plant-view-wrapper {
     width: 90%;
     margin: 80px auto; }
     .container .plant-view-wrapper .plant-img {
       max-width: 100%; }
+      .container .plant-view-wrapper .plant-title-text i {
+        padding-right: 16px; }
