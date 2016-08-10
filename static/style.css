@@ -44,3 +44,8 @@
       max-width: 100%; }
       .container .plant-view-wrapper .plant-title-text i {
         padding-right: 16px; }
+  .container .new-plant-title {
+    margin-top: 120px;
+    text-align: center; }
+    .container .new-plant-form {
+      margin-top: 60px; }

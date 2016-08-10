@@ -1,3 +1,11 @@
+<!-- define the navbar and set home to default -->
+{% set navigation_bar = [
+    ('/', 'index', 'Home'),
+    ('/new_plant', 'new_plant', 'New Plant')
+] -%}
+
+{% set active_page = active_page|default('index') -%}
+
 <!doctype html>
 <html>
 <head>
@@ -21,7 +29,17 @@
         </button>
         <a class="navbar-brand" href="/">Planty</a>
       </div>
-    </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <!-- loops over each link in navbar and sets the active class accordingly -->
+          {% for href, id, caption in navigation_bar %}
+            <li{% if id == active_page %} class="active"{% endif %}>
+              <a href="{{ href|e }}">{{ caption|e }}</a>
+            </li>
+          {% endfor %} <!-- ends the navbar loop -->
+        </ul>
+      </div> <!-- /.navbar-collapse -->
+    </div> <!-- /.container-fluid -->
   </nav>
 
   {% with messages = get_flashed_messages() %}
@@ -36,7 +54,7 @@
 
   {% block content %}{% endblock %}
 
-  </div>
+  </div><!-- /.container -->
   
   <script src="https://use.fontawesome.com/4bf6806d57.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

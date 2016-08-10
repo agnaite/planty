@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% set active_page = "new_plant" %}
+{% block title %}New Plant{% endblock %}
+
+{% block content %}
+  <h3 class='new-plant-title'>Add a new plant</h3>
+  <form class='form-horizontal col-sm-offset-3 new-plant-form' action='/process_new_plant' method='POST'>
+    <div class='form-group'>
+      <label for="name_field" class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="name_field" name='plant_name' required='required'>
+      </div>
+    </div>
+    
+    <div class='form-group'>
+      <label for="species_field" class="col-sm-2 control-label">Species</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="species_field" name='plant_species'>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="image_field" class="col-sm-2 control-label">Image URL</label>
+      <div class="col-sm-4">
+        <input type="url" class="form-control" id="image_field" name='plant_image'>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="water_field" class="col-sm-2 control-label">Water</label>
+      <div class="col-sm-4">
+        <select class='form-control' id='water_field' name='water'>
+          <option></option>
+          {% for key in WATER %}
+            <option value='{{ key }}'>{{ key }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="sun_field" class="col-sm-2 control-label">Sun</label>
+      <div class="col-sm-4">
+        <select class='form-control' id='sun_field' name='sun'>
+          <option></option>
+          {% for key in SUN %}
+            <option value='{{ key }}'>{{ key }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="humidity_field" class="col-sm-2 control-label">Humidity</label>
+      <div class="col-sm-4">
+        <select class='form-control' id='humidity_field' name='humidity'>
+          <option></option>
+          {% for key in HUMIDITY %}
+            <option value='{{ key }}'>{{ key }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="temp_field" class="col-sm-2 control-label">Temperature</label>
+      <div class="col-sm-4">
+        <select class='form-control' id='temp_field' name='temp'>
+          <option></option>
+          {% for key in TEMP %}
+            <option value='{{ key }}'>{{ key }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Add Plant</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}

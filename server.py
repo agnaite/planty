@@ -5,7 +5,7 @@ from flask_assets import Environment, Bundle
 
 from jinja2 import StrictUndefined
 
-from model import connect_to_db, db, Plant, User, PlantUser
+from model import connect_to_db, db, Plant, User
 import secret
 
 app = Flask(__name__)
@@ -48,7 +48,6 @@ def search_for_plant():
         return "No plants found "
 
 
-
 @app.route('/plant/<plant_id>')
 def show_plant_details(plant_id):
     """Show individual plant's page"""
@@ -56,8 +55,50 @@ def show_plant_details(plant_id):
     plant = Plant.query.get(plant_id)
 
     return render_template('plant.html',
-                            plant_name=plant.name,
-                            plant_species=plant.species)
+                           plant_name=plant.name,
+                           plant_species=plant.species,
+                           plant_img=plant.image)
+
+
+@app.route('/new_plant')
+def add_new_plant():
+    """Shows form for adding new plant"""
+
+    WATER = Plant.WATER.keys()
+    SUN = Plant.SUN.keys()
+    HUMIDITY = Plant.HUMIDITY.keys()
+    TEMP = Plant.TEMPERATURE.keys()
+
+    return render_template('new_plant_form.html',
+                           WATER=WATER,
+                           SUN=SUN,
+                           HUMIDITY=HUMIDITY,
+                           TEMP=TEMP)
+
+
+@app.route('/process_new_plant', methods=['POST'])
+def process_new_plant():
+    """Gets the user input from new plant form and adds to the database"""
+
+    # gets all the user-entered data from the new plant form
+    name = request.form.get('plant_name').title()
+    species = request.form.get('plant_species').title()
+    image = request.form.get('plant_image')
+    water = request.form.get('water')
+    sun = request.form.get('sun')
+    humidity = request.form.get('humidity')
+    temp = request.form.get('temp')
+
+    # creates new plant
+    new_plant = Plant(name=name, species=species, image=image, water=water,
+                      sun=sun, humidity=humidity, temperature=temp)
+
+    # adds and saves new plant in the database
+    db.session.add(new_plant)
+    db.session.commit()
+
+    flash(name + "has been added")
+    return redirect('/')
 
 
 @app.route('/all_plants')
