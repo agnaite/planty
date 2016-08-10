@@ -1,0 +1,7 @@
+/*TEMPERATURE*/
+{
+  "Normal Room Temperatures": "Tolerate normal room temperatures year-around, from 65F to 75F (18C to 24C).",
+  "Warm Temperatures": "Tolerate normal room temperatures very well during warmer months, but do not like temperatures below 65F (18C). No air conditioning.",
+  "Cool Temperatures": "Tolerate normal room temperatures during their growing period, but like cooler temperatures, around 45F to 55F (7C to 13C), during their rest period.",
+  "Cold Temperatures": "Prefer cold temperatures - 35F to 45F (2C - 7C). Never expose to freezing temperatures."
+}
