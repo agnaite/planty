@@ -37,6 +37,8 @@ $('#search-btn').click(startSearch);
 // **************************** AJAX PLANT EDIT ****************************
 
 function finalizeEdit(results) {
+  // if results from server are for image, changes the src attribute for plant image
+  // else changes the html for the edited plant spec
   if (results.col === 'image') {
     $('*[data-column='+results.col+']').html("<img class='plant-img col-md-4 col-sm-12' src="+results.val+"></a>");
   } else {
@@ -45,19 +47,23 @@ function finalizeEdit(results) {
 }
 
 function submitEdit(id, col) {
+  // makes a js object of the plant id, column, and user entered value
   var userValue = {'plantId': id,
                    'columnToEdit': col,
                    'newValue': $('#new_edit').val()};
-  
+  // calls an ajax post request to route edit plant and sends in the dict above
   $.post('/edit_plant', userValue, finalizeEdit);
 }
 
 function startEdit(evt) {
+  // stops further clicks
   $(this).unbind('click');
 
+  // gets the plant id and attribute clicked on
   var plantId = $(this).attr('data-plant');
   var tableCol = $(this).attr('data-column');
 
+  // checks what is clicked on and replaces html with appropriate form fields 
   if (tableCol === 'sun') {
     $(this).html("<select id='new_edit'>" +
                  "<option value='Full Sun'>Full Sun</option>" +
@@ -66,6 +72,7 @@ function startEdit(evt) {
                  "<option value='Low Light'>Low Light</option>" +
                  "</select>" +
                  "<input type='submit' id='submit-edit-btn'>");
+
   } else if (tableCol === 'water') {
       $(this).html("<select id='new_edit'>" +
                  "<option value='Moderately Moist'>Moderately Moist</option>" +
@@ -73,6 +80,7 @@ function startEdit(evt) {
                  "<option value='Keep on the Dry Side'>Keep on the Dry Side</option>" +
                  "</select>" +
                  "<input type='submit' id='submit-edit-btn'>");
+
   } else if (tableCol === 'humidity') {
       $(this).html("<select id='new_edit'>" +
                  "<option value='High Humidity'>High Humidity</option>" +
@@ -90,14 +98,17 @@ function startEdit(evt) {
                  "<option value='Cold Temperatures'>Cold Temperatures</option>" +
                  "</select>" +
                  "<input type='submit' id='submit-edit-btn'>");
+    
   } else {
     $(this).html("<input type='text' id='new_edit'>" +
                  "<input type='submit' id='submit-edit-btn'>");
   }
 
+  // on submit of edits calls submitEdit function and passes in plant id and column edited
   $('#submit-edit-btn').click(function(){ return submitEdit(plantId, tableCol); });
 }
 
+// on click of add specs button, call startEdit function
 $('.edit-btn').click(startEdit);
 
 
