@@ -44,8 +44,6 @@ def search_for_plant():
             plants_found[plant.plant_id] = plant.name
 
         return jsonify(plants_found)
-    else:
-        return "None"
 
 
 @app.route('/plant/<plant_id>')
@@ -104,6 +102,26 @@ def process_new_plant():
 
     flash(name + "has been added")
     return redirect('/new_plant/plant_id')
+
+
+@app.route('/edit_plant', methods=['POST'])
+def edit_plant():
+    """Edits plant."""
+
+    # gets column being edited, new value, and plant being edited from ajax
+    col_to_edit = request.form.get('columnToEdit')
+    value = request.form.get('newValue')
+    plant_id = int(request.form.get('plantId'))
+
+    # gets plant being edited and updated the column value for that plant
+    Plant.query.filter_by(plant_id=plant_id).update({col_to_edit: value})
+    db.session.commit()
+
+    # sends back the the column and new value for html update
+    edit = {'col': col_to_edit,
+            'val': value}
+
+    return jsonify(edit)
 
 
 @app.route('/all_plants')

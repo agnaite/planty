@@ -19,7 +19,7 @@
       {% if plant_species %}
         <h5>{{ plant_species }}</h5>
       {% else %}
-        <h5><a data-plant='{{ plant_id }}' data-column='species' class='edit-btn'>Add Species</a></h5>
+        <h5 data-new='species'><a data-plant='{{ plant_id }}' data-column='species' class='edit-btn'>Add Species</a></h5>
       {% endif %}
         <br>
       <i class="fa fa-sun-o fa-4x" aria-hidden="true"></i>
@@ -36,7 +36,7 @@
           {% if water %}
             <td>{{ water }}</td>
           {% else %}
-            <td><a data-plant='{{ plant_id }}' data-column='water' class='edit-btn'>Add water specifications</a></td>
+            <td data-new='water'><a data-plant='{{ plant_id }}' data-column='water' class='edit-btn'>Add water specifications</a></td>
           {% endif %}
         </tr>
         <tr>
@@ -45,7 +45,7 @@
           {% if sun %}
             <td>{{ sun }}</td>
           {% else %}
-            <td><a data-plant='{{ plant_id }}' data-column='sun' class='edit-btn'>Add sun specifications</a></td>
+            <td data-new='sun'><a data-plant='{{ plant_id }}' data-column='sun' class='edit-btn'>Add sun specifications</a></td>
           {% endif %}
         </tr>
         <tr>
@@ -54,7 +54,7 @@
           {% if humidity %}
             <td>{{ humidity }}</td>
           {% else %}
-            <td><a data-plant='{{ plant_id }}' data-column='humidity' class='edit-btn'>Add humidity specifications</a></td>
+            <td data-new='humidity'><a data-plant='{{ plant_id }}' data-column='humidity' class='edit-btn'>Add humidity specifications</a></td>
           {% endif %}
         </tr>
         <tr>
@@ -63,7 +63,7 @@
           {% if temp %}
             <td>{{ temp }}</td>
           {% else %}
-            <td><a data-plant='{{ plant_id }}' data-column='temperature' class='edit-btn'>Add temperature specifications</a></td>
+            <td data-new='temperature'><a data-plant='{{ plant_id }}' data-column='temperature' class='edit-btn'>Add temperature specifications</a></td>
           {% endif %}
         </tr>
       </table>
