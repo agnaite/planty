@@ -117,6 +117,11 @@ def edit_plant():
     Plant.query.filter_by(plant_id=plant_id).update({col_to_edit: value})
     db.session.commit()
 
+    # check to see if col to edit is a plant spec of sun, water, humidity, or temp
+    spec = get_plant_specs(Plant.query.get(plant_id), col_to_edit)
+    if spec:
+        value = spec
+
     # sends back the the column and new value for html update
     edit = {'col': col_to_edit,
             'val': value}
@@ -131,6 +136,21 @@ def show_all_plants_by_name():
     all_plants = Plant.query.all()
 
     return render_template("plants_by_name.html", plants=all_plants)
+
+# **************************** HELPER FUNCTIONS *******************************
+
+
+def get_plant_specs(plant, spec, key='description'):
+    if spec == 'water':
+        return plant.get_water(key)
+    elif spec == 'sun':
+        return plant.get_sun(key)
+    elif spec == 'humidity':
+        return plant.get_humidity(key)
+    elif spec == 'temp':
+        return plant.get_temp(key)
+    else:
+        return None
 
 
 if __name__ == "__main__":
