@@ -25,6 +25,11 @@
         <br>
       <i class="fa fa-sun-o fa-4x" aria-hidden="true"></i>
     </div>
+    <!-- delete and edit plant buttons -->
+    <div class='plant-controls col-offset-8 col-sm-4'>
+      <button class='btn btn-default edit-control' data-plant='{{ plant_id }}'><a>Edit</a></button>
+      <button class='btn btn-default delete-control' data-plant='{{ plant_id }}'><a>Delete</a></button>
+    </div>
   </div> <!-- .row -->
 
   <div class='row' id='edit-img-url-field'></div> <!-- empty div for image url field -->

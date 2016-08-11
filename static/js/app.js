@@ -1,3 +1,37 @@
+// ******************************** DELETE ALERT/AJAX ***********************************  
+
+function deleteRequestSubmitted(results) {
+  // redirects to homepage after plant deletion
+  window.location.replace("/");
+}
+
+function deleteWarning(evt) {
+  // displays confirmatory "sweetalert" alert
+  swal({title: "Are you sure?",
+        text: "You will not be able to recover this plant.",
+        imageSize: "120x120",
+        showCancelButton: true,
+        imageUrl: "/static/img/plant.svg",
+        animation: false,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it.",
+        cancelButtonText: "No, cancel pls!",
+        closeOnConfirm: true,
+        closeOnCancel: true },
+
+        function(isConfirm){
+          // if user clicked confirm delete, send ajax request to flask to delete
+          // plant from the db
+          if (isConfirm) {
+            $.post('/delete_request',
+                  {'dataPlant': $('.delete-control').attr('data-plant')},
+                   deleteRequestSubmitted);
+          }
+        });
+}
+
+$('.delete-control').click(deleteWarning);
+
 // ******************************** AJAX SEARCH ********************************
 function searchPlant(results) {
   var result_urls = [];

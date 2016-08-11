@@ -13,7 +13,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   {% assets "scss_all" %}
-    <link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
+    <link rel='stylesheet' href="{{ ASSET_URL }}">
+  {% endassets %}
+  {% assets "css_all" %}
+    <link rel='stylesheet' href="{{ ASSET_URL }}">
   {% endassets %}
 </head>
 <body>
@@ -58,6 +61,12 @@
   
   <script src="https://use.fontawesome.com/4bf6806d57.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script type="text/javascript" src='/static/app.js'></script>
+  {% assets "js_all" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
 </body>
 </html>
+
+
+<!-- *** CREDITS *** -->
+<!-- <div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>

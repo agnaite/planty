@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, redirect, jsonify, flash
+from flask import Flask, render_template, request, redirect, jsonify, flash, url_for
 from flask_assets import Environment, Bundle
 
 from jinja2 import StrictUndefined
@@ -16,8 +16,15 @@ app.jinja_env.undefined = StrictUndefined
 
 # compile sass from sass.scss to all.css
 assets.url = app.static_url_path
-scss = Bundle('sass.scss', filters='pyscss', output='style.css')
+
+scss = Bundle('css/sass.scss', filters='pyscss', output='css/style.css')
 assets.register('scss_all', scss)
+
+css = Bundle('css/sweetalert.css')
+assets.register('css_all', css)
+
+js = Bundle('js/app.js', 'js/sweetalert.min.js')
+assets.register('js_all', js)
 
 
 @app.route('/')
@@ -44,6 +51,8 @@ def search_for_plant():
             plants_found[plant.plant_id] = plant.name
 
         return jsonify(plants_found)
+    else:
+        return 'None'
 
 
 @app.route('/plant/<plant_id>')
@@ -83,12 +92,11 @@ def add_new_plant():
 def process_new_plant():
     """Gets the user input from new plant form and adds to the database"""
 
-    # gets all the user-entered data from the new plant form
-
-    name = request.form.get('plant_name').title()
     # if plant name not in the db, will create plant, else will not
+    name = request.form.get('plant_name').title()
     if Plant.query.filter_by(name=name).all() == []:
 
+        # gets all the user-entered data from the new plant form
         species = request.form.get('plant_species').title()
         image = request.form.get('plant_image')
         water = request.form.get('water')
@@ -107,7 +115,7 @@ def process_new_plant():
         flash(name + " has been added")
         return redirect('/plant/'+str(new_plant.plant_id))
     else:
-        flash("Plant already exists")
+        flash("Plant already exists", "warning")
         return redirect('/new_plant')
 
 
@@ -118,7 +126,7 @@ def edit_plant():
     # gets column being edited, new value, and plant being edited from ajax
     col_to_edit = request.form.get('columnToEdit')
     value = request.form.get('newValue')
-    plant_id = int(request.form.get('plantId'))
+    plant_id = int(request.form.get('plantId').plant_id)
 
     # gets plant being edited and updated the column value for that plant
     Plant.query.filter_by(plant_id=plant_id).update({col_to_edit: value})
@@ -136,6 +144,23 @@ def edit_plant():
     return jsonify(edit)
 
 
+@app.route('/delete_request', methods=['POST'])
+def process_delete():
+    """Deletes plant from the database"""
+
+    plant_id = int(request.form.get('dataPlant'))
+    print '*' * 100
+    print plant_id
+    plant = Plant.query.get(plant_id)
+    print plant
+    name = plant.name
+    db.session.delete(plant)
+    db.session.commit()
+
+    flash(name + ' was deleted')
+    return 'done'
+
+
 @app.route('/all_plants')
 def show_all_plants_by_name():
     """Show all plants by name."""
@@ -148,6 +173,8 @@ def show_all_plants_by_name():
 
 
 def get_plant_specs(plant, spec, key='description'):
+    """Returns a specific plant attribute for a specific plant"""
+
     if spec == 'water':
         return plant.get_water(key)
     elif spec == 'sun':

@@ -3,6 +3,9 @@ $green: #7FD279;
 $hover-green: #6BCC66;
 $white: #FFF;
 $gray: #A9A9A9;
+$light-gray: #CCC;
+$yellow: #f0ad4e;
+$red: #d9534f;
 
 .container {
   font-family: $menlo;
@@ -77,7 +80,7 @@ $gray: #A9A9A9;
       margin-top: 20px;
     }
     .req-table {
-      margin-top: 80px; 
+      margin-top: 40px; 
 
       table {
         font-size: 1.15em;
@@ -93,6 +96,16 @@ $gray: #A9A9A9;
 
     #submit-edit-btn {
       margin-left: 10px;
+    }
+    .plant-controls {
+      .btn-default {
+        padding: 2px 6px;
+        a {
+          color: darken($light-gray, 10%);
+          text-decoration: none;
+          font-size: 0.8em;
+        }
+      }
     }
   }
   // *************************** NEW PLANT FORM STYLES ***************************
