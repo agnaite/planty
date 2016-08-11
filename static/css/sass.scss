@@ -7,10 +7,23 @@ $light-gray: #CCC;
 $yellow: #f0ad4e;
 $red: #d9534f;
 
+// *************************** SWEET ALER OVERRIDES ***************************
+.sweet-alert {
+  font-family: 'Menlo'!important;
+  .sa-button-container {
+    padding-bottom: 20px;
+    button {
+      display: inline;
+      font-size: 0.85em;
+    }
+  }
+}
+
 .container {
   font-family: $menlo;
   width: 100%;
   padding: 0;
+
 // *************************** BASE STYLES ***************************
   .navbar {
     background: $white;

@@ -1,3 +1,11 @@
+.sweet-alert {
+  font-family: 'Menlo' !important; }
+  .sweet-alert .sa-button-container {
+    padding-bottom: 20px; }
+    .sweet-alert .sa-button-container button {
+      display: inline;
+      font-size: 0.85em; }
+
 .container {
   font-family: 'Menlo', sans-serif;
   width: 100%;
