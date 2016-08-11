@@ -10,33 +10,43 @@
       font-size: 1.5em; }
       .container .navbar-default .navbar-brand:hover {
         color: #6BCC66; }
-  .container .home-search {
-    width: 80%;
-    margin: 260px auto 0 auto; }
-    .container .home-search #search-field {
-      width: 90%;
-      padding: 15px;
-      font-size: 2em; }
-      .container .home-search #search-btn {
-        padding: 20px;
-        margin-top: 5px;
-        float: right;
-        font-size: 1.25em; }
-        .container .home-search .search-result-wrapper {
-          width: 60%;
-          margin-top: 20px; }
-          .container .home-search .search-result-wrapper #search-results {
-            padding-left: 2px; }
-            .container .home-search .search-result-wrapper #search-results li {
-              list-style: none;
-              line-height: 2;
-              font-size: 1.5em;
-              color: tomato; }
-              .container .home-search .search-result-wrapper #search-results li a {
-                color: #A9A9A9; }
-                .container .home-search .search-result-wrapper #search-results li a:hover {
-                  text-decoration: none;
-                  color: #7FD279; }
+  .container .flashes {
+    width: 30%;
+    margin: 0px auto;
+    padding: 10px 0;
+    text-align: center;
+    list-style: none;
+    color: #7FD279;
+    font-size: 1.25em;
+    border: 1px solid #7FD279;
+    border-radius: 5px; }
+    .container .home-search {
+      width: 80%;
+      margin: 260px auto 0 auto; }
+      .container .home-search #search-field {
+        width: 90%;
+        padding: 15px;
+        font-size: 2em; }
+        .container .home-search #search-btn {
+          padding: 20px;
+          margin-top: 5px;
+          float: right;
+          font-size: 1.25em; }
+          .container .home-search .search-result-wrapper {
+            width: 60%;
+            margin-top: 20px; }
+            .container .home-search .search-result-wrapper #search-results {
+              padding-left: 2px; }
+              .container .home-search .search-result-wrapper #search-results li {
+                list-style: none;
+                line-height: 2;
+                font-size: 1.5em;
+                color: tomato; }
+                .container .home-search .search-result-wrapper #search-results li a {
+                  color: #A9A9A9; }
+                  .container .home-search .search-result-wrapper #search-results li a:hover {
+                    text-decoration: none;
+                    color: #7FD279; }
   .container .plant-view-wrapper {
     width: 90%;
     margin: 80px auto; }

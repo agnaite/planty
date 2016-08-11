@@ -17,13 +17,23 @@ $red: #d9534f;
     border: none;
   }
   .navbar-default .navbar-brand {
-      color: $green;
-      font-size: 1.5em;
-
-      &:hover {
-        color: $hover-green;
-      }
+    color: $green;
+    font-size: 1.5em;
+    &:hover {
+      color: $hover-green;
     }
+  }
+  .flashes {
+    width: 30%;
+    margin: 0px auto;
+    padding: 10px 0;
+    text-align: center;
+    list-style: none;
+    color: $green;
+    font-size: 1.25em;
+    border: 1px solid $green;
+    border-radius: 5px;
+  }
 
   // *************************** HOME STYLES ***************************
   .home-search {

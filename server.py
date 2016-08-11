@@ -126,7 +126,7 @@ def edit_plant():
     # gets column being edited, new value, and plant being edited from ajax
     col_to_edit = request.form.get('columnToEdit')
     value = request.form.get('newValue')
-    plant_id = int(request.form.get('plantId').plant_id)
+    plant_id = int(request.form.get('plantId'))
 
     # gets plant being edited and updated the column value for that plant
     Plant.query.filter_by(plant_id=plant_id).update({col_to_edit: value})
