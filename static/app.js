@@ -1,8 +1,10 @@
+// ******************************** AJAX SEARCH ********************************
 function searchPlant(results) {
   var result_urls = [];
+  console.log(results);
 
-  if (typeof(results) === "string") {
-    $('#search-results').html("<li>" + results + "<i class='fa fa-frown-o fa-lg' aria-hidden='true'></i>" + "<li>");
+  if (results === "None") {
+    $('#search-results').html("<li>No plants found <i class='fa fa-frown-o fa-lg' aria-hidden='true'></i>" + "<li>");
   } else {
     // for each result item, makes an href link with plant name
     for(var plant in results) {
@@ -30,4 +32,18 @@ function startSearch(evt) {
 
 // on click of search button, calls the ajax function
 $('#search-btn').click(startSearch);
+
+// **************************** AJAX PLANT EDIT ****************************
+
+function startEdit(evt) {
+  var plantId = $(this).attr('data-plant');
+  var tableCol = $(this).attr('data-column');
+
+  // $(this).html('<select><option></option><option>something</option></select>');
+
+  console.log('EDITING '+ tableCol + ' for plant ID: ' + plantId);
+}
+
+$('.edit-btn').click(startEdit);
+
 

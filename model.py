@@ -66,28 +66,24 @@ class Plant(db.Model):
     }
 
     def get_sun(self, key='description'):
+        """For a specific plant, returns the sun information"""
         if self.sun:
             return Plant.SUN[self.sun][key]
-        else:
-            return 'No data'
 
     def get_water(self, key='description'):
+        """For a specific plant, returns the water information"""
         if self.water:
             return Plant.WATER[self.water][key]
-        else:
-            return 'No data'
 
     def get_temp(self, key='description'):
+        """For a specific plant, returns the temperature information"""
         if self.temperature:
             return Plant.TEMPERATURE[self.temperature][key]
-        else:
-            return 'No data'
 
     def get_humidity(self, key='description'):
+        """For a specific plant, returns the humidity information"""
         if self.humidity:
             return Plant.HUMIDITY[self.humidity][key]
-        else:
-            return 'No data'
 
     # def __repr__(self):
     #     return "<{}, {}.>".format(self.name.encode('utf-8').strip(), self.species.encode('utf-8').strip())

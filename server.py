@@ -45,7 +45,7 @@ def search_for_plant():
 
         return jsonify(plants_found)
     else:
-        return "No plants found "
+        return "None"
 
 
 @app.route('/plant/<plant_id>')
@@ -55,9 +55,14 @@ def show_plant_details(plant_id):
     plant = Plant.query.get(plant_id)
 
     return render_template('plant.html',
+                           plant_id=plant.plant_id,
                            plant_name=plant.name,
                            plant_species=plant.species,
-                           plant_img=plant.image)
+                           plant_img=plant.image,
+                           water=plant.get_water(),
+                           sun=plant.get_sun(),
+                           humidity=plant.get_humidity(),
+                           temp=plant.get_temp())
 
 
 @app.route('/new_plant')
@@ -98,7 +103,7 @@ def process_new_plant():
     db.session.commit()
 
     flash(name + "has been added")
-    return redirect('/')
+    return redirect('/new_plant/plant_id')
 
 
 @app.route('/all_plants')

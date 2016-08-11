@@ -3,18 +3,73 @@
 
 {% block content %}
 
-<div class='plant-view-wrapper row'>
-  {% if plant_img %}
-    <img class='plant-img col-md-4 col-sm-12' src='{{ plant_img }}'>
-  {% else %}
-    <img class='plant-img col-md-4 col-sm-12' src="/static/img/placeholder-image.png">
-  {% endif %}
-  <div class='plant-title-text col-md-4 col-sm-12'>
-    <h3>{{ plant_name }}</h3>
-    <h5>{{ plant_species }}</h5><br>
-    <i class="fa fa-sun-o fa-4x" aria-hidden="true"></i>
-  </div>
-</div>
-</div>
+<div class='plant-view-wrapper'>
+  <div class='row'>
+
+    <!-- Check if plant image exists in db -->
+    {% if plant_img %}
+      <img class='plant-img col-md-4 col-sm-12' src='{{ plant_img }}'>
+    {% else %}
+      <a data-column='image' data-plant='{{ plant_id }}' class='edit-btn' title='Add image URL'><img class='plant-img col-md-4 col-sm-12' src="/static/img/placeholder-image.png"></a>
+    {% endif %}
+
+    <div class='plant-title-text col-md-4 col-sm-12'>
+      <h3>{{ plant_name }}</h3>
+      <!-- Check if species exists in db -->
+      {% if plant_species %}
+        <h5>{{ plant_species }}</h5>
+      {% else %}
+        <h5><a data-plant='{{ plant_id }}' data-column='species' class='edit-btn'>Add Species</a></h5>
+      {% endif %}
+        <br>
+      <i class="fa fa-sun-o fa-4x" aria-hidden="true"></i>
+    </div>
+  </div> <!-- .row -->
+
+  <!-- TABLE -->
+  <div class='row req-table'>
+    <div class="table-responsive col-sm-10">
+      <table class="table">
+        <tr>
+          <td class='table-head'>Water:</td>
+          <!-- Check if water specs exist in db -->
+          {% if water %}
+            <td>{{ water }}</td>
+          {% else %}
+            <td><a data-plant='{{ plant_id }}' data-column='water' class='edit-btn'>Add water specifications</a></td>
+          {% endif %}
+        </tr>
+        <tr>
+          <td class='table-head'>Sun:</td>
+          <!-- Check if sun specs exist in db -->
+          {% if sun %}
+            <td>{{ sun }}</td>
+          {% else %}
+            <td><a data-plant='{{ plant_id }}' data-column='sun' class='edit-btn'>Add sun specifications</a></td>
+          {% endif %}
+        </tr>
+        <tr>
+          <td class='table-head'>Humidity:</td>
+          <!-- Check if water specs exist in db -->
+          {% if humidity %}
+            <td>{{ humidity }}</td>
+          {% else %}
+            <td><a data-plant='{{ plant_id }}' data-column='humidity' class='edit-btn'>Add humidity specifications</a></td>
+          {% endif %}
+        </tr>
+        <tr>
+          <td class='table-head'>Temperature:</td>
+          <!-- Check if temp specs exist in db -->
+          {% if temp %}
+            <td>{{ temp }}</td>
+          {% else %}
+            <td><a data-plant='{{ plant_id }}' data-column='temperature' class='edit-btn'>Add temperature specifications</a></td>
+          {% endif %}
+        </tr>
+      </table>
+    </div>
+  </div> <!-- .row -->
+</div> <!-- .plant-view-wrapper -->
+
 
 {% endblock %}

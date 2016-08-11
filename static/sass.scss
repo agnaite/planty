@@ -23,7 +23,6 @@ $gray: #A9A9A9;
     }
 
   // *************************** HOME STYLES ***************************
-    
   .home-search {
     width: 80%;
     margin: 260px auto 0 auto;
@@ -33,7 +32,6 @@ $gray: #A9A9A9;
       padding: 15px;
       font-size: 2em;
     }
-
     #search-btn {
       padding: 20px;
       margin-top: 5px; 
@@ -43,6 +41,7 @@ $gray: #A9A9A9;
     .search-result-wrapper {
       width: 60%;
       margin-top: 20px; 
+
       #search-results {
         padding-left: 2px;
         li {
@@ -73,6 +72,20 @@ $gray: #A9A9A9;
       i {
         padding-right: 16px;
       }
+    }
+    .req-table {
+      margin-top: 80px; 
+
+      table {
+        font-size: 1.15em;
+
+        .table-head {
+          font-weight: 700;
+        }
+      }
+    }
+    .edit-btn {
+      cursor: pointer;
     }
   }
   // *************************** NEW PLANT FORM STYLES ***************************
