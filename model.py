@@ -16,7 +16,7 @@ class Plant(db.Model):
 
     plant_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     image = db.Column(db.String(264))
-    name = db.Column(db.String(64), nullable=False)
+    name = db.Column(db.String(64), nullable=False, unique=True)
     species = db.Column(db.String(64))
     water = db.Column(db.String(128))
     sun = db.Column(db.String(128))
@@ -160,7 +160,7 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     # Create our tables and some sample data
-    # db.create_all()
+    db.create_all()
     # example_data()
 
     print "Connected to DB."

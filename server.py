@@ -84,24 +84,31 @@ def process_new_plant():
     """Gets the user input from new plant form and adds to the database"""
 
     # gets all the user-entered data from the new plant form
+
     name = request.form.get('plant_name').title()
-    species = request.form.get('plant_species').title()
-    image = request.form.get('plant_image')
-    water = request.form.get('water')
-    sun = request.form.get('sun')
-    humidity = request.form.get('humidity')
-    temp = request.form.get('temp')
+    # if plant name not in the db, will create plant, else will not
+    if Plant.query.filter_by(name=name).all() == []:
 
-    # creates new plant
-    new_plant = Plant(name=name, species=species, image=image, water=water,
-                      sun=sun, humidity=humidity, temperature=temp)
+        species = request.form.get('plant_species').title()
+        image = request.form.get('plant_image')
+        water = request.form.get('water')
+        sun = request.form.get('sun')
+        humidity = request.form.get('humidity')
+        temp = request.form.get('temp')
 
-    # adds and saves new plant in the database
-    db.session.add(new_plant)
-    db.session.commit()
+        # creates new plant
+        new_plant = Plant(name=name, species=species, image=image, water=water,
+                          sun=sun, humidity=humidity, temperature=temp)
 
-    flash(name + "has been added")
-    return redirect('/new_plant/plant_id')
+        # adds and saves new plant in the database
+        db.session.add(new_plant)
+        db.session.commit()
+
+        flash(name + " has been added")
+        return redirect('/plant/'+str(new_plant.plant_id))
+    else:
+        flash("Plant already exists")
+        return redirect('/new_plant')
 
 
 @app.route('/edit_plant', methods=['POST'])

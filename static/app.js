@@ -63,45 +63,60 @@ function startEdit(evt) {
   var plantId = $(this).attr('data-plant');
   var tableCol = $(this).attr('data-column');
 
-  // checks what is clicked on and replaces html with appropriate form fields 
+  // checks what is clicked on and replaces html with appropriate form fields
+  var form_start = "<form class='form-inline'>"+
+                   "<div class='form-group'>"+
+                   "<select id='new_edit' class='form-control'>";
+
+  var form_end = "</select></div>" +
+                 "<input type='submit' class='btn btn-default' id='submit-edit-btn'>"+
+                 "</form>";
+
   if (tableCol === 'sun') {
-    $(this).html("<select id='new_edit'>" +
+    $(this).html( form_start +
                  "<option value='Full Sun'>Full Sun</option>" +
                  "<option value='Bright Light'>Bright Light</option>" +
                  "<option value='Medium Light'>Medium Light</option>" +
                  "<option value='Low Light'>Low Light</option>" +
-                 "</select>" +
-                 "<input type='submit' id='submit-edit-btn'>");
+                 form_end
+                 );
 
   } else if (tableCol === 'water') {
-      $(this).html("<select id='new_edit'>" +
-                 "<option value='Moderately Moist'>Moderately Moist</option>" +
-                 "<option value='Drench and Let Dry'>Drench and Let Dry</option>" +
-                 "<option value='Keep on the Dry Side'>Keep on the Dry Side</option>" +
-                 "</select>" +
-                 "<input type='submit' id='submit-edit-btn'>");
+      $(this).html(form_start +
+                   "<option value='Moderately Moist'>Moderately Moist</option>" +
+                   "<option value='Drench and Let Dry'>Drench and Let Dry</option>" +
+                   "<option value='Keep on the Dry Side'>Keep on the Dry Side</option>" +
+                   form_end);
 
   } else if (tableCol === 'humidity') {
-      $(this).html("<select id='new_edit'>" +
-                 "<option value='High Humidity'>High Humidity</option>" +
-                 "<option value='Moderate Humidity'>Moderate Humidity</option>" +
-                 "<option value='Average Home Humidity'>Average Home Humidity</option>" +
-                 "<option value='Good Air Circulation'>Good Air Circulation</option>" +
-                 "</select>" +
-                 "<input type='submit' id='submit-edit-btn'>");
+      $(this).html(form_start +
+                   "<option value='High Humidity'>High Humidity</option>" +
+                   "<option value='Moderate Humidity'>Moderate Humidity</option>" +
+                   "<option value='Average Home Humidity'>Average Home Humidity</option>" +
+                   "<option value='Good Air Circulation'>Good Air Circulation</option>" +
+                   form_end);
 
   } else if (tableCol === 'temperature') {
-    $(this).html("<select id='new_edit'>" +
+    $(this).html(form_start +
                  "<option value='Normal Room Temperatures'>Normal Room Temperatures</option>" +
                  "<option value='Warm Temperatures'>Warm Temperatures</option>" +
                  "<option value='Cool Temperatures'>Cool Temperatures</option>" +
                  "<option value='Cold Temperatures'>Cold Temperatures</option>" +
-                 "</select>" +
-                 "<input type='submit' id='submit-edit-btn'>");
-    
+                 form_end);
+
+  } else if (tableCol === 'image'){
+    $('#edit-img-url-field').append("<form class='form-inline col-sm-4'>"+
+                   "<div class='form-group new-edit-input-field'>"+
+                   "<input type='text' placeholder='Enter URL' class='form-control' id='new_edit'></div>" +
+                   "<input type='submit' class='btn btn-default' id='submit-edit-btn'>"+
+                   "</form>");
   } else {
-    $(this).html("<input type='text' id='new_edit'>" +
-                 "<input type='submit' id='submit-edit-btn'>");
+    $(this).html("<form class='form-inline'>" +
+                 "<div class='form-group new-edit-input-field'> " +
+                 "<input type='text' class='form-control' id='new_edit'>" +
+                 "<input type='submit' class='btn btn-default' id='submit-edit-btn'>"+
+                 "</div></form>");
+
   }
 
   // on submit of edits calls submitEdit function and passes in plant id and column edited

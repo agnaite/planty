@@ -73,6 +73,9 @@ $gray: #A9A9A9;
         padding-right: 16px;
       }
     }
+    #edit-img-url-field {
+      margin-top: 20px;
+    }
     .req-table {
       margin-top: 80px; 
 
@@ -86,6 +89,10 @@ $gray: #A9A9A9;
     }
     .edit-btn {
       cursor: pointer;
+    }
+
+    #submit-edit-btn {
+      margin-left: 10px;
     }
   }
   // *************************** NEW PLANT FORM STYLES ***************************
