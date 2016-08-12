@@ -14,7 +14,7 @@ app.secret_key = secret.APP_KEY
 
 app.jinja_env.undefined = StrictUndefined
 
-# compile sass from sass.scss to all.css
+# ************************* ASSETS *********************************
 assets.url = app.static_url_path
 
 scss = Bundle('css/sass.scss', filters='pyscss', output='css/style.css')
@@ -25,6 +25,8 @@ assets.register('css_all', css)
 
 js = Bundle('js/app.js', 'js/sweetalert.min.js')
 assets.register('js_all', js)
+
+# ************************* ROUTES *********************************
 
 
 @app.route('/')
@@ -158,7 +160,7 @@ def process_delete():
     db.session.commit()
 
     flash(name + ' was deleted')
-    return 'done'
+    return 'Deleted plant'
 
 
 @app.route('/all_plants')

@@ -107,7 +107,7 @@ function startEdit(evt) {
                  "</form>";
 
   if (tableCol === 'sun') {
-    $(this).html( form_start +
+    $(this).html(form_start +
                  "<option value='Full Sun'>Full Sun</option>" +
                  "<option value='Bright Light'>Bright Light</option>" +
                  "<option value='Medium Light'>Medium Light</option>" +
@@ -150,7 +150,6 @@ function startEdit(evt) {
                  "<input type='text' class='form-control' id='new_edit'>" +
                  "<input type='submit' class='btn btn-default' id='submit-edit-btn'>"+
                  "</div></form>");
-
   }
 
   // on submit of edits calls submitEdit function and passes in plant id and column edited
