@@ -86,7 +86,7 @@ function submitEdit(id, col) {
                    'columnToEdit': col,
                    'newValue': $('#new_edit').val()};
   // calls an ajax post request to route edit plant and sends in the dict above
-  $.post('/edit_plant', userValue, finalizeEdit);
+  $.post('/add_to_plant', userValue, finalizeEdit);
 }
 
 function startEdit(evt) {

@@ -18,12 +18,25 @@ $red: #d9534f;
     }
   }
 }
+
+// *************************** BASE STYLES ***************************
+
+.flashes {
+  width: 30%;
+  margin: 0px auto;
+  padding: 10px 0;
+  text-align: center;
+  list-style: none;
+  color: $green;
+  font-size: 1.25em;
+  border: 1px solid $green;
+  border-radius: 5px;
+}
 .container {
   font-family: $menlo;
   width: 100%;
   padding: 0;
 
-// *************************** BASE STYLES ***************************
   .navbar {
     background: $white;
     border: none;
@@ -35,18 +48,7 @@ $red: #d9534f;
       color: $hover-green;
     }
   }
-  .flashes {
-    width: 30%;
-    margin: 0px auto;
-    padding: 10px 0;
-    text-align: center;
-    list-style: none;
-    color: $green;
-    font-size: 1.25em;
-    border: 1px solid $green;
-    border-radius: 5px;
-  }
-
+ 
   // *************************** HOME STYLES ***************************
   .home-search {
     width: 80%;
@@ -97,6 +99,13 @@ $red: #d9534f;
       i {
         padding-right: 16px;
       }
+      .icons {
+        img {
+          width: 60px;
+          margin-right: 10px;
+        }
+      }
+
     }
     #edit-img-url-field {
       margin-top: 20px;

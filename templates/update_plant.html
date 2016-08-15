@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% set active_page = "new_plant" %}
+{% block title %}New Plant{% endblock %}
+
+{% block content %}
+  <h3 class='new-plant-title'>Update {{ plant_name }}</h3>
+  <form class='form-horizontal col-sm-offset-3 new-plant-form' action='/process_update_plant/{{ plant_id }}' method='POST'>
+    <div class='form-group'>
+      <label for="name_field" class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="name_field" value='{{ plant_name }}' name='plant_name' required='required'>
+      </div>
+    </div>
+    
+    <div class='form-group'>
+      <label for="species_field" class="col-sm-2 control-label">Species</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="species_field" value='{{ plant_species }}' name='plant_species'>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="image_field" class="col-sm-2 control-label">Image URL</label>
+      <div class="col-sm-4">
+        <input type="url" class="form-control" id="image_field" value='{{ plant_img }}' name='plant_image'>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="water_field" class="col-sm-2 control-label">Water</label>
+      <div class="col-sm-4">
+        <select class='form-control' id='water_field' name='water'>
+          {% if not water %}
+            <option></option>
+          {% else %}
+            <option>{{ water }}</option>
+          {% endif %}
+          {% for key in WATER %}
+            {% if key != water %}
+              <option value='{{ key }}'>{{ key }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="sun_field" class="col-sm-2 control-label">Sun</label>
+      <div class="col-sm-4">
+        <select class='form-control' id='sun_field' name='sun'>
+          {% if not sun %}
+            <option></option>
+          {% else %}
+            <option>{{ sun }}</option>
+          {% endif %}
+          {% for key in SUN %}
+            {% if key != sun %} 
+              <option value='{{ key }}'>{{ key }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="humidity_field" class="col-sm-2 control-label">Humidity</label>
+      <div class="col-sm-4">
+        <select class='form-control' id='humidity_field' name='humidity'>
+          {% if not humidity %}
+            <option></option>
+          {% else %}
+            <option>{{ humidity }}</option>
+          {% endif %}
+          {% for key in HUMIDITY %}
+            {% if key != humidity %}
+              <option value='{{ key }}'>{{ key }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="temp_field" class="col-sm-2 control-label">Temperature</label>
+      <div class="col-sm-4">
+        <select class='form-control' id='temp_field' name='temp'>
+          {% if not temp %}
+            <option></option>
+          {% else %}
+            <option>{{ temp }}</option>
+          {% endif %}
+          {% for key in TEMP %}
+            {% if key != temp %}
+              <option value='{{ key }}'>{{ key }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Update Plant</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}

@@ -68,9 +68,13 @@ def show_plant_details(plant_id):
                            plant_name=plant.name,
                            plant_species=plant.species,
                            plant_img=plant.image,
+                           water_icon=plant.get_water('icon'),
                            water=plant.get_water(),
+                           sun_icon=plant.get_sun('icon'),
                            sun=plant.get_sun(),
+                           humidity_icon=plant.get_humidity('icon'),
                            humidity=plant.get_humidity(),
+                           temp_icon=plant.get_temp('icon'),
                            temp=plant.get_temp())
 
 
@@ -121,9 +125,9 @@ def process_new_plant():
         return redirect('/new_plant')
 
 
-@app.route('/edit_plant', methods=['POST'])
-def edit_plant():
-    """Edits plant."""
+@app.route('/add_to_plant', methods=['POST'])
+def add_missing_plant_info():
+    """Fills out missing fields for plant."""
 
     # gets column being edited, new value, and plant being edited from ajax
     col_to_edit = request.form.get('columnToEdit')
@@ -144,6 +148,64 @@ def edit_plant():
             'val': value}
 
     return jsonify(edit)
+
+
+@app.route('/update_plant/<plant_id>', methods=['GET'])
+def update_plant(plant_id):
+    """Updates plant"""
+
+    plant = Plant.query.get(plant_id)
+    WATER = Plant.WATER.keys()
+    SUN = Plant.SUN.keys()
+    HUMIDITY = Plant.HUMIDITY.keys()
+    TEMP = Plant.TEMPERATURE.keys()
+
+    return render_template('update_plant.html',
+                           plant_id=plant.plant_id,
+                           plant_name=plant.name,
+                           plant_species=plant.species,
+                           plant_img=plant.image,
+                           water=plant.get_water('summary'),
+                           sun=plant.get_sun('summary'),
+                           humidity=plant.get_humidity('summary'),
+                           temp=plant.get_temp('summary'),
+                           WATER=WATER,
+                           SUN=SUN,
+                           HUMIDITY=HUMIDITY,
+                           TEMP=TEMP)
+
+
+@app.route('/process_update_plant/<plant_id>', methods=['POST'])
+def process_update_plant(plant_id):
+    """Gets the user input from updating plant and updates the database"""
+    plant = Plant.query.get(plant_id)
+
+    # if plant name not in the db, will update plant, else will not
+    name = request.form.get('plant_name').title().rstrip()
+    if Plant.query.filter_by(name=name).all() == [] or Plant.query.filter_by(name=name).first() == plant:
+
+        # gets all the user-entered data from the update plant form
+        plant.name = request.form.get('plant_name')
+        plant.species = request.form.get('plant_species').title()
+        plant.image = request.form.get('plant_image')
+        plant.water = request.form.get('water')
+        plant.sun = request.form.get('sun')
+        plant.humidity = request.form.get('humidity')
+        plant.temperature = request.form.get('temp')
+
+        # saves updated plant in the database
+        db.session.commit()
+
+        flash(name + " has been updated")
+        return redirect('/plant/' + str(plant_id))
+    # if user deletes plant name, will not submit
+    elif name == '':
+        flash("Plant name cannot be blank", "warning")
+        return redirect('/update_plant/' + str(plant_id))
+    # if user tries to update plant name to a name that already exists in db, will not submit
+    else:
+        flash("Plant name already exists", "warning")
+        return redirect('/update_plant/' + str(plant_id))
 
 
 @app.route('/delete_request', methods=['POST'])
