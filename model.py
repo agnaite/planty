@@ -109,13 +109,19 @@ class User(db.Model):
 
     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(16), nullable=False, unique=True)
-    email = db.Column(db.String(64), nullable=False, unique=True)
-    password = db.Column(db.String(32), nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    # def __repr__(self):
-    #     return "<{} ({}).>".format(self.username, self.email)
+    # User authentication information
+    username = db.Column(db.String(64), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False, server_default='')
+
+    # User email information
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    confirmed_at = db.Column(db.DateTime())
+
+    # User information
+    first_name = db.Column(db.String(100), nullable=False, server_default='')
+    last_name = db.Column(db.String(100), nullable=False, server_default='')
 
 
 class PlantUser(db.Model):
@@ -125,7 +131,7 @@ class PlantUser(db.Model):
 
     userplant_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     plant_id = db.Column(db.Integer, db.ForeignKey('plants.plant_id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
 def example_data():
@@ -155,9 +161,9 @@ def example_data():
 
     db.session.commit()
 
+
 ####################################################################
 # Helper functions
-
 
 def connect_to_db(app):
     """Connect the database to the Flask app."""
@@ -176,6 +182,6 @@ if __name__ == "__main__":
 
     # Create our tables and some sample data
     db.create_all()
-    # example_data()
+    example_data()
 
     print "Connected to DB."

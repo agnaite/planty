@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, redirect, jsonify, flash, url_for
+from flask import Flask, render_template, request, redirect, jsonify, flash, session
 from flask_assets import Environment, Bundle
-
+import secret
 from jinja2 import StrictUndefined
+from datetime import datetime
 
 from model import connect_to_db, db, Plant, User
-import secret
 
 app = Flask(__name__)
 assets = Environment(app)
@@ -26,7 +26,10 @@ assets.register('css_all', css)
 js = Bundle('js/app.js', 'js/sweetalert.min.js')
 assets.register('js_all', js)
 
+
 # ************************* ROUTES *********************************
+
+# Basic Routes *********************************
 
 
 @app.route('/')
@@ -55,6 +58,100 @@ def search_for_plant():
         return jsonify(plants_found)
     else:
         return 'None'
+
+
+# User Routes *********************************
+
+@app.route('/login')
+def login_form():
+    """Renders login form"""
+    return render_template('login_form.html')
+
+
+@app.route('/process_login', methods=['POST'])
+def process_login():
+    """Processes user input and either logs user in if input is in database"""
+
+    # gets the user input from the username field and looks it up in the database
+    username = request.form.get('username')
+    user = User.query.filter_by(username=username).first()
+
+    # if username entered exists in db, gets the password entered and compares
+    # it to the one in the database
+    if user:
+        password = request.form.get('password')
+        # if password is correct, adds user to the current session and redirects to home page
+        if user.password == password:
+            session['logged_in'] = user.id
+            flash('Welcome back, ' + user.first_name + '!')
+            return redirect('/')
+        # if password is incorrect, redirects to login page
+        else:
+            flash('Incorrect login. Please try again.')
+            return redirect('/login')
+    # if username is not in the database, redirects to the registration form
+    else:
+        flash('Username not found. Please register!')
+        return redirect('/register')
+
+
+@app.route('/logout')
+def process_logout():
+    """Processes user logout"""
+
+    del session['logged_in']
+
+    flash('See you next time!')
+    return redirect('/')
+
+
+@app.route('/register')
+def register_form():
+    """Redirects the user to the registration form"""
+
+    return render_template('register_form.html')
+
+
+@app.route('/process_registration', methods=['POST'])
+def process_registration():
+    """Processes user registration form"""
+
+    username = request.form.get('username')
+    user = User.query.filter_by(username=username).first()
+
+    # if username does not already exist in the database,
+    # gets all the user entered values from the registration form
+    if not user:
+        first_name = request.form.get('fname')
+        last_name = request.form.get('lname')
+        password = request.form.get('password')
+        email = request.form.get('email')
+        timestamp = datetime.now()
+
+        # creates a new user instance
+        new_user = User(username=username,
+                        password=password,
+                        confirmed_at=timestamp,
+                        first_name=first_name,
+                        last_name=last_name,
+                        email=email)
+
+        # adds the new user instance to the database and saves
+        db.session.add(new_user)
+        db.session.commit()
+
+        # logs new user in
+        session['logged_in'] = new_user.id
+
+        flash("Account created. Hello, " + username + "!")
+        return redirect('/')
+    # if username exists, asks to pick new username and redirects to registration form
+    else:
+        flash('Username already exists!')
+        return redirect('/register')
+
+
+# Plant Routes *********************************
 
 
 @app.route('/plant/<plant_id>')
@@ -234,6 +331,10 @@ def show_all_plants_by_name():
     return render_template("plants_by_name.html", plants=all_plants)
 
 # **************************** HELPER FUNCTIONS *******************************
+
+
+def get_all_users():
+    return User.query.all()
 
 
 def get_plant_specs(plant, spec, key='description'):

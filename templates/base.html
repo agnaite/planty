@@ -1,9 +1,17 @@
 <!-- define the navbar and set home to default -->
-{% set navigation_bar = [
-    ('/', 'index', 'Home'),
-    ('/new_plant', 'new_plant', 'New Plant')
-] -%}
-
+{% if 'logged_in' in session %}
+  {% set navigation_bar = [
+      ('/', 'index', 'Search'),
+      ('/new_plant', 'new_plant', 'New Plant'),
+      ('/logout', 'logout', 'Logout')
+  ] -%}
+{% else %}
+  {% set navigation_bar = [
+      ('/', 'index', 'Search'),
+      ('/login', 'login_form', 'Login'),
+      ('/register', 'register_form', 'Register')
+  ] -%}
+{% endif %}
 <!-- {% set active_page = active_page|default('index') -%}
  -->
 <!doctype html>
