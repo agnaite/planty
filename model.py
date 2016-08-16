@@ -109,7 +109,7 @@ class User(db.Model):
 
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     # User authentication information
     username = db.Column(db.String(64), nullable=False, unique=True)
@@ -122,6 +122,7 @@ class User(db.Model):
     # User information
     first_name = db.Column(db.String(100), nullable=False, server_default='')
     last_name = db.Column(db.String(100), nullable=False, server_default='')
+    image = db.Column(db.String(264), server_default='https://medium.com/img/default-avatar.png')
 
 
 class PlantUser(db.Model):
@@ -131,7 +132,7 @@ class PlantUser(db.Model):
 
     userplant_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     plant_id = db.Column(db.Integer, db.ForeignKey('plants.plant_id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
 
 def example_data():
@@ -181,7 +182,7 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     # Create our tables and some sample data
-    db.create_all()
-    example_data()
+    # db.create_all()
+    # example_data()
 
     print "Connected to DB."

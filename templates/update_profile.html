@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% set active_page = "update_profile" %}
+{% block title %}Update Account{% endblock %}
+
+{% block content %}
+
+<h3 class='new-page-title'>Update Account</h3><br>
+  <form class='form-horizontal col-sm-offset-3 register-form' action='/process_profile_update' method='POST'>
+
+    <div class='form-group'>
+      <label for="fname_field" class="col-sm-2 control-label">First name</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="fname_field" name='fname' value='{{ user.first_name }}'>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="lname_field" class="col-sm-2 control-label">Last name</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="lname_field" name='lname' value='{{ user.last_name }}'>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="img_field" class="col-sm-2 control-label">Image URL</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="img_field" name='img' value='{{ user.image }}'>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <label for="email_field" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="email_field" name='email' value='{{ user.email }}' required='required'>
+      </div>
+    </div>
+    
+    <div class='form-group'>
+      <label for="password_field" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-4">
+        <input type="password" class="form-control" id="password_field" name='password' required='required'>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Update</button>
+      </div>
+    </div>
+    <input type="hidden" id="id_field" name='user_id' value='{{ user.user_id }}'>
+  </form>
+
+{% endblock %}

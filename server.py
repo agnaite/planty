@@ -63,7 +63,7 @@ def search_for_plant():
 # User Routes *********************************
 
 @app.route('/login')
-def login_form():
+def show_login_form():
     """Renders login form"""
     return render_template('login_form.html')
 
@@ -82,7 +82,7 @@ def process_login():
         password = request.form.get('password')
         # if password is correct, adds user to the current session and redirects to home page
         if user.password == password:
-            session['logged_in'] = user.id
+            session['logged_in'] = user.user_id
             flash('Welcome back, ' + user.first_name + '!')
             return redirect('/')
         # if password is incorrect, redirects to login page
@@ -106,7 +106,7 @@ def process_logout():
 
 
 @app.route('/register')
-def register_form():
+def show_registration_form():
     """Redirects the user to the registration form"""
 
     return render_template('register_form.html')
@@ -126,6 +126,7 @@ def process_registration():
         last_name = request.form.get('lname')
         password = request.form.get('password')
         email = request.form.get('email')
+        image = request.form.get('img')
         timestamp = datetime.now()
 
         # creates a new user instance
@@ -134,6 +135,7 @@ def process_registration():
                         confirmed_at=timestamp,
                         first_name=first_name,
                         last_name=last_name,
+                        image=image,
                         email=email)
 
         # adds the new user instance to the database and saves
@@ -141,7 +143,7 @@ def process_registration():
         db.session.commit()
 
         # logs new user in
-        session['logged_in'] = new_user.id
+        session['logged_in'] = new_user.user_id
 
         flash("Account created. Hello, " + username + "!")
         return redirect('/')
@@ -149,6 +151,61 @@ def process_registration():
     else:
         flash('Username already exists!')
         return redirect('/register')
+
+
+@app.route('/user_profile/<user_id>')
+def show_user_profile(user_id):
+    """Shows user profile"""
+
+    # gets the login user from the database
+    user = User.query.get(user_id)
+
+    # sets default image, if there isn't one
+    if user.image:
+        img = user.image
+    else:
+        img = "https://medium.com/img/default-avatar.png"
+
+    return render_template('user_profile.html',
+                           user=user,
+                           img=img)
+
+
+@app.route('/update_profile/<user_id>')
+def update_user_profile(user_id):
+    """Renders user profile update page"""
+
+    user = User.query.get(user_id)
+
+    return render_template('update_profile.html',
+                           user=user)
+
+
+@app.route('/process_profile_update', methods=['POST'])
+def process_update_profile():
+    """Processes any profile updates"""
+    user_id = request.form.get('user_id')
+    user = User.query.get(int(user_id))
+    email = request.form.get('email')
+    validate_email = int(User.query.filter_by(email=email).count())
+
+    if validate_email < 2:
+        user.first_name = request.form.get('fname')
+        user.last_name = request.form.get('lname')
+        user.password = request.form.get('password')
+        user.image = request.form.get('img')
+        user.email = email
+
+        db.session.commit()
+
+        flash('Account updated.')
+        return redirect('/user_profile/' + str(user.user_id))
+    else:
+        flash('This email is already taken.')
+        return redirect('/update_profile/' + str(user.user_id))
+
+
+
 
 
 # Plant Routes *********************************

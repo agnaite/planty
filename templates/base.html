@@ -3,6 +3,7 @@
   {% set navigation_bar = [
       ('/', 'index', 'Search'),
       ('/new_plant', 'new_plant', 'New Plant'),
+      ('/user_profile/' + session['logged_in'] |string, 'user_profile', 'Account'),
       ('/logout', 'logout', 'Logout')
   ] -%}
 {% else %}

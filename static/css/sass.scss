@@ -139,6 +139,29 @@ $red: #d9534f;
       }
     }
   }
+
+  // *************************** USER VIEW STYLES ***************************
+  .user-view-wrapper {
+    width: 90%;
+    margin: 80px auto;
+
+    .user-img {
+      max-width: 100%;
+    }
+    .user-text {
+      margin-left: 40px;
+    }
+    .user-controls {
+      .btn-default {
+        padding: 2px 6px;
+        a {
+          color: darken($light-gray, 10%);
+          text-decoration: none;
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
   // *************************** FORM STYLES ***************************
   .new-page-title {
     margin-top: 120px; 

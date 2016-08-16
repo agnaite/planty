@@ -84,6 +84,19 @@
               color: #b3b3b3;
               text-decoration: none;
               font-size: 0.8em; }
+    .container .user-view-wrapper {
+      width: 90%;
+      margin: 80px auto; }
+      .container .user-view-wrapper .user-img {
+        max-width: 100%; }
+        .container .user-view-wrapper .user-text {
+          margin-left: 40px; }
+          .container .user-view-wrapper .user-controls .btn-default {
+            padding: 2px 6px; }
+            .container .user-view-wrapper .user-controls .btn-default a {
+              color: #b3b3b3;
+              text-decoration: none;
+              font-size: 0.8em; }
     .container .new-page-title {
       margin-top: 120px;
       text-align: center; }
