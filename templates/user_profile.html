@@ -15,6 +15,9 @@
         <h3>{{ user.username }}</h3>
       {% endif %}
       <h5>You own <a href="/user_plants/{{ user.user_id }}">{{ user.plants|length }}</a> plants.</h5>
+      <!-- <div ng-controller='userPlantsCtrl'>
+        <a href="" ng-click='getUserPlants(1)'>My Plants</a>
+      </div> -->
     </div>
     <!-- delete and edit plant buttons -->
     <div class='user-controls col-offset-8 col-sm-4'>

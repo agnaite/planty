@@ -2,15 +2,26 @@
 
 from flask import Flask, render_template, request, redirect, jsonify, flash, session
 from flask_assets import Environment, Bundle
+import simplejson
+import random
 import secret
+import flickr_api
+from flickr_api.api import flickr
 from jinja2 import StrictUndefined
 from datetime import datetime
+
 
 from model import connect_to_db, db, Plant, User, PlantUser
 
 app = Flask(__name__)
 assets = Environment(app)
 app.secret_key = secret.APP_KEY
+flickr_api_key = secret.FLICKR_API_KEY
+flickr_api_secret = secret.FLICKR_API_SECRET
+
+
+flickr_api.set_keys(api_key=flickr_api_key,
+                    api_secret=flickr_api_secret)
 
 app.jinja_env.undefined = StrictUndefined
 
@@ -226,10 +237,15 @@ def show_user_plants(user_id):
     """Shows plants the user has added"""
 
     user = User.query.get(user_id)
+    plants = {}
 
-    plants = user.plants
+    # for plant in user.plants:
+    #     plants[plant.plant_id] = {
+    #         'name': plant.name,
+    #         'species': plant.species
+    #     }
 
-    return render_template('user_plants.html', plants=plants)
+    return render_template('user_plants.html', plants=user.plants)
 
 # Plant Routes *********************************
 
@@ -282,6 +298,8 @@ def process_new_plant():
         # gets all the user-entered data from the new plant form
         species = request.form.get('plant_species').title()
         image = request.form.get('plant_image')
+        if not image:
+            image = get_flickr_image(name)
         water = request.form.get('water')
         sun = request.form.get('sun')
         humidity = request.form.get('humidity')
@@ -430,6 +448,25 @@ def get_plant_specs(plant, spec, key='description'):
         return plant.get_temp(key)
     else:
         return None
+
+
+def get_flickr_image(tag):
+    """Get a random image from Flickr using the passed in term as a tag"""
+
+    r = flickr.photos.search(api_key=flickr_api_key, tags=tag, format='json',
+                             nojsoncallback=1, per_page=20)
+
+    output = simplejson.loads(r)
+    image_lst = output.items()[0][1]['photo']
+    random_img = image_lst[random.randint(0, len(image_lst)-1)]
+    farm_id = random_img['farm']
+    server_id = random_img['server']
+    img_id = random_img['id']
+    secret = random_img['secret']
+
+    url = 'https://farm{}.staticflickr.com/{}/{}_{}.jpg'.format(farm_id, server_id, img_id, secret)
+
+    return url
 
 
 if __name__ == "__main__":
