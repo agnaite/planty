@@ -6,7 +6,7 @@ import secret
 from jinja2 import StrictUndefined
 from datetime import datetime
 
-from model import connect_to_db, db, Plant, User
+from model import connect_to_db, db, Plant, User, PlantUser
 
 app = Flask(__name__)
 assets = Environment(app)
@@ -23,7 +23,7 @@ assets.register('scss_all', scss)
 css = Bundle('css/sweetalert.css')
 assets.register('css_all', css)
 
-js = Bundle('js/app.js', 'js/sweetalert.min.js')
+js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular.js')
 assets.register('js_all', js)
 
 
@@ -205,8 +205,31 @@ def process_update_profile():
         return redirect('/update_profile/' + str(user.user_id))
 
 
+# PlantUser Routes *********************************
+
+@app.route('/add_plantuser', methods=['POST'])
+def add_plant_to_user():
+    post = request.get_json()
+    plant_id = int(post.get('plant'))
+    user_id = int(post.get('user'))
+
+    new_plantuser = PlantUser(user_id=user_id, plant_id=plant_id)
+
+    db.session.add(new_plantuser)
+    db.session.commit()
+
+    return redirect('/plant/'+str(plant_id))
 
 
+@app.route('/user_plants/<user_id>')
+def show_user_plants(user_id):
+    """Shows plants the user has added"""
+
+    user = User.query.get(user_id)
+
+    plants = user.plants
+
+    return render_template('user_plants.html', plants=plants)
 
 # Plant Routes *********************************
 

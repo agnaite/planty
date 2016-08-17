@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Your plants{% endblock %}
+{% set active_page = "user_plants" %}
+
+{% block content %}
+
+<ul>
+{% for plant in plants %}
+
+ <li>{{ plant.name }}</li>
+
+{% endfor %}
+</ul>
+{% endblock %}

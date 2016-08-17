@@ -9,8 +9,12 @@
     <img class='user-img col-md-2 col-sm-12' src='{{ img }}'>
     
     <div class='user-text col-md-4 col-sm-12'>
-      <h3>{{ user.first_name }} {{ user.last_name }}</h3>
-      <h5>{{ user.email }}</h5>
+      {% if user.first_name %}
+        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+      {% else %}
+        <h3>{{ user.username }}</h3>
+      {% endif %}
+      <h5>You own <a href="/user_plants/{{ user.user_id }}">{{ user.plants|length }}</a> plants.</h5>
     </div>
     <!-- delete and edit plant buttons -->
     <div class='user-controls col-offset-8 col-sm-4'>

@@ -37,7 +37,12 @@
             <img src='{{ temp_icon }}'>
           {% endif %}
         </div>
-      <!-- <i class="fa fa-sun-o fa-4x" aria-hidden="true"></i> -->
+        <br>
+      {% if 'logged_in' in session %}
+        <div ng-controller="addPlantController">
+          <a ng-click="click({{ session['logged_in'] }}, {{ plant_id }})" id='add_plant'>Add to your plants!</a>
+        </div>
+      {% endif %}
     </div>
     <!-- delete and edit plant buttons -->
     <div class='plant-controls col-offset-8 col-sm-4'>
