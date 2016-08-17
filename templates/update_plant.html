@@ -3,7 +3,7 @@
 {% block title %}New Plant{% endblock %}
 
 {% block content %}
-  <h3 class='new-plant-title'>Update {{ plant_name }}</h3>
+  <h3 class='new-page-title'>Update {{ plant_name }}</h3>
   <form class='form-horizontal col-sm-offset-3 new-plant-form' action='/process_update_plant/{{ plant_id }}' method='POST'>
     <div class='form-group'>
       <label for="name_field" class="col-sm-2 control-label">Name</label>
@@ -22,7 +22,7 @@
     <div class='form-group'>
       <label for="image_field" class="col-sm-2 control-label">Image URL</label>
       <div class="col-sm-4">
-        <input type="url" class="form-control" id="image_field" value='{{ plant_img }}' name='plant_image'>
+        <input type="text" class="form-control" id="image_field" value='{{ plant_img }}' name='plant_image'>
       </div>
     </div>
 

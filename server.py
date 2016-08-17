@@ -382,7 +382,15 @@ def process_update_plant(plant_id):
         # gets all the user-entered data from the update plant form
         plant.name = request.form.get('plant_name')
         plant.species = request.form.get('plant_species').title()
-        plant.image = request.form.get('plant_image')
+        image = request.form.get('plant_image')
+        if not image or image == 'None':
+            url = get_flickr_image(name)
+            if url:
+                plant.image = url
+            else:
+                pass
+        else:
+            plant.image = image
         plant.water = request.form.get('water')
         plant.sun = request.form.get('sun')
         plant.humidity = request.form.get('humidity')
@@ -452,19 +460,26 @@ def get_plant_specs(plant, spec, key='description'):
 
 def get_flickr_image(tag):
     """Get a random image from Flickr using the passed in term as a tag"""
-
-    r = flickr.photos.search(api_key=flickr_api_key, tags=tag, format='json',
-                             nojsoncallback=1, per_page=20)
+    # tag = (tag + u', plant').encode('utf-8')
+    r = flickr.photos.search(api_key=flickr_api_key, tags=tag.encode('utf-8'), format='json',
+                             nojsoncallback=1, per_page=40)
 
     output = simplejson.loads(r)
     image_lst = output.items()[0][1]['photo']
-    random_img = image_lst[random.randint(0, len(image_lst)-1)]
+
+    if len(image_lst) == 1:
+        random_img = image_lst[0]
+    elif len(image_lst) == 0:
+        return ''
+    else:
+        random_img = image_lst[random.randint(0, len(image_lst)-1)]
+
     farm_id = random_img['farm']
     server_id = random_img['server']
     img_id = random_img['id']
     secret = random_img['secret']
 
-    url = 'https://farm{}.staticflickr.com/{}/{}_{}.jpg'.format(farm_id, server_id, img_id, secret)
+    url = 'https://farm{}.staticflickr.com/{}/{}_{}.jpg'.format(farm_id, server_id, img_id, secret).encode('utf-8')
 
     return url
 
