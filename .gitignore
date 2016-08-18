@@ -1,5 +1,6 @@
 env/
 *.pyc
+_app.js
 secret.py
 .DS_Store
 .webassets-cache

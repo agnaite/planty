@@ -34,14 +34,14 @@ assets.register('scss_all', scss)
 css = Bundle('css/sweetalert.css')
 assets.register('css_all', css)
 
-js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular.js')
+js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular-route.js')
 assets.register('js_all', js)
 
 
 # ************************* ROUTES *********************************
 
 # Basic Routes *********************************
-
+# NG'd *********************************
 
 @app.route('/')
 def index_page():
@@ -49,22 +49,25 @@ def index_page():
 
     return render_template("index.html")
 
+# NG'd *********************************
 
-@app.route('/search', methods=['GET'])
+
+@app.route('/search/')
 def search_for_plant():
-    """Displays search results."""
+    """Retrieves search results from database."""
 
     # gets the user's search term from app.js and queries the db
-    search_term = request.args.get('plant-name')
+    search_term = request.args.get('search', '')
     results = Plant.query.filter(Plant.name.ilike('%' + search_term + '%')).all()
 
-    if len(results) > 0:
+    if results:
         plants_found = {}
 
         # for each plant in the results, make dictionary using plant's id as key
-        # and plant's name as value
+        # and plant's other data as value
         for plant in results:
-            plants_found[plant.plant_id] = plant.name
+            plants_found[plant.plant_id] = {'id': plant.plant_id,
+                                            'name': plant.name}
 
         return jsonify(plants_found)
     else:

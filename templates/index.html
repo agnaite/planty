@@ -3,14 +3,16 @@
 
 {% block content %}
 
-<div class='home-search'>
+<div class='home-search' ng-controller='homeCtrl'>
   <form>
-    <input type='text' name='plant-name' id='search-field' placeholder='Enter plant name'>
-    <button type='submit' id='search-btn'>Search</button>
+    <input ng-model='searchText' type='text' name='plant-name' id='search-field' placeholder='Enter plant name'>
+    <button ng-click='searchSubmit()' type='submit' id='search-btn'>Search</button>
   </form>
 
   <div class='search-result-wrapper'>
-    <ul id="search-results"></ul>
+    <ul id="search-results" ng-repeat='plant in foundPlants'>
+        <li><a ng-href='/plant/[[ plant.id ]]'>[[ plant.name ]]</a></li>
+    </ul>
   </div>
 </div>
 
