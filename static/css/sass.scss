@@ -167,8 +167,24 @@ $red: #d9534f;
     margin-top: 120px; 
     text-align: center;
   }
+
+  .form-validation {
+    font-size: 11px;
+    color: red;
+    text-align: center;
+  }
+
+  input.ng-valid.ng-touched {
+    border-color: $green;
+  }
+
+  input.ng-invalid.ng-touched {
+    border-color: $red;
+  }
+
   .new-plant-form {
-    margin-top: 60px; 
+    margin-top: 80px; 
+
   }
 }
 

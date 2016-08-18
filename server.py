@@ -34,7 +34,7 @@ assets.register('scss_all', scss)
 css = Bundle('css/sweetalert.css')
 assets.register('css_all', css)
 
-js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular-route.js')
+js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js')
 assets.register('js_all', js)
 
 
@@ -288,6 +288,25 @@ def add_new_plant():
                            SUN=SUN,
                            HUMIDITY=HUMIDITY,
                            TEMP=TEMP)
+
+
+# NG'd *********************************
+
+
+@app.route('/is_plant/<plant_name>')
+def get_all_plant_names(plant_name):
+    """Checks if a plant by a specific name is already in the database.
+
+       Returns true if plant by that name exists, and false otherwise.
+
+    """
+    plant_name = plant_name.title()
+    plant = Plant.query.filter_by(name=plant_name).first()
+
+    if plant:
+        return "True"
+    else:
+        return "False"
 
 
 @app.route('/process_new_plant', methods=['POST'])

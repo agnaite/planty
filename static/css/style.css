@@ -100,5 +100,13 @@
     .container .new-page-title {
       margin-top: 120px;
       text-align: center; }
-      .container .new-plant-form {
-        margin-top: 60px; }
+      .container .form-validation {
+        font-size: 11px;
+        color: red;
+        text-align: center; }
+        .container input.ng-valid.ng-touched {
+          border-color: #7FD279; }
+          .container input.ng-invalid.ng-touched {
+            border-color: #d9534f; }
+            .container .new-plant-form {
+              margin-top: 80px; }
