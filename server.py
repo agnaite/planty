@@ -76,6 +76,43 @@ def search_for_plant(search_term):
 
 # User Routes *********************************
 
+
+# NG'd *********************************
+
+@app.route('/is_username/<username>')
+def check_if_username_is_taken(username):
+    """Checks if a username has already been taken.
+
+       Returns true if username exists, and false otherwise.
+
+    """
+    username = username.lower()
+    user = User.query.filter_by(username=username).first()
+
+    if user:
+        return "True"
+    else:
+        return "False"
+
+# NG'd *********************************
+
+
+@app.route('/is_email/<email>')
+def check_if_email_is_taken(email):
+    """Checks if a email is already in use.
+
+       Returns true if email exists, and false otherwise.
+
+    """
+    email = email.lower()
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        return "True"
+    else:
+        return "False"
+
+
 @app.route('/login')
 def show_login_form():
     """Renders login form"""

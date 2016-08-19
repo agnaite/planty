@@ -33,10 +33,37 @@ app.controller('homeCtrl', function($scope, $http, $location) {
         $scope.foundPlants = '';
       } else {
         $scope.foundPlants = results.data;
-        console.log($scope.foundPlants);
       }
     });
   };
+});
+
+// NEW USER  ***************************************************************
+
+app.controller('addUserCtrl', function($scope, $http, $window) {
+  $scope.master = {};
+
+  // on register button click, send user filled data to Flask 
+  // $scope.update = function(user) {
+  //   $scope.master = angular.copy(user);
+
+  //    $http({
+  //     url: '/process_new_plant',
+  //     method: "POST",
+  //     data: $.param(plant),
+  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  //    }).success(function(data) {
+  //       // on 200 status from Flask, redirect to the new plant's page
+  //       $window.location.href = '/plant/' + data;
+  //   });
+  // };
+  // on click of reset button, clear all form fields
+  $scope.reset = function() {
+    $scope.user = angular.copy($scope.master);
+    // $scope.plant.name = '';
+  };
+
+  $scope.reset();
 });
 
 // ADD PLANT ***************************************************************

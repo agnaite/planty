@@ -4,56 +4,64 @@
 
 {% block content %}
 
-  <h3 class='new-page-title'>Register</h3><br>
-  <form class='form-horizontal col-sm-offset-3 register-form' action='/process_registration' method='POST'>
+<div ng-controller='addUserCtrl'>
+
+  <form class='form-horizontal col-sm-offset-3 register-form' name='form' nonvalidate>
 
     <div class='form-group'>
       <label for="fname_field" class="col-sm-2 control-label">First name</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="fname_field" name='fname'>
+        <input ng-model='user.fname' type="text" class="form-control" id="fname_field" required>
       </div>
     </div>
 
     <div class='form-group'>
       <label for="lname_field" class="col-sm-2 control-label">Last name</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="lname_field" name='lname_field'>
+        <input ng-model='user.lname' type="text" class="form-control" id="lname_field" name='lname_field'>
       </div>
     </div>
 
     <div class='form-group'>
       <label for="img_field" class="col-sm-2 control-label">Image URL</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="img_field" name='img'>
+        <input ng-model='user.image' type="text" class="form-control" id="img_field" name='image' img-url>
+        <span class='form-validation' ng-show="form.image.$error.imgUrl" ng-cloak>Image URL has to end in JPG or PNG</span>
       </div>
     </div>
 
     <div class='form-group'>
       <label for="username_field" class="col-sm-2 control-label">Username</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="username_field" name='username' required='required'>
+        <input ng-model='user.username' type="text" class="form-control" id="username_field" name='username' username required>
+        <span class='form-validation' ng-show="form.username.$error.username" ng-cloak>This username has been taken :(</span>
       </div>
     </div>
 
     <div class='form-group'>
       <label for="email_field" class="col-sm-2 control-label">Email</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="email_field" name='email' required='required'>
+        <input ng-model='user.email' type="email" class="form-control" id="email_field" name='email' email required>
+        <span class='form-validation' ng-show="form.email.$error.email" ng-cloak>
+          This email is already in use. Maybe try <a ng-href='/login'>signing in</a>?
+        </span>
       </div>
     </div>
     
     <div class='form-group'>
       <label for="password_field" class="col-sm-2 control-label">Password</label>
       <div class="col-sm-4">
-        <input type="password" class="form-control" id="password_field" name='password'>
+        <input ng-model='user.password' type="password" class="form-control" id="password_field" name='password' required>
       </div>
     </div>
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Register</button>
+        <button ng-disabled="form.$invalid" ng-click="update(user)" class="btn btn-default">Register</button>
+        <button ng-click='reset()' class="btn btn-default">Reset</button>
       </div>
     </div>
   </form>
+</div>
 
 {% endblock %}

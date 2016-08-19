@@ -178,13 +178,17 @@ $red: #d9534f;
     text-align: center;
   }
 
-  .new-plant-form {
+  form {
     margin-top: 80px;
 
     .form-validation {
-    font-size: 11px;
-    color: red;
-    text-align: center;
+      font-size: 11px;
+      color: $red;
+      text-align: center;
+      a {
+        color: $red;
+        text-decoration: underline;
+      }
     }
 
     input.ng-valid.ng-touched {
