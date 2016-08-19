@@ -21,6 +21,10 @@ $red: #d9534f;
 
 // *************************** BASE STYLES ***************************
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 .flashes {
   width: 30%;
   margin: 0px auto;
@@ -69,13 +73,19 @@ $red: #d9534f;
       width: 60%;
       margin-top: 20px; 
 
+      #no-plants-found {
+          list-style: none;
+          line-height: 2;
+          font-size: 1.5em;
+          color: tomato;
+      }
+
       #search-results {
         padding-left: 2px;
         li {
           list-style: none;
           line-height: 2;
           font-size: 1.5em;
-          color: tomato;
           a {
             color: $gray;
             &:hover {
@@ -85,7 +95,7 @@ $red: #d9534f;
           }
         }
       }
-    } 
+    }
   }
   // *************************** PLANT VIEW STYLES ***************************
   .plant-view-wrapper {
@@ -168,23 +178,22 @@ $red: #d9534f;
     text-align: center;
   }
 
-  .form-validation {
+  .new-plant-form {
+    margin-top: 80px;
+
+    .form-validation {
     font-size: 11px;
     color: red;
     text-align: center;
-  }
+    }
 
-  input.ng-valid.ng-touched {
-    border-color: $green;
-  }
+    input.ng-valid.ng-touched {
+      border-color: $green;
+    }
 
-  input.ng-invalid.ng-touched {
-    border-color: $red;
-  }
-
-  .new-plant-form {
-    margin-top: 80px; 
-
+    input.ng-invalid.ng-touched {
+      border-color: $red;
+    }
   }
 }
 

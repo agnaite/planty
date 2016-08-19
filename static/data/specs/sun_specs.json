@@ -1,0 +1,13 @@
+{
+        "Full Sun": {"summary": "Full Sun",
+                     "description": "Full sun at least four hours a day. Bright light the rest of the day.",
+                     "icon": "/static/img/n_sun.png"},
+        "Bright Light": {"summary": "Bright Light",
+                         "description": "Fewer than four hours of direct sun a day. Intense light for eight or more.",
+                         "icon": "/static/img/n_bright.png"},
+        "Medium Light": {"summary": "Medium Light",
+                         "description": "Prefer good light. Little direct sun, except perhaps in the morning or late afternoon.",
+                         "icon": "/static/img/n_medium.png"},
+        "Low Light": {"summary": "Low Light",
+                      "description": "Prefer moderate to weak light with no direct sun.",
+                      "icon": "/static/img/cloud.svg"}}

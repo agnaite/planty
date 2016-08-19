@@ -1,0 +1,9 @@
+{"Moderately Moist": {"summary": "Moderately Moist", 
+                       "description": "Water thoroughly as soon as its potting mix begins to dry out. Cannot tolerate drought.",
+                       "icon": "/static/img/refresh.svg"},
+  "Drench and Let Dry": {"summary": "Drench and Let Dry",
+                         "description": "During potting season, water as soon as its potting mix begins to dry out. When not in a phase of rapid growth, water thoroughly, but allow mix to become dry for a day or two before watering again. Never allow plant to wilt.",
+                         "icon": ""},
+  "Keep on the Dry Side": {"summary": "Keep on the Dry Side",
+                           "description": "Water thoroughly during growing season. Let mix go until it is dry to the touch. If plant is completely dormant, it needs no water at all for a lengthy period.",
+                           "icon": "/static/img/n_cacti.svg"}}

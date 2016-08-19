@@ -6,107 +6,114 @@
       display: inline;
       font-size: 0.85em; }
 
-.flashes {
-  width: 30%;
-  margin: 0px auto;
-  padding: 10px 0;
-  text-align: center;
-  list-style: none;
-  color: #7FD279;
-  font-size: 1.25em;
-  border: 1px solid #7FD279;
-  border-radius: 5px; }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
 
-  .container {
-    font-family: 'Menlo', sans-serif;
-    width: 100%;
-    padding: 0; }
-    .container .navbar {
-      background: #FFF;
-      border: none; }
-      .container .navbar-default .navbar-brand {
-        color: #7FD279;
-        font-size: 1.5em; }
-        .container .navbar-default .navbar-brand:hover {
-          color: #6BCC66; }
-    .container .home-search {
-      width: 80%;
-      margin: 260px auto 0 auto; }
-      .container .home-search #search-field {
-        width: 90%;
-        padding: 15px;
-        font-size: 2em; }
-        .container .home-search #search-btn {
-          padding: 20px;
-          margin-top: 5px;
-          float: right;
-          font-size: 1.25em; }
-          .container .home-search .search-result-wrapper {
-            width: 60%;
-            margin-top: 20px; }
-            .container .home-search .search-result-wrapper #search-results {
-              padding-left: 2px; }
-              .container .home-search .search-result-wrapper #search-results li {
+  .flashes {
+    width: 30%;
+    margin: 0px auto;
+    padding: 10px 0;
+    text-align: center;
+    list-style: none;
+    color: #7FD279;
+    font-size: 1.25em;
+    border: 1px solid #7FD279;
+    border-radius: 5px; }
+
+    .container {
+      font-family: 'Menlo', sans-serif;
+      width: 100%;
+      padding: 0; }
+      .container .navbar {
+        background: #FFF;
+        border: none; }
+        .container .navbar-default .navbar-brand {
+          color: #7FD279;
+          font-size: 1.5em; }
+          .container .navbar-default .navbar-brand:hover {
+            color: #6BCC66; }
+      .container .home-search {
+        width: 80%;
+        margin: 260px auto 0 auto; }
+        .container .home-search #search-field {
+          width: 90%;
+          padding: 15px;
+          font-size: 2em; }
+          .container .home-search #search-btn {
+            padding: 20px;
+            margin-top: 5px;
+            float: right;
+            font-size: 1.25em; }
+            .container .home-search .search-result-wrapper {
+              width: 60%;
+              margin-top: 20px; }
+              .container .home-search .search-result-wrapper #no-plants-found {
                 list-style: none;
                 line-height: 2;
                 font-size: 1.5em;
                 color: tomato; }
-                .container .home-search .search-result-wrapper #search-results li a {
-                  color: #A9A9A9; }
-                  .container .home-search .search-result-wrapper #search-results li a:hover {
-                    text-decoration: none;
-                    color: #7FD279; }
-    .container .plant-view-wrapper {
-      width: 90%;
-      margin: 80px auto; }
-      .container .plant-view-wrapper .plant-img {
-        max-width: 100%; }
-        .container .plant-view-wrapper .plant-title-text i {
-          padding-right: 16px; }
-          .container .plant-view-wrapper .plant-title-text .icons img {
-            width: 60px;
-            margin-right: 10px; }
-      .container .plant-view-wrapper #edit-img-url-field {
-        margin-top: 20px; }
-        .container .plant-view-wrapper .req-table {
-          margin-top: 40px; }
-          .container .plant-view-wrapper .req-table table {
-            font-size: 1.15em; }
-            .container .plant-view-wrapper .req-table table .table-head {
-              font-weight: 700; }
-      .container .plant-view-wrapper .edit-btn {
-        cursor: pointer; }
-        .container .plant-view-wrapper #submit-edit-btn {
-          margin-left: 10px; }
-          .container .plant-view-wrapper .plant-controls .btn-default {
-            padding: 2px 6px; }
-            .container .plant-view-wrapper .plant-controls .btn-default a {
-              color: #b3b3b3;
-              text-decoration: none;
-              font-size: 0.8em; }
-    .container .user-view-wrapper {
-      width: 90%;
-      margin: 80px auto; }
-      .container .user-view-wrapper .user-img {
-        max-width: 100%; }
-        .container .user-view-wrapper .user-text {
-          margin-left: 40px; }
-          .container .user-view-wrapper .user-controls .btn-default {
-            padding: 2px 6px; }
-            .container .user-view-wrapper .user-controls .btn-default a {
-              color: #b3b3b3;
-              text-decoration: none;
-              font-size: 0.8em; }
-    .container .new-page-title {
-      margin-top: 120px;
-      text-align: center; }
-      .container .form-validation {
-        font-size: 11px;
-        color: red;
+                .container .home-search .search-result-wrapper #search-results {
+                  padding-left: 2px; }
+                  .container .home-search .search-result-wrapper #search-results li {
+                    list-style: none;
+                    line-height: 2;
+                    font-size: 1.5em; }
+                    .container .home-search .search-result-wrapper #search-results li a {
+                      color: #A9A9A9; }
+                      .container .home-search .search-result-wrapper #search-results li a:hover {
+                        text-decoration: none;
+                        color: #7FD279; }
+      .container .plant-view-wrapper {
+        width: 90%;
+        margin: 80px auto; }
+        .container .plant-view-wrapper .plant-img {
+          max-width: 100%; }
+          .container .plant-view-wrapper .plant-title-text i {
+            padding-right: 16px; }
+            .container .plant-view-wrapper .plant-title-text .icons img {
+              width: 60px;
+              margin-right: 10px; }
+        .container .plant-view-wrapper #edit-img-url-field {
+          margin-top: 20px; }
+          .container .plant-view-wrapper .req-table {
+            margin-top: 40px; }
+            .container .plant-view-wrapper .req-table table {
+              font-size: 1.15em; }
+              .container .plant-view-wrapper .req-table table .table-head {
+                font-weight: 700; }
+        .container .plant-view-wrapper .edit-btn {
+          cursor: pointer; }
+          .container .plant-view-wrapper #submit-edit-btn {
+            margin-left: 10px; }
+            .container .plant-view-wrapper .plant-controls .btn-default {
+              padding: 2px 6px; }
+              .container .plant-view-wrapper .plant-controls .btn-default a {
+                color: #b3b3b3;
+                text-decoration: none;
+                font-size: 0.8em; }
+      .container .user-view-wrapper {
+        width: 90%;
+        margin: 80px auto; }
+        .container .user-view-wrapper .user-img {
+          max-width: 100%; }
+          .container .user-view-wrapper .user-text {
+            margin-left: 40px; }
+            .container .user-view-wrapper .user-controls .btn-default {
+              padding: 2px 6px; }
+              .container .user-view-wrapper .user-controls .btn-default a {
+                color: #b3b3b3;
+                text-decoration: none;
+                font-size: 0.8em; }
+      .container .new-page-title {
+        margin-top: 120px;
         text-align: center; }
-        .container input.ng-valid.ng-touched {
-          border-color: #7FD279; }
-          .container input.ng-invalid.ng-touched {
-            border-color: #d9534f; }
-            .container .new-plant-form {
-              margin-top: 80px; }
+        .container .new-plant-form {
+          margin-top: 80px; }
+          .container .new-plant-form .form-validation {
+            font-size: 11px;
+            color: red;
+            text-align: center; }
+            .container .new-plant-form input.ng-valid.ng-touched {
+              border-color: #7FD279; }
+              .container .new-plant-form input.ng-invalid.ng-touched {
+                border-color: #d9534f; }

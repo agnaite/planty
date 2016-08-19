@@ -6,6 +6,7 @@ import json
 db = SQLAlchemy()
 
 
+
 ####################################################################
 # Model definitions
 
@@ -26,59 +27,38 @@ class Plant(db.Model):
 
     users = db.relationship("User", secondary="plant_users", backref="plants")
 
-    WATER = {
-        "Moderately Moist": {'summary': "Moderately Moist",
-                             'description': "Water thoroughly as soon as its potting mix begins to dry out. Cannot tolerate drought.",
-                             'icon': '/static/img/refresh.svg'},
-        "Drench and Let Dry": {'summary': "Drench and Let Dry",
-                               'description': "During potting season, water as soon as its potting mix begins to dry out. When not in a phase of rapid growth, water thoroughly, but allow mix to become dry for a day or two before watering again. Never allow plant to wilt.",
-                               'icon': ''},
-        "Keep on the Dry Side": {'summary': "Keep on the Dry Side",
-                                 'description': "Water thoroughly during growing season. Let mix go until it is dry to the touch. If plant is completely dormant, it needs no water at all for a lengthy period.",
-                                 'icon': '/static/img/n_cacti.svg'}
-    }
-    SUN = {
-        "Full Sun": {'summary': "Full Sun",
-                     'description': "Full sun at least four hours a day. Bright light the rest of the day.",
-                     'icon': '/static/img/n_sun.png'},
-        "Bright Light": {'summary': "Bright Light",
-                         'description': "Fewer than four hours of direct sun a day. Intense light for eight or more.",
-                         'icon': '/static/img/n_bright.png'},
-        "Medium Light": {'summary': "Medium Light",
-                         'description': "Prefer good light. Little direct sun, except perhaps in the morning or late afternoon.",
-                         'icon': '/static/img/n_medium.png'},
-        "Low Light": {'summary': "Low Light",
-                      'description': "Prefer moderate to weak light with no direct sun.",
-                      'icon': '/static/img/cloud.svg'}
-    }
-    HUMIDITY = {
-        "High Humidity": {'summary': "High Humidity",
-                          'description': "Plants do best in a very humid environment where a home humidifying system is installed.",
-                          'icon': '/static/img/n_high_humidity.svg'},
-        "Moderate Humidity": {'summary': "Moderate Humidity",
-                              'description': "Grow best in a humid room. Some sort of humidifying system is often required.",
-                              'icon': ''},
-        "Average Home Humidity": {'summary': "Average Home Humidity",
-                                  'description': "Can tolerate dry air.",
-                                  'icon': ''},
-        "Good Air Circulation": {'summary': "Good Air Circulation",
-                                 'description': "Can tolerate stagnant air.",
-                                 'icon': '/static/img/n_low_humidity.svg'}
-    }
-    TEMPERATURE = {
-        "Normal Room Temperatures": {'summary': "Normal Room Temperatures",
-                                     'description': "Tolerate normal room temperatures year-around, from 65F to 75F (18C to 24C).",
-                                     'icon': '/static/img/normal.svg'},
-        "Warm Temperatures": {'summary': "Warm Temperatures",
-                              'description': "Tolerate normal room temperatures very well during warmer months, but do not like temperatures below 65F (18C). No air conditioning.",
-                              'icon': '/static/img/warm.svg'},
-        "Cool Temperatures": {'summary': "Cool Temperatures",
-                              'description': "Tolerate normal room temperatures during their growing period, but like cooler temperatures, around 45F to 55F (7C to 13C), during their rest period.",
-                              'icon': '/static/img/cool.svg'},
-        "Cold Temperatures": {'summary': "Cold Temperatures",
-                              'description': "Prefer cold temperatures - 35F to 45F (2C - 7C). Never expose to freezing temperatures.",
-                              'icon': '/static/img/cold.svg'}
-    }
+    def get_water_specs():
+        """Get water json."""
+
+        with open('static/data/specs/water_specs.json') as data_file:
+            data = json.load(data_file)
+        return data
+
+    def get_sun_specs():
+        """Get sun json."""
+
+        with open('static/data/specs/sun_specs.json') as data_file:
+            data = json.load(data_file)
+        return data
+
+    def get_humid_specs():
+        """Get sun json."""
+
+        with open('static/data/specs/humidity_specs.json') as data_file:
+            data = json.load(data_file)
+        return data
+
+    def get_temp_specs():
+        """Get sun json."""
+
+        with open('static/data/specs/temp_specs.json') as data_file:
+            data = json.load(data_file)
+        return data
+
+    WATER = get_water_specs()
+    SUN = get_sun_specs()
+    HUMIDITY = get_humid_specs()
+    TEMPERATURE = get_temp_specs()
 
     def get_sun(self, key='description'):
         """For a specific plant, returns the sun information"""
@@ -139,7 +119,7 @@ def example_data():
     """Create some sample data."""
 
     # convert json file into dictionary
-    with open('data/plant_results_with_child_nodes.json') as data_file:
+    with open('static/data/plant_results_with_child_nodes.json') as data_file:
         data = json.load(data_file)
 
     for plant in data:

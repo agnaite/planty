@@ -16,6 +16,7 @@ from model import connect_to_db, db, Plant, User, PlantUser
 app = Flask(__name__)
 assets = Environment(app)
 app.secret_key = secret.APP_KEY
+
 flickr_api_key = secret.FLICKR_API_KEY
 flickr_api_secret = secret.FLICKR_API_SECRET
 
@@ -34,7 +35,7 @@ assets.register('scss_all', scss)
 css = Bundle('css/sweetalert.css')
 assets.register('css_all', css)
 
-js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js')
+js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js', 'js/angular-flash.js')
 assets.register('js_all', js)
 
 
@@ -52,12 +53,11 @@ def index_page():
 # NG'd *********************************
 
 
-@app.route('/search/')
-def search_for_plant():
+@app.route('/search/<search_term>')
+def search_for_plant(search_term):
     """Retrieves search results from database."""
 
     # gets the user's search term from app.js and queries the db
-    search_term = request.args.get('search', '')
     results = Plant.query.filter(Plant.name.ilike('%' + search_term + '%')).all()
 
     if results:
@@ -250,6 +250,7 @@ def show_user_plants(user_id):
 
     return render_template('user_plants.html', plants=user.plants)
 
+
 # Plant Routes *********************************
 
 
@@ -274,20 +275,13 @@ def show_plant_details(plant_id):
                            temp=plant.get_temp())
 
 
+# NG'd *********************************
+
 @app.route('/new_plant')
 def add_new_plant():
     """Shows form for adding new plant"""
 
-    WATER = Plant.WATER.keys()
-    SUN = Plant.SUN.keys()
-    HUMIDITY = Plant.HUMIDITY.keys()
-    TEMP = Plant.TEMPERATURE.keys()
-
-    return render_template('new_plant_form.html',
-                           WATER=WATER,
-                           SUN=SUN,
-                           HUMIDITY=HUMIDITY,
-                           TEMP=TEMP)
+    return render_template('new_plant_form.html')
 
 
 # NG'd *********************************
@@ -308,38 +302,35 @@ def get_all_plant_names(plant_name):
     else:
         return "False"
 
+# NG'd *********************************
 
 @app.route('/process_new_plant', methods=['POST'])
 def process_new_plant():
     """Gets the user input from new plant form and adds to the database"""
 
-    # if plant name not in the db, will create plant, else will not
-    name = request.form.get('plant_name').title()
-    if Plant.query.filter_by(name=name).all() == []:
+    # if user did not add image url, get one from flickr
+    name = request.form.get('name')
+    image = request.form.get('image')
+    if not image:
+        image = get_flickr_image(name)
 
-        # gets all the user-entered data from the new plant form
-        species = request.form.get('plant_species').title()
-        image = request.form.get('plant_image')
-        if not image:
-            image = get_flickr_image(name)
-        water = request.form.get('water')
-        sun = request.form.get('sun')
-        humidity = request.form.get('humidity')
-        temp = request.form.get('temp')
+    # gets plant info from angular's data passed in and creates new Plant instance
+    new_plant = Plant(name=name,
+                      species=request.form.get('species'),
+                      image=image,
+                      water=request.form.get('water'),
+                      sun=request.form.get('sun'),
+                      humidity=request.form.get('humidity'),
+                      temperature=request.form.get('temp'))
 
-        # creates new plant
-        new_plant = Plant(name=name, species=species, image=image, water=water,
-                          sun=sun, humidity=humidity, temperature=temp)
+    # adds plant to the database and saves
+    db.session.add(new_plant)
+    db.session.commit()
 
-        # adds and saves new plant in the database
-        db.session.add(new_plant)
-        db.session.commit()
+    flash('Added plant!')
 
-        flash(name + " has been added")
-        return redirect('/plant/'+str(new_plant.plant_id))
-    else:
-        flash("Plant already exists", "warning")
-        return redirect('/new_plant')
+    # returns plant ID to angular's callback
+    return str(new_plant.plant_id)
 
 
 @app.route('/add_to_plant', methods=['POST'])
@@ -449,14 +440,6 @@ def process_delete():
     flash(name + ' was deleted')
     return 'Deleted plant'
 
-
-@app.route('/all_plants')
-def show_all_plants_by_name():
-    """Show all plants by name."""
-
-    all_plants = Plant.query.all()
-
-    return render_template("plants_by_name.html", plants=all_plants)
 
 # **************************** HELPER FUNCTIONS *******************************
 

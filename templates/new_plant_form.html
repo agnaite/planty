@@ -4,14 +4,13 @@
 
 {% block content %}
   <div ng-controller='addPlantCtrl'>
-
     <form class='form-horizontal col-sm-offset-3 new-plant-form' name='form' novalidate>
 
       <div class='form-group'>
         <label for="name_field" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-4 test">
           <input ng-model='plant.name' type="text" class="form-control" id="name_field" name='name' plant-name required>
-          <span class='form-validation' ng-show="form.name.$error.plantName">This plant already exists!</span>
+          <span class='form-validation' ng-show="form.name.$error.plantName" ng-cloak>This plant already exists!</span>
         </div>
       </div>
 
@@ -26,18 +25,16 @@
         <label for="image_field" class="col-sm-2 control-label">Image URL</label>
         <div class="col-sm-4">
           <input ng-model='plant.image' type="text" class="form-control" id="image_field" name='image' img-url>
-          <span class='form-validation' ng-show="form.image.$error.imgUrl">Image URL has to end in JPG or PNG</span>
+          <span class='form-validation' ng-show="form.image.$error.imgUrl" ng-cloak>Image URL has to end in JPG or PNG</span>
         </div>
       </div>
 
       <div class='form-group'>
         <label for="water_field" class="col-sm-2 control-label">Water</label>
         <div class="col-sm-4">
-          <select class='form-control' id='water_field' name='water'>
+          <select ng-model='plant.water' class='form-control' id='water_field'>
             <option></option>
-            {% for key in WATER %}
-              <option value='{{ key }}'>{{ key }}</option>
-            {% endfor %}
+            <option ng-repeat='(key, value) in water'>[[ key ]]</option>
           </select>
         </div>
       </div>
@@ -45,11 +42,9 @@
       <div class='form-group'>
         <label for="sun_field" class="col-sm-2 control-label">Sun</label>
         <div class="col-sm-4">
-          <select class='form-control' id='sun_field' name='sun'>
+          <select ng-model='plant.sun' class='form-control' id='sun_field'>
             <option></option>
-            {% for key in SUN %}
-              <option value='{{ key }}'>{{ key }}</option>
-            {% endfor %}
+            <option ng-repeat='(key, value) in _sun'>[[ key ]]</option>
           </select>
         </div>
       </div>
@@ -57,11 +52,9 @@
       <div class='form-group'>
         <label for="humidity_field" class="col-sm-2 control-label">Humidity</label>
         <div class="col-sm-4">
-          <select class='form-control' id='humidity_field' name='humidity'>
+          <select ng-model='plant.humidity' class='form-control' id='humidity_field'>
             <option></option>
-            {% for key in HUMIDITY %}
-              <option value='{{ key }}'>{{ key }}</option>
-            {% endfor %}
+            <option ng-repeat='(key, value) in humidity'>[[ key ]]</option>
           </select>
         </div>
       </div>
@@ -69,22 +62,18 @@
       <div class='form-group'>
         <label for="temp_field" class="col-sm-2 control-label">Temperature</label>
         <div class="col-sm-4">
-          <select class='form-control' id='temp_field' name='temp'>
+          <select ng-model='plant.temp' class='form-control' id='temp_field'>
             <option></option>
-            {% for key in TEMP %}
-              <option value='{{ key }}'>{{ key }}</option>
-            {% endfor %}
+            <option ng-repeat='(key, value) in temp'>[[ key ]]</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
-
         <div class="col-sm-offset-2 col-sm-10">
-          <button ng-click="update(plant)" class="btn btn-default">Add Plant</button>
+          <button ng-disabled="form.$invalid" ng-click="update(plant)" class="btn btn-default">Add Plant</button>
           <button ng-click='reset()' class="btn btn-default">Reset</button>
         </div>
-
       </div>
     </form>
 

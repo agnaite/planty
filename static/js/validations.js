@@ -26,7 +26,7 @@ angular.module("planty")
                   def.reject();
                 }
             });
-        }, 1000);
+        }, 500);
 
         return def.promise;
       };
@@ -60,7 +60,7 @@ angular.module("planty")
             def.reject();
           }
 
-        }, 1000);
+        }, 500);
 
         return def.promise;
       };
