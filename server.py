@@ -324,6 +324,22 @@ def get_all_plant_names(plant_name):
 
 # NG'd *********************************
 
+
+@app.route('/get_flickr_img/<plant_name>')
+def get_flickr_img_url(plant_name):
+    """Gets link for flickr image and returns to angular."""
+
+    url = get_flickr_image(plant_name)
+
+    if url:
+        return url
+    else:
+        return 'No image found.'
+
+
+# NG'd *********************************
+
+
 @app.route('/process_new_plant', methods=['POST'])
 def process_new_plant():
     """Gets the user input from new plant form and adds to the database"""

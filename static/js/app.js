@@ -96,6 +96,13 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
     $scope.plant.name = '';
   };
 
+  $scope.getFlickrImg = function() {
+    $http.get('/get_flickr_img/' + $scope.plant.name)
+    .success(function(data) {
+      $scope.plant.image = data;
+    });
+  };
+
   // gets all the plant spec data from json files via getPlantSpecs Service
   getPlantSpecsService.getWater(function(response) {
     $scope.water = response.data;

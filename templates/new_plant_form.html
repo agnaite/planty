@@ -24,7 +24,8 @@
       <div class='form-group'>
         <label for="image_field" class="col-sm-2 control-label">Image URL</label>
         <div class="col-sm-4">
-          <input ng-model='plant.image' type="text" class="form-control" id="image_field" name='image' img-url>
+          <input ng-model='plant.image' type="text" class="form-control plant-img-field" id="image_field" name='image' img-url>
+          <a ng-disabled="form.name.$invalid" ng-click='getFlickrImg()' class='flickr-img-link btn btn-default'>Get Flickr image</a>
           <span class='form-validation' ng-show="form.image.$error.imgUrl" ng-cloak>Image URL has to end in JPG or PNG</span>
         </div>
       </div>

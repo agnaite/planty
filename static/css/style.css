@@ -107,20 +107,26 @@
       .container .new-page-title {
         margin-top: 120px;
         text-align: center; }
-        .container .new-plant-form, .container .register-form {
-          margin-top: 80px; }
-          .container .new-plant-form .form-validation,
-          .container .register-form .form-validation {
-            font-size: 11px;
+        .container .new-plant-form .plant-img-field {
+          width: 58%;
+          display: inline; }
+          .container .new-plant-form .flickr-img-link {
+            display: inline;
+            font-size: 11px; }
+      .container .new-plant-form, .container .register-form {
+        margin-top: 80px; }
+        .container .new-plant-form .form-validation,
+        .container .register-form .form-validation {
+          font-size: 11px;
+          color: #d9534f;
+          text-align: center; }
+          .container .new-plant-form .form-validation a,
+          .container .register-form .form-validation a {
             color: #d9534f;
-            text-align: center; }
-            .container .new-plant-form .form-validation a,
-            .container .register-form .form-validation a {
-              color: #d9534f;
-              text-decoration: underline; }
-          .container .new-plant-form input.ng-valid.ng-touched,
-          .container .register-form input.ng-valid.ng-touched {
-            border-color: #7FD279; }
-            .container .new-plant-form input.ng-invalid.ng-touched,
-            .container .register-form input.ng-invalid.ng-touched {
-              border-color: #d9534f; }
+            text-decoration: underline; }
+        .container .new-plant-form input.ng-valid.ng-touched,
+        .container .register-form input.ng-valid.ng-touched {
+          border-color: #7FD279; }
+          .container .new-plant-form input.ng-invalid.ng-touched,
+          .container .register-form input.ng-invalid.ng-touched {
+            border-color: #d9534f; }

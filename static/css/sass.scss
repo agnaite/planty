@@ -178,6 +178,17 @@ $red: #d9534f;
     text-align: center;
   }
 
+  .new-plant-form {
+    .plant-img-field {
+      width: 58%;
+      display: inline;
+    }
+    .flickr-img-link {
+      display: inline;
+      font-size: 11px;
+    }
+  }
+
   .new-plant-form,
   .register-form {
     margin-top: 80px;
