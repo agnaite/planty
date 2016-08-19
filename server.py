@@ -167,41 +167,24 @@ def show_registration_form():
 def process_registration():
     """Processes user registration form"""
 
-    username = request.form.get('username')
-    user = User.query.filter_by(username=username).first()
+    # creates a new user instance
+    new_user = User(username=request.form.get('username'),
+                    first_name=request.form.get('fname'),
+                    last_name=request.form.get('lname'),
+                    password=request.form.get('password'),
+                    email=request.form.get('email'),
+                    image=request.form.get('image'),
+                    confirmed_at=datetime.now())
 
-    # if username does not already exist in the database,
-    # gets all the user entered values from the registration form
-    if not user:
-        first_name = request.form.get('fname')
-        last_name = request.form.get('lname')
-        password = request.form.get('password')
-        email = request.form.get('email')
-        image = request.form.get('img')
-        timestamp = datetime.now()
+    # adds the new user instance to the database and saves
+    db.session.add(new_user)
+    db.session.commit()
 
-        # creates a new user instance
-        new_user = User(username=username,
-                        password=password,
-                        confirmed_at=timestamp,
-                        first_name=first_name,
-                        last_name=last_name,
-                        image=image,
-                        email=email)
+    # logs new user in
+    session['logged_in'] = new_user.user_id
 
-        # adds the new user instance to the database and saves
-        db.session.add(new_user)
-        db.session.commit()
-
-        # logs new user in
-        session['logged_in'] = new_user.user_id
-
-        flash("Account created. Hello, " + username + "!")
-        return redirect('/')
-    # if username exists, asks to pick new username and redirects to registration form
-    else:
-        flash('Username already exists!')
-        return redirect('/register')
+    flash("Account created. Hello, " + new_user.username + "!")
+    return str(new_user.user_id)
 
 
 @app.route('/user_profile/<user_id>')

@@ -44,26 +44,30 @@ app.controller('addUserCtrl', function($scope, $http, $window) {
   $scope.master = {};
 
   // on register button click, send user filled data to Flask 
-  // $scope.update = function(user) {
-  //   $scope.master = angular.copy(user);
+  $scope.update = function(user) {
+    $scope.master = angular.copy(user);
 
-  //    $http({
-  //     url: '/process_new_plant',
-  //     method: "POST",
-  //     data: $.param(plant),
-  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-  //    }).success(function(data) {
-  //       // on 200 status from Flask, redirect to the new plant's page
-  //       $window.location.href = '/plant/' + data;
-  //   });
-  // };
-  // on click of reset button, clear all form fields
-  $scope.reset = function() {
-    $scope.user = angular.copy($scope.master);
-    // $scope.plant.name = '';
+     $http({
+      url: '/process_registration',
+      method: "POST",
+      data: $.param(user),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+     }).success(function(data) {
+        // on 200 status from Flask, redirect to the new user's page
+        $window.location.href = '/user_profile/' + data;
+    });
   };
 
-  $scope.reset();
+  // on click of reset button, clear all form fields and set to untouched
+  $scope.reset = function() {
+    $scope.user = angular.copy($scope.master);
+    $scope.form.$setUntouched();
+    $scope.user.email = '';
+    $scope.user.image = '';
+    $scope.user.username = '';
+  };
+
+  //$scope.reset();
 });
 
 // ADD PLANT ***************************************************************
@@ -88,10 +92,9 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
   // on click of reset button, clear all form fields
   $scope.reset = function() {
     $scope.plant = angular.copy($scope.master);
+    $scope.form.$setUntouched();
     $scope.plant.name = '';
   };
-
-  $scope.reset();
 
   // gets all the plant spec data from json files via getPlantSpecs Service
   getPlantSpecsService.getWater(function(response) {
