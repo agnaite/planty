@@ -11,13 +11,15 @@ app.config(function($routeProvider, $interpolateProvider) {
 
   $routeProvider
     .when('/', {
-      templateUrl: 'index.html',
+      templateUrl: '/html_for_angular/search.html',
       controller: 'homeCtrl'
     })
-    .when('/new_plant', {
-      templateUrl: 'new_plant_form.html',
+    .when('/add_plant', {
+      templateUrl: '/html_for_angular/new_plant_form.html',
       controller: 'addPlantCtrl'
     });
+
+    // $locationProvider.html5Mode(true);
 });
 
 // SEARCH ***************************************************************

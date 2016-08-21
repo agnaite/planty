@@ -35,7 +35,7 @@ assets.register('scss_all', scss)
 css = Bundle('css/sweetalert.css')
 assets.register('css_all', css)
 
-js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js', 'js/angular-flash.js')
+js = Bundle('js/app.js','js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js', 'js/angular-flash.js')
 assets.register('js_all', js)
 
 
@@ -47,8 +47,14 @@ assets.register('js_all', js)
 @app.route('/')
 def index_page():
     """Show index page."""
+    return render_template("base.html")
 
-    return render_template("index.html")
+
+# sends static html files to angular
+@app.route('/html_for_angular/<filename>')
+def html_for_angular(filename):
+    return render_template('angular/{}'.format(filename))
+
 
 # NG'd *********************************
 
@@ -113,54 +119,54 @@ def check_if_email_is_taken(email):
         return "False"
 
 
-@app.route('/login')
-def show_login_form():
-    """Renders login form"""
-    return render_template('login_form.html')
+# @app.route('/login')
+# def show_login_form():
+#     """Renders login form"""
+#     return render_template('login_form.html')
 
 
-@app.route('/process_login', methods=['POST'])
-def process_login():
-    """Processes user input and either logs user in if input is in database"""
+# @app.route('/process_login', methods=['POST'])
+# def process_login():
+#     """Processes user input and either logs user in if input is in database"""
 
-    # gets the user input from the username field and looks it up in the database
-    username = request.form.get('username')
-    user = User.query.filter_by(username=username).first()
+#     # gets the user input from the username field and looks it up in the database
+#     username = request.form.get('username')
+#     user = User.query.filter_by(username=username).first()
 
-    # if username entered exists in db, gets the password entered and compares
-    # it to the one in the database
-    if user:
-        password = request.form.get('password')
-        # if password is correct, adds user to the current session and redirects to home page
-        if user.password == password:
-            session['logged_in'] = user.user_id
-            flash('Welcome back, ' + user.first_name + '!')
-            return redirect('/')
-        # if password is incorrect, redirects to login page
-        else:
-            flash('Incorrect login. Please try again.')
-            return redirect('/login')
-    # if username is not in the database, redirects to the registration form
-    else:
-        flash('Username not found. Please register!')
-        return redirect('/register')
-
-
-@app.route('/logout')
-def process_logout():
-    """Processes user logout"""
-
-    del session['logged_in']
-
-    flash('See you next time!')
-    return redirect('/')
+#     # if username entered exists in db, gets the password entered and compares
+#     # it to the one in the database
+#     if user:
+#         password = request.form.get('password')
+#         # if password is correct, adds user to the current session and redirects to home page
+#         if user.password == password:
+#             session['logged_in'] = user.user_id
+#             flash('Welcome back, ' + user.first_name + '!')
+#             return redirect('/')
+#         # if password is incorrect, redirects to login page
+#         else:
+#             flash('Incorrect login. Please try again.')
+#             return redirect('/login')
+#     # if username is not in the database, redirects to the registration form
+#     else:
+#         flash('Username not found. Please register!')
+#         return redirect('/register')
 
 
-@app.route('/register')
-def show_registration_form():
-    """Redirects the user to the registration form"""
+# @app.route('/logout')
+# def process_logout():
+#     """Processes user logout"""
 
-    return render_template('register_form.html')
+#     del session['logged_in']
+
+#     flash('See you next time!')
+#     return redirect('/')
+
+
+# @app.route('/register')
+# def show_registration_form():
+#     """Redirects the user to the registration form"""
+
+#     return render_template('register_form.html')
 
 
 @app.route('/process_registration', methods=['POST'])
@@ -187,80 +193,80 @@ def process_registration():
     return str(new_user.user_id)
 
 
-@app.route('/user_profile/<user_id>')
-def show_user_profile(user_id):
-    """Shows user profile"""
+# @app.route('/user_profile/<user_id>')
+# def show_user_profile(user_id):
+#     """Shows user profile"""
 
-    # gets the login user from the database
-    user = User.query.get(user_id)
+#     # gets the login user from the database
+#     user = User.query.get(user_id)
 
-    # sets default image, if there isn't one
-    if user.image:
-        img = user.image
-    else:
-        img = "https://medium.com/img/default-avatar.png"
+#     # sets default image, if there isn't one
+#     if user.image:
+#         img = user.image
+#     else:
+#         img = "https://medium.com/img/default-avatar.png"
 
-    return render_template('user_profile.html',
-                           user=user,
-                           img=img)
-
-
-@app.route('/update_profile/<user_id>')
-def update_user_profile(user_id):
-    """Renders user profile update page"""
-
-    user = User.query.get(user_id)
-
-    return render_template('update_profile.html',
-                           user=user)
+#     return render_template('user_profile.html',
+#                            user=user,
+#                            img=img)
 
 
-@app.route('/process_profile_update', methods=['POST'])
-def process_update_profile():
-    """Processes any profile updates"""
-    user_id = request.form.get('user_id')
-    user = User.query.get(int(user_id))
-    email = request.form.get('email')
-    validate_email = int(User.query.filter_by(email=email).count())
+# @app.route('/update_profile/<user_id>')
+# def update_user_profile(user_id):
+#     """Renders user profile update page"""
 
-    if validate_email < 2:
-        user.first_name = request.form.get('fname')
-        user.last_name = request.form.get('lname')
-        user.password = request.form.get('password')
-        user.image = request.form.get('img')
-        user.email = email
+#     user = User.query.get(user_id)
 
-        db.session.commit()
+#     return render_template('update_profile.html',
+#                            user=user)
 
-        flash('Account updated.')
-        return redirect('/user_profile/' + str(user.user_id))
-    else:
-        flash('This email is already taken.')
-        return redirect('/update_profile/' + str(user.user_id))
+
+# @app.route('/process_profile_update', methods=['POST'])
+# def process_update_profile():
+#     """Processes any profile updates"""
+#     user_id = request.form.get('user_id')
+#     user = User.query.get(int(user_id))
+#     email = request.form.get('email')
+#     validate_email = int(User.query.filter_by(email=email).count())
+
+#     if validate_email < 2:
+#         user.first_name = request.form.get('fname')
+#         user.last_name = request.form.get('lname')
+#         user.password = request.form.get('password')
+#         user.image = request.form.get('img')
+#         user.email = email
+
+#         db.session.commit()
+
+#         flash('Account updated.')
+#         return redirect('/user_profile/' + str(user.user_id))
+#     else:
+#         flash('This email is already taken.')
+#         return redirect('/update_profile/' + str(user.user_id))
 
 
 # PlantUser Routes *********************************
 
-@app.route('/add_plantuser', methods=['POST'])
-def add_plant_to_user():
-    post = request.get_json()
-    plant_id = int(post.get('plant'))
-    user_id = int(post.get('user'))
+# @app.route('/add_plantuser', methods=['POST'])
+# def add_plant_to_user():
+#     post = request.get_json()
+#     plant_id = int(post.get('plant'))
+#     user_id = int(post.get('user'))
 
-    new_plantuser = PlantUser(user_id=user_id, plant_id=plant_id)
+#     new_plantuser = PlantUser(user_id=user_id, plant_id=plant_id)
 
-    db.session.add(new_plantuser)
-    db.session.commit()
+#     db.session.add(new_plantuser)
+#     db.session.commit()
 
-    return redirect('/plant/'+str(plant_id))
+#     return redirect('/plant/'+str(plant_id))
 
 
-@app.route('/user_plants/<user_id>')
-def show_user_plants(user_id):
-    """Shows plants the user has added"""
+# @app.route('/user_plants/<user_id>')
+# def show_user_plants(user_id):
+#     """Shows plants the user has added"""
 
-    user = User.query.get(user_id)
-    plants = {}
+#     user = User.query.get(user_id)
+#     plants = {}
 
     # for plant in user.plants:
     #     plants[plant.plant_id] = {
@@ -268,40 +274,40 @@ def show_user_plants(user_id):
     #         'species': plant.species
     #     }
 
-    return render_template('user_plants.html', plants=user.plants)
+    # return render_template('user_plants.html', plants=user.plants)
 
 
 # Plant Routes *********************************
 
 
-@app.route('/plant/<plant_id>')
-def show_plant_details(plant_id):
-    """Show individual plant's page"""
+# @app.route('/plant/<plant_id>')
+# def show_plant_details(plant_id):
+#     """Show individual plant's page"""
 
-    plant = Plant.query.get(plant_id)
+#     plant = Plant.query.get(plant_id)
 
-    return render_template('plant.html',
-                           plant_id=plant.plant_id,
-                           plant_name=plant.name,
-                           plant_species=plant.species,
-                           plant_img=plant.image,
-                           water_icon=plant.get_water('icon'),
-                           water=plant.get_water(),
-                           sun_icon=plant.get_sun('icon'),
-                           sun=plant.get_sun(),
-                           humidity_icon=plant.get_humidity('icon'),
-                           humidity=plant.get_humidity(),
-                           temp_icon=plant.get_temp('icon'),
-                           temp=plant.get_temp())
+#     return render_template('plant.html',
+#                            plant_id=plant.plant_id,
+#                            plant_name=plant.name,
+#                            plant_species=plant.species,
+#                            plant_img=plant.image,
+#                            water_icon=plant.get_water('icon'),
+#                            water=plant.get_water(),
+#                            sun_icon=plant.get_sun('icon'),
+#                            sun=plant.get_sun(),
+#                            humidity_icon=plant.get_humidity('icon'),
+#                            humidity=plant.get_humidity(),
+#                            temp_icon=plant.get_temp('icon'),
+#                            temp=plant.get_temp())
 
 
 # NG'd *********************************
 
-@app.route('/new_plant')
-def add_new_plant():
-    """Shows form for adding new plant"""
+# @app.route('/new_plant')
+# def add_new_plant():
+#     """Shows form for adding new plant"""
 
-    return render_template('new_plant_form.html')
+#     return render_template('new_plant_form.html')
 
 
 # NG'd *********************************
@@ -394,87 +400,87 @@ def add_missing_plant_info():
     return jsonify(edit)
 
 
-@app.route('/update_plant/<plant_id>', methods=['GET'])
-def update_plant(plant_id):
-    """Updates plant"""
+# @app.route('/update_plant/<plant_id>', methods=['GET'])
+# def update_plant(plant_id):
+#     """Updates plant"""
 
-    plant = Plant.query.get(plant_id)
-    WATER = Plant.WATER.keys()
-    SUN = Plant.SUN.keys()
-    HUMIDITY = Plant.HUMIDITY.keys()
-    TEMP = Plant.TEMPERATURE.keys()
+#     plant = Plant.query.get(plant_id)
+#     WATER = Plant.WATER.keys()
+#     SUN = Plant.SUN.keys()
+#     HUMIDITY = Plant.HUMIDITY.keys()
+#     TEMP = Plant.TEMPERATURE.keys()
 
-    return render_template('update_plant.html',
-                           plant_id=plant.plant_id,
-                           plant_name=plant.name,
-                           plant_species=plant.species,
-                           plant_img=plant.image,
-                           water=plant.get_water('summary'),
-                           sun=plant.get_sun('summary'),
-                           humidity=plant.get_humidity('summary'),
-                           temp=plant.get_temp('summary'),
-                           WATER=WATER,
-                           SUN=SUN,
-                           HUMIDITY=HUMIDITY,
-                           TEMP=TEMP)
+#     return render_template('update_plant.html',
+#                            plant_id=plant.plant_id,
+#                            plant_name=plant.name,
+#                            plant_species=plant.species,
+#                            plant_img=plant.image,
+#                            water=plant.get_water('summary'),
+#                            sun=plant.get_sun('summary'),
+#                            humidity=plant.get_humidity('summary'),
+#                            temp=plant.get_temp('summary'),
+#                            WATER=WATER,
+#                            SUN=SUN,
+#                            HUMIDITY=HUMIDITY,
+#                            TEMP=TEMP)
 
 
-@app.route('/process_update_plant/<plant_id>', methods=['POST'])
-def process_update_plant(plant_id):
+# @app.route('/process_update_plant/<plant_id>', methods=['POST'])
+# def process_update_plant(plant_id):
     """Gets the user input from updating plant and updates the database"""
-    plant = Plant.query.get(plant_id)
+    # plant = Plant.query.get(plant_id)
 
     # if plant name not in the db, will update plant, else will not
-    name = request.form.get('plant_name').title().rstrip()
-    if Plant.query.filter_by(name=name).all() == [] or Plant.query.filter_by(name=name).first() == plant:
+    # name = request.form.get('plant_name').title().rstrip()
+    # if Plant.query.filter_by(name=name).all() == [] or Plant.query.filter_by(name=name).first() == plant:
 
         # gets all the user-entered data from the update plant form
-        plant.name = request.form.get('plant_name')
-        plant.species = request.form.get('plant_species').title()
-        image = request.form.get('plant_image')
-        if not image or image == 'None':
-            url = get_flickr_image(name)
-            if url:
-                plant.image = url
-            else:
-                pass
-        else:
-            plant.image = image
-        plant.water = request.form.get('water')
-        plant.sun = request.form.get('sun')
-        plant.humidity = request.form.get('humidity')
-        plant.temperature = request.form.get('temp')
+        # plant.name = request.form.get('plant_name')
+        # plant.species = request.form.get('plant_species').title()
+        # image = request.form.get('plant_image')
+        # if not image or image == 'None':
+        #     url = get_flickr_image(name)
+        #     if url:
+        #         plant.image = url
+        #     else:
+        #         pass
+        # else:
+        #     plant.image = image
+        # plant.water = request.form.get('water')
+        # plant.sun = request.form.get('sun')
+        # plant.humidity = request.form.get('humidity')
+        # plant.temperature = request.form.get('temp')
 
         # saves updated plant in the database
-        db.session.commit()
+        # db.session.commit()
 
-        flash(name + " has been updated")
-        return redirect('/plant/' + str(plant_id))
+        # flash(name + " has been updated")
+        # return redirect('/plant/' + str(plant_id))
     # if user deletes plant name, will not submit
-    elif name == '':
-        flash("Plant name cannot be blank", "warning")
-        return redirect('/update_plant/' + str(plant_id))
+    # elif name == '':
+    #     flash("Plant name cannot be blank", "warning")
+    #     return redirect('/update_plant/' + str(plant_id))
     # if user tries to update plant name to a name that already exists in db, will not submit
-    else:
-        flash("Plant name already exists", "warning")
-        return redirect('/update_plant/' + str(plant_id))
+    # else:
+    #     flash("Plant name already exists", "warning")
+    #     return redirect('/update_plant/' + str(plant_id))
 
 
-@app.route('/delete_request', methods=['POST'])
-def process_delete():
-    """Deletes plant from the database"""
+# @app.route('/delete_request', methods=['POST'])
+# def process_delete():
+#     """Deletes plant from the database"""
 
-    plant_id = int(request.form.get('dataPlant'))
-    print '*' * 100
-    print plant_id
-    plant = Plant.query.get(plant_id)
-    print plant
-    name = plant.name
-    db.session.delete(plant)
-    db.session.commit()
+#     plant_id = int(request.form.get('dataPlant'))
+#     print '*' * 100
+#     print plant_id
+#     plant = Plant.query.get(plant_id)
+#     print plant
+#     name = plant.name
+#     db.session.delete(plant)
+#     db.session.commit()
 
-    flash(name + ' was deleted')
-    return 'Deleted plant'
+#     flash(name + ' was deleted')
+#     return 'Deleted plant'
 
 
 # **************************** HELPER FUNCTIONS *******************************
