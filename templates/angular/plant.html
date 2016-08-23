@@ -16,14 +16,17 @@
       <input placeholder='Species' ng-change="plant.edited = true" ng-blur="editing = false;" ng-show="editing" ng-model="plant.species" class="editing-label form-control" type="text"/>
 
       <div class='icons'>
-        
-      <!-- ICONS GO HERE -->
-
+        <span>
+          <img ng-if="[[ allWater[plant.water].icon ]] != ''" src='[[ allWater[plant.water].icon ]]'>
+          <img ng-if="[[ allSun[plant.sun].icon ]] != ''" src='[[ allSun[plant.sun].icon ]]'>
+          <img ng-if="[[ allHumid[plant.humid].icon ]] != ''" src='[[ allHumid[plant.humid].icon ]]'>
+          <img ng-if="[[ allTemp[plant.temp].icon ]] != ''" src='[[ allTemp[plant.temp].icon ]]'>
+        </span>  
       </div>
 
       {% if 'logged_in' in session %}
         <div ng-controller="addPlantCtrl">
-          <a ng-click="click({{ session['logged_in'] }}, [[ plant.plant_id ]])" id='add_plant'>Add to your plants!</a>
+          <a ng-click="click({{ session['logged_in'] }}, [[ plant.plant_id ]])" class='btn btn-default add_plant'>Add Plant</a>
         </div>
       {% endif %}
     </div>
@@ -32,7 +35,7 @@
       <!-- delete and edit plant buttons -->
       <div class='plant-controls col-offset-8 col-sm-4'>
         <button class='btn btn-default edit-control' ng-disabled="editing" ng-click="editing = !editing">Edit</button>
-        <button ng-click="saveEdits(plant)" class='btn btn-default edit-control' ng-disabled="!plant.edited">Save</button>
+        <button ng-click="saveEdits()" class='btn btn-default edit-control' ng-disabled="!plant.edited">Save</button>
         <button class='btn btn-default delete-control' ng-click='deletePlant([[ plant.plant_id ]])'>Delete</button>
       </div>
     {% endif %}
@@ -71,30 +74,30 @@
               <td class='col-sm-8'>[[ allSun[plant.sun].description ]]</td>
             </label>
           </tr>
-          
+          <tr>
           <td scope='row' ng-click="editing = true" class='table-head'>Humidity:</td>
             <label ng-click="editing = true" ng-hide="editing" for="humid_field" class="control-label">
               <td>
-                <span ng-hide="editing">[[ allHumid[plant.humid].summary ]]</span>
-                <select id='humid_field' ng-change="plant.edited = true" ng-blur="editing = false;" ng-show="editing" ng-model="plant.humid" class="editing-label form-control" type="text"/>
+                <span ng-hide="editing">[[ allHumid[plant.humidity].summary ]]</span>
+                <select id='humid_field' ng-change="plant.edited = true" ng-blur="editing = false;" ng-show="editing" ng-model="plant.humidity" class="editing-label form-control" type="text"/>
                   <option></option>
                   <option ng-repeat='(key, value) in allHumid'>[[ key ]]</option>
                 </select>
               </td>
-              <td class='col-sm-8'>[[ allHumid[plant.humid].description ]]</td>
+              <td class='col-sm-8'>[[ allHumid[plant.humidity].description ]]</td>
             </label>
-
+          </tr>
           <tr>
             <td scope='row' ng-click="editing = true" class='table-head'>Temperature:</td>
             <label ng-click="editing = true" ng-hide="editing" for="temp_field" class="control-label">
               <td>
-                <span ng-hide="editing">[[ allTemp[plant.temp].summary ]]</span>
-                <select id='temp_field' ng-change="plant.edited = true" ng-blur="editing = false;" ng-show="editing" ng-model="plant.temp" class="editing-label form-control" type="text"/>
+                <span ng-hide="editing">[[ allTemp[plant.temperature].summary ]]</span>
+                <select id='temp_field' ng-change="plant.edited = true" ng-blur="editing = false;" ng-show="editing" ng-model="plant.temperature" class="editing-label form-control" type="text"/>
                   <option></option>
                   <option ng-repeat='(key, value) in allTemp'>[[ key ]]</option>
                 </select>
               </td>
-              <td class='col-sm-8'>[[ allTemp[plant.temp].description ]]</td>
+              <td class='col-sm-8'>[[ allTemp[plant.temperature].description ]]</td>
             </label>
           </tr>
         </tbody>

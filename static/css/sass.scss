@@ -145,6 +145,20 @@ $red: #d9534f;
     width: 90%;
     margin: 80px auto;
 
+    .icons {
+      padding: 10px 5px;
+    }
+
+    .add_plant {
+      margin-top: 15px;
+
+      &:hover {
+        border-color: $green;
+        color: $green;
+        background-color: white;
+      }
+    }
+
     .plant-img {
       max-width: 100%;
     }
@@ -189,6 +203,12 @@ $red: #d9534f;
         color: darken($light-gray, 10%);
         text-decoration: none;
         font-size: 0.8em;
+
+        &:hover:enabled {
+          border-color: $green;
+          color: $green;
+          background-color: white;
+        }
       }
     }
   }

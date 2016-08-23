@@ -104,6 +104,14 @@
           .container .plant-view-wrapper {
             width: 90%;
             margin: 80px auto; }
+            .container .plant-view-wrapper .icons {
+              padding: 10px 5px; }
+              .container .plant-view-wrapper .add_plant {
+                margin-top: 15px; }
+                .container .plant-view-wrapper .add_plant:hover {
+                  border-color: #7FD279;
+                  color: #7FD279;
+                  background-color: white; }
             .container .plant-view-wrapper .plant-img {
               max-width: 100%; }
               .container .plant-view-wrapper .plant-title-text label {
@@ -130,6 +138,10 @@
                   color: #b3b3b3;
                   text-decoration: none;
                   font-size: 0.8em; }
+                  .container .plant-view-wrapper .plant-controls .btn-default:hover:enabled {
+                    border-color: #7FD279;
+                    color: #7FD279;
+                    background-color: white; }
           .container .user-view-wrapper {
             width: 90%;
             margin: 80px auto; }

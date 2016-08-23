@@ -198,12 +198,12 @@ app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSp
 
     getPlantSpecsService.getHumidity(function(response) {
       $scope.allHumid = response.data;
-      $scope.humid = response.data[$scope.plant.humidity];
+      $scope.humidity = response.data[$scope.plant.humidity];
     });
 
     getPlantSpecsService.getTemp(function(response) {
       $scope.allTemp = response.data;
-      $scope.temp = response.data[$scope.plant.temperature];
+      $scope.temperature = response.data[$scope.plant.temperature];
     });
 
     getPlantSpecsService.getSun(function(response) {
@@ -213,7 +213,7 @@ app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSp
 
     getPlantSpecsService.getWater(function(response) {
       $scope.allWater = response.data;
-      $scope.plant.water = response.data[$scope.plant.water];
+      $scope.water = response.data[$scope.plant.water];
     });
 
     if ($scope.plant["image"] === null) {
@@ -221,12 +221,13 @@ app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSp
     }
   });
 
-  $scope.saveEdits = function(editedPlant) {
+  $scope.saveEdits = function() {
     $scope.plant.edited = false;
+    console.log($scope.plant);
     $http({
       url: '/save_plant_edits',
       method: "POST",
-      data: $.param(editedPlant),
+      data: $.param($scope.plant),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new plant's page
@@ -258,7 +259,7 @@ app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSp
                 data: $.param($scope.plant),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
               }).then(function(data) {
-                  // on 200 status from Flask, redirect to the new plant's page
+                  // on 200 status from Flask, redirect to the new plants page
                   $location.path('/');
                   $route.reload();
                   flash("Plant deleted.");
