@@ -33,8 +33,6 @@ $red: #d9534f;
   list-style: none;
   color: $green;
   font-size: 1.25em;
-  border: 1px solid $green;
-  border-radius: 5px;
 }
 .container {
   font-family: $menlo;
@@ -62,6 +60,22 @@ $red: #d9534f;
       width: 90%;
       padding: 15px;
       font-size: 2em;
+    
+      @media screen and (max-width: 1240px) {
+        width: 85%;
+      }
+      @media screen and (max-width: 990px) {
+        width: 80%;
+      }
+      @media screen and (max-width: 700px) {
+        width: 75%;
+      }
+      @media screen and (max-width: 560px) {
+        width: 70%;
+      }
+      @media screen and (max-width: 440px) {
+        width: 60%;
+      }
     }
     #search-btn {
       padding: 20px;
@@ -106,8 +120,11 @@ $red: #d9534f;
       max-width: 100%;
     }
     .plant-title-text {
-      i {
-        padding-right: 16px;
+      label {
+        display: block;
+      }
+      input {
+        margin-bottom: 5px;
       }
       .icons {
         img {
@@ -115,7 +132,6 @@ $red: #d9534f;
           margin-right: 10px;
         }
       }
-
     }
     #edit-img-url-field {
       margin-top: 20px;
@@ -141,11 +157,9 @@ $red: #d9534f;
     .plant-controls {
       .btn-default {
         padding: 2px 6px;
-        a {
-          color: darken($light-gray, 10%);
-          text-decoration: none;
-          font-size: 0.8em;
-        }
+        color: darken($light-gray, 10%);
+        text-decoration: none;
+        font-size: 0.8em;
       }
     }
   }

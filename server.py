@@ -35,7 +35,7 @@ assets.register('scss_all', scss)
 css = Bundle('css/sweetalert.css')
 assets.register('css_all', css)
 
-js = Bundle('js/app.js','js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js', 'js/angular-flash.js')
+js = Bundle('js/app.js','js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js')
 assets.register('js_all', js)
 
 
@@ -125,41 +125,38 @@ def check_if_email_is_taken(email):
 #     return render_template('login_form.html')
 
 
-# @app.route('/process_login', methods=['POST'])
-# def process_login():
-#     """Processes user input and either logs user in if input is in database"""
+@app.route('/process_login', methods=['POST'])
+def process_login():
+    """Processes user input and either logs user in if input is in database"""
 
-#     # gets the user input from the username field and looks it up in the database
-#     username = request.form.get('username')
-#     user = User.query.filter_by(username=username).first()
+    # gets the user input from the username field and looks it up in the database
+    username = request.form.get('username')
+    user = User.query.filter_by(username=username).first()
 
-#     # if username entered exists in db, gets the password entered and compares
-#     # it to the one in the database
-#     if user:
-#         password = request.form.get('password')
-#         # if password is correct, adds user to the current session and redirects to home page
-#         if user.password == password:
-#             session['logged_in'] = user.user_id
-#             flash('Welcome back, ' + user.first_name + '!')
-#             return redirect('/')
-#         # if password is incorrect, redirects to login page
-#         else:
-#             flash('Incorrect login. Please try again.')
-#             return redirect('/login')
-#     # if username is not in the database, redirects to the registration form
-#     else:
-#         flash('Username not found. Please register!')
-#         return redirect('/register')
+    # if username entered exists in db, gets the password entered and compares
+    # it to the one in the database
+    if user:
+        password = hash(request.form.get('password'))
+        # if password is correct, adds user to the current session and redirects to home page
+        if user.password == str(password):
+            session['logged_in'] = user.user_id
+            print 'logged in'
+            return jsonify(session)
+        # if password is incorrect, redirects to login page
+        else:
+            return 'error'
+    # if username is not in the database, redirects to the registration form
+    else:
+        return 'error'
 
 
-# @app.route('/logout')
-# def process_logout():
-#     """Processes user logout"""
+@app.route('/process_logout')
+def process_logout():
+    """Processes user logout"""
 
-#     del session['logged_in']
+    del session['logged_in']
 
-#     flash('See you next time!')
-#     return redirect('/')
+    return 'logged out'
 
 
 # @app.route('/register')
@@ -177,7 +174,7 @@ def process_registration():
     new_user = User(username=request.form.get('username'),
                     first_name=request.form.get('fname'),
                     last_name=request.form.get('lname'),
-                    password=request.form.get('password'),
+                    password=hash(request.form.get('password')),
                     email=request.form.get('email'),
                     image=request.form.get('image'),
                     confirmed_at=datetime.now())
@@ -189,7 +186,6 @@ def process_registration():
     # logs new user in
     session['logged_in'] = new_user.user_id
 
-    flash("Account created. Hello, " + new_user.username + "!")
     return str(new_user.user_id)
 
 
@@ -280,37 +276,19 @@ def process_registration():
 # Plant Routes *********************************
 
 
-# @app.route('/plant/<plant_id>')
-# def show_plant_details(plant_id):
-#     """Show individual plant's page"""
+@app.route('/plant/<plant_id>')
+def show_plant_details(plant_id):
+    """Show individual plant's page"""
 
-#     plant = Plant.query.get(plant_id)
+    found_plant = Plant.query.get(plant_id)
+    found_plant = found_plant.__dict__
 
-#     return render_template('plant.html',
-#                            plant_id=plant.plant_id,
-#                            plant_name=plant.name,
-#                            plant_species=plant.species,
-#                            plant_img=plant.image,
-#                            water_icon=plant.get_water('icon'),
-#                            water=plant.get_water(),
-#                            sun_icon=plant.get_sun('icon'),
-#                            sun=plant.get_sun(),
-#                            humidity_icon=plant.get_humidity('icon'),
-#                            humidity=plant.get_humidity(),
-#                            temp_icon=plant.get_temp('icon'),
-#                            temp=plant.get_temp())
+    if '_sa_instance_state' in found_plant:
+        del found_plant['_sa_instance_state']
 
+    print found_plant
 
-# NG'd *********************************
-
-# @app.route('/new_plant')
-# def add_new_plant():
-#     """Shows form for adding new plant"""
-
-#     return render_template('new_plant_form.html')
-
-
-# NG'd *********************************
+    return jsonify(found_plant)
 
 
 @app.route('/is_plant/<plant_name>')
@@ -375,95 +353,24 @@ def process_new_plant():
     return str(new_plant.plant_id)
 
 
-@app.route('/add_to_plant', methods=['POST'])
-def add_missing_plant_info():
-    """Fills out missing fields for plant."""
+@app.route('/save_plant_edits', methods=['POST'])
+def update_plant():
+    """Updates plant"""
 
-    # gets column being edited, new value, and plant being edited from ajax
-    col_to_edit = request.form.get('columnToEdit')
-    value = request.form.get('newValue')
-    plant_id = int(request.form.get('plantId'))
+    plant = Plant.query.get(request.form.get('plant_id'))
 
-    # gets plant being edited and updated the column value for that plant
-    Plant.query.filter_by(plant_id=plant_id).update({col_to_edit: value})
+    plant.name = request.form.get('name')
+    plant.species = request.form.get('species')
+    plant.image = request.form.get('image')
+    plant.water = request.form.get('water')
+    plant.sun = request.form.get('sun')
+    plant.humidity = request.form.get('humidity')
+    plant.temperature = request.form.get('temperature')
+
     db.session.commit()
 
-    # check to see if col to edit is a plant spec of sun, water, humidity, or temp
-    spec = get_plant_specs(Plant.query.get(plant_id), col_to_edit)
-    if spec:
-        value = spec
+    return 'plant updated'
 
-    # sends back the the column and new value for html update
-    edit = {'col': col_to_edit,
-            'val': value}
-
-    return jsonify(edit)
-
-
-# @app.route('/update_plant/<plant_id>', methods=['GET'])
-# def update_plant(plant_id):
-#     """Updates plant"""
-
-#     plant = Plant.query.get(plant_id)
-#     WATER = Plant.WATER.keys()
-#     SUN = Plant.SUN.keys()
-#     HUMIDITY = Plant.HUMIDITY.keys()
-#     TEMP = Plant.TEMPERATURE.keys()
-
-#     return render_template('update_plant.html',
-#                            plant_id=plant.plant_id,
-#                            plant_name=plant.name,
-#                            plant_species=plant.species,
-#                            plant_img=plant.image,
-#                            water=plant.get_water('summary'),
-#                            sun=plant.get_sun('summary'),
-#                            humidity=plant.get_humidity('summary'),
-#                            temp=plant.get_temp('summary'),
-#                            WATER=WATER,
-#                            SUN=SUN,
-#                            HUMIDITY=HUMIDITY,
-#                            TEMP=TEMP)
-
-
-# @app.route('/process_update_plant/<plant_id>', methods=['POST'])
-# def process_update_plant(plant_id):
-    """Gets the user input from updating plant and updates the database"""
-    # plant = Plant.query.get(plant_id)
-
-    # if plant name not in the db, will update plant, else will not
-    # name = request.form.get('plant_name').title().rstrip()
-    # if Plant.query.filter_by(name=name).all() == [] or Plant.query.filter_by(name=name).first() == plant:
-
-        # gets all the user-entered data from the update plant form
-        # plant.name = request.form.get('plant_name')
-        # plant.species = request.form.get('plant_species').title()
-        # image = request.form.get('plant_image')
-        # if not image or image == 'None':
-        #     url = get_flickr_image(name)
-        #     if url:
-        #         plant.image = url
-        #     else:
-        #         pass
-        # else:
-        #     plant.image = image
-        # plant.water = request.form.get('water')
-        # plant.sun = request.form.get('sun')
-        # plant.humidity = request.form.get('humidity')
-        # plant.temperature = request.form.get('temp')
-
-        # saves updated plant in the database
-        # db.session.commit()
-
-        # flash(name + " has been updated")
-        # return redirect('/plant/' + str(plant_id))
-    # if user deletes plant name, will not submit
-    # elif name == '':
-    #     flash("Plant name cannot be blank", "warning")
-    #     return redirect('/update_plant/' + str(plant_id))
-    # if user tries to update plant name to a name that already exists in db, will not submit
-    # else:
-    #     flash("Plant name already exists", "warning")
-    #     return redirect('/update_plant/' + str(plant_id))
 
 
 # @app.route('/delete_request', methods=['POST'])

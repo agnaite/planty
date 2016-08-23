@@ -3,7 +3,7 @@
 (function(angular) {
   'use strict';
 
-var app = angular.module('planty', ['ngRoute']);
+var app = angular.module('planty', ['ngRoute', 'ngCookies']);
 
 app.config(function($routeProvider, $interpolateProvider) {
   $interpolateProvider.startSymbol('[[');
@@ -17,15 +17,75 @@ app.config(function($routeProvider, $interpolateProvider) {
     .when('/add_plant', {
       templateUrl: '/html_for_angular/new_plant_form.html',
       controller: 'addPlantCtrl'
+    })
+    .when('/plant/:plantId', {
+      templateUrl: '/html_for_angular/plant.html',
+      controller: 'viewPlantCtrl'
+    })
+    .when('/login', {
+      templateUrl: '/html_for_angular/login.html',
+      controller: 'userCtrl'
+    })
+    .when('/register', {
+      templateUrl: '/html_for_angular/register.html',
+      controller: 'addUserCtrl'
     });
 
-    // $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
+});
+
+
+// LOGOUT &
+// LOGIN ***************************************************************
+
+
+app.controller('userCtrl', function($scope, $http, $location, $route, $routeParams, $rootScope, $cookies) {
+
+    $scope.submitLogin = function() {
+    $http ({
+      url: '/process_login',
+      method: "POST",
+      data: $.param($scope.user),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).then(function(response) {
+      // on 200 status from Flask, redirect to the new plant's page
+      if (response.data === 'false') {
+        $location.path('/login');
+        flash('Could not log you in. Please try again.');
+      } else {
+        console.log(response.data);
+        $cookies.put('logged_in', response.data['logged_in']);
+        $location.path('/');
+        flash('Welcome back!');
+      }
+    });
+  };
+
+  $scope.isLoggedIn = function() {
+    return $cookies.get('logged_in');
+  };
+
+  $scope.logout = function() {
+
+    $cookies.put('logged_in', undefined);
+
+    // TODO: actually invalidate session with flask
+    $http.get('/process_logout')
+    .then(function(results) {
+      $scope.username = '';
+      $scope.password = '';
+      $location.path('/');
+      flash('Logged out!');
+    });
+  };
+
 });
 
 // SEARCH ***************************************************************
 
-app.controller('homeCtrl', function($scope, $http, $location) {
+app.controller('homeCtrl', function($scope, $http, $location, $routeParams) {
   // gets the binded input data and sends the user entered text to the server
+
   $scope.searchSubmit = function() {
     $http.get('/search/' + $scope.searchText)
     .then(function(results){
@@ -38,11 +98,12 @@ app.controller('homeCtrl', function($scope, $http, $location) {
       }
     });
   };
+
 });
 
 // NEW USER  ***************************************************************
 
-app.controller('addUserCtrl', function($scope, $http, $window) {
+app.controller('addUserCtrl', function($scope, $http, $route, $location) {
   $scope.master = {};
 
   // on register button click, send user filled data to Flask 
@@ -56,7 +117,8 @@ app.controller('addUserCtrl', function($scope, $http, $window) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new user's page
-        $window.location.href = '/user_profile/' + data;
+        $location.path('/user/' + data);
+        $route.reload();
     });
   };
 
@@ -88,7 +150,8 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new plant's page
-        $window.location.href = '/plant/' + data;
+        $location.path('/plant/' + data);
+        $route.reload();
     });
   };
   // on click of reset button, clear all form fields
@@ -123,6 +186,60 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
   });
 
 });
+
+// PLANT VIEW ***************************************************************
+
+app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSpecsService) {
+  var plant_id = $routeParams.plantId;
+
+  $scope.editing = false;
+
+  $http.get('/plant/' + plant_id)
+  .then(function(response) {
+    $scope.plant = response.data;
+    $scope.plant.edited = false;
+
+    getPlantSpecsService.getHumidity(function(response) {
+      $scope.allHumid = response.data;
+      $scope.humid = response.data[$scope.plant.humidity];
+    });
+
+    getPlantSpecsService.getTemp(function(response) {
+      $scope.allTemp = response.data;
+      $scope.temp = response.data[$scope.plant.temperature];
+    });
+
+    getPlantSpecsService.getSun(function(response) {
+      $scope.allSun = response.data;
+      $scope.sun = response.data[$scope.plant.sun];
+    });
+
+    getPlantSpecsService.getWater(function(response) {
+      $scope.allWater = response.data;
+      $scope.plant.water = response.data[$scope.plant.water];
+    });
+
+    if ($scope.plant["image"] === null) {
+      $scope.plant["image"] = "/static/img/placeholder-image.png";
+    }
+  });
+
+  $scope.saveEdits = function(editedPlant) {
+    console.log(editedPlant);
+    $scope.plant.edited = false;
+    $http({
+      url: '/save_plant_edits',
+      method: "POST",
+      data: $.param(editedPlant),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+     }).success(function(data) {
+        // on 200 status from Flask, redirect to the new plant's page
+        flash(data);
+    });
+  };
+
+});
+
 
 app.service('getPlantSpecsService', function($http){
   // gets plant specs out of json files

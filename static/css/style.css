@@ -16,9 +16,7 @@
     text-align: center;
     list-style: none;
     color: #7FD279;
-    font-size: 1.25em;
-    border: 1px solid #7FD279;
-    border-radius: 5px; }
+    font-size: 1.25em; }
 
     .container {
       font-family: 'Menlo', sans-serif;
@@ -39,40 +37,62 @@
           width: 90%;
           padding: 15px;
           font-size: 2em; }
-          .container .home-search #search-btn {
-            padding: 20px;
-            margin-top: 5px;
-            float: right;
-            font-size: 1.25em; }
-            .container .home-search .search-result-wrapper {
-              width: 60%;
-              margin-top: 20px; }
-              .container .home-search .search-result-wrapper #no-plants-found {
-                list-style: none;
-                line-height: 2;
-                font-size: 1.5em;
-                color: tomato; }
-                .container .home-search .search-result-wrapper #search-results {
-                  padding-left: 2px; }
-                  .container .home-search .search-result-wrapper #search-results li {
-                    list-style: none;
-                    line-height: 2;
-                    font-size: 1.5em; }
-                    .container .home-search .search-result-wrapper #search-results li a {
-                      color: #A9A9A9; }
-                      .container .home-search .search-result-wrapper #search-results li a:hover {
-                        text-decoration: none;
-                        color: #7FD279; }
+          @media screen and (max-width: 1240px) {
+            .container .home-search #search-field {
+              width: 85%;   }
+}
+            @media screen and (max-width: 990px) {
+              .container .home-search #search-field {
+                width: 80%;   }
+}
+              @media screen and (max-width: 700px) {
+                .container .home-search #search-field {
+                  width: 75%;   }
+}
+                @media screen and (max-width: 560px) {
+                  .container .home-search #search-field {
+                    width: 70%;   }
+}
+                  @media screen and (max-width: 440px) {
+                    .container .home-search #search-field {
+                      width: 60%;   }
+}
+        .container .home-search #search-btn {
+          padding: 20px;
+          margin-top: 5px;
+          float: right;
+          font-size: 1.25em; }
+          .container .home-search .search-result-wrapper {
+            width: 60%;
+            margin-top: 20px; }
+            .container .home-search .search-result-wrapper #no-plants-found {
+              list-style: none;
+              line-height: 2;
+              font-size: 1.5em;
+              color: tomato; }
+              .container .home-search .search-result-wrapper #search-results {
+                padding-left: 2px; }
+                .container .home-search .search-result-wrapper #search-results li {
+                  list-style: none;
+                  line-height: 2;
+                  font-size: 1.5em; }
+                  .container .home-search .search-result-wrapper #search-results li a {
+                    color: #A9A9A9; }
+                    .container .home-search .search-result-wrapper #search-results li a:hover {
+                      text-decoration: none;
+                      color: #7FD279; }
       .container .plant-view-wrapper {
         width: 90%;
         margin: 80px auto; }
         .container .plant-view-wrapper .plant-img {
           max-width: 100%; }
-          .container .plant-view-wrapper .plant-title-text i {
-            padding-right: 16px; }
-            .container .plant-view-wrapper .plant-title-text .icons img {
-              width: 60px;
-              margin-right: 10px; }
+          .container .plant-view-wrapper .plant-title-text label {
+            display: block; }
+            .container .plant-view-wrapper .plant-title-text input {
+              margin-bottom: 5px; }
+              .container .plant-view-wrapper .plant-title-text .icons img {
+                width: 60px;
+                margin-right: 10px; }
         .container .plant-view-wrapper #edit-img-url-field {
           margin-top: 20px; }
           .container .plant-view-wrapper .req-table {
@@ -86,11 +106,10 @@
           .container .plant-view-wrapper #submit-edit-btn {
             margin-left: 10px; }
             .container .plant-view-wrapper .plant-controls .btn-default {
-              padding: 2px 6px; }
-              .container .plant-view-wrapper .plant-controls .btn-default a {
-                color: #b3b3b3;
-                text-decoration: none;
-                font-size: 0.8em; }
+              padding: 2px 6px;
+              color: #b3b3b3;
+              text-decoration: none;
+              font-size: 0.8em; }
       .container .user-view-wrapper {
         width: 90%;
         margin: 80px auto; }
