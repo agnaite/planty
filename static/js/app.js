@@ -32,13 +32,12 @@ app.config(function($routeProvider, $interpolateProvider) {
     });
 });
 
-
 // LOGOUT &
 // LOGIN ***************************************************************
 
-
 app.controller('userCtrl', function($scope, $http, $location, $route, $routeParams, $rootScope, $cookies) {
 
+    // Verifies credentials via Flask in db and sets js cookie to logged in
     $scope.submitLogin = function() {
     $http ({
       url: '/process_login',
@@ -51,7 +50,6 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
         $location.path('/login');
         flash('Could not log you in. Please try again.');
       } else {
-        console.log(response.data);
         $cookies.put('logged_in', response.data['logged_in']);
         $location.path('/');
         flash('Welcome back, ' + $scope.user.username + '!');
@@ -59,15 +57,15 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
     });
   };
 
+  // Checks if a user is currently logged in
   $scope.isLoggedIn = function() {
     return $cookies.get('logged_in');
   };
 
+  // Removes user_id from cookie and from from flask session
   $scope.logout = function() {
-
     $cookies.put('logged_in', undefined);
 
-    // TODO: actually invalidate session with flask
     $http.get('/process_logout')
     .then(function(results) {
       $scope.username = '';
@@ -76,14 +74,13 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
       flash("Bye, see you soon.");
     });
   };
-
 });
 
 // SEARCH ***************************************************************
 
 app.controller('homeCtrl', function($scope, $http, $location, $routeParams) {
+  
   // gets the binded input data and sends the user entered text to the server
-
   $scope.searchSubmit = function() {
     $http.get('/search/' + $scope.searchText)
     .then(function(results){
@@ -106,7 +103,6 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
   // on register button click, send user filled data to Flask 
   $scope.update = function(user) {
     $scope.master = angular.copy(user);
-
      $http({
       url: '/process_registration',
       method: "POST",
@@ -138,7 +134,6 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
   // on add plant button click, send user filled data to Flask 
   $scope.update = function(plant) {
     $scope.master = angular.copy(plant);
-
      $http({
       url: '/process_new_plant',
       method: "POST",
@@ -151,6 +146,7 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
         flash(plant.name + " has been added!");
     });
   };
+
   // on click of reset button, clear all form fields
   $scope.reset = function() {
     $scope.plant = angular.copy($scope.master);
@@ -158,6 +154,7 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
     $scope.plant.name = '';
   };
 
+  // get flickr image url on click of button from Flask
   $scope.getFlickrImg = function() {
     $http.get('/get_flickr_img/' + $scope.plant.name)
     .success(function(data) {
@@ -169,15 +166,12 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
   getPlantSpecsService.getWater(function(response) {
     $scope.water = response.data;
   });
-
   getPlantSpecsService.getSun(function(response) {
     $scope._sun = response.data;
   });
-
   getPlantSpecsService.getHumidity(function(response) {
     $scope.humidity = response.data;
   });
-
   getPlantSpecsService.getTemp(function(response) {
     $scope.temp = response.data;
   });
@@ -193,11 +187,13 @@ app.controller('viewPlantCtrl', function($http,
                                          $location,
                                          $timeout,
                                          getPlantSpecsService) {
+  // gets plant_id from link clicked on and gets all the data about that plant from Flask
   var plant_id = $routeParams.plantId;
 
   $scope.editing = false;
 
   $scope.$on('$viewContentLoaded', function(evt) {
+    // calls function to check if the plant has been added to user or not on reroute
      $timeout(function() {
       if ($scope.isLoggedIn()) {
         $scope.userHasPlant();
@@ -205,6 +201,7 @@ app.controller('viewPlantCtrl', function($http,
     }, 0);
   });
 
+  // gets data about plant specs for easy in-place editing
   $http.get('/plant/' + plant_id)
   .then(function(response) {
     $scope.plant = response.data;
@@ -235,9 +232,10 @@ app.controller('viewPlantCtrl', function($http,
     }
   });
 
+  // on click of the save button, sends all the data in the fields to flask to update db
   $scope.saveEdits = function() {
     $scope.plant.edited = false;
-    console.log($scope.plant);
+
     $http({
       url: '/save_plant_edits',
       method: "POST",
@@ -249,6 +247,7 @@ app.controller('viewPlantCtrl', function($http,
     });
   };
 
+  // sends plant data to Flask for removal from db
   $scope.deletePlant = function() {
     // displays confirmatory "sweetalert" alert
     swal({title: "Are you sure?",
@@ -282,6 +281,7 @@ app.controller('viewPlantCtrl', function($http,
       });
   };
 
+  // adds plant to logged in user
   $scope.addUserPlant = function() {
     var data = {
       'userId': $scope.isLoggedIn(),
@@ -293,12 +293,29 @@ app.controller('viewPlantCtrl', function($http,
       data: $.param(data),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function(response) {
-      console.log(response.data);
       $scope.plantUserStatus = true;
       flash("Plant added!");
     });
   };
 
+  // removes plant from logged in user
+  $scope.removeUserPlant = function() {
+    var data = {
+      'userId': $scope.isLoggedIn(),
+      'plantId': $scope.plant.plant_id
+    };
+    $http({
+      url: '/remove_user_plant',
+      method: 'POST',
+      data: $.param(data),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).then(function(response) {
+      $scope.plantUserStatus = false;
+      flash("Plant removed.");
+    });
+  };
+
+  // asks flask if logged in user has already added the plant 
   $scope.userHasPlant = function(){
      var data = {
         'userId': $scope.isLoggedIn(),
@@ -319,6 +336,7 @@ app.controller('viewPlantCtrl', function($http,
   };
 });
 
+// gets plant spec data from JSON
 app.service('getPlantSpecsService', function($http){
   // gets plant specs out of json files
 

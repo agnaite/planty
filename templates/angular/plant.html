@@ -23,10 +23,10 @@
         </span>  
       </div>
 
-     <!-- Add plant to User's dashboard -->
+      <!-- Add plant to User's dashboard -->
       <div ng-if='isLoggedIn()'>
-        <a ng-click='addUserPlant(); userHasPlant()' ng-if='!plantUserStatus' class='btn btn-default add_plant'>Add Plant</a>
-        <a ng-click='addUserPlant(); userHasPlant()' ng-if='plantUserStatus' class='btn btn-danger add_plant'>Remove Plant</a>
+        <a ng-click='addUserPlant()' ng-if='!plantUserStatus' class='btn btn-default add_plant' ng-cloak>Add Plant</a>
+        <a ng-click='removeUserPlant()' ng-if='plantUserStatus' class='btn btn-danger add_plant' ng-cloak>Remove Plant</a>
       </div>
 
     </div>

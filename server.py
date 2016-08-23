@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, redirect, jsonify, flash, session
+from flask import Flask, render_template, request, jsonify, flash, session
 from flask_assets import Environment, Bundle
 import simplejson
 import random
@@ -9,6 +9,7 @@ import flickr_api
 from flickr_api.api import flickr
 from jinja2 import StrictUndefined
 from datetime import datetime
+from sqlalchemy import and_
 
 
 from model import connect_to_db, db, Plant, User, PlantUser
@@ -42,7 +43,6 @@ assets.register('js_all', js)
 # ************************* ROUTES *********************************
 
 # Basic Routes *********************************
-# NG'd *********************************
 
 @app.route('/')
 def index_page():
@@ -54,9 +54,6 @@ def index_page():
 @app.route('/html_for_angular/<filename>')
 def html_for_angular(filename):
     return render_template('angular/{}'.format(filename))
-
-
-# NG'd *********************************
 
 
 @app.route('/search/<search_term>')
@@ -83,8 +80,6 @@ def search_for_plant(search_term):
 # User Routes *********************************
 
 
-# NG'd *********************************
-
 @app.route('/is_username/<username>')
 def check_if_username_is_taken(username):
     """Checks if a username has already been taken.
@@ -99,8 +94,6 @@ def check_if_username_is_taken(username):
         return "True"
     else:
         return "False"
-
-# NG'd *********************************
 
 
 @app.route('/is_email/<email>')
@@ -117,12 +110,6 @@ def check_if_email_is_taken(email):
         return "True"
     else:
         return "False"
-
-
-# @app.route('/login')
-# def show_login_form():
-#     """Renders login form"""
-#     return render_template('login_form.html')
 
 
 @app.route('/process_login', methods=['POST'])
@@ -159,13 +146,6 @@ def process_logout():
     return 'logged out'
 
 
-# @app.route('/register')
-# def show_registration_form():
-#     """Redirects the user to the registration form"""
-
-#     return render_template('register_form.html')
-
-
 @app.route('/process_registration', methods=['POST'])
 def process_registration():
     """Processes user registration form"""
@@ -189,58 +169,6 @@ def process_registration():
     return str(new_user.user_id)
 
 
-# @app.route('/user_profile/<user_id>')
-# def show_user_profile(user_id):
-#     """Shows user profile"""
-
-#     # gets the login user from the database
-#     user = User.query.get(user_id)
-
-#     # sets default image, if there isn't one
-#     if user.image:
-#         img = user.image
-#     else:
-#         img = "https://medium.com/img/default-avatar.png"
-
-#     return render_template('user_profile.html',
-#                            user=user,
-#                            img=img)
-
-
-# @app.route('/update_profile/<user_id>')
-# def update_user_profile(user_id):
-#     """Renders user profile update page"""
-
-#     user = User.query.get(user_id)
-
-#     return render_template('update_profile.html',
-#                            user=user)
-
-
-# @app.route('/process_profile_update', methods=['POST'])
-# def process_update_profile():
-#     """Processes any profile updates"""
-#     user_id = request.form.get('user_id')
-#     user = User.query.get(int(user_id))
-#     email = request.form.get('email')
-#     validate_email = int(User.query.filter_by(email=email).count())
-
-#     if validate_email < 2:
-#         user.first_name = request.form.get('fname')
-#         user.last_name = request.form.get('lname')
-#         user.password = request.form.get('password')
-#         user.image = request.form.get('img')
-#         user.email = email
-
-#         db.session.commit()
-
-#         flash('Account updated.')
-#         return redirect('/user_profile/' + str(user.user_id))
-#     else:
-#         flash('This email is already taken.')
-#         return redirect('/update_profile/' + str(user.user_id))
-
-
 # PlantUser Routes *********************************
 
 @app.route('/add_user_plant', methods=['POST'])
@@ -258,6 +186,21 @@ def add_plant_to_user():
     return 'ok'
 
 
+@app.route('/remove_user_plant', methods=['POST'])
+def remove_plant_from_user():
+    """Delete a plant from a User's account."""
+
+    user_id = int(request.form.get('userId'))
+    plant_id = int(request.form.get('plantId'))
+
+    plantuser = PlantUser.query.filter(and_(User.user_id == user_id, Plant.plant_id == plant_id)).first()
+
+    db.session.delete(plantuser)
+    db.session.commit()
+
+    return 'ok'
+
+
 @app.route('/is_plant_user', methods=['POST'])
 def does_user_own_plant():
     """Checks if a user has already added that specific plant."""
@@ -269,26 +212,9 @@ def does_user_own_plant():
     print user.plants
 
     if plant in user.plants:
-        print "TRUE"
         return 'true'
     else:
-        print "FALSE"
         return 'false'
-
-# @app.route('/user_plants/<user_id>')
-# def show_user_plants(user_id):
-#     """Shows plants the user has added"""
-
-#     user = User.query.get(user_id)
-#     plants = {}
-
-    # for plant in user.plants:
-    #     plants[plant.plant_id] = {
-    #         'name': plant.name,
-    #         'species': plant.species
-    #     }
-
-    # return render_template('user_plants.html', plants=user.plants)
 
 
 # Plant Routes *********************************
@@ -324,8 +250,6 @@ def get_all_plant_names(plant_name):
     else:
         return "False"
 
-# NG'd *********************************
-
 
 @app.route('/get_flickr_img/<plant_name>')
 def get_flickr_img_url(plant_name):
@@ -337,9 +261,6 @@ def get_flickr_img_url(plant_name):
         return url
     else:
         return 'No image found.'
-
-
-# NG'd *********************************
 
 
 @app.route('/process_new_plant', methods=['POST'])
