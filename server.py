@@ -35,7 +35,7 @@ assets.register('scss_all', scss)
 css = Bundle('css/sweetalert.css')
 assets.register('css_all', css)
 
-js = Bundle('js/app.js','js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js')
+js = Bundle('js/app.js','js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js', 'js/main.js')
 assets.register('js_all', js)
 
 

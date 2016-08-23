@@ -54,7 +54,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
         console.log(response.data);
         $cookies.put('logged_in', response.data['logged_in']);
         $location.path('/');
-        flash('Welcome back!');
+        flash('Welcome back, ' + $scope.user.username + '!');
       }
     });
   };
@@ -73,7 +73,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
       $scope.username = '';
       $scope.password = '';
       $location.path('/');
-      flash("You've been logged out.");
+      flash("Bye, see you soon.");
     });
   };
 
@@ -252,7 +252,6 @@ app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSp
             // if user clicked confirm delete, send ajax request to flask to delete
             // plant from the db
             if (isConfirm) {
-              
               $http({
                 url: '/process_delete',
                 method: "POST",
@@ -267,8 +266,6 @@ app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSp
               }
       });
   };
-
-
 });
 
 app.service('getPlantSpecsService', function($http){
