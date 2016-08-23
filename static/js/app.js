@@ -186,10 +186,24 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
 
 // PLANT VIEW ***************************************************************
 
-app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSpecsService, $route, $location) {
+app.controller('viewPlantCtrl', function($http,
+                                         $scope,
+                                         $routeParams,
+                                         $route,
+                                         $location,
+                                         $timeout,
+                                         getPlantSpecsService) {
   var plant_id = $routeParams.plantId;
 
   $scope.editing = false;
+
+  $scope.$on('$viewContentLoaded', function(evt) {
+     $timeout(function() {
+      if ($scope.isLoggedIn()) {
+        $scope.userHasPlant();
+      }
+    }, 0);
+  });
 
   $http.get('/plant/' + plant_id)
   .then(function(response) {
@@ -266,6 +280,42 @@ app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSp
                 });
               }
       });
+  };
+
+  $scope.addUserPlant = function() {
+    var data = {
+      'userId': $scope.isLoggedIn(),
+      'plantId': $scope.plant.plant_id
+    };
+    $http({
+      url: '/add_user_plant',
+      method: 'POST',
+      data: $.param(data),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).then(function(response) {
+      console.log(response.data);
+      $scope.plantUserStatus = true;
+      flash("Plant added!");
+    });
+  };
+
+  $scope.userHasPlant = function(){
+     var data = {
+        'userId': $scope.isLoggedIn(),
+        'plantId': plant_id
+      };
+    $http({
+        url: '/is_plant_user',
+        method: 'POST',
+        data: $.param(data),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }).then(function(response) {
+        if (response.data == 'true') {
+          $scope.plantUserStatus = true;
+        } else {
+          $scope.plantUserStatus = false;
+        }
+    });
   };
 });
 

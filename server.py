@@ -243,19 +243,37 @@ def process_registration():
 
 # PlantUser Routes *********************************
 
-# @app.route('/add_plantuser', methods=['POST'])
-# def add_plant_to_user():
-#     post = request.get_json()
-#     plant_id = int(post.get('plant'))
-#     user_id = int(post.get('user'))
+@app.route('/add_user_plant', methods=['POST'])
+def add_plant_to_user():
+    """Add a plant to a User's account."""
 
-#     new_plantuser = PlantUser(user_id=user_id, plant_id=plant_id)
+    user_id = int(request.form.get('userId'))
+    plant_id = int(request.form.get('plantId'))
 
-#     db.session.add(new_plantuser)
-#     db.session.commit()
+    new_plantuser = PlantUser(user_id=user_id, plant_id=plant_id)
 
-#     return redirect('/plant/'+str(plant_id))
+    db.session.add(new_plantuser)
+    db.session.commit()
 
+    return 'ok'
+
+
+@app.route('/is_plant_user', methods=['POST'])
+def does_user_own_plant():
+    """Checks if a user has already added that specific plant."""
+
+    user = User.query.get(int(request.form.get('userId')))
+    plant = Plant.query.get(int(request.form.get('plantId')))
+
+    print plant
+    print user.plants
+
+    if plant in user.plants:
+        print "TRUE"
+        return 'true'
+    else:
+        print "FALSE"
+        return 'false'
 
 # @app.route('/user_plants/<user_id>')
 # def show_user_plants(user_id):
