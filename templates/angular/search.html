@@ -1,7 +1,7 @@
 <div class='home-search' ng-controller='homeCtrl'>
   <form>
-    <input ng-model='searchText' ng-change='searchSubmit()' type='text' name='plant-name' id='search-field' placeholder='Enter plant name'>
-    <button ng-click='searchSubmit()' type='submit' id='search-btn'>Search</button>
+    <input ng-model='searchText' ng-change='searchSubmit()' type='text' name='plant-name' id='search-field' placeholder='Enter plant name' autocomplete='off'>
+    <button ng-click='searchSubmit()' type='submit' id='search-btn' class='btn btn-default'>Search</button>
   </form>
 
   <div class='search-result-wrapper'>

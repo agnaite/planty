@@ -33,7 +33,7 @@
       <div class='plant-controls col-offset-8 col-sm-4'>
         <button class='btn btn-default edit-control' ng-disabled="editing" ng-click="editing = !editing">Edit</button>
         <button ng-click="saveEdits(plant)" class='btn btn-default edit-control' ng-disabled="!plant.edited">Save</button>
-        <button class='btn btn-default delete-control'>Delete</button>
+        <button class='btn btn-default delete-control' ng-click='deletePlant([[ plant.plant_id ]])'>Delete</button>
       </div>
     {% endif %}
 

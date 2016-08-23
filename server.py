@@ -372,22 +372,19 @@ def update_plant():
     return 'plant updated'
 
 
+@app.route('/process_delete', methods=['POST'])
+def process_delete():
+    """Deletes plant from the database"""
+    print '*' * 100
+    print request.form.get('plant_id')
+    plant_id = int(request.form.get('plant_id'))
+    plant = Plant.query.get(plant_id)
 
-# @app.route('/delete_request', methods=['POST'])
-# def process_delete():
-#     """Deletes plant from the database"""
+    print plant.name + "deleting"
+    db.session.delete(plant)
+    db.session.commit()
 
-#     plant_id = int(request.form.get('dataPlant'))
-#     print '*' * 100
-#     print plant_id
-#     plant = Plant.query.get(plant_id)
-#     print plant
-#     name = plant.name
-#     db.session.delete(plant)
-#     db.session.commit()
-
-#     flash(name + ' was deleted')
-#     return 'Deleted plant'
+    return 'Deleted.'
 
 
 # **************************** HELPER FUNCTIONS *******************************

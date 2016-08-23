@@ -30,8 +30,6 @@ app.config(function($routeProvider, $interpolateProvider) {
       templateUrl: '/html_for_angular/register.html',
       controller: 'addUserCtrl'
     });
-
-    //$locationProvider.html5Mode(true);
 });
 
 
@@ -49,7 +47,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function(response) {
       // on 200 status from Flask, redirect to the new plant's page
-      if (response.data === 'false') {
+      if (response.data === 'error') {
         $location.path('/login');
         flash('Could not log you in. Please try again.');
       } else {
@@ -75,7 +73,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
       $scope.username = '';
       $scope.password = '';
       $location.path('/');
-      flash('Logged out!');
+      flash("You've been logged out.");
     });
   };
 
@@ -98,7 +96,6 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams) {
       }
     });
   };
-
 });
 
 // NEW USER  ***************************************************************
@@ -119,6 +116,7 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
         // on 200 status from Flask, redirect to the new user's page
         $location.path('/user/' + data);
         $route.reload();
+        flash("Welcome to Planty, " + user.name);
     });
   };
 
@@ -130,8 +128,6 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
     $scope.user.image = '';
     $scope.user.username = '';
   };
-
-  //$scope.reset();
 });
 
 // ADD PLANT ***************************************************************
@@ -152,6 +148,7 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
         // on 200 status from Flask, redirect to the new plant's page
         $location.path('/plant/' + data);
         $route.reload();
+        flash(plant.name + " has been added!");
     });
   };
   // on click of reset button, clear all form fields
@@ -189,7 +186,7 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPl
 
 // PLANT VIEW ***************************************************************
 
-app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSpecsService) {
+app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSpecsService, $route, $location) {
   var plant_id = $routeParams.plantId;
 
   $scope.editing = false;
@@ -225,7 +222,6 @@ app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSp
   });
 
   $scope.saveEdits = function(editedPlant) {
-    console.log(editedPlant);
     $scope.plant.edited = false;
     $http({
       url: '/save_plant_edits',
@@ -234,12 +230,46 @@ app.controller('viewPlantCtrl', function($http, $scope, $routeParams, getPlantSp
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new plant's page
-        flash(data);
+        flash("Saved!");
     });
   };
 
-});
+  $scope.deletePlant = function() {
+    // displays confirmatory "sweetalert" alert
+    swal({title: "Are you sure?",
+          text: "You will not be able to recover this plant.",
+          imageSize: "120x120",
+          showCancelButton: true,
+          imageUrl: "/static/img/plant.svg",
+          animation: false,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, delete it.",
+          cancelButtonText: "No, cancel pls!",
+          closeOnConfirm: true,
+          closeOnCancel: true },
 
+          function(isConfirm){
+            // if user clicked confirm delete, send ajax request to flask to delete
+            // plant from the db
+            if (isConfirm) {
+              
+              $http({
+                url: '/process_delete',
+                method: "POST",
+                data: $.param($scope.plant),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+              }).then(function(data) {
+                  // on 200 status from Flask, redirect to the new plant's page
+                  $location.path('/');
+                  $route.reload();
+                  flash("Plant deleted.");
+                });
+              }
+      });
+  };
+
+
+});
 
 app.service('getPlantSpecsService', function($http){
   // gets plant specs out of json files

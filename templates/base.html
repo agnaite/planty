@@ -28,17 +28,22 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
 
-            <li ng-show="isLoggedIn()" ng-cloak><a ng-href="#add_plant">Add new plant</a></li>
-            <li ng-show="isLoggedIn()" ng-cloak><a ng-click="logout()">Logout</a></li>
-     
+            <li ng-show="isLoggedIn()" ng-cloak><a ng-href="#add_plant">Add Plant</a></li>
+            <li ng-show="isLoggedIn()" ng-cloak><a ng-click="#user">Account</a></li>
+            <li ng-show="isLoggedIn()" ng-cloak><a href='' ng-click="logout()">Logout</a></li>
+
             <li ng-show="!isLoggedIn()" ng-cloak><a ng-href="#login">Login</a></li>
             <li ng-show="!isLoggedIn()" ng-cloak><a ng-href="#register">Register</a></li>
           </ul>
         </div> <!-- /.navbar-collapse -->
       </div> <!-- /.container-fluid -->
     </nav>
-    <div class='flashes'></div>
-  <div ng-view></div>
+
+    <div class='row'>
+      <div class='flashes'></div>
+    </div>
+
+    <div class='templateView' ng-view></div>
 
   </div><!-- /.container -->
   

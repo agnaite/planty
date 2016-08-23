@@ -25,15 +25,24 @@ $red: #d9534f;
   display: none !important;
 }
 
+*:focus {
+  outline: none;
+}
+
+.templateView {
+  z-index: 100;
+}
+
 .flashes {
-  width: 30%;
-  margin: 0px auto;
-  padding: 10px 0;
+  width: 100%;
+  position: absolute;
   text-align: center;
+  margin: 0px auto;
   list-style: none;
   color: $green;
   font-size: 1.25em;
 }
+
 .container {
   font-family: $menlo;
   width: 100%;
@@ -54,12 +63,18 @@ $red: #d9534f;
   // *************************** HOME STYLES ***************************
   .home-search {
     width: 80%;
-    margin: 260px auto 0 auto;
+    margin: 200px auto 0 auto;
 
     #search-field {
       width: 90%;
       padding: 15px;
       font-size: 2em;
+      border-radius: 5px;
+      border: 2px solid $light-gray;
+
+      &:focus {
+        border-color: $green;
+      }
     
       @media screen and (max-width: 1240px) {
         width: 85%;
@@ -78,10 +93,24 @@ $red: #d9534f;
       }
     }
     #search-btn {
-      padding: 20px;
-      margin-top: 5px; 
+      padding: 22px 20px;
       float: right;
       font-size: 1.25em;
+      border-width: 2px;
+      border-radius: 5px;
+      color: darken($light-gray, 20%);
+
+      &:hover {
+        border-color: $green;
+        color: $green;
+        background-color: white;
+      }
+
+      &:focus {
+        outline: none;
+        background-color: white;
+        border-color: $light-gray;
+      }
     }
     .search-result-wrapper {
       width: 60%;
@@ -98,7 +127,7 @@ $red: #d9534f;
         padding-left: 2px;
         li {
           list-style: none;
-          line-height: 2;
+          line-height: 1.5;
           font-size: 1.5em;
           a {
             color: $gray;

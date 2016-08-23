@@ -9,143 +9,163 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
-  .flashes {
-    width: 30%;
-    margin: 0px auto;
-    padding: 10px 0;
-    text-align: center;
-    list-style: none;
-    color: #7FD279;
-    font-size: 1.25em; }
+  *:focus {
+    outline: none; }
 
-    .container {
-      font-family: 'Menlo', sans-serif;
-      width: 100%;
-      padding: 0; }
-      .container .navbar {
-        background: #FFF;
-        border: none; }
-        .container .navbar-default .navbar-brand {
-          color: #7FD279;
-          font-size: 1.5em; }
-          .container .navbar-default .navbar-brand:hover {
-            color: #6BCC66; }
-      .container .home-search {
-        width: 80%;
-        margin: 260px auto 0 auto; }
-        .container .home-search #search-field {
-          width: 90%;
-          padding: 15px;
-          font-size: 2em; }
-          @media screen and (max-width: 1240px) {
+    .templateView {
+      z-index: 100; }
+
+      .flashes {
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        margin: 0px auto;
+        list-style: none;
+        color: #7FD279;
+        font-size: 1.25em; }
+
+        .container {
+          font-family: 'Menlo', sans-serif;
+          width: 100%;
+          padding: 0; }
+          .container .navbar {
+            background: #FFF;
+            border: none; }
+            .container .navbar-default .navbar-brand {
+              color: #7FD279;
+              font-size: 1.5em; }
+              .container .navbar-default .navbar-brand:hover {
+                color: #6BCC66; }
+          .container .home-search {
+            width: 80%;
+            margin: 200px auto 0 auto; }
             .container .home-search #search-field {
-              width: 85%;   }
-}
-            @media screen and (max-width: 990px) {
-              .container .home-search #search-field {
-                width: 80%;   }
-}
-              @media screen and (max-width: 700px) {
-                .container .home-search #search-field {
-                  width: 75%;   }
-}
-                @media screen and (max-width: 560px) {
+              width: 90%;
+              padding: 15px;
+              font-size: 2em;
+              border-radius: 5px;
+              border: 2px solid #CCC; }
+              .container .home-search #search-field:focus {
+                border-color: #7FD279; }
+                @media screen and (max-width: 1240px) {
                   .container .home-search #search-field {
-                    width: 70%;   }
+                    width: 85%;   }
 }
-                  @media screen and (max-width: 440px) {
+                  @media screen and (max-width: 990px) {
                     .container .home-search #search-field {
-                      width: 60%;   }
+                      width: 80%;   }
 }
-        .container .home-search #search-btn {
-          padding: 20px;
-          margin-top: 5px;
-          float: right;
-          font-size: 1.25em; }
-          .container .home-search .search-result-wrapper {
-            width: 60%;
-            margin-top: 20px; }
-            .container .home-search .search-result-wrapper #no-plants-found {
-              list-style: none;
-              line-height: 2;
-              font-size: 1.5em;
-              color: tomato; }
-              .container .home-search .search-result-wrapper #search-results {
-                padding-left: 2px; }
-                .container .home-search .search-result-wrapper #search-results li {
-                  list-style: none;
-                  line-height: 2;
-                  font-size: 1.5em; }
-                  .container .home-search .search-result-wrapper #search-results li a {
-                    color: #A9A9A9; }
-                    .container .home-search .search-result-wrapper #search-results li a:hover {
-                      text-decoration: none;
-                      color: #7FD279; }
-      .container .plant-view-wrapper {
-        width: 90%;
-        margin: 80px auto; }
-        .container .plant-view-wrapper .plant-img {
-          max-width: 100%; }
-          .container .plant-view-wrapper .plant-title-text label {
-            display: block; }
-            .container .plant-view-wrapper .plant-title-text input {
-              margin-bottom: 5px; }
-              .container .plant-view-wrapper .plant-title-text .icons img {
-                width: 60px;
-                margin-right: 10px; }
-        .container .plant-view-wrapper #edit-img-url-field {
-          margin-top: 20px; }
-          .container .plant-view-wrapper .req-table {
-            margin-top: 40px; }
-            .container .plant-view-wrapper .req-table table {
-              font-size: 1.15em; }
-              .container .plant-view-wrapper .req-table table .table-head {
-                font-weight: 700; }
-        .container .plant-view-wrapper .edit-btn {
-          cursor: pointer; }
-          .container .plant-view-wrapper #submit-edit-btn {
-            margin-left: 10px; }
-            .container .plant-view-wrapper .plant-controls .btn-default {
-              padding: 2px 6px;
-              color: #b3b3b3;
-              text-decoration: none;
-              font-size: 0.8em; }
-      .container .user-view-wrapper {
-        width: 90%;
-        margin: 80px auto; }
-        .container .user-view-wrapper .user-img {
-          max-width: 100%; }
-          .container .user-view-wrapper .user-text {
-            margin-left: 40px; }
-            .container .user-view-wrapper .user-controls .btn-default {
-              padding: 2px 6px; }
-              .container .user-view-wrapper .user-controls .btn-default a {
-                color: #b3b3b3;
-                text-decoration: none;
-                font-size: 0.8em; }
-      .container .new-page-title {
-        margin-top: 120px;
-        text-align: center; }
-        .container .new-plant-form .plant-img-field {
-          width: 58%;
-          display: inline; }
-          .container .new-plant-form .flickr-img-link {
-            display: inline;
-            font-size: 11px; }
-      .container .new-plant-form, .container .register-form {
-        margin-top: 80px; }
-        .container .new-plant-form .form-validation,
-        .container .register-form .form-validation {
-          font-size: 11px;
-          color: #d9534f;
-          text-align: center; }
-          .container .new-plant-form .form-validation a,
-          .container .register-form .form-validation a {
-            color: #d9534f;
-            text-decoration: underline; }
-        .container .new-plant-form input.ng-valid.ng-touched,
-        .container .register-form input.ng-valid.ng-touched {
-          border-color: #7FD279; }
-          .container .new-plant-form input.ng-invalid.ng-touched,
-          .container .register-form input.ng-invalid.ng-touched {
-            border-color: #d9534f; }
+                    @media screen and (max-width: 700px) {
+                      .container .home-search #search-field {
+                        width: 75%;   }
+}
+                      @media screen and (max-width: 560px) {
+                        .container .home-search #search-field {
+                          width: 70%;   }
+}
+                        @media screen and (max-width: 440px) {
+                          .container .home-search #search-field {
+                            width: 60%;   }
+}
+            .container .home-search #search-btn {
+              padding: 22px 20px;
+              float: right;
+              font-size: 1.25em;
+              border-width: 2px;
+              border-radius: 5px;
+              color: #999; }
+              .container .home-search #search-btn:hover {
+                border-color: #7FD279;
+                color: #7FD279;
+                background-color: white; }
+                .container .home-search #search-btn:focus {
+                  outline: none;
+                  background-color: white;
+                  border-color: #CCC; }
+            .container .home-search .search-result-wrapper {
+              width: 60%;
+              margin-top: 20px; }
+              .container .home-search .search-result-wrapper #no-plants-found {
+                list-style: none;
+                line-height: 2;
+                font-size: 1.5em;
+                color: tomato; }
+                .container .home-search .search-result-wrapper #search-results {
+                  padding-left: 2px; }
+                  .container .home-search .search-result-wrapper #search-results li {
+                    list-style: none;
+                    line-height: 1.5;
+                    font-size: 1.5em; }
+                    .container .home-search .search-result-wrapper #search-results li a {
+                      color: #A9A9A9; }
+                      .container .home-search .search-result-wrapper #search-results li a:hover {
+                        text-decoration: none;
+                        color: #7FD279; }
+          .container .plant-view-wrapper {
+            width: 90%;
+            margin: 80px auto; }
+            .container .plant-view-wrapper .plant-img {
+              max-width: 100%; }
+              .container .plant-view-wrapper .plant-title-text label {
+                display: block; }
+                .container .plant-view-wrapper .plant-title-text input {
+                  margin-bottom: 5px; }
+                  .container .plant-view-wrapper .plant-title-text .icons img {
+                    width: 60px;
+                    margin-right: 10px; }
+            .container .plant-view-wrapper #edit-img-url-field {
+              margin-top: 20px; }
+              .container .plant-view-wrapper .req-table {
+                margin-top: 40px; }
+                .container .plant-view-wrapper .req-table table {
+                  font-size: 1.15em; }
+                  .container .plant-view-wrapper .req-table table .table-head {
+                    font-weight: 700; }
+            .container .plant-view-wrapper .edit-btn {
+              cursor: pointer; }
+              .container .plant-view-wrapper #submit-edit-btn {
+                margin-left: 10px; }
+                .container .plant-view-wrapper .plant-controls .btn-default {
+                  padding: 2px 6px;
+                  color: #b3b3b3;
+                  text-decoration: none;
+                  font-size: 0.8em; }
+          .container .user-view-wrapper {
+            width: 90%;
+            margin: 80px auto; }
+            .container .user-view-wrapper .user-img {
+              max-width: 100%; }
+              .container .user-view-wrapper .user-text {
+                margin-left: 40px; }
+                .container .user-view-wrapper .user-controls .btn-default {
+                  padding: 2px 6px; }
+                  .container .user-view-wrapper .user-controls .btn-default a {
+                    color: #b3b3b3;
+                    text-decoration: none;
+                    font-size: 0.8em; }
+          .container .new-page-title {
+            margin-top: 120px;
+            text-align: center; }
+            .container .new-plant-form .plant-img-field {
+              width: 58%;
+              display: inline; }
+              .container .new-plant-form .flickr-img-link {
+                display: inline;
+                font-size: 11px; }
+          .container .new-plant-form, .container .register-form {
+            margin-top: 80px; }
+            .container .new-plant-form .form-validation,
+            .container .register-form .form-validation {
+              font-size: 11px;
+              color: #d9534f;
+              text-align: center; }
+              .container .new-plant-form .form-validation a,
+              .container .register-form .form-validation a {
+                color: #d9534f;
+                text-decoration: underline; }
+            .container .new-plant-form input.ng-valid.ng-touched,
+            .container .register-form input.ng-valid.ng-touched {
+              border-color: #7FD279; }
+              .container .new-plant-form input.ng-invalid.ng-touched,
+              .container .register-form input.ng-invalid.ng-touched {
+                border-color: #d9534f; }
