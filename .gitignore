@@ -1,4 +1,5 @@
-env/
+node_modules
+env
 *.pyc
 _app.js
 secret.py

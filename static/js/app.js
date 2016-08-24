@@ -3,7 +3,10 @@
 (function(angular) {
   'use strict';
 
+require('angular-route');
+
 var app = angular.module('planty', ['ngRoute', 'ngCookies']);
+var flash = require('./flash');
 
 app.config(function($routeProvider, $interpolateProvider) {
   $interpolateProvider.startSymbol('[[');
@@ -149,7 +152,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
 
 // ADD PLANT ***************************************************************
 
-app.controller('addPlantCtrl', function($scope, $http, $location, $window, getPlantSpecsService) {
+app.controller('addPlantCtrl', function($scope, $http, $location, $route, getPlantSpecsService) {
   $scope.master = {};
 
   // on add plant button click, send user filled data to Flask 
@@ -210,6 +213,8 @@ app.controller('viewPlantCtrl', function($http,
                                          getPlantSpecsService) {
   // gets plant_id from link clicked on and gets all the data about that plant from Flask
   var plant_id = $routeParams.plantId;
+  var swal = require('sweetalert');
+
 
   // gets data about plant specs for easy in-place editing
   $http.get('/plant/' + plant_id)
@@ -327,7 +332,7 @@ app.controller('viewPlantCtrl', function($http,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function(response) {
       $scope.userHasPlant();
-      flash("Plant removed.");
+      flash("Plant removed. ");
     });
   };
 

@@ -1,0 +1,65 @@
+{
+  "private": true,
+  "name": "planty",
+  "version": "1.0.0",
+  "description": "A website about plants.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build-js": "browserify static/js/app.js > static/dist/app.js",
+    "lint": "jshint static/js/*.js",
+    "build-css": "node-sass static/css/app.scss static/dist/app.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
+    "watch-js": "nodemon -e js --ignore static/dist -x \"npm run build-js\"",
+    "build": "npm run lint && npm run build-js",
+    "watch": "npm run watch-css && npm run watch-js"
+  },
+  "jshintConfig": {
+    "asi": false,
+    "boss": true,
+    "browser": true,
+    "debug": true,
+    "devel": true,
+    "eqnull": true,
+    "evil": true,
+    "expr": true,
+    "globals": {
+      "angular": true
+    },
+    "jquery": true,
+    "lastsemic": true,
+    "latedef": "nofunc",
+    "laxcomma": true,
+    "maxcomplexity": 10,
+    "maxerr": 10,
+    "maxlen": 115,
+    "maxparams": 8,
+    "node": true,
+    "sub": true,
+    "supernew": true,
+    "trailing": true,
+    "undef": true,
+    "unused": "vars",
+    "worker": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agnaite/planty.git"
+  },
+  "author": "Agne Klimaite",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agnaite/planty/issues"
+  },
+  "homepage": "https://github.com/agnaite/planty#readme",
+  "devDependencies": {
+    "angular-route": "^1.5.8",
+    "browserify": "^13.1.0",
+    "jshint": "^2.9.3",
+    "node-sass": "^3.8.0",
+    "nodemon": "^1.10.2",
+    "sweetalert": "^1.1.3"
+  }
+}

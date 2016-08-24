@@ -4,10 +4,10 @@
   <title>{% block title %}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
-  {% assets "scss_all" %}
+  <link rel="stylesheet" href='/static/dist/app.css'>
+<!--   {% assets "scss_all" %}
     <link rel='stylesheet' href="{{ ASSET_URL }}">
-  {% endassets %}
+  {% endassets %} -->
 </head>
 <body ng-app='planty'>
 
@@ -47,7 +47,7 @@
     </nav>
 
     <div class='row'>
-      <div class='flashes'></div>
+      <div role='status' class='flashes'></div>
     </div>
 
     <div class='templateView' ng-view></div>
@@ -59,9 +59,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
   <script src="https://use.fontawesome.com/4bf6806d57.js"></script>
-  {% assets "js_all" %}
+  
+  <script src='/static/dist/app.js'></script>
+
+  <!-- {% assets "js_all" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
+  {% endassets %} -->
 </body>
 </html>
 

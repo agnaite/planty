@@ -29,14 +29,14 @@ app.jinja_env.undefined = StrictUndefined
 # ************************* ASSETS *********************************
 assets.url = app.static_url_path
 
-scss = Bundle('css/sass.scss', filters='pyscss', output='css/style.css')
-assets.register('scss_all', scss)
+# scss = Bundle('css/sass.scss', filters='pyscss', output='css/style.css')
+# assets.register('scss_all', scss)
 
 # css = Bundle('')
 # assets.register('css_all', css)
 
-js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js', 'js/main.js')
-assets.register('js_all', js)
+# js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js', 'js/main.js')
+# assets.register('js_all', js)
 
 
 # ************************* ROUTES *********************************
