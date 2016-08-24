@@ -52,11 +52,20 @@ $red: #d9534f;
     background: $white;
     border: none;
   }
-  .navbar-default .navbar-brand {
-    color: $green;
-    font-size: 1.5em;
-    &:hover {
-      color: $hover-green;
+  .navbar-default {
+    .navbar-brand {
+      color: $green;
+      margin-top: -5px; 
+      font-size: 1.7em;
+      &:hover {
+        color: $hover-green;
+      }
+      .brand-img {
+        display: inline;
+        width: 30px;
+        margin-right: 5px; 
+        margin-bottom: 16px;
+      }
     }
   }
  

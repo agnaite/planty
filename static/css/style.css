@@ -33,9 +33,15 @@
             border: none; }
             .container .navbar-default .navbar-brand {
               color: #7FD279;
-              font-size: 1.5em; }
+              margin-top: -5px;
+              font-size: 1.7em; }
               .container .navbar-default .navbar-brand:hover {
                 color: #6BCC66; }
+                .container .navbar-default .navbar-brand .brand-img {
+                  display: inline;
+                  width: 30px;
+                  margin-right: 5px;
+                  margin-bottom: 16px; }
           .container .home-search {
             width: 80%;
             margin: 200px auto 0 auto; }
