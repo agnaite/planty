@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, request, jsonify, flash, session
-from flask_assets import Environment, Bundle
 import simplejson
 import random
 import secret
@@ -14,7 +13,6 @@ from datetime import datetime
 from model import connect_to_db, db, Plant, User, PlantUser
 
 app = Flask(__name__)
-assets = Environment(app)
 app.secret_key = secret.APP_KEY
 
 flickr_api_key = secret.FLICKR_API_KEY
@@ -26,22 +24,10 @@ flickr_api.set_keys(api_key=flickr_api_key,
 
 app.jinja_env.undefined = StrictUndefined
 
-# ************************* ASSETS *********************************
-assets.url = app.static_url_path
-
-# scss = Bundle('css/sass.scss', filters='pyscss', output='css/style.css')
-# assets.register('scss_all', scss)
-
-# css = Bundle('')
-# assets.register('css_all', css)
-
-# js = Bundle('js/app.js', 'js/sweetalert.min.js', 'js/angular-route.js', 'js/validations.js', 'js/main.js')
-# assets.register('js_all', js)
-
-
 # ************************* ROUTES *********************************
 
 # Basic Routes *********************************
+
 
 @app.route('/')
 def index_page():

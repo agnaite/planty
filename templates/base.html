@@ -1,13 +1,13 @@
 <!doctype html>
 <html>
 <head>
-  <title>{% block title %}{% endblock %}</title>
+  <title>[[ title ]]</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
   <link rel="stylesheet" href='/static/dist/app.css'>
-<!--   {% assets "scss_all" %}
-    <link rel='stylesheet' href="{{ ASSET_URL }}">
-  {% endassets %} -->
+
 </head>
 <body ng-app='planty'>
 
@@ -62,10 +62,6 @@
   
   <script src='/static/dist/app.js'></script>
 
-  <!-- {% assets "js_all" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %} -->
-</body>
 </html>
 
 

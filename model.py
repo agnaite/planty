@@ -6,7 +6,6 @@ import json
 db = SQLAlchemy()
 
 
-
 ####################################################################
 # Model definitions
 
