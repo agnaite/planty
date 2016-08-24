@@ -2,10 +2,20 @@ $menlo: 'Menlo', sans-serif;
 $green: #7FD279;
 $hover-green: #6BCC66;
 $white: #FFF;
-$gray: #A9A9A9;
+// $gray: #A9A9A9;
 $light-gray: #CCC;
 $yellow: #f0ad4e;
 $red: #d9534f;
+
+$turquoise: rgb(102, 225, 197);
+$lightest-pink: #ffd7ea;
+$light-pink: #ffb0d5;
+$pink: rgb(237, 145, 197);
+$dark-pink: #c782a2;
+$light-yellow: rgb(255, 248, 154);
+$blue: rgb(43, 45, 250);
+$off-white: rgb(248, 247, 244);
+$gray: rgb(186, 186, 183);
 
 // *************************** SWEET ALER OVERRIDES ***************************
 .sweet-alert {
@@ -23,6 +33,10 @@ $red: #d9534f;
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+body {
+  background-color: $off-white;
 }
 
 *:focus {
@@ -51,14 +65,25 @@ $red: #d9534f;
   .navbar {
     background: $white;
     border: none;
+    padding: 10px 0;
+    background-color: $turquoise;
   }
   .navbar-default {
-    .navbar-brand {
-      color: $green;
-      margin-top: -5px; 
-      font-size: 1.7em;
+    .navbar-nav>li>a {
+      color: white;
+      margin-top: 10px;
+      font-size: 1.1em;
       &:hover {
-        color: $hover-green;
+        color: $light-yellow;
+      }
+    }
+    .navbar-brand {
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+      margin-top: -5px; 
+      font-size: 2em;
+      &:hover {
+        color: $light-yellow;
       }
       .brand-img {
         display: inline;
@@ -79,10 +104,17 @@ $red: #d9534f;
       padding: 15px;
       font-size: 2em;
       border-radius: 5px;
-      border: 2px solid $light-gray;
+      border: 3px solid $pink;
+
+      &::-webkit-input-placeholder {
+        color: lighten($pink, 15%);
+      }
+      &::-moz-placeholder {
+        color: lighten($pink, 15%);
+      }
 
       &:focus {
-        border-color: $green;
+        background-color: lighten($pink, 20%);
       }
     
       @media screen and (max-width: 1240px) {
@@ -105,14 +137,17 @@ $red: #d9534f;
       padding: 22px 20px;
       float: right;
       font-size: 1.25em;
-      border-width: 2px;
-      border-radius: 5px;
-      color: darken($light-gray, 20%);
+      border-width: 3px;
+      border-radius: 10px;
+      background-color: $pink;
+      color: $lightest-pink;
+      border: none;
+      border-bottom: 6px solid $dark-pink;
 
       &:hover {
-        border-color: $green;
-        color: $green;
-        background-color: white;
+        // border-color: $green;
+        // color: $green;
+        background-color: lighten($pink, 20%);
       }
 
       &:focus {
@@ -258,12 +293,40 @@ $red: #d9534f;
     .flickr-img-link {
       display: inline;
       font-size: 11px;
+      padding: 15px 10px 10px 10px;
+      background-color: lighten($blue, 10%);
+      border: none;
+      border-bottom: 4px solid $blue;
+      border-radius: 6px;
+      color: $off-white;
+
+      &:hover {
+        background-color: lighten($blue, 15%);
+      }
     }
   }
 
   .new-plant-form,
   .register-form {
     margin-top: 80px;
+
+    .form-control {
+      height: 45px;
+      border-color: lighten($blue, 20%);
+    }
+
+    .main-btn {
+      padding: 12px 20px;
+      background-color: lighten($blue, 10%);
+      border: none;
+      border-bottom: 5px solid $blue;
+      color: $off-white;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: lighten($blue, 15%);
+      }
+    }
 
     .form-validation {
       font-size: 11px;
@@ -276,7 +339,7 @@ $red: #d9534f;
     }
 
     input.ng-valid.ng-touched {
-      border-color: $green;
+      border-color: $turquoise;
     }
 
     input.ng-invalid.ng-touched {
