@@ -152,7 +152,8 @@
             width: 90%;
             margin: 80px auto; }
             .container .user-view-wrapper .user-img {
-              max-width: 100%; }
+              max-width: 100%;
+              border-radius: 50%; }
               .container .user-view-wrapper .user-text {
                 margin-left: 40px; }
                 .container .user-view-wrapper .user-controls .btn-default {

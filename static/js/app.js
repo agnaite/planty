@@ -15,7 +15,7 @@ app.config(function($routeProvider, $interpolateProvider) {
       controller: 'homeCtrl'
     })
     .when('/add_plant', {
-      templateUrl: '/html_for_angular/new_plant_form.html',
+      templateUrl: '/html_for_angular/add_plant.html',
       controller: 'addPlantCtrl'
     })
     .when('/plant/:plantId', {
@@ -139,7 +139,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
   .then(function(response) {
     $scope.user = response.data;
     if ($scope.user.image === '') {
-      $scope.user.image='';
+      $scope.user.image='static/img/user_placeholder.jpg';
     }
     $scope.userPlantNum = Object.keys($scope.user.plants).length;
     // $scope.plant.edited = false;
@@ -210,8 +210,6 @@ app.controller('viewPlantCtrl', function($http,
                                          getPlantSpecsService) {
   // gets plant_id from link clicked on and gets all the data about that plant from Flask
   var plant_id = $routeParams.plantId;
-
-  $scope.editing = false;
 
   // gets data about plant specs for easy in-place editing
   $http.get('/plant/' + plant_id)

@@ -24,11 +24,20 @@
           <a class="navbar-brand" ng-href="#/"><img class='brand-img' ng-src='/static/img/planty.svg'>Planty</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav nav-pills navbar-right">
 
             <li ng-show="isLoggedIn()" ng-cloak><a ng-href="#add_plant">Add Plant</a></li>
-            <li ng-show="isLoggedIn()" ng-cloak><a ng-href="#user/[[ isLoggedIn() ]]">Account</a></li>
-            <li ng-show="isLoggedIn()" ng-cloak><a href='' ng-click="logout()">Logout</a></li>
+            <li ng-show="isLoggedIn()" role="presentation" class="dropdown" ng-cloak>
+              <a class="dropdown-toggle" data-toggle="dropdown" ng-href="" role="button" aria-haspopup="true" aria-expanded="false">
+                Account<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a ng-href='#user/[[ isLoggedIn() ]]'>View Profile</a></li>
+                <li><a ng-href=''>Settings</a></li>
+                <li><a ng-href='' ng-click="logout()">Logout</a></li>
+              </ul>
+            </li>
+           <!--  <li ng-show="isLoggedIn()" ng-cloak><a href='' ng-click="logout()">Logout</a></li> -->
 
             <li ng-show="!isLoggedIn()" ng-cloak><a ng-href="#login">Login</a></li>
             <li ng-show="!isLoggedIn()" ng-cloak><a ng-href="#register">Register</a></li>
@@ -47,6 +56,7 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
   <script src="https://use.fontawesome.com/4bf6806d57.js"></script>
   {% assets "js_all" %}
