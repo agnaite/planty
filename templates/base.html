@@ -27,7 +27,7 @@
           <ul class="nav navbar-nav navbar-right">
 
             <li ng-show="isLoggedIn()" ng-cloak><a ng-href="#add_plant">Add Plant</a></li>
-            <li ng-show="isLoggedIn()" ng-cloak><a ng-click="#user">Account</a></li>
+            <li ng-show="isLoggedIn()" ng-cloak><a ng-href="#user/[[ isLoggedIn() ]]">Account</a></li>
             <li ng-show="isLoggedIn()" ng-cloak><a href='' ng-click="logout()">Logout</a></li>
 
             <li ng-show="!isLoggedIn()" ng-cloak><a ng-href="#login">Login</a></li>

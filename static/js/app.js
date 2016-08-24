@@ -29,6 +29,10 @@ app.config(function($routeProvider, $interpolateProvider) {
     .when('/register', {
       templateUrl: '/html_for_angular/register.html',
       controller: 'addUserCtrl'
+    })
+    .when('/user/:userId', {
+      templateUrl: '/html_for_angular/user.html',
+      controller: 'userProfileCtrl'
     });
 });
 
@@ -95,7 +99,7 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams) {
   };
 });
 
-// NEW USER  ***************************************************************
+// USER  ***************************************************************
 
 app.controller('addUserCtrl', function($scope, $http, $route, $location) {
   $scope.master = {};
@@ -124,6 +128,23 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
     $scope.user.image = '';
     $scope.user.username = '';
   };
+});
+
+app.controller('userProfileCtrl', function($scope, $http, $route, $location, $routeParams) {
+  var user_id = $routeParams.userId;
+
+  // $scope.editing = false;
+
+  $http.get('/user/' + user_id)
+  .then(function(response) {
+    $scope.user = response.data;
+    if ($scope.user.image === '') {
+      $scope.user.image='';
+    }
+    $scope.userPlantNum = Object.keys($scope.user.plants).length;
+    // $scope.plant.edited = false;
+  });
+
 });
 
 // ADD PLANT ***************************************************************
@@ -192,20 +213,12 @@ app.controller('viewPlantCtrl', function($http,
 
   $scope.editing = false;
 
-  $scope.$on('$viewContentLoaded', function(evt) {
-    // calls function to check if the plant has been added to user or not on reroute
-     $timeout(function() {
-      if ($scope.isLoggedIn()) {
-        $scope.userHasPlant();
-      }
-    }, 0);
-  });
-
   // gets data about plant specs for easy in-place editing
   $http.get('/plant/' + plant_id)
   .then(function(response) {
     $scope.plant = response.data;
     $scope.plant.edited = false;
+    $scope.userHasPlant();
 
     getPlantSpecsService.getHumidity(function(response) {
       $scope.allHumid = response.data;
@@ -231,6 +244,7 @@ app.controller('viewPlantCtrl', function($http,
       $scope.plant["image"] = "/static/img/placeholder-image.png";
     }
   });
+
 
   // on click of the save button, sends all the data in the fields to flask to update db
   $scope.saveEdits = function() {
@@ -287,13 +301,15 @@ app.controller('viewPlantCtrl', function($http,
       'userId': $scope.isLoggedIn(),
       'plantId': $scope.plant.plant_id
     };
+    $scope.plantUserStatus = true;
+
     $http({
       url: '/add_user_plant',
       method: 'POST',
       data: $.param(data),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function(response) {
-      $scope.plantUserStatus = true;
+      $scope.userHasPlant();
       flash("Plant added!");
     });
   };
@@ -304,13 +320,15 @@ app.controller('viewPlantCtrl', function($http,
       'userId': $scope.isLoggedIn(),
       'plantId': $scope.plant.plant_id
     };
+    $scope.plantUserStatus = false;
+
     $http({
       url: '/remove_user_plant',
       method: 'POST',
       data: $.param(data),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function(response) {
-      $scope.plantUserStatus = false;
+      $scope.userHasPlant();
       flash("Plant removed.");
     });
   };
@@ -321,6 +339,7 @@ app.controller('viewPlantCtrl', function($http,
         'userId': $scope.isLoggedIn(),
         'plantId': plant_id
       };
+
     $http({
         url: '/is_plant_user',
         method: 'POST',

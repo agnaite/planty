@@ -9,7 +9,6 @@ import flickr_api
 from flickr_api.api import flickr
 from jinja2 import StrictUndefined
 from datetime import datetime
-from sqlalchemy import and_
 
 
 from model import connect_to_db, db, Plant, User, PlantUser
@@ -78,6 +77,22 @@ def search_for_plant(search_term):
 
 
 # User Routes *********************************
+
+@app.route('/user/<user_id>')
+def get_user_info(user_id):
+    """Retrieves user data based on the user ID."""
+
+    user = User.query.get(user_id)
+    user = user.__dict__
+
+    if '_sa_instance_state' in user:
+        del user['_sa_instance_state']
+
+    user_plants = get_user_plants(user_id)
+
+    user['plants'] = user_plants
+
+    return jsonify(user)
 
 
 @app.route('/is_username/<username>')
@@ -193,7 +208,7 @@ def remove_plant_from_user():
     user_id = int(request.form.get('userId'))
     plant_id = int(request.form.get('plantId'))
 
-    plantuser = PlantUser.query.filter(and_(User.user_id == user_id, Plant.plant_id == plant_id)).first()
+    plantuser = PlantUser.query.filter(PlantUser.user_id == user_id, PlantUser.plant_id == plant_id).first()
 
     db.session.delete(plantuser)
     db.session.commit()
@@ -329,6 +344,21 @@ def process_delete():
 
 
 # **************************** HELPER FUNCTIONS *******************************
+
+def get_user_plants(user_id):
+    """Returns a list of plants a user has added."""
+
+    user_plants = User.query.get(user_id).plants
+
+    unpacked_user_plants = {}
+
+    for plant in user_plants:
+        unpacked_user_plants[plant.plant_id] = plant.__dict__
+
+        if '_sa_instance_state' in unpacked_user_plants[plant.plant_id]:
+            del unpacked_user_plants[plant.plant_id]['_sa_instance_state']
+
+    return unpacked_user_plants
 
 
 def get_all_users():
