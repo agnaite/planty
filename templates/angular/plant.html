@@ -1,7 +1,10 @@
 <div class='plant__wrapper' ng-controller='viewPlantCtrl'>
   <div class='row'>
    <!-- Check if plant image exists in db -->
-    <img class='plant__img col-md-4 col-sm-12' src="[[ plant.image ]] alt='[[ plant.name ]]'">
+    <label ng-hide="plant.editing" class='plant-info__label'> 
+    <img class='plant__img col-md-4 col-sm-12' src="[[ plant.image ]]" alt="[[ plant.name ]]">
+    </label>
+    <input placeholder='Image' ng-change="plant.edited = true" ng-blur="plant.editing = false;" ng-show="plant.editing" ng-model="plant.image" class="plant-info__field form-control" type="text"/>
 
     <div class='col-md-4 col-sm-12 plant__info'>
       <label ng-hide="plant.editing" class='plant-info__label'>
@@ -15,10 +18,10 @@
       <input placeholder='Species' ng-change="plant.edited = true" ng-blur="plant.editing = false;" ng-show="plant.editing" ng-model="plant.species" class="plant-info__field form-control" type="text"/>
 
       <div class='plant__icons'>
-          <img ng-if="[[ allWater[plant.water].icon ]] != ''" src='[[ allWater[plant.water].icon ]]' class='plant-icons__item'>
-          <img ng-if="[[ allSun[plant.sun].icon ]] != ''" src='[[ allSun[plant.sun].icon ]]' class='plant-icons__item'>
-          <img ng-if="[[ allHumid[plant.humid].icon ]] != ''" src='[[ allHumid[plant.humid].icon ]]'>
-          <img ng-if="[[ allTemp[plant.temp].icon ]] != ''" src='[[ allTemp[plant.temp].icon ]]' class='plant-icons__item'>
+          <img ng-show="[[ allWater[plant.water].icon ]]" src='[[ allWater[plant.water].icon ]]' class='plant-icons__item'>
+          <img ng-show="[[ allSun[plant.sun].icon ]]" src='[[ allSun[plant.sun].icon ]]' class='plant-icons__item'>
+          <img ng-show="[[ allHumid[plant.humid].icon ]]" src='[[ allHumid[plant.humid].icon ]]'>
+          <img ng-show="[[ allTemp[plant.temp].icon ]]" src='[[ allTemp[plant.temp].icon ]]' class='plant-icons__item'>
       </div>
 
       <!-- Add plant to User's dashboard -->

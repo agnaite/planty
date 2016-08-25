@@ -18,7 +18,7 @@ assets = Environment(app)
 
 app.jinja_env.undefined = StrictUndefined
 assets.url = app.static_url_path
-
+app.config['ASSETS_DEBUG'] = True
 app.secret_key = secret.APP_KEY
 flickr_api_key = secret.FLICKR_API_KEY
 flickr_api_secret = secret.FLICKR_API_SECRET

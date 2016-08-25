@@ -45,6 +45,7 @@
   @include pop-out-btn($border-bottom: 6px,
                        $radius: 10px,
                        $color: $dark-pink);
+  background-color: $pink;
   padding: 22px 20px;
   float: right;
   font-size: 1.25em;
