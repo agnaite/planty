@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, request, jsonify, flash, session
+from flask_assets import Environment
 import simplejson
 import random
 import secret
@@ -13,16 +14,17 @@ from datetime import datetime
 from model import connect_to_db, db, Plant, User, PlantUser
 
 app = Flask(__name__)
-app.secret_key = secret.APP_KEY
+assets = Environment(app)
 
+app.jinja_env.undefined = StrictUndefined
+assets.url = app.static_url_path
+
+app.secret_key = secret.APP_KEY
 flickr_api_key = secret.FLICKR_API_KEY
 flickr_api_secret = secret.FLICKR_API_SECRET
 
-
 flickr_api.set_keys(api_key=flickr_api_key,
                     api_secret=flickr_api_secret)
-
-app.jinja_env.undefined = StrictUndefined
 
 # ************************* ROUTES *********************************
 

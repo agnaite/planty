@@ -1,15 +1,17 @@
 <div class='home-search' ng-controller='homeCtrl'>
+  
   <form>
-    <input ng-model='searchText' ng-change='searchSubmit()' type='text' name='plant-name' id='search-field' placeholder='Enter plant name' autocomplete='off'>
-    <button ng-click='searchSubmit()' type='submit' id='search-btn' class='btn btn-default'>Search</button>
+    <input ng-model='searchText' ng-change='searchSubmit()' type='text' name='plant-name' class='search-field' placeholder='Enter plant name' autocomplete='off'>
+    <button ng-click='searchSubmit()' type='submit' class='search-btn' class='btn btn-default'>Search</button>
   </form>
 
   <div class='search-result-wrapper'>
     <span ng-if="foundPlants == ''">
-        <li id='no-plants-found' ng-cloak>No plants found <i class="fa fa-frown-o fa-lg" aria-hidden="true"></i></li>
+        <li class='no-plants-found' ng-cloak>No plants found <i class="fa fa-frown-o fa-lg" aria-hidden="true"></i></li>
     </span>
-    <ul id="search-results" ng-repeat='plant in foundPlants'>
-        <li><a ng-href='#plant/[[ plant.id ]]' ng-cloak>[[ plant.name ]]</a></li>
+    <ul class="search-results" ng-repeat='plant in foundPlants'>
+        <li class='search-results__item'><a class='search-results__link' ng-href='#plant/[[ plant.id ]]' ng-cloak>[[ plant.name ]]</a></li>
     </ul>
   </div>
+
 </div>

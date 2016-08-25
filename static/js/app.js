@@ -3,7 +3,9 @@
 (function(angular) {
   'use strict';
 
+require('bootstrap');
 require('angular-route');
+require('angular-cookies');
 
 var app = angular.module('planty', ['ngRoute', 'ngCookies']);
 var flash = require('./flash');

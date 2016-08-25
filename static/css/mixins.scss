@@ -1,0 +1,20 @@
+@mixin links($font-size: 1em) {
+  color: $white;
+  font-size: $font-size;
+  &:hover {
+    color: $light-yellow;
+  }
+}
+
+@mixin pop-out-btn($color:$blue,
+                   $border-bottom:5px,
+                   $radius: 8px) {
+  border: none;
+  border-bottom: $border-bottom solid $color;
+  color: $off-white;
+  border-radius: $radius;
+  background-color: lighten($color, 10%);
+  &:hover {
+    background-color: lighten($color, 15%);
+  }
+}

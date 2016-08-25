@@ -1,11 +1,11 @@
 <div ng-controller='addUserCtrl'>
 
-  <form class='form-horizontal col-sm-offset-3 register-form' name='form' nonvalidate>
+  <form class='form-horizontal col-sm-offset-3 user-form' name='form' nonvalidate>
 
     <div class='form-group'>
       <label for="fname_field" class="col-sm-2 control-label">First name</label>
       <div class="col-sm-4">
-        <input ng-model='user.fname' type="text" class="form-control" id="fname_field" required>
+        <input ng-model='user.fname' type="text" class="form-control form-field" id="fname_field" required>
       </div>
     </div>
 
@@ -51,8 +51,8 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button ng-disabled="form.$invalid" ng-click="update(user)" class="btn btn-default">Register</button>
-        <button ng-click='reset()' class="btn btn-default">Reset</button>
+        <button ng-disabled="form.$invalid" ng-click="update(user)" class="btn btn-default form-submit">Register</button>
+        <button ng-click='reset()' class="btn btn-default form-reset">Reset</button>
       </div>
     </div>
   </form>

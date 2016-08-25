@@ -1,0 +1,28 @@
+// angular's cloak
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  background-color: $off-white;
+}
+
+.container {
+  font-family: $menlo;
+  width: 100%;
+  padding: 0;
+}
+
+.flash {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  margin: 0px auto;
+  list-style: none;
+  color: $green;
+  font-size: 1.25em;
+}

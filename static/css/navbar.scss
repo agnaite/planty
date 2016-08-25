@@ -1,0 +1,23 @@
+.navbar {
+  border: none;
+  padding: 10px 0;
+  background-color: $turquoise;
+}
+
+.navbar-default .navbar-nav>li>a {
+  @include links(1.1em);
+  margin-top: 10px;
+}
+
+.navbar-default .navbar-brand {
+  @include links(2em);
+  margin-top: -5px; 
+}
+
+.navbar-brand .brand-img {
+  display: inline;
+  width: 30px;
+  margin-right: 5px; 
+  margin-bottom: 16px;
+}
+

@@ -1,0 +1,45 @@
+.form-img-field {
+  width: 58%;
+  display: inline;
+}
+
+.form-flickr-btn {
+  @include pop-out-btn($border-bottom: 4px,
+                       $radius: 6px);
+  display: inline;
+  font-size: 11px;
+  padding: 15px 10px 10px 10px;  
+}
+
+.form-horizontal {
+  margin-top: 140px;
+}
+
+.form-control {
+  height: 45px;
+  border-color: lighten($blue, 20%);
+}
+
+.form-submit,
+.form-reset {
+  @include pop-out-btn();
+  padding: 12px 20px;
+}
+
+// .form-validation {
+//   font-size: 11px;
+//   color: $red;
+//   text-align: center;
+//   a {
+//     color: $red;
+//     text-decoration: underline;
+//   }
+// }
+
+// input.ng-valid.ng-touched {
+//   border-color: $turquoise;
+// }
+
+// input.ng-invalid.ng-touched {
+//   border-color: $red;
+// }

@@ -1,6 +1,5 @@
 node_modules
 env
 *.pyc
-_ryan-example.css
 secret.py
 .DS_Store

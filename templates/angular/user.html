@@ -1,18 +1,11 @@
-<div class='user-view-wrapper' ng-controller='userProfileCtrl'>
+<div class='user__wrapper' ng-controller='userProfileCtrl'>
   <div class='row'>
-    <img class='user-img col-md-2 col-sm-12' src='[[ user.image ]]'>
+    <img class='user__img col-md-2 col-sm-12' src='[[ user.image ]]'>
     
-    <div class='user-text col-md-4 col-sm-12'>
-
+    <div class='user__info col-md-4 col-sm-12'>
       <h3>[[ user.first_name ]] [[ user.last_name ]]</h3>
-      
-     
       <h5>You own <a href="">[[ userPlantNum ]]</a> plants.</h5>
-      <!-- <div ng-controller='userPlantsCtrl'>
-        <a href="" ng-click='getUserPlants(1)'>My Plants</a>
-      </div> -->
     </div>
-
    
   </div> <!-- .row -->
 </div> <!-- .plant-view-wrapper -->
