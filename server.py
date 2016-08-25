@@ -207,8 +207,11 @@ def remove_plant_from_user():
 @app.route('/is_plant_user', methods=['POST'])
 def does_user_own_plant():
     """Checks if a user has already added that specific plant."""
+    try:
+        user = User.query.get(int(request.form.get('userId')))
+    except:
+        return 'not logged in'
 
-    user = User.query.get(int(request.form.get('userId')))
     plant = Plant.query.get(int(request.form.get('plantId')))
 
     print plant

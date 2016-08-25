@@ -42,19 +42,13 @@
 }
 
 .search-btn {
+  @include pop-out-btn($border-bottom: 6px,
+                       $radius: 10px,
+                       $color: $dark-pink);
   padding: 22px 20px;
   float: right;
   font-size: 1.25em;
-  border-width: 3px;
-  border-radius: 10px;
-  background-color: $pink;
   color: $lightest-pink;
-  border: none;
-  border-bottom: 6px solid $dark-pink;
-
-  &:hover {
-    background-color: lighten($pink, 10%);
-  }
 
   @media screen and (max-width: 560px) {
     float: none;

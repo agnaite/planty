@@ -7244,17 +7244,19 @@ body {
       font-size: 1.2em; } }
 
 .search-btn {
+  border: none;
+  border-bottom: 6px solid #c782a2;
+  color: #f8f7f4;
+  border-radius: 10px;
+  background-color: #d7a5bc;
   padding: 22px 20px;
   float: right;
   font-size: 1.25em;
-  border-width: 3px;
-  border-radius: 10px;
-  background-color: #ed91c5;
-  color: #ffd7ea;
-  border: none;
-  border-bottom: 6px solid #c782a2; }
+  color: #ffd7ea; }
   .search-btn:hover {
-    background-color: #f4bddc; }
+    background-color: #dfb7c9;
+    color: #f8f7f4;
+    border-color: #cf94af; }
   @media screen and (max-width: 560px) {
     .search-btn {
       float: none;
@@ -7342,7 +7344,9 @@ body {
   font-size: 11px;
   padding: 15px 10px 10px 10px; }
   .form-flickr-btn:hover {
-    background-color: #7677fc; }
+    background-color: #7677fc;
+    color: #f8f7f4;
+    border-color: #4446fb; }
 
 .form-horizontal {
   margin-top: 140px; }
@@ -7350,6 +7354,11 @@ body {
 .form-control {
   height: 45px;
   border-color: #8f90fc; }
+
+.control-label {
+  font-size: 1.2em;
+  margin-top: 5px;
+  color: #2b2dfa; }
 
 .form-submit,
 .form-reset {
@@ -7361,4 +7370,6 @@ body {
   padding: 12px 20px; }
   .form-submit:hover,
   .form-reset:hover {
-    background-color: #7677fc; }
+    background-color: #7677fc;
+    color: #f8f7f4;
+    border-color: #4446fb; }

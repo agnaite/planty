@@ -250,7 +250,7 @@ app.controller('viewPlantCtrl', function($http,
     }
   });
 
-
+  
   // on click of the save button, sends all the data in the fields to flask to update db
   $scope.saveEdits = function() {
     $scope.plant.edited = false;

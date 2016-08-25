@@ -20,6 +20,12 @@
   border-color: lighten($blue, 20%);
 }
 
+.control-label {
+  font-size: 1.2em;
+  margin-top: 5px;
+  color: $blue;
+}
+
 .form-submit,
 .form-reset {
   @include pop-out-btn();
