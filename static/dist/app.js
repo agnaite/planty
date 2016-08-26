@@ -5091,7 +5091,6 @@ app.config(function($routeProvider, $interpolateProvider) {
 // LOGIN ***************************************************************
 
 app.controller('userCtrl', function($scope, $http, $location, $route, $routeParams, $rootScope, $cookies) {
-
     // Verifies credentials via Flask in db and sets js cookie to logged in
     $scope.submitLogin = function() {
     $http ({
@@ -5296,7 +5295,7 @@ app.controller('viewPlantCtrl', function($http,
     }
   });
 
-  
+
   // on click of the save button, sends all the data in the fields to flask to update db
   $scope.saveEdits = function() {
     $scope.plant.edited = false;
@@ -5431,10 +5430,10 @@ app.service('getPlantSpecsService', function($http){
 })(window.angular);
 },{"./flash":28,"angular-cookies":2,"angular-route":4,"bootstrap":5,"sweetalert":26}],28:[function(require,module,exports){
 module.exports = function flash(flashMsg) {
-  $('.flashes').append(flashMsg);
+  $('.flash').append(flashMsg);
 
   setTimeout(function() {
-    $('.flashes').empty();
+    $('.flash').empty();
   }, 3000);
 };
 },{}]},{},[27]);

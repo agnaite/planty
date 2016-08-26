@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from flask_sqlalchemy import SQLAlchemy
+from twilio.rest import TwilioRestClient
+import schedule
+import secret
+import time
 import json
 
 db = SQLAlchemy()
@@ -141,6 +145,46 @@ def example_data():
 
     db.session.commit()
 
+
+class Reminder():
+    """Schedules and sends SMS reminders."""
+
+    account_sid = secret.TWILIO_SID
+    auth_token = secret.TWILIO_AUTH
+    client = TwilioRestClient(account_sid, auth_token)
+
+    def __init__(self, number, days, plant):
+        self.number = number
+        self.days = days
+        self.plant = plant
+
+    # set up a client to talk to the Twilio REST API
+
+    def send_sms(self, msg='testing ¯\_(ツ)_/¯'):
+
+        message = self.client.messages.create(
+            to=self.number,
+            from_="+16506678554",
+            body="It's time to water your {}!".format(self.plant)
+        )
+        print(message.sid)
+
+    def schedule_test(self):
+        schedule.every(30).seconds.do(self.send_sms)
+        # for day in self.days:
+        #     schedule.every().wednesday.at("9:00").do(self.send_sms)
+        counter = 0
+        while True:
+            print counter
+            schedule.run_pending()
+            time.sleep(1)
+            counter += 1
+
+        # schedule.every(5).seconds.do(self.send_sms())
+        # schedule.every().hour.do(job)
+        # schedule.every().day.at("10:30").do(job)
+        # schedule.every().monday.do(job)
+        # schedule.every().wednesday.at("13:15").do(job)
 
 ####################################################################
 # Helper functions

@@ -12,7 +12,6 @@ angular.module("planty")
           // consider empty model valid
           return $q.when();
         }
-
         var def = $q.defer();
 
         $timeout(function() {
@@ -26,7 +25,6 @@ angular.module("planty")
                 }
             });
         }, 500);
-
         return def.promise;
       };
     }

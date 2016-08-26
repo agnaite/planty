@@ -45,7 +45,6 @@ app.config(function($routeProvider, $interpolateProvider) {
 // LOGIN ***************************************************************
 
 app.controller('userCtrl', function($scope, $http, $location, $route, $routeParams, $rootScope, $cookies) {
-
     // Verifies credentials via Flask in db and sets js cookie to logged in
     $scope.submitLogin = function() {
     $http ({
@@ -250,7 +249,7 @@ app.controller('viewPlantCtrl', function($http,
     }
   });
 
-  
+
   // on click of the save button, sends all the data in the fields to flask to update db
   $scope.saveEdits = function() {
     $scope.plant.edited = false;

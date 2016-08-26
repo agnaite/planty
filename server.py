@@ -10,10 +10,10 @@ from flickr_api.api import flickr
 from jinja2 import StrictUndefined
 from datetime import datetime
 
-
 from model import connect_to_db, db, Plant, User, PlantUser
 
 app = Flask(__name__)
+
 assets = Environment(app)
 
 app.jinja_env.undefined = StrictUndefined
@@ -336,6 +336,7 @@ def process_delete():
 
 # **************************** HELPER FUNCTIONS *******************************
 
+
 def get_user_plants(user_id):
     """Returns a list of plants a user has added."""
 
@@ -402,4 +403,4 @@ if __name__ == "__main__":
     connect_to_db(app)
     app.debug = True
 
-    app.run(host="0.0.0.0")
+    # app.run(host="0.0.0.0")

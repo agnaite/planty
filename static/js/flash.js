@@ -1,7 +1,7 @@
 module.exports = function flash(flashMsg) {
-  $('.flashes').append(flashMsg);
+  $('.flash').append(flashMsg);
 
   setTimeout(function() {
-    $('.flashes').empty();
+    $('.flash').empty();
   }, 3000);
 };
