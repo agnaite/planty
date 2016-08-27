@@ -146,12 +146,12 @@ def example_data():
     db.session.commit()
 
 
-class Reminder():
+class Reminder(object):
     """Schedules and sends SMS reminders."""
 
     account_sid = secret.TWILIO_SID
     auth_token = secret.TWILIO_AUTH
-    client = TwilioRestClient(account_sid, auth_token)
+    _client = TwilioRestClient(account_sid, auth_token)
 
     def __init__(self, number, days, plant):
         self.number = number
@@ -162,7 +162,7 @@ class Reminder():
 
     def send_sms(self, msg='testing ¯\_(ツ)_/¯'):
 
-        message = self.client.messages.create(
+        message = self._client.messages.create(
             to=self.number,
             from_="+16506678554",
             body="It's time to water your {}!".format(self.plant)
