@@ -5052,6 +5052,7 @@ module.exports = exports['default'];
 require('bootstrap');
 require('angular-route');
 require('angular-cookies');
+require('sweetalert');
 
 var app = angular.module('planty', ['ngRoute', 'ngCookies']);
 var flash = require('./flash');
@@ -5182,21 +5183,89 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
 
 app.controller('userProfileCtrl', function($scope, $http, $route, $location, $routeParams) {
   var user_id = $routeParams.userId;
+  $scope.days = new Set();
+  loadUserPage();
 
-  // $scope.editing = false;
+  function loadUserPage() {
+    $http.get('/user/' + user_id)
+    .then(function(response) {
+      $scope.user = response.data;
+      if ($scope.user.image === '') {
+        $scope.user.image='static/img/user_placeholder.jpg';
+      }
+      $scope.userPlantNum = Object.keys($scope.user.plants).length;
+    });
+  }
 
-  $http.get('/user/' + user_id)
-  .then(function(response) {
-    $scope.user = response.data;
-    if ($scope.user.image === '') {
-      $scope.user.image='static/img/user_placeholder.jpg';
-    }
-    $scope.userPlantNum = Object.keys($scope.user.plants).length;
-    // $scope.plant.edited = false;
-  });
+  // Reminders ****************************** 
 
+  $scope.addDay = function(day) {
+    $scope.days.add(day);
+  };
+
+  // sends plant data to Flask for removal from db
+  $scope.addReminder = function(plant_id) {
+    $scope.reminderId = plant_id;
+    $('#myModal').modal();
+  };
+
+  $scope.submitReminder = function($event) {
+    var daysData = {'days': '',
+                    'plant_id': $scope.reminderId,
+                    'user_id': $scope.isLoggedIn()
+                   };
+
+    $scope.days.forEach(function(day) {
+      daysData['days'] += day;
+    });
+    console.log(daysData);
+    $http({
+      url: '/process_new_reminder',
+      method: "POST",
+      data: $.param(daysData),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+     }).success(function(data) {
+        // on 200 status from Flask, redirect to the new plant's page
+        flash("Reminder has been added!");
+    });
+    loadUserPage();
+    $scope.days = new Set();
+    clearModal();
+
+  };
+
+  $scope.removeReminder = function(plant_id) {
+    $scope.reminderId = plant_id;
+    var data = {'plant_id': $scope.reminderId,
+                'user_id': $scope.isLoggedIn()
+                };
+    $http({
+      url: '/delete_reminder',
+      method: "POST",
+      data: $.param(data),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+     }).success(function(data) {
+        // on 200 status from Flask, redirect to the new plant's page
+        loadUserPage();
+        flash("Reminder has been removed!");
+    });
+  };
+
+  $scope.cancelReminder = function() {
+    $scope.days = new Set();
+    clearModal();
+    console.log($scope.days);
+  };
+
+  function clearModal() {
+    $('#myModal').on('hidden.bs.modal', function (e) {
+      $(this)
+        .find("input[type=checkbox]")
+           .prop("checked", "")
+           .end();
+    });
+  }
 });
-
 // ADD PLANT ***************************************************************
 
 app.controller('addPlantCtrl', function($scope, $http, $location, $route, getPlantSpecsService) {
@@ -5260,8 +5329,6 @@ app.controller('viewPlantCtrl', function($http,
                                          getPlantSpecsService) {
   // gets plant_id from link clicked on and gets all the data about that plant from Flask
   var plant_id = $routeParams.plantId;
-  var swal = require('sweetalert');
-
 
   // gets data about plant specs for easy in-place editing
   $http.get('/plant/' + plant_id)
@@ -5290,9 +5357,6 @@ app.controller('viewPlantCtrl', function($http,
       $scope.water = response.data[$scope.plant.water];
     });
 
-    if ($scope.plant["image"] === null) {
-      $scope.plant["image"] = "/static/img/placeholder-image.png";
-    }
   });
 
 

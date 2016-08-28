@@ -16,21 +16,66 @@
   <div class='row user-plants'>
     <h4>Your plants:</h4><br>
     <div class='user-plants__wrapper col-md-12 col-sm-12'>
-      <span ng-repeat='plant in user.plants'>
-        <div class="col-sm-6 col-md-3">
+      <!-- <div ng-repeat='plant in user.plants'> -->
+        <div ng-repeat='plant in user.plants' class="col-sm-6 col-md-3">
           <div class="thumbnail user-plants__thumb">
-            <img class='user-plants__thumb' src="[[ plant.image ]]" alt='[[ plant.image ]]'>
-            <!-- <span ng-if='![[ plant.image ]]'><img class='user-plants__thumb' src="/static/img/placeholder-image.png" alt='placeholder'></span> -->
+            <img class='user-plants__thumb' src="[[ plant.image ]]" alt='[[ plant.name ]]'>
             <div class="caption user-plants__caption">
               <h3>[[ plant.name ]]</h3>
               <h5>[[ plant.species ]]<h5>
               <p><a href="#plant/[[ plant.plant_id ]]" class="btn btn-primary" role="button">Details</a> 
-              <a href="#" class="btn btn-default" role="button">Add Reminder!</a></p>
+              <a ng-if="plant.reminder_status == 'False'" ng-click="addReminder(plant.plant_id)" class="btn btn-default btn__add-reminder" role="button">Add Reminder!</a>
+               <a ng-if="plant.reminder_status == 'True'" ng-click="removeReminder(plant.plant_id)" class="btn btn-default btn__remove-reminder" role="button">Remove Reminder</a>
             </div>
           </div>
         </div>
-      </span>
+      <!-- </div> -->
     </div>
 
   </div>
+
+  <div class="modal fade" id='myModal' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Add a Reminder</h4>
+        </div>
+        <div class="modal-body">
+          <p>Select the days you want to receive a reminder text:</p>
+          <form class='reminder-form' name='form' novalidate>
+            <label class="checkbox-inline">
+              <input ng-click="addDay('m')" type="checkbox" id="inlineCheckbox1"> Monday
+            </label>
+            <label class="checkbox-inline">
+              <input ng-click="addDay('t')" type="checkbox" id="inlineCheckbox2"> Tuesday
+            </label>
+            <label class="checkbox-inline">
+              <input ng-click="addDay('w')" type="checkbox" id="inlineCheckbox3"> Wednesday
+            </label>
+            <label class="checkbox-inline">
+              <input ng-click="addDay('t')" type="checkbox" id="inlineCheckbox1"> Thursday
+            </label>
+            <label class="checkbox-inline">
+              <input ng-click="addDay('f')" type="checkbox" id="inlineCheckbox2"> Friday
+            </label>
+            <label class="checkbox-inline">
+              <input ng-click="addDay('s')" type="checkbox" id="inlineCheckbox3"> Saturday
+            </label>
+             <label class="checkbox-inline">
+              <input ng-click="addDay('u')" type="checkbox" id="inlineCheckbox3"> Sunday
+            </label>
+            <div class="form-group modal-footer">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button ng-disabled="form.$invalid" ng-click='submitReminder()' data-dismiss="modal" class="btn btn-default form-submit">Add Reminder</button>
+                <button ng-disabled="form.$invalid" ng-click='cancelReminder()' data-dismiss="modal" class="btn btn-default form-submit">Cancel</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 </div> <!-- .plant-view-wrapper -->

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask_sqlalchemy import SQLAlchemy
+import migrate
 from twilio.rest import TwilioRestClient
 import schedule
 import secret
@@ -116,6 +117,7 @@ class PlantUser(db.Model):
     userplant_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     plant_id = db.Column(db.Integer, db.ForeignKey('plants.plant_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    watering_schedule = db.Column(db.String(128))
 
 
 def example_data():
@@ -172,7 +174,8 @@ class Reminder(object):
     def schedule_test(self):
         schedule.every(30).seconds.do(self.send_sms)
         # for day in self.days:
-        #     schedule.every().wednesday.at("9:00").do(self.send_sms)
+            # schedule.every().__getattribute__(day).at('9:00')
+        # schedule.every().wednesday.at("9:00").do(self.send_sms)
         counter = 0
         while True:
             print counter
@@ -188,6 +191,8 @@ class Reminder(object):
 
 ####################################################################
 # Helper functions
+
+
 
 def connect_to_db(app):
     """Connect the database to the Flask app."""

@@ -80,6 +80,9 @@ def get_user_info(user_id):
 
     user['plants'] = user_plants
 
+    for plant in user['plants']:
+        user['plants'][plant]['reminder_status'] = str(get_reminder_status(user['user_id'], user['plants'][plant]['plant_id']))
+
     return jsonify(user)
 
 
@@ -223,6 +226,37 @@ def does_user_own_plant():
         return 'false'
 
 
+@app.route('/process_new_reminder', methods=['POST'])
+def add_reminder():
+    """Adds a watering reminder for a particular PlantUser"""
+
+    plant_id = int(request.form.getlist('plant_id')[0].encode('utf-8'))
+    user_id = int(request.form.getlist('user_id')[0].encode('utf-8'))
+    days = request.form.getlist('days')[0].encode('utf-8')
+
+    plant_user = PlantUser.query.filter(PlantUser.user_id == user_id, PlantUser.plant_id == plant_id).first()
+    plant_user.watering_schedule = days
+
+    db.session.commit()
+
+    return 'ok'
+
+
+@app.route('/delete_reminder', methods=['POST'])
+def delete_reminder():
+    """Deletes a watering reminder for a particular PlantUser"""
+
+    plant_id = int(request.form.getlist('plant_id')[0].encode('utf-8'))
+    user_id = int(request.form.getlist('user_id')[0].encode('utf-8'))
+
+    plant_user = PlantUser.query.filter(PlantUser.user_id == user_id, PlantUser.plant_id == plant_id).first()
+    plant_user.watering_schedule = ''
+
+    db.session.commit()
+
+    return 'ok'
+
+
 # Plant Routes *********************************
 
 
@@ -231,12 +265,16 @@ def show_plant_details(plant_id):
     """Show individual plant's page"""
 
     found_plant = Plant.query.get(plant_id)
+
+    if not found_plant.image:
+        found_plant.image = "/static/img/placeholder-image.png"
+
+        db.session.commit()
+
     found_plant = found_plant.__dict__
 
     if '_sa_instance_state' in found_plant:
         del found_plant['_sa_instance_state']
-
-    print found_plant
 
     return jsonify(found_plant)
 
@@ -335,6 +373,16 @@ def process_delete():
 
 
 # **************************** HELPER FUNCTIONS *******************************
+
+def get_reminder_status(user_id, plant_id):
+    """Checks if PlantUser has an active reminder."""
+
+    plant_user = PlantUser.query.filter(PlantUser.user_id == user_id, PlantUser.plant_id == plant_id).first()
+
+    if plant_user.watering_schedule:
+        return True
+    else:
+        return False
 
 
 def get_user_plants(user_id):
