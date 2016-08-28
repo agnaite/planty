@@ -5216,8 +5216,9 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
                    };
 
     $scope.days.forEach(function(day) {
-      daysData['days'] += day;
+      daysData['days'] += day + ',';
     });
+    daysData['days'] = daysData['days'].slice(0, -1);
     console.log(daysData);
     $http({
       url: '/process_new_reminder',

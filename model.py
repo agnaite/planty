@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from flask_sqlalchemy import SQLAlchemy
-import migrate
-from twilio.rest import TwilioRestClient
-import schedule
-import secret
-import time
 import json
 
 db = SQLAlchemy()
@@ -107,6 +102,7 @@ class User(db.Model):
     first_name = db.Column(db.String(100), nullable=False, server_default='')
     last_name = db.Column(db.String(100), nullable=False, server_default='')
     image = db.Column(db.String(264), server_default='https://medium.com/img/default-avatar.png')
+    phone = db.Column(db.String(128), unique=True)
 
 
 class PlantUser(db.Model):
@@ -118,6 +114,12 @@ class PlantUser(db.Model):
     plant_id = db.Column(db.Integer, db.ForeignKey('plants.plant_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     watering_schedule = db.Column(db.String(128))
+
+    def get_watering_days(self):
+        if 's' in self.watering_schedule:
+            return self.watering_schedule.split(',')[0:-1]
+        else:
+            return [self.watering_schedule]
 
 
 def example_data():
@@ -148,50 +150,8 @@ def example_data():
     db.session.commit()
 
 
-class Reminder(object):
-    """Schedules and sends SMS reminders."""
-
-    account_sid = secret.TWILIO_SID
-    auth_token = secret.TWILIO_AUTH
-    _client = TwilioRestClient(account_sid, auth_token)
-
-    def __init__(self, number, days, plant):
-        self.number = number
-        self.days = days
-        self.plant = plant
-
-    # set up a client to talk to the Twilio REST API
-
-    def send_sms(self, msg='testing ¯\_(ツ)_/¯'):
-
-        message = self._client.messages.create(
-            to=self.number,
-            from_="+16506678554",
-            body="It's time to water your {}!".format(self.plant)
-        )
-        print(message.sid)
-
-    def schedule_test(self):
-        schedule.every(30).seconds.do(self.send_sms)
-        # for day in self.days:
-            # schedule.every().__getattribute__(day).at('9:00')
-        # schedule.every().wednesday.at("9:00").do(self.send_sms)
-        counter = 0
-        while True:
-            print counter
-            schedule.run_pending()
-            time.sleep(1)
-            counter += 1
-
-        # schedule.every(5).seconds.do(self.send_sms())
-        # schedule.every().hour.do(job)
-        # schedule.every().day.at("10:30").do(job)
-        # schedule.every().monday.do(job)
-        # schedule.every().wednesday.at("13:15").do(job)
-
 ####################################################################
 # Helper functions
-
 
 
 def connect_to_db(app):

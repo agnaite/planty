@@ -99,6 +99,40 @@ angular.module("planty")
   };
 })
 
+// Is valid phone number ***********************************************
+.directive('phone', function($q, $timeout, $http) {
+  return {
+    require: 'ngModel',
+    link: function(scope, elm, attrs, ctrl) {
+
+      ctrl.$asyncValidators.phone = function(modelValue, viewValue) {
+
+        if (ctrl.$isEmpty(modelValue)) {
+          // consider empty model valid
+          return $q.when();
+        }
+
+        var def = $q.defer();
+
+        $timeout(function() {
+          // Mock a delayed response
+
+          if (modelValue.length === 10) {
+            def.resolve();
+          } else if (/^[0-9]+$/.test(modelValue)) {
+            def.resolve();
+          } else {
+            def.reject();
+          }
+
+        }, 500);
+
+        return def.promise;
+      };
+    }
+  };
+})
+
 // Is email in use ***********************************************
 
 .directive('email', function($q, $timeout, $http) {

@@ -24,7 +24,7 @@
               <h3>[[ plant.name ]]</h3>
               <h5>[[ plant.species ]]<h5>
               <p><a href="#plant/[[ plant.plant_id ]]" class="btn btn-primary" role="button">Details</a> 
-              <a ng-if="plant.reminder_status == 'False'" ng-click="addReminder(plant.plant_id)" class="btn btn-default btn__add-reminder" role="button">Add Reminder!</a>
+              <a ng-disabled="user.phone == null" ng-if="plant.reminder_status == 'False'" ng-click="addReminder(plant.plant_id)" class="btn btn-default btn__add-reminder" role="button">Add Reminder!</a>
                <a ng-if="plant.reminder_status == 'True'" ng-click="removeReminder(plant.plant_id)" class="btn btn-default btn__remove-reminder" role="button">Remove Reminder</a>
             </div>
           </div>
@@ -45,25 +45,25 @@
           <p>Select the days you want to receive a reminder text:</p>
           <form class='reminder-form' name='form' novalidate>
             <label class="checkbox-inline">
-              <input ng-click="addDay('m')" type="checkbox" id="inlineCheckbox1"> Monday
+              <input ng-click="addDay('Monday')" type="checkbox" id="inlineCheckbox1"> Monday
             </label>
             <label class="checkbox-inline">
-              <input ng-click="addDay('t')" type="checkbox" id="inlineCheckbox2"> Tuesday
+              <input ng-click="addDay('Tuesday')" type="checkbox" id="inlineCheckbox2"> Tuesday
             </label>
             <label class="checkbox-inline">
-              <input ng-click="addDay('w')" type="checkbox" id="inlineCheckbox3"> Wednesday
+              <input ng-click="addDay('Wednesday')" type="checkbox" id="inlineCheckbox3"> Wednesday
             </label>
             <label class="checkbox-inline">
-              <input ng-click="addDay('t')" type="checkbox" id="inlineCheckbox1"> Thursday
+              <input ng-click="addDay('Thursday')" type="checkbox" id="inlineCheckbox1"> Thursday
             </label>
             <label class="checkbox-inline">
-              <input ng-click="addDay('f')" type="checkbox" id="inlineCheckbox2"> Friday
+              <input ng-click="addDay('Friday')" type="checkbox" id="inlineCheckbox2"> Friday
             </label>
             <label class="checkbox-inline">
-              <input ng-click="addDay('s')" type="checkbox" id="inlineCheckbox3"> Saturday
+              <input ng-click="addDay('Saturday')" type="checkbox" id="inlineCheckbox3"> Saturday
             </label>
              <label class="checkbox-inline">
-              <input ng-click="addDay('u')" type="checkbox" id="inlineCheckbox3"> Sunday
+              <input ng-click="addDay('Sunday')" type="checkbox" id="inlineCheckbox3"> Sunday
             </label>
             <div class="form-group modal-footer">
               <div class="col-sm-offset-2 col-sm-10">

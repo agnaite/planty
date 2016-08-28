@@ -163,6 +163,7 @@ def process_registration():
                     password=hash(request.form.get('password')),
                     email=request.form.get('email'),
                     image=request.form.get('image'),
+                    phone=request.form.get('phone'),
                     confirmed_at=datetime.now())
 
     # adds the new user instance to the database and saves
