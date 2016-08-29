@@ -116,10 +116,10 @@ class PlantUser(db.Model):
     watering_schedule = db.Column(db.String(128))
 
     def get_watering_days(self):
-        if 's' in self.watering_schedule:
-            return self.watering_schedule.split(',')[0:-1]
+        if self.watering_schedule:
+            return self.watering_schedule.split(',')
         else:
-            return [self.watering_schedule]
+            return []
 
 
 def example_data():

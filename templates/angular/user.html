@@ -18,6 +18,7 @@
     <div class='user-plants__wrapper col-md-12 col-sm-12'>
       <!-- <div ng-repeat='plant in user.plants'> -->
         <div ng-repeat='plant in user.plants' class="col-sm-6 col-md-3">
+
           <div class="thumbnail user-plants__thumb">
             <img class='user-plants__thumb' src="[[ plant.image ]]" alt='[[ plant.name ]]'>
             <div class="caption user-plants__caption">
@@ -28,6 +29,7 @@
                <a ng-if="plant.reminder_status == 'True'" ng-click="removeReminder(plant.plant_id)" class="btn btn-default btn__remove-reminder" role="button">Remove Reminder</a>
             </div>
           </div>
+          
         </div>
       <!-- </div> -->
     </div>

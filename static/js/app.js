@@ -173,7 +173,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
       daysData['days'] += day + ',';
     });
     daysData['days'] = daysData['days'].slice(0, -1);
-    console.log(daysData);
+
     $http({
       url: '/process_new_reminder',
       method: "POST",
@@ -314,6 +314,14 @@ app.controller('viewPlantCtrl', function($http,
 
   });
 
+  //get flickr image url on click of button from Flask
+  $scope.getFlickrImg = function() {
+    $http.get('/get_flickr_img/' + $scope.plant.name)
+    .success(function(data) {
+      $scope.plant.image = data;
+      $scope.plant.edited = true;
+    });
+  };
 
   // on click of the save button, sends all the data in the fields to flask to update db
   $scope.saveEdits = function() {
@@ -326,6 +334,7 @@ app.controller('viewPlantCtrl', function($http,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new plant's page
+        $scope.plant.editing = false;
         flash("Saved!");
     });
   };

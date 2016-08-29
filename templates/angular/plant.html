@@ -43,7 +43,10 @@
 
   <!-- TABLE -->
   <div class='row'>
-    <input placeholder='Image URL' ng-change="plant.edited = true" ng-blur="plant.editing = false;" ng-show="plant.editing" ng-model="plant.image" class="form-control plant-img__field" type="text" img-url />
+    
+    <input placeholder='Image URL' ng-change="plant.edited = true" ng-blur="plant.editing = false" ng-show="plant.editing" ng-model="plant.image" class="form-control plant-img__field" type="text" img-url />
+    <a ng-show="plant.editing" ng-click='getFlickrImg()' class='form-flickr-btn btn btn-default' role='button'>Get Flickr image</a>
+
     <span class='form-validation' ng-show="form.image.$error.imgUrl" ng-cloak>Image URL has to end in JPG or PNG</span>
     <div class="table-responsive plant__table">
       <table class="table">

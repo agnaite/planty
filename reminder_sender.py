@@ -15,7 +15,7 @@ def send_sms(day, name, num):
     message = _client.messages.create(
         to='+1'+num,
         from_="+16506678554",
-        body="🌱 It's time to water your {}! - Planty".format(name)
+        body="It's time to water your {}! - Planty🌱".format(name)
     )
     print(message.sid)
 
