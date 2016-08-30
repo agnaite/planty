@@ -26,16 +26,17 @@
 
       <!-- Add plant to User's dashboard -->
       <div ng-if='isLoggedIn()'>
-        <a ng-click='addUserPlant()' ng-if='!plantUserStatus' class='btn btn-default plant__add' role='button' ng-cloak>Add Plant</a>
-        <a ng-click='removeUserPlant()' ng-if='plantUserStatus' class='btn btn-default plant__remove' role='button' ng-cloak>Remove Plant</a>
+        <a ng-click='addUserPlant()' ng-if='!plantUserStatus' class='btn btn-default plant__add' role='button' ng-cloak>Add to My Plants</a>
+        <a ng-click='removeUserPlant()' ng-if='plantUserStatus' class='btn btn-default plant__remove' role='button' ng-cloak>Remove from My Plants</a>
       </div>
 
     </div>
 
     <!-- delete and edit plant buttons -->
     <div ng-if='isLoggedIn()' class='controls col-offset-8 col-sm-4'>
-      <button class='btn btn-default controls__edit' ng-click="plant.editing = !plant.editing">Edit</button>
-      <button ng-click="saveEdits()" class='btn btn-default controls__save' ng-disabled="!plant.edited">Save</button>
+      <button ng-show='!plant.editing' class='btn btn-default controls__edit' ng-click="plant.editing = true">Edit</button>
+      <button ng-show='plant.editing' class='btn btn-default controls__edit' ng-click="plant.editing = false">Cancel</button>
+      <button ng-show='plant.editing' ng-click="saveEdits()" class='btn btn-default controls__save' ng-disabled="!plant.edited">Save</button>
       <button class='btn btn-default controls__delete' ng-click='deletePlant([[ plant.plant_id ]])'>Delete</button>
     </div>
 

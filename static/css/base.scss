@@ -4,7 +4,7 @@
 }
 
 *:focus {
-  outline: none;
+  outline: none !important;
 }
 
 body {
@@ -23,6 +23,7 @@ body {
   text-align: center;
   margin: 0px auto;
   list-style: none;
-  color: $green;
+  color: $pink;
+  font-weight: 700;
   font-size: 1.25em;
 }

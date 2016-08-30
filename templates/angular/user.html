@@ -4,8 +4,8 @@
       <img class='user__img' src='[[ user.image ]]'>
     </span>
     <div class='user__info col-md-4 col-sm-12'>
-      <h3>[[ user.first_name ]] [[ user.last_name ]]</h3>
-      <h5>Plants: [[ userPlantNum ]]</h5>
+      <h3 class='user-info__name'>[[ user.first_name ]] [[ user.last_name ]]</h3>
+      <h5 class='user-info__plants'>Owns [[ userPlantNum ]] plants<span class='userplant-count__emoji'>🌱<span></h5>
     </div>
 
   </div> <!-- .row -->
@@ -15,12 +15,11 @@
   <br><br>
 
   <div class='row user-plants'>
-    <!-- <h4>[[ user.username ]]'s plants</h4><br> -->
     <div class='user-plants__wrapper col-md-12 col-sm-12'>
       
       <div class='row'>
         <div class="col-sm-6 userplants__sort"> <!-- Sorting buttons -->
-          <h4>Sort by:</h4>
+          <h4 class='sorting-text'>Sort by:</h4>
           <button class='btn btn-default userplants-sort__btn' ng-click="sortBy('name')">Name
             <i ng-show="reverse === false && propertyName === 'name'" class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
             <i ng-show="reverse === true && propertyName === 'name'" class="fa fa-sort-asc fa-lg" aria-hidden="true"></i>
@@ -48,7 +47,7 @@
             <img class='user-plants__img' src="[[ plant.image ]]" alt='[[ plant.name ]]'>
           </div>
           <div class="caption user-plants__caption">
-            <h3>[[ plant.name ]]</h3>
+            <h4>[[ plant.name ]]</h4>
             <h5>[[ plant.species ]]<h5>
             <p><a href="#plant/[[ plant.plant_id ]]" class="btn btn-primary btn__plant-details" role="button">Details</a> 
             <a ng-disabled="user.phone == null" ng-if="plant.reminder_status == 'False'" ng-click="addReminder(plant.plant_id)" class="btn btn-default btn__add-reminder" role="button">Add Reminder!</a>
@@ -67,7 +66,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Add a Reminder</h4>
+          <h4 class="modal-title">Add a Reminder ⏲</h4>
         </div>
         <div class="modal-body">
           <p>Select the days you want to receive a text reminder:</p>

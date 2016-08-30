@@ -102,6 +102,15 @@ def check_if_username_is_taken(username):
         return "False"
 
 
+@app.route('/get_profile_img', methods=['POST'])
+def retrieve_user_image():
+    """Gets the profile image of the current user."""
+
+    user = User.query.get(request.form.get('user_id'))
+
+    return user.image
+
+
 @app.route('/is_email/<email>')
 def check_if_email_is_taken(email):
     """Checks if a email is already in use.

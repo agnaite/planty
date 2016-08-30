@@ -1,3 +1,9 @@
+.sorting-text {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .userplants__sort {
   padding-left: 40px;
 }
@@ -12,14 +18,14 @@
 
 .user__wrapper {
   width: 90%;
-  margin: 80px auto;
+  margin: 60px auto;
 }
 
 .user-img__crop {
   display: inline-block;
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
   border-radius: 50%;
 }
@@ -27,11 +33,27 @@
 .user__img {
   width: auto;
   height: 100%;
-  margin-left: -100px;
+  margin-left: 0px;
 }
 
 .user__info {
-  margin-left: 40px;
+  margin-left: 0px;
+}
+
+.user-info__name {
+  font-weight: 700;
+  color: darken($gray, 5%);
+}
+
+.user-info__plants {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 700;
+  color: $gray;
+}
+
+.userplant-count__emoji {
+  font-size: 24px;
 }
 
 .btn__plant-details {
@@ -41,13 +63,15 @@
 }
 
 .btn__remove-reminder {
-  @include pop-out-btn($color:$turquoise,
+  @include pop-out-btn($color:$light-yellow,
                        $border-bottom:4px,
                        $radius: 6px);
+  font-weight: 700;
+  color: darken($light-yellow, 50%);
 }
 
 .btn__add-reminder {
-  @include pop-out-btn($color:$gray,
+  @include pop-out-btn($color:$turquoise,
                        $border-bottom:4px,
                        $radius: 6px);
 

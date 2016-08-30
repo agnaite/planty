@@ -33,10 +33,21 @@
 .plant__add,
 .plant__remove {
   margin-top: 15px;
-  outline: none !important;
   @include pop-out-btn($color:$turquoise,
                        $border-bottom:4px,
                        $radius: 6px);
+}
+
+.controls__edit,
+.controls__save,
+.controls__delete {
+  outline: none !important;
+  @include pop-out-btn($color:$gray,
+                       $border-bottom:4px,
+                       $radius: 6px);
+  &:focus {
+    outline: none !important;
+  }
 }
 
 .plant-info__label {

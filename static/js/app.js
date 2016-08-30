@@ -67,7 +67,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
       }
     });
   };
-
+  
   // Checks if a user is currently logged in
   $scope.isLoggedIn = function() {
     return $cookies.get('logged_in');
@@ -85,6 +85,24 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
       flash("Bye, see you soon.");
     });
   };
+
+  // If logged in, gets User profile pic
+  function getProfileImg(user_id) {
+    $http ({
+    url: '/get_profile_img',
+    method: "POST",
+    data: $.param({'user_id': user_id}),
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).then(function(response) {
+    // on 200 status from Flask, redirect to the new plant's page
+      $scope.profilePic = response.data;
+    });
+  }
+
+  if ($scope.isLoggedIn()) {
+    var userId = $scope.isLoggedIn();
+    getProfileImg(userId);
+  }
 });
 
 // SEARCH ***************************************************************
@@ -133,6 +151,7 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
     $scope.form.$setUntouched();
     $scope.user.email = '';
     $scope.user.image = '';
+    $scope.user.phone = '';
     $scope.user.username = '';
   };
 });
@@ -158,7 +177,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
     .then(function(response) {
       $scope.user = response.data;
       if ($scope.user.image === '') {
-        $scope.user.image='static/img/user_placeholder.jpg';
+        $scope.user.image='static/img/planty.svg';
       }
       console.log($scope.user.plants);
       for (var plant_id in $scope.user.plants) {
@@ -269,9 +288,16 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $route, getPla
 
   // get flickr image url on click of button from Flask
   $scope.getFlickrImg = function() {
+    $scope.loading = true;
     $http.get('/get_flickr_img/' + $scope.plant.name)
     .success(function(data) {
-      $scope.plant.image = data;
+      $scope.loading = false;
+      if (data === 'No image found.') {
+        flash('Flickr could not find this plant.');
+      } else {
+        $scope.plant.image = data;
+        $scope.plant.edited = true;
+      }
     });
   };
 
@@ -370,9 +396,9 @@ app.controller('viewPlantCtrl', function($http,
           text: "You will not be able to recover this plant.",
           imageSize: "120x120",
           showCancelButton: true,
-          imageUrl: "/static/img/plant.svg",
+          imageUrl: "/static/img/_planty.svg",
           animation: false,
-          confirmButtonColor: "#DD6B55",
+          confirmButtonColor: "#c782a2",
           confirmButtonText: "Yes, delete it.",
           cancelButtonText: "No, cancel pls!",
           closeOnConfirm: true,

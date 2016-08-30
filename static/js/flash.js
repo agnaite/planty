@@ -1,5 +1,5 @@
 module.exports = function flash(flashMsg) {
-  $('.flash').append(flashMsg);
+  $('.flash').html(flashMsg);
 
   setTimeout(function() {
     $('.flash').empty();

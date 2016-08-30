@@ -14,6 +14,8 @@
   color: $off-white;
   border-radius: $radius;
   background-color: lighten($color, 10%);
+  font-weight: 700;
+
   &:hover,
   &:focus {
     background-color: lighten($color, 15%);

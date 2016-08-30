@@ -7158,7 +7158,7 @@ button.close {
   display: none !important; }
 
 *:focus {
-  outline: none; }
+  outline: none !important; }
 
 body {
   background-color: #f8f7f4; }
@@ -7174,7 +7174,8 @@ body {
   text-align: center;
   margin: 0px auto;
   list-style: none;
-  color: #7FD279;
+  color: #ed91c5;
+  font-weight: 700;
   font-size: 1.25em; }
 
 .sweet-alert {
@@ -7187,28 +7188,52 @@ body {
 
 .navbar {
   border: none;
-  padding: 10px 0;
   background-color: #66e1c5; }
 
 .navbar-default .navbar-nav > li > a {
   color: #FFF;
   font-size: 1.1em;
-  margin-top: 10px; }
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 20px;
+  letter-spacing: 2px;
+  color: #FFF; }
   .navbar-default .navbar-nav > li > a:hover {
     color: #fff89a; }
+  .navbar-default .navbar-nav > li > a:focus {
+    color: #FFF; }
 
 .navbar-default .navbar-brand {
   color: #FFF;
   font-size: 2em;
-  margin-top: -5px; }
+  font-weight: 700;
+  color: #FFF;
+  text-shadow: 1px 1px #ed91c5, 2px 2px #ed91c5, 3px 3px #ed91c5; }
   .navbar-default .navbar-brand:hover {
     color: #fff89a; }
+  .navbar-default .navbar-brand:focus {
+    color: #FFF; }
 
 .navbar-brand .brand-img {
-  display: inline;
-  width: 30px;
+  display: inline-block;
+  width: 20px;
   margin-right: 5px;
-  margin-bottom: 16px; }
+  padding-bottom: 22px; }
+
+.user-menu-img__crop {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-left: 25%; }
+
+.user-menu__img {
+  width: auto;
+  height: 100%;
+  margin-left: 0px; }
 
 .home-search {
   width: 80%;
@@ -7249,6 +7274,7 @@ body {
   color: #f8f7f4;
   border-radius: 10px;
   background-color: #d7a5bc;
+  font-weight: 700;
   background-color: #ed91c5;
   padding: 22px 20px;
   float: right;
@@ -7273,7 +7299,7 @@ body {
   list-style: none;
   line-height: 2;
   font-size: 1.5em;
-  color: tomato; }
+  color: #ed91c5; }
 
 .search-results {
   padding-left: 2px; }
@@ -7316,18 +7342,41 @@ body {
 .plant__add,
 .plant__remove {
   margin-top: 15px;
-  outline: none !important;
   border: none;
   border-bottom: 4px solid #66e1c5;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #91e9d5; }
+  background-color: #91e9d5;
+  font-weight: 700; }
   .plant__add:hover, .plant__add:focus,
   .plant__remove:hover,
   .plant__remove:focus {
     background-color: #a6eedd;
     color: #f8f7f4;
     border-color: #7be5cd; }
+
+.controls__edit,
+.controls__save,
+.controls__delete {
+  outline: none !important;
+  border: none;
+  border-bottom: 4px solid #babab7;
+  color: #f8f7f4;
+  border-radius: 6px;
+  background-color: #d3d3d1;
+  font-weight: 700; }
+  .controls__edit:hover, .controls__edit:focus,
+  .controls__save:hover,
+  .controls__save:focus,
+  .controls__delete:hover,
+  .controls__delete:focus {
+    background-color: #dfdfde;
+    color: #f8f7f4;
+    border-color: #c6c6c4; }
+  .controls__edit:focus,
+  .controls__save:focus,
+  .controls__delete:focus {
+    outline: none !important; }
 
 .plant-info__label {
   display: block; }
@@ -7342,6 +7391,11 @@ body {
 .table-head {
   font-weight: 700; }
 
+.sorting-text {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 700; }
+
 .userplants__sort {
   padding-left: 40px; }
 
@@ -7352,7 +7406,8 @@ body {
   border-bottom: 4px solid #ed91c5;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #f4bddc; }
+  background-color: #f4bddc;
+  font-weight: 700; }
   .userplants-sort__btn:hover, .userplants-sort__btn:focus {
     background-color: #f8d3e8;
     color: #f8f7f4;
@@ -7360,30 +7415,44 @@ body {
 
 .user__wrapper {
   width: 90%;
-  margin: 80px auto; }
+  margin: 60px auto; }
 
 .user-img__crop {
   display: inline-block;
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
   border-radius: 50%; }
 
 .user__img {
   width: auto;
   height: 100%;
-  margin-left: -100px; }
+  margin-left: 0px; }
 
 .user__info {
-  margin-left: 40px; }
+  margin-left: 0px; }
+
+.user-info__name {
+  font-weight: 700;
+  color: #aeaeaa; }
+
+.user-info__plants {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 700;
+  color: #babab7; }
+
+.userplant-count__emoji {
+  font-size: 24px; }
 
 .btn__plant-details {
   border: none;
   border-bottom: 4px solid #2b2dfa;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #5d5efb; }
+  background-color: #5d5efb;
+  font-weight: 700; }
   .btn__plant-details:hover, .btn__plant-details:focus {
     background-color: #7677fc;
     color: #f8f7f4;
@@ -7391,25 +7460,29 @@ body {
 
 .btn__remove-reminder {
   border: none;
-  border-bottom: 4px solid #66e1c5;
+  border-bottom: 4px solid #fff89a;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #91e9d5; }
+  background-color: #fffccd;
+  font-weight: 700;
+  font-weight: 700;
+  color: #9a8f00; }
   .btn__remove-reminder:hover, .btn__remove-reminder:focus {
-    background-color: #a6eedd;
+    background-color: #fffde7;
     color: #f8f7f4;
-    border-color: #7be5cd; }
+    border-color: #fffab4; }
 
 .btn__add-reminder {
   border: none;
-  border-bottom: 4px solid #babab7;
+  border-bottom: 4px solid #66e1c5;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #d3d3d1; }
+  background-color: #91e9d5;
+  font-weight: 700; }
   .btn__add-reminder:hover, .btn__add-reminder:focus {
-    background-color: #dfdfde;
+    background-color: #a6eedd;
     color: #f8f7f4;
-    border-color: #c6c6c4; }
+    border-color: #7be5cd; }
 
 .user-plants__thumb {
   max-height: 330px;
@@ -7430,12 +7503,22 @@ body {
   width: 58%;
   display: inline; }
 
+.plant-form-img__loader {
+  display: inline-block;
+  position: fixed;
+  float: right;
+  margin: 10px 0 0 25px; }
+
+.fa {
+  color: #ed91c5; }
+
 .form-flickr-btn {
   border: none;
   border-bottom: 4px solid #2b2dfa;
   color: #f8f7f4;
   border-radius: 6px;
   background-color: #5d5efb;
+  font-weight: 700;
   display: inline;
   font-size: 11px;
   padding: 15px 10px 10px 10px; }
@@ -7463,6 +7546,7 @@ body {
   color: #f8f7f4;
   border-radius: 8px;
   background-color: #5d5efb;
+  font-weight: 700;
   padding: 12px 20px; }
   .form-submit:hover, .form-submit:focus,
   .form-reset:hover,
@@ -7470,3 +7554,17 @@ body {
     background-color: #7677fc;
     color: #f8f7f4;
     border-color: #4446fb; }
+
+.form-validation {
+  font-size: 11px;
+  color: #ed91c5;
+  text-align: center; }
+  .form-validation a {
+    color: #ed91c5;
+    text-decoration: underline; }
+
+form input.ng-valid.ng-touched {
+  border-color: #66e1c5; }
+
+form form input.ng-invalid.ng-touched {
+  border-color: #ed91c5; }

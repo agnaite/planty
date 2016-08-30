@@ -117,14 +117,11 @@ angular.module("planty")
         $timeout(function() {
           // Mock a delayed response
 
-          if (modelValue.length === 10) {
-            def.resolve();
-          } else if (/^[0-9]+$/.test(modelValue)) {
+          if ((modelValue.length == 10) && (/^[0-9]+$/.test(modelValue))) {
             def.resolve();
           } else {
             def.reject();
           }
-
         }, 500);
 
         return def.promise;

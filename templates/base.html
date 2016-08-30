@@ -19,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" ng-href="#/"><img class='brand-img' ng-src='/static/img/planty.svg'>Planty</a>
+          <a class="navbar-brand" ng-href="#/"><img class='brand-img' ng-src='/static/img/_planty.svg'>Planty</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav nav-pills navbar-right">
@@ -30,12 +30,16 @@
                 Account<span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a ng-href='#user/[[ isLoggedIn() ]]'>View Profile</a></li>
+                <li><a ng-href='#user/[[ isLoggedIn() ]]'>
+                  <div class='user-menu-img__crop'>
+                    <img class='user-menu__img' src='[[ profilePic ]]'>
+                  </div>
+                  <br>View Profile
+                </a></li>
                 <li><a ng-href=''>Settings</a></li>
                 <li><a ng-href='' ng-click="logout()">Logout</a></li>
               </ul>
             </li>
-           <!--  <li ng-show="isLoggedIn()" ng-cloak><a href='' ng-click="logout()">Logout</a></li> -->
 
             <li ng-show="!isLoggedIn()" ng-cloak><a ng-href="#login">Login</a></li>
             <li ng-show="!isLoggedIn()" ng-cloak><a ng-href="#register">Register</a></li>

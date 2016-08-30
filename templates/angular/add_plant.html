@@ -21,12 +21,16 @@
     <div class="col-sm-4">
       <input ng-model='plant.image' type="text" class="form-control form-img-field" id="image_field" name='image' img-url>
       <a ng-disabled="form.name.$invalid" ng-click='getFlickrImg()' class='form-flickr-btn btn btn-default' role='button'>Get Flickr image</a>
+      <div ng-show='loading' class='plant-form-img__loader'>
+        <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
       <span class='form-validation' ng-show="form.image.$error.imgUrl" ng-cloak>Image URL has to end in JPG or PNG</span>
     </div>
   </div>
 
   <div class='form-group'>
-    <label for="water_field" class="col-sm-2 control-label">Water</label>
+    <label for="water_field" class="col-sm-2 control-label">💧 Water</label>
     <div class="col-sm-4">
       <select ng-model='plant.water' class='form-control' id='water_field'>
         <option></option>
@@ -36,7 +40,7 @@
   </div>
 
   <div class='form-group'>
-    <label for="sun_field" class="col-sm-2 control-label">Sun</label>
+    <label for="sun_field" class="col-sm-2 control-label">☀️ Sun</label>
     <div class="col-sm-4">
       <select ng-model='plant.sun' class='form-control' id='sun_field'>
         <option></option>
@@ -46,7 +50,7 @@
   </div>
 
   <div class='form-group'>
-    <label for="humidity_field" class="col-sm-2 control-label">Humidity</label>
+    <label for="humidity_field" class="col-sm-2 control-label">💦 Humidity</label>
     <div class="col-sm-4">
       <select ng-model='plant.humidity' class='form-control' id='humidity_field'>
         <option></option>
@@ -56,7 +60,7 @@
   </div>
 
   <div class='form-group'>
-    <label for="temp_field" class="col-sm-2 control-label">Temperature</label>
+    <label for="temp_field" class="col-sm-2 control-label">🌡 Temperature</label>
     <div class="col-sm-4">
       <select ng-model='plant.temp' class='form-control' id='temp_field'>
         <option></option>

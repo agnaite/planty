@@ -1,23 +1,53 @@
 .navbar {
   border: none;
-  padding: 10px 0;
   background-color: $turquoise;
 }
 
 .navbar-default .navbar-nav>li>a {
   @include links(1.1em);
-  margin-top: 10px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 20px;
+  letter-spacing: 2px;
+  color: $white;
+  &:focus {
+    color: $white;
+  }
 }
 
 .navbar-default .navbar-brand {
   @include links(2em);
-  margin-top: -5px; 
+  font-weight: 700;
+  color: $white;
+  text-shadow: 1px 1px $pink, 
+               2px 2px $pink, 
+               3px 3px $pink;
+  &:focus {
+    color: $white;
+  }
 }
 
 .navbar-brand .brand-img {
-  display: inline;
-  width: 30px;
+  display: inline-block;
+  width: 20px;
   margin-right: 5px; 
-  margin-bottom: 16px;
+  padding-bottom: 22px;
+}
+
+.user-menu-img__crop {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-left: 25%;
+}
+
+.user-menu__img {
+  width: auto;
+  height: 100%;
+  margin-left: 0px;
 }
 
