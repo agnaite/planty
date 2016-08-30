@@ -95,7 +95,11 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function(response) {
     // on 200 status from Flask, redirect to the new plant's page
-      $scope.profilePic = response.data;
+      if (response.data !== '') {
+        $scope.profilePic = response.data;
+      } else {
+        $scope.profilePic ='static/img/planty.svg';
+      }
     });
   }
 
@@ -139,9 +143,11 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new user's page
-        $location.path('/user/' + data);
+        $scope.user = data;
+        $location.path('/user/' + $scope.user.user_id);
         $route.reload();
-        flash("Welcome to Planty, " + user.name);
+        $cookies.put('logged_in', $scope.user.user_id);
+        flash("Welcome to Planty, " + $scope.user.username);
     });
   };
 
@@ -149,6 +155,9 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
   $scope.reset = function() {
     $scope.user = angular.copy($scope.master);
     $scope.form.$setUntouched();
+    $scope.user.last_name = '';
+    $scope.user.first_name = '';
+    $scope.user.password = '';
     $scope.user.email = '';
     $scope.user.image = '';
     $scope.user.phone = '';
@@ -179,7 +188,6 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
       if ($scope.user.image === '') {
         $scope.user.image='static/img/planty.svg';
       }
-      console.log($scope.user.plants);
       for (var plant_id in $scope.user.plants) {
         console.log(plant_id);
         $scope.userplants.push($scope.user.plants[plant_id]);

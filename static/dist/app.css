@@ -7208,8 +7208,7 @@ body {
   color: #FFF;
   font-size: 2em;
   font-weight: 700;
-  color: #FFF;
-  text-shadow: 1px 1px #ed91c5, 2px 2px #ed91c5, 3px 3px #ed91c5; }
+  color: #FFF; }
   .navbar-default .navbar-brand:hover {
     color: #fff89a; }
   .navbar-default .navbar-brand:focus {
@@ -7417,18 +7416,9 @@ body {
   width: 90%;
   margin: 60px auto; }
 
-.user-img__crop {
-  display: inline-block;
-  position: relative;
-  width: 100px;
-  height: 100px;
-  overflow: hidden;
-  border-radius: 50%; }
-
 .user__img {
-  width: auto;
-  height: 100%;
-  margin-left: 0px; }
+  width: 50%;
+  margin-right: 0px; }
 
 .user__info {
   margin-left: 0px; }
@@ -7511,6 +7501,9 @@ body {
 
 .fa {
   color: #ed91c5; }
+
+.user__icon {
+  width: 50px; }
 
 .form-flickr-btn {
   border: none;

@@ -21,19 +21,18 @@
   margin: 60px auto;
 }
 
-.user-img__crop {
-  display: inline-block;
-  position: relative;
-  width: 100px;
-  height: 100px;
-  overflow: hidden;
-  border-radius: 50%;
-}
+// .user-img__crop {
+//   display: inline-block;
+//   position: relative;
+//   width: 100px;
+//   height: 100px;
+//   overflow: hidden;
+//   border-radius: 50%;
+// }
 
 .user__img {
-  width: auto;
-  height: 100%;
-  margin-left: 0px;
+  width: 50%;
+  margin-right: 0px;
 }
 
 .user__info {

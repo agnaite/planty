@@ -20,7 +20,7 @@
     <label for="image_field" class="col-sm-2 control-label">Image URL</label>
     <div class="col-sm-4">
       <input ng-model='plant.image' type="text" class="form-control form-img-field" id="image_field" name='image' img-url>
-      <a ng-disabled="form.name.$invalid" ng-click='getFlickrImg()' class='form-flickr-btn btn btn-default' role='button'>Get Flickr image</a>
+      <a ng-disabled="form.name.$invalid" ng-click='form.name.$invalid || getFlickrImg()' class='form-flickr-btn btn btn-default' role='button'>Get Flickr image</a>
       <div ng-show='loading' class='plant-form-img__loader'>
         <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
         <span class="sr-only">Loading...</span>

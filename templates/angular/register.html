@@ -17,11 +17,17 @@
     </div>
 
     <div class='form-group'>
-      <label for="img_field" class="col-sm-2 control-label">Image URL</label>
-      <div class="col-sm-4">
-        <input ng-model='user.image' type="text" class="form-control" id="img_field" name='image' img-url>
-        <span class='form-validation' ng-show="form.image.$error.imgUrl" ng-cloak>Image URL has to end in JPG or PNG</span>
-      </div>
+      <label for="img_field" class="col-sm-2 control-label">Planty icon</label>
+      <input ng-model='user.image'type='radio' name='image' value='/static/img/nature.svg' required>
+      <img class='user__icon' src="/static/img/nature.svg">
+      <input ng-model='user.image' type='radio' name='image' value='/static/img/plant-1.svg'>
+      <img class='user__icon' src="/static/img/plant-1.svg">
+      <input ng-model='user.image' type='radio' name='image' value='/static/img/plant-3.svg'>
+      <img class='user__icon' src="/static/img/plant-3.svg">
+      <input ng-model='user.image' type='radio' name='image' value='/static/img/planty.svg'>
+      <img class='user__icon' src="/static/img/planty.svg">
+      <input ng-model='user.image' type='radio' name='image' value='/static/img/cactus 2.svg'>
+      <img class='user__icon' src="/static/img/cactus 2.svg">
     </div>
 
     <div class='form-group'>

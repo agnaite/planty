@@ -14,6 +14,10 @@
   color: $pink;
 }
 
+.user__icon {
+  width: 50px;
+}
+
 .form-flickr-btn {
   @include pop-out-btn($border-bottom: 4px,
                        $radius: 6px);

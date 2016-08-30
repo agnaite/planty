@@ -182,7 +182,12 @@ def process_registration():
     # logs new user in
     session['logged_in'] = new_user.user_id
 
-    return str(new_user.user_id)
+    new_user = new_user.__dict__
+
+    if '_sa_instance_state' in new_user:
+        del new_user['_sa_instance_state']
+
+    return jsonify(new_user)
 
 
 # PlantUser Routes *********************************

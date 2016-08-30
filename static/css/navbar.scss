@@ -20,9 +20,6 @@
   @include links(2em);
   font-weight: 700;
   color: $white;
-  text-shadow: 1px 1px $pink, 
-               2px 2px $pink, 
-               3px 3px $pink;
   &:focus {
     color: $white;
   }
