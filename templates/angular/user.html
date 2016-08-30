@@ -1,11 +1,12 @@
 <div class='user__wrapper' ng-controller='userProfileCtrl'>
+  
   <div class='row'>
-    <span class='col-md-2 col-sm-12 user-img__crop'>
-      <img class='user__img' src='[[ user.image ]]'>
-    </span>
-    <div class='user__info col-md-4 col-sm-12'>
-      <h3 class='user-info__name'>[[ user.first_name ]] [[ user.last_name ]]</h3>
-      <h5 class='user-info__plants'>Owns [[ userPlantNum ]] plants<span class='userplant-count__emoji'>🌱<span></h5>
+    <div class='col-md-6 col-sm-6 user__info'>
+      <img class='user__img col-md-3' src='[[ user.image ]]'>
+      <div class='user-info__text col-md-2'>
+        <h3 class='user-info__name'>[[ user.first_name ]] [[ user.last_name ]]</h3>
+        <h5 class='user-info__plants'>Owns [[ userPlantNum ]] plants<span class='userplant-count__emoji'>🌱<span></h5>
+      </div>
     </div>
 
   </div> <!-- .row -->

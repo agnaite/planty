@@ -66,4 +66,16 @@ form {
   }
 }
 
+// USER SETTINGS ****************************************
+
+.settings-form {
+  margin-top: 50px;
+}
+
+.user-update__instructions {
+  padding-top: 60px;
+  text-align: center;
+  color: darken($gray, 10%);
+}
+
 

@@ -21,30 +21,22 @@
   margin: 60px auto;
 }
 
-// .user-img__crop {
-//   display: inline-block;
-//   position: relative;
-//   width: 100px;
-//   height: 100px;
-//   overflow: hidden;
-//   border-radius: 50%;
-// }
-
 .user__img {
-  width: 50%;
-  margin-right: 0px;
+  width: 40%;
 }
 
-.user__info {
-  margin-left: 0px;
+.user-info__text {
+  width: 40%;
+
 }
 
 .user-info__name {
+
   font-weight: 700;
   color: darken($gray, 5%);
 }
 
-.user-info__plants {
+.user-info__plants {  
   text-transform: uppercase;
   font-size: 13px;
   font-weight: 700;

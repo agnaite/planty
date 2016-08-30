@@ -39,6 +39,10 @@ app.config(function($routeProvider, $interpolateProvider, $locationProvider) {
     .when('/user/:userId', {
       templateUrl: '/html_for_angular/user.html',
       controller: 'userProfileCtrl'
+    })
+    .when('/user/settings/:userId', {
+      templateUrl: '/html_for_angular/user_settings.html',
+      controller: 'userSettingsCtrl'
     });
 
     // $locationProvider.html5Mode(true);
@@ -128,6 +132,40 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams) {
   };
 });
 
+// USER SETTINGS ***************************************************************
+
+app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
+  
+  function loadUserSettings() {
+    $http.get('/user/' + $scope.isLoggedIn())
+    .then(function(response) {
+      $scope.user = response.data;
+    });
+  }
+
+  loadUserSettings();
+
+  $scope.submitUserUpdate = function() {
+     $http({
+      url: '/process_user_update',
+      method: "POST",
+      data: $.param({ 'email': $scope.new_email,
+                      'phone': $scope.new_phone,
+                      'password': $scope.check_password,
+                      'id': $scope.isLoggedIn() }),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+     }).then(function(response) {
+        if (response.data === 'bad password') {
+          $('#password_field').val('');
+          flash("Could not update. Your password does not match.");
+        } else {
+          $location.path('/user/' + $scope.isLoggedIn());
+          $route.reload();
+          flash("Account was updated!");
+        }
+    });
+  };
+});
 // USER  ***************************************************************
 
 app.controller('addUserCtrl', function($scope, $http, $route, $location) {
@@ -189,7 +227,6 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
         $scope.user.image='static/img/planty.svg';
       }
       for (var plant_id in $scope.user.plants) {
-        console.log(plant_id);
         $scope.userplants.push($scope.user.plants[plant_id]);
       }
       $scope.userPlantNum = Object.keys($scope.user.plants).length;

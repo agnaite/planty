@@ -7188,7 +7188,8 @@ body {
 
 .navbar {
   border: none;
-  background-color: #66e1c5; }
+  background-color: #91e9d5;
+  padding-bottom: 10px; }
 
 .navbar-default .navbar-nav > li > a {
   color: #FFF;
@@ -7417,11 +7418,10 @@ body {
   margin: 60px auto; }
 
 .user__img {
-  width: 50%;
-  margin-right: 0px; }
+  width: 40%; }
 
-.user__info {
-  margin-left: 0px; }
+.user-info__text {
+  width: 40%; }
 
 .user-info__name {
   font-weight: 700;
@@ -7561,3 +7561,11 @@ form input.ng-valid.ng-touched {
 
 form form input.ng-invalid.ng-touched {
   border-color: #ed91c5; }
+
+.settings-form {
+  margin-top: 50px; }
+
+.user-update__instructions {
+  padding-top: 60px;
+  text-align: center;
+  color: #a1a19d; }

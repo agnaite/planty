@@ -10,12 +10,12 @@
       <label ng-hide="plant.editing" class='plant-info__label'>
         <h3 class='plant__name'>[[ plant.name ]]</h3>
       </label>
-      <input placeholder='Name' ng-change="plant.edited = true" ng-blur="plant.editing = false" ng-show="plant.editing" ng-model="plant.name" class="plant-info__field form-control" type="text"/>
+      <input placeholder='Name' ng-change="plant.edited = true" ng-show="plant.editing" ng-model="plant.name" class="plant-info__field form-control" type="text"/>
 
       <label ng-hide="plant.editing">
         <h5 class='plant__species'>[[ plant.species ]]</h5>
       </label>
-      <input placeholder='Species' ng-change="plant.edited = true" ng-blur="plant.editing = false" ng-show="plant.editing" ng-model="plant.species" class="plant-info__field form-control" type="text"/>
+      <input placeholder='Species' ng-change="plant.edited = true" ng-show="plant.editing" ng-model="plant.species" class="plant-info__field form-control" type="text"/>
 
       <div class='plant__icons'>
           <img ng-show="[[ allWater[plant.water].icon ]]" src='[[ allWater[plant.water].icon ]]' class='plant-icons__item'>
@@ -45,7 +45,7 @@
   <!-- Plant image edit fields -->
   <div class='row'>
     <div ng-show="plant.editing" class='col-sm-8 plant__edit-img'>
-        <input placeholder='Image URL' ng-change="plant.edited = true" ng-blur="plant.editing = false" ng-model="plant.image" class="form-control plant-img__field" type="text" img-url />
+        <input placeholder='Image URL' ng-change="plant.edited = true" ng-model="plant.image" class="form-control plant-img__field" type="text" img-url />
         <a ng-click='getFlickrImg()' class='form-flickr-btn btn btn-default' role='button'>Get Flickr image</a>
         <div ng-show='loading' class='plant-img__loader'>
           <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
@@ -65,7 +65,7 @@
             <label ng-hide="plant.editing" for="water_field" class="control-label">
               <td>
                 <span ng-hide="plant.editing">[[ allWater[plant.water].summary ]]</span>
-                <select id='water_field' ng-change="plant.edited = true" ng-blur="plant.editing = false;" ng-show="plant.editing" ng-model="plant.water" class="select-field form-control" type="text"/>
+                <select id='water_field' ng-change="plant.edited = true" ng-show="plant.editing" ng-model="plant.water" class="select-field form-control" type="text"/>
                   <option></option>
                   <option ng-repeat='(key, value) in allWater'>[[ key ]]</option>
                 </select>
@@ -78,7 +78,7 @@
             <label ng-hide="plant.editing" for="sun_field" class="control-label">
               <td>
                 <span ng-hide="plant.editing">[[ allSun[plant.sun].summary ]]</span>
-                <select id='sun_field' ng-change="plant.edited = true" ng-blur="plant.editing = false;" ng-show="plant.editing" ng-model="plant.sun" class="select-field form-control" type="text"/>
+                <select id='sun_field' ng-change="plant.edited = true" ng-show="plant.editing" ng-model="plant.sun" class="select-field form-control" type="text"/>
                   <option></option>
                   <option ng-repeat='(key, value) in allSun'>[[ key ]]</option>
                 </select>
@@ -91,7 +91,7 @@
             <label ng-hide="plant.editing" for="humid_field" class="control-label">
               <td>
                 <span ng-hide="plant.editing">[[ allHumid[plant.humidity].summary ]]</span>
-                <select id='humid_field' ng-change="plant.edited = true" ng-blur="plant.editing = false;" ng-show="plant.editing" ng-model="plant.humidity" class="select-field form-control" type="text"/>
+                <select id='humid_field' ng-change="plant.edited = true" ng-show="plant.editing" ng-model="plant.humidity" class="select-field form-control" type="text"/>
                   <option></option>
                   <option ng-repeat='(key, value) in allHumid'>[[ key ]]</option>
                 </select>
@@ -104,7 +104,7 @@
             <label ng-hide="plant.editing" for="temp_field" class="control-label">
               <td>
                 <span ng-hide="plant.editing">[[ allTemp[plant.temperature].summary ]]</span>
-                <select id='temp_field' ng-change="plant.edited = true" ng-blur="plant.editing = false;" ng-show="plant.editing" ng-model="plant.temperature" class="select-field form-control" type="text"/>
+                <select id='temp_field' ng-change="plant.edited = true" ng-show="plant.editing" ng-model="plant.temperature" class="select-field form-control" type="text"/>
                   <option></option>
                   <option ng-repeat='(key, value) in allTemp'>[[ key ]]</option>
                 </select>
