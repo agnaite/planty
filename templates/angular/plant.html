@@ -10,12 +10,12 @@
       <label ng-hide="plant.editing" class='plant-info__label'>
         <h3 class='plant__name'>[[ plant.name ]]</h3>
       </label>
-      <input placeholder='Name' ng-change="plant.edited = true" ng-blur="plant.editing = false;" ng-show="plant.editing" ng-model="plant.name" class="plant-info__field form-control" type="text"/>
+      <input placeholder='Name' ng-change="plant.edited = true" ng-blur="plant.editing = false" ng-show="plant.editing" ng-model="plant.name" class="plant-info__field form-control" type="text"/>
 
       <label ng-hide="plant.editing">
         <h5 class='plant__species'>[[ plant.species ]]</h5>
       </label>
-      <input placeholder='Species' ng-change="plant.edited = true" ng-blur="plant.editing = false;" ng-show="plant.editing" ng-model="plant.species" class="plant-info__field form-control" type="text"/>
+      <input placeholder='Species' ng-change="plant.edited = true" ng-blur="plant.editing = false" ng-show="plant.editing" ng-model="plant.species" class="plant-info__field form-control" type="text"/>
 
       <div class='plant__icons'>
           <img ng-show="[[ allWater[plant.water].icon ]]" src='[[ allWater[plant.water].icon ]]' class='plant-icons__item'>
@@ -27,26 +27,34 @@
       <!-- Add plant to User's dashboard -->
       <div ng-if='isLoggedIn()'>
         <a ng-click='addUserPlant()' ng-if='!plantUserStatus' class='btn btn-default plant__add' role='button' ng-cloak>Add Plant</a>
-        <a ng-click='removeUserPlant()' ng-if='plantUserStatus' class='btn btn-danger plant__remove' role='button' ng-cloak>Remove Plant</a>
+        <a ng-click='removeUserPlant()' ng-if='plantUserStatus' class='btn btn-default plant__remove' role='button' ng-cloak>Remove Plant</a>
       </div>
 
     </div>
 
     <!-- delete and edit plant buttons -->
     <div ng-if='isLoggedIn()' class='controls col-offset-8 col-sm-4'>
-      <button class='btn btn-default controls__edit' ng-disabled="plant.editing" ng-click="plant.editing = true">Edit</button>
+      <button class='btn btn-default controls__edit' ng-click="plant.editing = !plant.editing">Edit</button>
       <button ng-click="saveEdits()" class='btn btn-default controls__save' ng-disabled="!plant.edited">Save</button>
       <button class='btn btn-default controls__delete' ng-click='deletePlant([[ plant.plant_id ]])'>Delete</button>
     </div>
 
   </div> <!-- .row -->
 
+  <!-- Plant image edit fields -->
+  <div class='row'>
+    <div ng-show="plant.editing" class='col-sm-8 plant__edit-img'>
+        <input placeholder='Image URL' ng-change="plant.edited = true" ng-blur="plant.editing = false" ng-model="plant.image" class="form-control plant-img__field" type="text" img-url />
+        <a ng-click='getFlickrImg()' class='form-flickr-btn btn btn-default' role='button'>Get Flickr image</a>
+        <div ng-show='loading' class='plant-img__loader'>
+          <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+  </div>
+
   <!-- TABLE -->
   <div class='row'>
-    
-    <input placeholder='Image URL' ng-change="plant.edited = true" ng-blur="plant.editing = false" ng-show="plant.editing" ng-model="plant.image" class="form-control plant-img__field" type="text" img-url />
-    <a ng-show="plant.editing" ng-click='getFlickrImg()' class='form-flickr-btn btn btn-default' role='button'>Get Flickr image</a>
-
     <span class='form-validation' ng-show="form.image.$error.imgUrl" ng-cloak>Image URL has to end in JPG or PNG</span>
     <div class="table-responsive plant__table">
       <table class="table">

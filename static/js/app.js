@@ -11,7 +11,7 @@ require('sweetalert');
 var app = angular.module('planty', ['ngRoute', 'ngCookies']);
 var flash = require('./flash');
 
-app.config(function($routeProvider, $interpolateProvider) {
+app.config(function($routeProvider, $interpolateProvider, $locationProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
 
@@ -40,6 +40,8 @@ app.config(function($routeProvider, $interpolateProvider) {
       templateUrl: '/html_for_angular/user.html',
       controller: 'userProfileCtrl'
     });
+
+    // $locationProvider.html5Mode(true);
 });
 
 // LOGOUT &
@@ -138,14 +140,30 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
 app.controller('userProfileCtrl', function($scope, $http, $route, $location, $routeParams) {
   var user_id = $routeParams.userId;
   $scope.days = new Set();
+  
   loadUserPage();
+  
+  $scope.propertyName = 'name';
+  $scope.reverse = false;
+
+
+  $scope.sortBy = function(propertyName) {
+    $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+    $scope.propertyName = propertyName;
+  };
 
   function loadUserPage() {
+    $scope.userplants = [];
     $http.get('/user/' + user_id)
     .then(function(response) {
       $scope.user = response.data;
       if ($scope.user.image === '') {
         $scope.user.image='static/img/user_placeholder.jpg';
+      }
+      console.log($scope.user.plants);
+      for (var plant_id in $scope.user.plants) {
+        console.log(plant_id);
+        $scope.userplants.push($scope.user.plants[plant_id]);
       }
       $scope.userPlantNum = Object.keys($scope.user.plants).length;
     });
@@ -316,10 +334,16 @@ app.controller('viewPlantCtrl', function($http,
 
   //get flickr image url on click of button from Flask
   $scope.getFlickrImg = function() {
+    $scope.loading = true;
     $http.get('/get_flickr_img/' + $scope.plant.name)
     .success(function(data) {
-      $scope.plant.image = data;
-      $scope.plant.edited = true;
+      $scope.loading = false;
+      if (data === 'No image found.') {
+        flash('Flickr could not find this plant.');
+      } else {
+        $scope.plant.image = data;
+        $scope.plant.edited = true;
+      }
     });
   };
 

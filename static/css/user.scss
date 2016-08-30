@@ -1,21 +1,69 @@
+.userplants__sort {
+  padding-left: 40px;
+}
+
+.userplants-sort__btn {
+  padding-right: 10px;
+  outline: none !important;
+  @include pop-out-btn($color:$pink,
+                       $border-bottom:4px,
+                       $radius: 6px);
+}
+
 .user__wrapper {
   width: 90%;
   margin: 80px auto;
 }
 
-.user__img {
-  max-width: 100%;
+.user-img__crop {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
   border-radius: 50%;
+}
+
+.user__img {
+  width: auto;
+  height: 100%;
+  margin-left: -100px;
 }
 
 .user__info {
   margin-left: 40px;
 }
 
-.user-plants__wrapper {
-    
+.btn__plant-details {
+  @include pop-out-btn($color:$blue,
+                       $border-bottom:4px,
+                       $radius: 6px);
+}
+
+.btn__remove-reminder {
+  @include pop-out-btn($color:$turquoise,
+                       $border-bottom:4px,
+                       $radius: 6px);
+}
+
+.btn__add-reminder {
+  @include pop-out-btn($color:$gray,
+                       $border-bottom:4px,
+                       $radius: 6px);
+
 }
 
 .user-plants__thumb {
-    
+  max-height: 330px;
+  overflow: scroll;
 }
+
+.user-plants__crop {
+  max-height: 180px;
+  overflow: hidden; 
+}
+
+.user-plants__img {
+  @include crop-img();
+}
+

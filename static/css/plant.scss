@@ -7,6 +7,20 @@
   width: 100%;
 }
 
+.plant__edit-img {
+  margin-top: 20px;
+
+  .plant-img__field {
+    width: 70%;
+    display: inline;
+  }
+}
+
+.plant-img__loader {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .icons {
   padding: 10px 5px;
 }
@@ -19,6 +33,10 @@
 .plant__add,
 .plant__remove {
   margin-top: 15px;
+  outline: none !important;
+  @include pop-out-btn($color:$turquoise,
+                       $border-bottom:4px,
+                       $radius: 6px);
 }
 
 .plant-info__label {

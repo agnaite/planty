@@ -14,9 +14,18 @@
   color: $off-white;
   border-radius: $radius;
   background-color: lighten($color, 10%);
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: lighten($color, 15%);
     color: $off-white;
     border-color: lighten($color, 5%);
   }
+}
+
+@mixin crop-img() {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto !important;
+  -ms-interpolation-mode: bicubic;
 }

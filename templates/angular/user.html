@@ -1,10 +1,11 @@
 <div class='user__wrapper' ng-controller='userProfileCtrl'>
   <div class='row'>
-    <img class='user__img col-md-2 col-sm-12' src='[[ user.image ]]'>
-    
+    <span class='col-md-2 col-sm-12 user-img__crop'>
+      <img class='user__img' src='[[ user.image ]]'>
+    </span>
     <div class='user__info col-md-4 col-sm-12'>
       <h3>[[ user.first_name ]] [[ user.last_name ]]</h3>
-      <h5>Plants: <a href="">[[ userPlantNum ]]</a></h5>
+      <h5>Plants: [[ userPlantNum ]]</h5>
     </div>
 
   </div> <!-- .row -->
@@ -14,21 +15,46 @@
   <br><br>
 
   <div class='row user-plants'>
-    <h4>Your plants:</h4><br>
+    <!-- <h4>[[ user.username ]]'s plants</h4><br> -->
     <div class='user-plants__wrapper col-md-12 col-sm-12'>
-      <!-- <div ng-repeat='plant in user.plants'> -->
-        <div ng-repeat='plant in user.plants' class="col-sm-6 col-md-3">
+      
+      <div class='row'>
+        <div class="col-sm-6 userplants__sort"> <!-- Sorting buttons -->
+          <h4>Sort by:</h4>
+          <button class='btn btn-default userplants-sort__btn' ng-click="sortBy('name')">Name
+            <i ng-show="reverse === false && propertyName === 'name'" class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+            <i ng-show="reverse === true && propertyName === 'name'" class="fa fa-sort-asc fa-lg" aria-hidden="true"></i>
+          </button>
+          <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
+          
+          <button class='btn btn-default userplants-sort__btn' ng-click="sortBy('species')">Species
+            <i ng-show="reverse === false && propertyName === 'species'" class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+            <i ng-show="reverse === true && propertyName === 'species'" class="fa fa-sort-asc fa-lg" aria-hidden="true"></i>
+          </button>
+          <span class="sortorder" ng-show="propertyName === 'species'" ng-class="{reverse: reverse}"></span>
+          
+          <button class='btn btn-default userplants-sort__btn' ng-click="sortBy('reminder_status')">Reminder Status
+          <span class="sortorder" ng-show="propertyName === 'reminder_status'" ng-class="{reverse: reverse}"></span>
+            <i ng-show="reverse === false && propertyName === 'reminder_status'" class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+            <i ng-show="reverse === true && propertyName === 'reminder_status'" class="fa fa-sort-asc fa-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <br>
+      <div ng-repeat="plant in userplants | orderBy:propertyName:reverse" class="col-sm-6 col-md-3">
 
-          <div class="thumbnail user-plants__thumb">
-            <img class='user-plants__thumb' src="[[ plant.image ]]" alt='[[ plant.name ]]'>
-            <div class="caption user-plants__caption">
-              <h3>[[ plant.name ]]</h3>
-              <h5>[[ plant.species ]]<h5>
-              <p><a href="#plant/[[ plant.plant_id ]]" class="btn btn-primary" role="button">Details</a> 
-              <a ng-disabled="user.phone == null" ng-if="plant.reminder_status == 'False'" ng-click="addReminder(plant.plant_id)" class="btn btn-default btn__add-reminder" role="button">Add Reminder!</a>
-               <a ng-if="plant.reminder_status == 'True'" ng-click="removeReminder(plant.plant_id)" class="btn btn-default btn__remove-reminder" role="button">Remove Reminder</a>
-            </div>
+        <div class="thumbnail user-plants__thumb">
+          <div class="user-plants__crop">
+            <img class='user-plants__img' src="[[ plant.image ]]" alt='[[ plant.name ]]'>
           </div>
+          <div class="caption user-plants__caption">
+            <h3>[[ plant.name ]]</h3>
+            <h5>[[ plant.species ]]<h5>
+            <p><a href="#plant/[[ plant.plant_id ]]" class="btn btn-primary btn__plant-details" role="button">Details</a> 
+            <a ng-disabled="user.phone == null" ng-if="plant.reminder_status == 'False'" ng-click="addReminder(plant.plant_id)" class="btn btn-default btn__add-reminder" role="button">Add Reminder!</a>
+             <a ng-if="plant.reminder_status == 'True'" ng-click="removeReminder(plant.plant_id)" class="btn btn-default btn__remove-reminder" role="button">Remove Reminder</a>
+          </div>
+        </div>
           
         </div>
       <!-- </div> -->
@@ -44,29 +70,16 @@
           <h4 class="modal-title">Add a Reminder</h4>
         </div>
         <div class="modal-body">
-          <p>Select the days you want to receive a reminder text:</p>
+          <p>Select the days you want to receive a text reminder:</p>
           <form class='reminder-form' name='form' novalidate>
-            <label class="checkbox-inline">
-              <input ng-click="addDay('Monday')" type="checkbox" id="inlineCheckbox1"> Monday
-            </label>
-            <label class="checkbox-inline">
-              <input ng-click="addDay('Tuesday')" type="checkbox" id="inlineCheckbox2"> Tuesday
-            </label>
-            <label class="checkbox-inline">
-              <input ng-click="addDay('Wednesday')" type="checkbox" id="inlineCheckbox3"> Wednesday
-            </label>
-            <label class="checkbox-inline">
-              <input ng-click="addDay('Thursday')" type="checkbox" id="inlineCheckbox1"> Thursday
-            </label>
-            <label class="checkbox-inline">
-              <input ng-click="addDay('Friday')" type="checkbox" id="inlineCheckbox2"> Friday
-            </label>
-            <label class="checkbox-inline">
-              <input ng-click="addDay('Saturday')" type="checkbox" id="inlineCheckbox3"> Saturday
-            </label>
-             <label class="checkbox-inline">
-              <input ng-click="addDay('Sunday')" type="checkbox" id="inlineCheckbox3"> Sunday
-            </label>
+            <input ng-click="addDay('Monday')" type="checkbox" id="inlineCheckbox1"> Monday
+            <input ng-click="addDay('Tuesday')" type="checkbox" id="inlineCheckbox2"> Tuesday
+            <input ng-click="addDay('Wednesday')" type="checkbox" id="inlineCheckbox3"> Wednesday
+            <input ng-click="addDay('Thursday')" type="checkbox" id="inlineCheckbox1"> Thursday
+            <input ng-click="addDay('Friday')" type="checkbox" id="inlineCheckbox2"> Friday
+            <input ng-click="addDay('Saturday')" type="checkbox" id="inlineCheckbox3"> Saturday
+            <input ng-click="addDay('Sunday')" type="checkbox" id="inlineCheckbox3"> Sunday
+
             <div class="form-group modal-footer">
               <div class="col-sm-offset-2 col-sm-10">
                 <button ng-disabled="form.$invalid" ng-click='submitReminder()' data-dismiss="modal" class="btn btn-default form-submit">Add Reminder</button>
