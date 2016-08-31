@@ -5192,13 +5192,11 @@ app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
   loadUserSettings();
 
   $scope.submitUserUpdate = function() {
-     $http({
+    $scope.updating['id'] = $scope.isLoggedIn();
+    $http({
       url: '/process_user_update',
       method: "POST",
-      data: $.param({ 'email': $scope.new_email,
-                      'phone': $scope.new_phone,
-                      'password': $scope.check_password,
-                      'id': $scope.isLoggedIn() }),
+      data: $.param($scope.updating),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
      }).then(function(response) {
         if (response.data === 'bad password') {

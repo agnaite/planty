@@ -194,22 +194,19 @@ def process_registration():
 def update_user():
     """Saves updated user info."""
 
-    user_to_update = User.query.get(int(request.form.get('id')))
-    print "**************DB PASSWORD: {}".format(user_to_update.password)
-    print "**************CHECK PASSWORD {}".format(request.form.get('password'))
+    user_id = request.form.get('id')
+    user_to_update = User.query.get(int(user_id))
 
-    if user_to_update.password == hash(request.form.get('password')):
+    if user_to_update.password == str(hash(request.form.get('password'))):
         if request.form.get('email'):
             user_to_update.email = request.form.get('email')
         if request.form.get('phone'):
             user_to_update.phone = request.form.get('phone')
     else:
-        print "bad password"
         return "bad password"
 
     db.session.commit()
 
-    print "ok"
     return "ok"
 
 
