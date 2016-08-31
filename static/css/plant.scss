@@ -36,6 +36,7 @@
   @include pop-out-btn($color:$turquoise,
                        $border-bottom:4px,
                        $radius: 6px);
+  color: darken($gray, 30%);
 }
 
 .controls__edit,
@@ -45,6 +46,8 @@
   @include pop-out-btn($color:$gray,
                        $border-bottom:4px,
                        $radius: 6px);
+  color: darken($gray, 30%);
+  
   &:focus {
     outline: none !important;
   }

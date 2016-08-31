@@ -52,8 +52,8 @@ app.config(function($routeProvider, $interpolateProvider, $locationProvider) {
 // LOGIN ***************************************************************
 
 app.controller('userCtrl', function($scope, $http, $location, $route, $routeParams, $rootScope, $cookies) {
-    // Verifies credentials via Flask in db and sets js cookie to logged in
-    $scope.submitLogin = function() {
+  // Verifies credentials via Flask in db and sets js cookie to logged in
+  $scope.submitLogin = function() {
     $http ({
       url: '/process_login',
       method: "POST",
@@ -91,11 +91,11 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
   };
 
   // If logged in, gets User profile pic
-  function getProfileImg(user_id) {
+  $scope.getProfileImg = function() {
     $http ({
     url: '/get_profile_img',
     method: "POST",
-    data: $.param({'user_id': user_id}),
+    data: $.param({'user_id': $scope.isLoggedIn()}),
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function(response) {
     // on 200 status from Flask, redirect to the new plant's page
@@ -105,12 +105,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
         $scope.profilePic ='static/img/planty.svg';
       }
     });
-  }
-
-  if ($scope.isLoggedIn()) {
-    var userId = $scope.isLoggedIn();
-    getProfileImg(userId);
-  }
+  };
 });
 
 // SEARCH ***************************************************************
@@ -166,7 +161,7 @@ app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
 });
 // USER  ***************************************************************
 
-app.controller('addUserCtrl', function($scope, $http, $route, $location) {
+app.controller('addUserCtrl', function($scope, $http, $route, $location, $cookies) {
   $scope.master = {};
 
   // on register button click, send user filled data to Flask 
@@ -180,9 +175,9 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new user's page
         $scope.user = data;
-        $location.path('/user/' + $scope.user.user_id);
+        $cookies.put('logged_in', $scope.user.logged_in);
+        $location.path('/user/' + $scope.isLoggedIn());
         $route.reload();
-        $cookies.put('logged_in', $scope.user.user_id);
         flash("Welcome to Planty, " + $scope.user.username + '🌱✌️');
     });
   };
@@ -230,6 +225,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
       $scope.userPlantNum = Object.keys($scope.user.plants).length;
     });
   }
+
 
   // Reminders ****************************** 
 
@@ -282,14 +278,13 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new plant's page
         loadUserPage();
-        flash("Reminder has been removed!");
+        flash("Reminder has been removed.");
     });
   };
 
   $scope.cancelReminder = function() {
     $scope.days = new Set();
     clearModal();
-    console.log($scope.days);
   };
 
   function clearModal() {

@@ -31,7 +31,6 @@
 }
 
 .user-info__name {
-
   font-weight: 700;
   color: darken($gray, 5%);
 }
@@ -54,27 +53,27 @@
 }
 
 .btn__remove-reminder {
-  @include pop-out-btn($color:$light-yellow,
+  @include pop-out-btn($color:$gray,
                        $border-bottom:4px,
                        $radius: 6px);
-  font-weight: 700;
-  color: darken($light-yellow, 50%);
+  color: darken($gray, 30%);
 }
 
 .btn__add-reminder {
   @include pop-out-btn($color:$turquoise,
                        $border-bottom:4px,
                        $radius: 6px);
+  color: darken($gray, 30%);
 
 }
 
 .user-plants__thumb {
-  max-height: 330px;
+  height: 340px;
   overflow: scroll;
 }
 
 .user-plants__crop {
-  max-height: 180px;
+  max-height: 212px;
   overflow: hidden; 
 }
 

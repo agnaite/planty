@@ -7164,6 +7164,7 @@ body {
   background-color: #f8f7f4; }
 
 .container {
+  font-family: "Menlo", sans-serif;
   font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
   width: 100%;
   padding: 0; }
@@ -7342,7 +7343,8 @@ body {
   border-bottom: 4px solid #66e1c5;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #91e9d5; }
+  background-color: #91e9d5;
+  color: #6e6e6a; }
   .plant__add:hover, .plant__add:focus,
   .plant__remove:hover,
   .plant__remove:focus {
@@ -7358,7 +7360,8 @@ body {
   border-bottom: 4px solid #babab7;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #d3d3d1; }
+  background-color: #d3d3d1;
+  color: #6e6e6a; }
   .controls__edit:hover, .controls__edit:focus,
   .controls__save:hover,
   .controls__save:focus,
@@ -7442,34 +7445,34 @@ body {
 
 .btn__remove-reminder {
   border: none;
-  border-bottom: 4px solid #fff89a;
+  border-bottom: 4px solid #babab7;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #fffccd;
-  font-weight: 700;
-  color: #9a8f00; }
+  background-color: #d3d3d1;
+  color: #6e6e6a; }
   .btn__remove-reminder:hover, .btn__remove-reminder:focus {
-    background-color: #fffde7;
+    background-color: #dfdfde;
     color: #f8f7f4;
-    border-color: #fffab4; }
+    border-color: #c6c6c4; }
 
 .btn__add-reminder {
   border: none;
   border-bottom: 4px solid #66e1c5;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #91e9d5; }
+  background-color: #91e9d5;
+  color: #6e6e6a; }
   .btn__add-reminder:hover, .btn__add-reminder:focus {
     background-color: #a6eedd;
     color: #f8f7f4;
     border-color: #7be5cd; }
 
 .user-plants__thumb {
-  max-height: 330px;
+  height: 340px;
   overflow: scroll; }
 
 .user-plants__crop {
-  max-height: 180px;
+  max-height: 212px;
   overflow: hidden; }
 
 .user-plants__img {

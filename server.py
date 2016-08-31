@@ -187,6 +187,9 @@ def process_registration():
     if '_sa_instance_state' in new_user:
         del new_user['_sa_instance_state']
 
+    # passes new user's id to angular
+    new_user['logged_in'] = session['logged_in']
+
     return jsonify(new_user)
 
 

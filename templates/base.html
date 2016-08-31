@@ -26,13 +26,13 @@
 
             <li ng-show="isLoggedIn()" ng-cloak><a ng-href="#add_plant">Add Plant</a></li>
             <li ng-show="isLoggedIn()" role="presentation" class="dropdown" ng-cloak>
-              <a class="dropdown-toggle" data-toggle="dropdown" ng-href="" role="button" aria-haspopup="true" aria-expanded="false">
+              <a ng-click='getProfileImg()' class="dropdown-toggle" data-toggle="dropdown" ng-href="" role="button" aria-haspopup="true" aria-expanded="false">
                 Account<span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li><a ng-href='#user/[[ isLoggedIn() ]]'>
                   <div class='user-menu-img__crop'>
-                    <img class='user-menu__img' src='[[ profilePic ]]'>
+                    <img class='user-menu__img' ng-src='[[ profilePic ]]'>
                   </div>
                   <br>View Profile
                 </a></li>
