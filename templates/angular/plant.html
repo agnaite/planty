@@ -18,12 +18,12 @@
       <input placeholder='Species' ng-change="plant.edited = true" ng-show="plant.editing" ng-model="plant.species" class="plant-info__field form-control" type="text"/>
 
       <div class='plant__icons'>
-          <img ng-show="[[ allWater[plant.water].icon ]]" src='[[ allWater[plant.water].icon ]]' class='plant-icons__item'>
-          <img ng-show="[[ allSun[plant.sun].icon ]]" src='[[ allSun[plant.sun].icon ]]' class='plant-icons__item'>
-          <img ng-show="[[ allHumid[plant.humid].icon ]]" src='[[ allHumid[plant.humid].icon ]]'>
-          <img ng-show="[[ allTemp[plant.temp].icon ]]" src='[[ allTemp[plant.temp].icon ]]' class='plant-icons__item'>
+        <img ng-show="allWater[plant.water].icon" src='[[ allWater[plant.water].icon ]]' class='plant-icons__item'>
+        <img ng-show="allSun[plant.sun].icon" src='[[ allSun[plant.sun].icon ]]' class='plant-icons__item'>
+        <img ng-show="allHumid[plant.humid].icon" src='[[ allHumid[plant.humid].icon ]]'>
+        <img ng-show="allTemp[plant.temp].icon" src='[[ allTemp[plant.temp].icon ]]' class='plant-icons__item'>
       </div>
-
+      
       <!-- Add plant to User's dashboard -->
       <div ng-if='isLoggedIn()'>
         <a ng-click='addUserPlant()' ng-if='!plantUserStatus' class='btn btn-default plant__add' role='button' ng-cloak>Add to My Plants</a>

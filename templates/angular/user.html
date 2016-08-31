@@ -50,6 +50,7 @@
           <div class="caption user-plants__caption">
             <h4>[[ plant.name ]]</h4>
             <h5>[[ plant.species ]]<h5>
+
             <p><a href="#plant/[[ plant.plant_id ]]" class="btn btn-primary btn__plant-details" role="button">Details</a> 
             <a ng-disabled="user.phone == null" ng-if="plant.reminder_status == 'False'" ng-click="user.phone == null || addReminder(plant.plant_id)" class="btn btn-default btn__add-reminder" role="button">Add Reminder!</a>
              <a ng-if="plant.reminder_status == 'True'" ng-click="removeReminder(plant.plant_id)" class="btn btn-default btn__remove-reminder" role="button">Remove Reminder</a>

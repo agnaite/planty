@@ -63,11 +63,11 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
       // on 200 status from Flask, redirect to the new plant's page
       if (response.data === 'error') {
         $location.path('/login');
-        flash('Could not log you in. Please try again.');
+        flash('Could not log you in 🤔. Please try again.');
       } else {
         $cookies.put('logged_in', response.data['logged_in']);
         $location.path('/');
-        flash('Welcome back, ' + $scope.user.username + '!');
+        flash('Welcome back, ' + $scope.user.username + '!👋');
       }
     });
   };
@@ -86,7 +86,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
       $scope.username = '';
       $scope.password = '';
       $location.path('/');
-      flash("Bye, see you soon.");
+      flash("Bye, see you soon." + "🐛");
     });
   };
 
@@ -155,11 +155,11 @@ app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
      }).then(function(response) {
         if (response.data === 'bad password') {
           $('#password_field').val('');
-          flash("Could not update. Your password does not match.");
+          flash("Could not update. Your password does not match." + "👎");
         } else {
           $location.path('/user/' + $scope.isLoggedIn());
           $route.reload();
-          flash("Account was updated!");
+          flash("Account was updated!" + "👍");
         }
     });
   };
@@ -183,7 +183,7 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location) {
         $location.path('/user/' + $scope.user.user_id);
         $route.reload();
         $cookies.put('logged_in', $scope.user.user_id);
-        flash("Welcome to Planty, " + $scope.user.username);
+        flash("Welcome to Planty, " + $scope.user.username + '🌱✌️');
     });
   };
 
@@ -261,7 +261,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new plant's page
-        flash("Reminder has been added!");
+        flash("Reminder has been added!" + "👌");
     });
     loadUserPage();
     $scope.days = new Set();
@@ -318,7 +318,7 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $route, getPla
         // on 200 status from Flask, redirect to the new plant's page
         $location.path('/plant/' + data);
         $route.reload();
-        flash(plant.name + " has been added!");
+        flash(plant.name + "🌱 has been added!");
     });
   };
 
@@ -336,7 +336,7 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $route, getPla
     .success(function(data) {
       $scope.loading = false;
       if (data === 'No image found.') {
-        flash('Flickr could not find this plant.');
+        flash('Flickr could not find this plant" + " 🙄');
       } else {
         $scope.plant.image = data;
         $scope.plant.edited = true;
@@ -408,7 +408,7 @@ app.controller('viewPlantCtrl', function($http,
     .success(function(data) {
       $scope.loading = false;
       if (data === 'No image found.') {
-        flash('Flickr could not find this plant.');
+        flash('Flickr could not find this plant" + " 🙄');
       } else {
         $scope.plant.image = data;
         $scope.plant.edited = true;
@@ -428,7 +428,7 @@ app.controller('viewPlantCtrl', function($http,
      }).success(function(data) {
         // on 200 status from Flask, redirect to the new plant's page
         $scope.plant.editing = false;
-        flash("Saved!");
+        flash("Saved!" + "✨");
     });
   };
 
@@ -460,7 +460,7 @@ app.controller('viewPlantCtrl', function($http,
                   // on 200 status from Flask, redirect to the new plants page
                   $location.path('/');
                   $route.reload();
-                  flash("Plant deleted.");
+                  flash("Plant deleted " + "💀");
                 });
               }
       });
@@ -481,7 +481,7 @@ app.controller('viewPlantCtrl', function($http,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function(response) {
       $scope.userHasPlant();
-      flash("Plant added!");
+      flash("Plant added!" + "✨");
     });
   };
 
@@ -500,7 +500,7 @@ app.controller('viewPlantCtrl', function($http,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function(response) {
       $scope.userHasPlant();
-      flash("Plant removed. ");
+      flash("Plant removed.");
     });
   };
 

@@ -7164,7 +7164,7 @@ body {
   background-color: #f8f7f4; }
 
 .container {
-  font-family: "Menlo", sans-serif;
+  font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
   width: 100%;
   padding: 0; }
 
@@ -7172,11 +7172,11 @@ body {
   width: 100%;
   position: absolute;
   text-align: center;
-  margin: 0px auto;
+  margin: 10px auto;
   list-style: none;
   color: #ed91c5;
   font-weight: 700;
-  font-size: 1.25em; }
+  font-size: 1.4em; }
 
 .sweet-alert {
   font-family: "Menlo" !important; }
@@ -7192,24 +7192,21 @@ body {
   padding-bottom: 10px; }
 
 .navbar-default .navbar-nav > li > a {
+  font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
   color: #FFF;
-  font-size: 1.1em;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: 700;
-  margin-top: 20px;
-  letter-spacing: 2px;
-  color: #FFF; }
+  font-size: 1.2em;
+  margin-top: 20px; }
   .navbar-default .navbar-nav > li > a:hover {
     color: #fff89a; }
   .navbar-default .navbar-nav > li > a:focus {
     color: #FFF; }
 
 .navbar-default .navbar-brand {
+  font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
   color: #FFF;
   font-size: 2em;
   font-weight: 700;
-  color: #FFF; }
+  letter-spacing: 2px; }
   .navbar-default .navbar-brand:hover {
     color: #fff89a; }
   .navbar-default .navbar-brand:focus {
@@ -7218,7 +7215,7 @@ body {
 .navbar-brand .brand-img {
   display: inline-block;
   width: 20px;
-  margin-right: 5px;
+  margin-right: 10px;
   padding-bottom: 22px; }
 
 .user-menu-img__crop {
@@ -7274,7 +7271,6 @@ body {
   color: #f8f7f4;
   border-radius: 10px;
   background-color: #d7a5bc;
-  font-weight: 700;
   background-color: #ed91c5;
   padding: 22px 20px;
   float: right;
@@ -7346,8 +7342,7 @@ body {
   border-bottom: 4px solid #66e1c5;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #91e9d5;
-  font-weight: 700; }
+  background-color: #91e9d5; }
   .plant__add:hover, .plant__add:focus,
   .plant__remove:hover,
   .plant__remove:focus {
@@ -7363,8 +7358,7 @@ body {
   border-bottom: 4px solid #babab7;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #d3d3d1;
-  font-weight: 700; }
+  background-color: #d3d3d1; }
   .controls__edit:hover, .controls__edit:focus,
   .controls__save:hover,
   .controls__save:focus,
@@ -7406,8 +7400,7 @@ body {
   border-bottom: 4px solid #ed91c5;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #f4bddc;
-  font-weight: 700; }
+  background-color: #f4bddc; }
   .userplants-sort__btn:hover, .userplants-sort__btn:focus {
     background-color: #f8d3e8;
     color: #f8f7f4;
@@ -7441,8 +7434,7 @@ body {
   border-bottom: 4px solid #2b2dfa;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #5d5efb;
-  font-weight: 700; }
+  background-color: #5d5efb; }
   .btn__plant-details:hover, .btn__plant-details:focus {
     background-color: #7677fc;
     color: #f8f7f4;
@@ -7455,7 +7447,6 @@ body {
   border-radius: 6px;
   background-color: #fffccd;
   font-weight: 700;
-  font-weight: 700;
   color: #9a8f00; }
   .btn__remove-reminder:hover, .btn__remove-reminder:focus {
     background-color: #fffde7;
@@ -7467,8 +7458,7 @@ body {
   border-bottom: 4px solid #66e1c5;
   color: #f8f7f4;
   border-radius: 6px;
-  background-color: #91e9d5;
-  font-weight: 700; }
+  background-color: #91e9d5; }
   .btn__add-reminder:hover, .btn__add-reminder:focus {
     background-color: #a6eedd;
     color: #f8f7f4;
@@ -7495,7 +7485,7 @@ body {
 
 .plant-form-img__loader {
   display: inline-block;
-  position: fixed;
+  position: absolute;
   float: right;
   margin: 10px 0 0 25px; }
 
@@ -7511,7 +7501,6 @@ body {
   color: #f8f7f4;
   border-radius: 6px;
   background-color: #5d5efb;
-  font-weight: 700;
   display: inline;
   font-size: 11px;
   padding: 15px 10px 10px 10px; }
@@ -7539,7 +7528,6 @@ body {
   color: #f8f7f4;
   border-radius: 8px;
   background-color: #5d5efb;
-  font-weight: 700;
   padding: 12px 20px; }
   .form-submit:hover, .form-submit:focus,
   .form-reset:hover,

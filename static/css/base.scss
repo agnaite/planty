@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-  font-family: $menlo;
+  @include Maison-Bold;
   width: 100%;
   padding: 0;
 }
@@ -21,9 +21,9 @@ body {
   width: 100%;
   position: absolute;
   text-align: center;
-  margin: 0px auto;
+  margin: 10px auto;
   list-style: none;
   color: $pink;
   font-weight: 700;
-  font-size: 1.25em;
+  font-size: 1.4em;
 }
