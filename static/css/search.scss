@@ -7,12 +7,27 @@
   }
 }
 
+.filters-btn {
+  @include pop-out-btn($border-bottom: 4px,
+                       $radius: 6px,
+                       $color: $dark-pink);
+  .fa {
+    color: white;
+  }
+}
+
+.filter-label {
+  color: $gray;
+  font-size: 1.2em;
+  margin-top: 5px;
+}
+
 .search-field {
   width: 90%;
   padding: 15px;
   font-size: 2em;
   border-radius: 5px;
-  border: 3px solid $pink;
+  border: 3px solid $light-pink;
 
   &::-webkit-input-placeholder {
     color: lighten($pink, 15%);
@@ -45,11 +60,10 @@
   @include pop-out-btn($border-bottom: 6px,
                        $radius: 10px,
                        $color: $dark-pink);
-  background-color: $pink;
   padding: 22px 20px;
   float: right;
   font-size: 1.25em;
-  color: $lightest-pink;
+  // color: $lightest-pink;
 
   @media screen and (max-width: 560px) {
     float: none;

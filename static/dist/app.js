@@ -5098,6 +5098,7 @@ app.config(function($routeProvider, $interpolateProvider, $locationProvider) {
 // LOGIN ***************************************************************
 
 app.controller('userCtrl', function($scope, $http, $location, $route, $routeParams, $rootScope, $cookies) {
+
   // Verifies credentials via Flask in db and sets js cookie to logged in
   $scope.submitLogin = function() {
     $http ({
@@ -5156,8 +5157,34 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
 
 // SEARCH ***************************************************************
 
-app.controller('homeCtrl', function($scope, $http, $location, $routeParams) {
-  
+app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getPlantSpecsService) {
+  var filters = [];
+
+  $scope.resetFilters = function() {
+    filters = [];
+  };
+
+  $scope.applyFilter = function(filter) {
+    filters.push(filter);
+    console.log(filters);
+  };
+
+  getPlantSpecsService.getHumidity(function(response) {
+      $scope.allHumid = response.data;
+    });
+
+    getPlantSpecsService.getTemp(function(response) {
+      $scope.allTemp = response.data;
+    });
+
+    getPlantSpecsService.getSun(function(response) {
+      $scope.allSun = response.data;
+    });
+
+    getPlantSpecsService.getWater(function(response) {
+      $scope.allWater = response.data;
+    });
+    
   // gets the binded input data and sends the user entered text to the server
   $scope.searchSubmit = function() {
     $http.get('/search/' + $scope.searchText)
@@ -5170,6 +5197,12 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams) {
         $scope.foundPlants = results.data;
       }
     });
+  };
+});
+
+app.directive('filters', function() {
+  return {
+    templateUrl: '/html_for_angular/filters.html'
   };
 });
 
@@ -5196,7 +5229,7 @@ app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
      }).then(function(response) {
         if (response.data === 'bad password') {
           $('#password_field').val('');
-          flash("Could not update. Your password does not match." + "👎");
+          flash("Could not update. Your password does not match" + "👎");
         } else {
           $location.path('/user/' + $scope.isLoggedIn());
           $route.reload();
@@ -5271,7 +5304,6 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
       $scope.userPlantNum = Object.keys($scope.user.plants).length;
     });
   }
-
 
   // Reminders ****************************** 
 
@@ -5377,7 +5409,7 @@ app.controller('addPlantCtrl', function($scope, $http, $location, $route, getPla
     .success(function(data) {
       $scope.loading = false;
       if (data === 'No image found.') {
-        flash('Flickr could not find this plant" + " 🙄');
+        flash("Flickr could not find this plant" + " 🙄");
       } else {
         $scope.plant.image = data;
         $scope.plant.edited = true;
@@ -5449,7 +5481,7 @@ app.controller('viewPlantCtrl', function($http,
     .success(function(data) {
       $scope.loading = false;
       if (data === 'No image found.') {
-        flash('Flickr could not find this plant" + " 🙄');
+        flash("Flickr could not find this plant" + " 🙄");
       } else {
         $scope.plant.image = data;
         $scope.plant.edited = true;

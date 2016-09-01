@@ -7240,12 +7240,30 @@ body {
     .home-search {
       margin-top: 100px; } }
 
+.filters-btn {
+  border: none;
+  border-bottom: 4px solid #c782a2;
+  color: #f8f7f4;
+  border-radius: 6px;
+  background-color: #d7a5bc; }
+  .filters-btn:hover, .filters-btn:focus {
+    background-color: #dfb7c9;
+    color: #f8f7f4;
+    border-color: #cf94af; }
+  .filters-btn .fa {
+    color: white; }
+
+.filter-label {
+  color: #babab7;
+  font-size: 1.2em;
+  margin-top: 5px; }
+
 .search-field {
   width: 90%;
   padding: 15px;
   font-size: 2em;
   border-radius: 5px;
-  border: 3px solid #ed91c5; }
+  border: 3px solid #ffb0d5; }
   .search-field::-webkit-input-placeholder {
     color: #f8d3e8; }
   .search-field::-moz-placeholder {
@@ -7272,11 +7290,9 @@ body {
   color: #f8f7f4;
   border-radius: 10px;
   background-color: #d7a5bc;
-  background-color: #ed91c5;
   padding: 22px 20px;
   float: right;
-  font-size: 1.25em;
-  color: #ffd7ea; }
+  font-size: 1.25em; }
   .search-btn:hover, .search-btn:focus {
     background-color: #dfb7c9;
     color: #f8f7f4;
@@ -7519,7 +7535,7 @@ body {
   height: 45px;
   border-color: #8f90fc; }
 
-.control-label {
+form .control-label {
   font-size: 1.2em;
   margin-top: 5px;
   color: #2b2dfa; }

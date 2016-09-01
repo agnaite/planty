@@ -46,9 +46,13 @@ def html_for_angular(filename):
 @app.route('/search/<search_term>')
 def search_for_plant(search_term):
     """Retrieves search results from database."""
-
-    # gets the user's search term from app.js and queries the db
-    results = Plant.query.filter(Plant.name.ilike('%' + search_term + '%')).all()
+    print '*' * 100 + search_term
+    if search_term.strip() == 'undefined':
+        print Plant.query.all()
+        results = Plant.query.all()
+    else:
+        # gets the user's search term from app.js and queries the db
+        results = Plant.query.filter(Plant.name.ilike('%' + search_term + '%')).all()
 
     if results:
         plants_found = {}

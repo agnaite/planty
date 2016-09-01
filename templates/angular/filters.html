@@ -1,0 +1,27 @@
+ <div class='row' ng-controller='homeCtrl'>
+  <label for="water_field" class="col-sm-2 control-label filter-label">Water</label>
+  <span ng-repeat='spec in allWater' class="col-sm-3">
+   <input ng-click="applyFilter(spec['summary'])" type='checkbox' name='filter_water' value="[[ spec['summary'] ]]">[[ spec['summary'] ]]
+  </span>
+</div>
+<hr>
+<div class='row'>
+  <label for="sun_field" class="col-sm-2 control-label filter-label">Sun</label>
+  <span ng-repeat='spec in allSun' class="col-sm-3">
+   <input ng-click="applyFilter(spec['summary'])" type='checkbox'>[[ spec['summary'] ]]
+  </span>
+</div>
+<hr>
+<div class='row'>
+  <label for="humid_field" class="col-sm-2 control-label filter-label">Humidity</label>
+  <span ng-repeat='spec in allHumid' class="col-sm-3">
+   <input type='checkbox'>[[ spec['summary'] ]]
+  </span>
+</div>
+<hr>
+<div class='row'>
+  <label for="temp_field" class="col-sm-2 control-label filter-label">Temperature</label>
+  <span ng-repeat='spec in allTemp' class="col-sm-3">
+   <input type='checkbox'>[[ spec['summary'] ]]
+  </span>
+</div>

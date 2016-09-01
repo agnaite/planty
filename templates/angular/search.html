@@ -1,5 +1,20 @@
 <div class='home-search' ng-controller='homeCtrl'>
+  <span ng-init='filters.show = false'></span>
   
+  <button ng-if="!filters.show" ng-click="filters.show = true" class='btn btn-default filters-btn'>Show Filters
+    <i class="fa fa-sort-asc fa-lg" aria-hidden="true"></i>
+  </button>
+  <button ng-if="filters.show" ng-click="filters.show = false" class='btn btn-default filters-btn'>Hide Filters
+    <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i></button>
+    <div ng-if='filters.show' class='filters'>
+      
+      <br>
+      <filters></filters>
+      <br>
+      
+    </div>
+  
+  <br><br> 
   <input ng-model='searchText' ng-change='searchSubmit()' type='text' name='plant-name' class='search-field' placeholder='Enter plant name' autocomplete='off'>
   <button ng-click='searchSubmit()' type='submit' class='search-btn' class='btn btn-default'>Search</button>
 
