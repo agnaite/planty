@@ -15,8 +15,8 @@
     </div>
   
   <br><br> 
-  <input ng-model='searchText' ng-change='searchSubmit()' type='text' name='plant-name' class='search-field' placeholder='Enter plant name' autocomplete='off'>
-  <button ng-click='searchSubmit()' type='submit' class='search-btn' class='btn btn-default'>Search</button>
+  <input ng-model='searchText' ng-change="searchSubmit()" type='text' name='plant-name' class='search-field' placeholder='Enter plant name' autocomplete='off'>
+  <button ng-click="searchSubmit()" type='submit' class='search-btn' class='btn btn-default'>Search</button>
 
   <div class='search-result-wrapper'>
     <span ng-if="foundPlants == ''">

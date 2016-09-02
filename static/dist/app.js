@@ -5158,15 +5158,24 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
 // SEARCH ***************************************************************
 
 app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getPlantSpecsService) {
-  var filters = [];
+  $scope.filters = {};
 
   $scope.resetFilters = function() {
-    filters = [];
+    $scope.filters = {};
   };
 
-  $scope.applyFilter = function(filter) {
-    filters.push(filter);
-    console.log(filters);
+  $scope.applyFilter = function(filter, spec) {
+    var index = $.inArray(filter, Object.keys($scope.filters));
+    
+    if (index === -1) {
+      $scope.filters[filter] = spec;
+      console.log($scope.filters);
+    } else {
+        delete $scope.filters[filter];
+        console.log($scope.filters);
+    }
+
+    $scope.searchSubmit();
   };
 
   getPlantSpecsService.getHumidity(function(response) {
@@ -5187,16 +5196,31 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getP
     
   // gets the binded input data and sends the user entered text to the server
   $scope.searchSubmit = function() {
-    $http.get('/search/' + $scope.searchText)
-    .then(function(results){
-      // if server sends back none string, send empty string to view
-      // else, send dictionary of plant objects to view
-      if (results.data === 'None') {
-        $scope.foundPlants = '';
-      } else {
-        $scope.foundPlants = results.data;
-      }
-    });
+    // if (filters === []) {
+    //   filters = '';
+    // }
+    var data = { 'name': $scope.searchText,
+                 'filters': $.param($scope.filters)
+               };
+    $http({
+      method: 'POST',
+      url: '/search',
+      data: $.param(data),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).then(function successCallback(response) {
+        // this callback will be called asynchronously
+        // when the response is available
+        if (response.data === 'None') {
+          $scope.foundPlants = '';
+        } else {
+          $scope.foundPlants = response.data;
+
+        }
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      });
+    console.log($scope.foundPlants);
   };
 });
 
@@ -5229,7 +5253,7 @@ app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
      }).then(function(response) {
         if (response.data === 'bad password') {
           $('#password_field').val('');
-          flash("Could not update. Your password does not match" + "👎");
+          flash("Could not update. Your password does not match " + "👎");
         } else {
           $location.path('/user/' + $scope.isLoggedIn());
           $route.reload();

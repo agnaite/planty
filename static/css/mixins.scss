@@ -54,3 +54,9 @@
 @mixin Maison-Bold {
   font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
 }
+
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  transform: translateY(-50%);
+}

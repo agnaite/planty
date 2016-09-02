@@ -43,16 +43,58 @@ def html_for_angular(filename):
     return render_template('angular/{}'.format(filename))
 
 
-@app.route('/search/<search_term>')
-def search_for_plant(search_term):
+@app.route('/search', methods=['POST'])
+def search_for_plant():
     """Retrieves search results from database."""
-    print '*' * 100 + search_term
+
+    search_term = request.form.get('name')
+    filters = '&' + request.form.get('filters').encode('utf-8')
+    filters = filters.replace('%20', " ").split('&')[1:]
+
+    # make dict out of the unicode string passed from angular
+    filter_results = []
+
+    if filters:
+        for filter in filters:
+            filter = filter.split('=')
+            if filter[1] == 'water':
+                results = Plant.query.filter(Plant.water == filter[0]).all()
+                filter_results.extend(results)
+
+    print 100 * '*'
+    print filter_results
+    print 100 * '*'
+
+    # for filter in decoded_filters.items():
+
     if search_term.strip() == 'undefined':
-        print Plant.query.all()
-        results = Plant.query.all()
+            results = Plant.query.all()
     else:
         # gets the user's search term from app.js and queries the db
         results = Plant.query.filter(Plant.name.ilike('%' + search_term + '%')).all()
+
+    if filter_results:
+        results = list(set(results).intersection(filter_results))
+
+    # print 100 * '*'
+    # print filters[0].encode('utf-8') == ''
+    # print 100 * '*'
+
+    # if filters:
+    #     for filter in filters:
+    #         formatted_filter = filter.replace("\"", "").encode('utf-8')
+    #         filter_results = Plant.query.filter(Plant.water == formatted_filter).all()
+    #         print 100 * '*'
+    #         print filter_results
+    #         print "before {}".format(results)
+
+    #         results = list(set(results).intersection(filter_results))
+
+    #         print 'aftr {}'.format(results)
+
+    # print 100 * '*'
+    # print results
+    # print 100 * '*'
 
     if results:
         plants_found = {}
@@ -493,4 +535,4 @@ if __name__ == "__main__":
     connect_to_db(app)
     app.debug = True
 
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=5001)

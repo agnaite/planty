@@ -1,27 +1,35 @@
- <div class='row' ng-controller='homeCtrl'>
-  <label for="water_field" class="col-sm-2 control-label filter-label">Water</label>
+ <fieldset class='row' ng-controller='homeCtrl'>
+  
+  <legend>Water</legend>
   <span ng-repeat='spec in allWater' class="col-sm-3">
-   <input ng-click="applyFilter(spec['summary'])" type='checkbox' name='filter_water' value="[[ spec['summary'] ]]">[[ spec['summary'] ]]
+    <label class="col-sm-10 control-label">
+      <input ng-click="applyFilter(spec['summary'], 'water')" type='checkbox' name='filter_water' value="[[ spec['summary'] ]]">
+      [[ spec['summary'] ]]
+    </label>
   </span>
-</div>
-<hr>
-<div class='row'>
-  <label for="sun_field" class="col-sm-2 control-label filter-label">Sun</label>
+
+  <legend>Sun</legend>
   <span ng-repeat='spec in allSun' class="col-sm-3">
-   <input ng-click="applyFilter(spec['summary'])" type='checkbox'>[[ spec['summary'] ]]
+    <label class="col-sm-10 control-label">
+      <input ng-click="applyFilter(spec['summary'], 'sun')" type='checkbox' name='filter_sun' value="[[ spec['summary'] ]]">
+      [[ spec['summary'] ]]
+    </label>
   </span>
-</div>
-<hr>
-<div class='row'>
-  <label for="humid_field" class="col-sm-2 control-label filter-label">Humidity</label>
+
+  <legend>Humidity</legend>
   <span ng-repeat='spec in allHumid' class="col-sm-3">
-   <input type='checkbox'>[[ spec['summary'] ]]
+    <label class="col-sm-10 control-label">
+      <input ng-click="applyFilter(spec['summary'], 'humid')" type='checkbox' name='filter_humid' value="[[ spec['summary'] ]]">
+      [[ spec['summary'] ]]
+    </label>
   </span>
-</div>
-<hr>
-<div class='row'>
-  <label for="temp_field" class="col-sm-2 control-label filter-label">Temperature</label>
+
+  <legend>Temperature</legend>
   <span ng-repeat='spec in allTemp' class="col-sm-3">
-   <input type='checkbox'>[[ spec['summary'] ]]
-  </span>
-</div>
+    <label class="col-sm-10 control-label">
+      <input ng-click="applyFilter(spec['summary'], 'temp')" type='checkbox' name='filter_temp' value="[[ spec['summary'] ]]">
+      [[ spec['summary'] ]]
+    </label>
+  </span> 
+
+</fieldset>
