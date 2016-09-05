@@ -1,4 +1,4 @@
-# planty  ![travis badge](https://travis-ci.org/agnaite/planty.svg)
+# planty  [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
 
 A website about house plants🌱.
 
