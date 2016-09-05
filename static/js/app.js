@@ -112,7 +112,28 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
 // SEARCH ***************************************************************
 
 app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getPlantSpecsService) {
-  $scope.filters = {};
+ 
+  $scope.searchSubmit = function() {
+
+    var data = { 'name': $scope.searchText,
+                 'filters': $.param($scope.filters)
+               };
+    $http({
+      method: 'POST',
+      url: '/search',
+      data: $.param(data),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).then(function (response) {
+        // this callback will be called asynchronously
+        // when the response is available
+        if (response.data === 'None') {
+          $scope.foundPlants = '';
+        } else {
+          $scope.foundPlants = response.data;
+        }
+      });
+    console.log($scope.foundPlants);
+  };
 
   $scope.resetFilters = function() {
     $scope.filters = {};
@@ -130,6 +151,7 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getP
     }
 
     $scope.searchSubmit();
+
   };
 
   getPlantSpecsService.getHumidity(function(response) {
@@ -148,42 +170,13 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getP
       $scope.allWater = response.data;
     });
     
-  // gets the binded input data and sends the user entered text to the server
-  $scope.searchSubmit = function() {
-    // if (filters === []) {
-    //   filters = '';
-    // }
-    var data = { 'name': $scope.searchText,
-                 'filters': $.param($scope.filters)
-               };
-    $http({
-      method: 'POST',
-      url: '/search',
-      data: $.param(data),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    }).then(function successCallback(response) {
-        // this callback will be called asynchronously
-        // when the response is available
-        if (response.data === 'None') {
-          $scope.foundPlants = '';
-        } else {
-          $scope.foundPlants = response.data;
-
-        }
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-      });
-    console.log($scope.foundPlants);
-  };
 });
 
 app.directive('filters', function() {
   return {
     templateUrl: '/html_for_angular/filters.html'
-  };
+    };
 });
-
 // USER SETTINGS ***************************************************************
 
 app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
