@@ -166,14 +166,6 @@ app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routePa
     
 });
 
-// app.directive('filters', function() {
-//   return {
-//     templateUrl: '/html_for_angular/filters.html'
-//     },
-//     scope: {
-//       searchSubmit: '&'
-//     };
-// });
 // USER SETTINGS ***************************************************************
 
 app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
@@ -246,11 +238,13 @@ app.controller('addUserCtrl', function($scope, $http, $route, $location, $cookie
 app.controller('userProfileCtrl', function($scope, $http, $route, $location, $routeParams) {
   var user_id = $routeParams.userId;
   $scope.days = new Set();
-  
+
   loadUserPage();
   
   $scope.propertyName = 'name';
   $scope.reverse = false;
+
+  $scope.daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 
   $scope.sortBy = function(propertyName) {
@@ -275,6 +269,10 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
 
   // Reminders ****************************** 
 
+  $scope.checkDay = function(e) {
+    $(e.target).toggleClass('day__checked');
+  };
+
   $scope.addDay = function(day) {
     $scope.days.add(day);
   };
@@ -290,7 +288,6 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
                     'plant_id': $scope.reminderId,
                     'user_id': $scope.isLoggedIn()
                    };
-
     $scope.days.forEach(function(day) {
       daysData['days'] += day + ',';
     });
@@ -302,8 +299,12 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
       data: $.param(daysData),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
      }).success(function(data) {
-        // on 200 status from Flask, redirect to the new plant's page
+      if (data === 'ok') {
         flash("Reminder has been added!" + "👌");
+      } else {
+        flash("Please add a phone number in user settings to schedule reminders 🙃");
+      }
+        
     });
     loadUserPage();
     $scope.days = new Set();

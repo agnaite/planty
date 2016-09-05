@@ -1,15 +1,15 @@
-<div class='home-search' ng-controller='homeCtrl'>
+<div ng-controller='homeCtrl'>
   <span ng-init='filters.show = false'></span>
-  
-  <button ng-if="!filters.show" ng-click="filters.show = true" class='btn btn-default filters-btn'>Show Filters
-    <i class="fa fa-sort-asc fa-lg" aria-hidden="true"></i>
-  </button>
-  <button ng-if="filters.show" ng-click="filters.show = false" class='btn btn-default filters-btn'>Hide Filters
-    <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i></button>
-    <div ng-if='filters.show' class='filters' class='row'> 
-       <br>
-
-       <fieldsets>
+  <div ng-class="{ 'home-search-filters': filters.show }" class='home-search' >
+    <button ng-if="!filters.show" ng-click="filters.show = true" class='btn btn-default filters-btn'>Show Filters
+      <i class="fa fa-sort-asc fa-lg" aria-hidden="true"></i>
+    </button>
+    <button ng-if="filters.show" ng-click="filters.show = false" class='btn btn-default filters-btn'>Hide Filters
+      <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i></button>
+      <div ng-if='filters.show' class='filters' class='row'> 
+      
+      <fieldsets>
+        
         <span class="col-sm-3">
           <legend>Water</legend>
           <span ng-repeat='spec in allWater'>
@@ -49,23 +49,21 @@
             </label>
           </span> 
         </span>
+        
       </fieldset>
-
-      <br>
-      <br>
     </div>
-  
-  <br><br> 
-  <input ng-model='searchText' ng-change="searchSubmit()" type='text' name='plant-name' class='search-field' placeholder='Enter plant name' autocomplete='off'>
-  <button ng-click="searchSubmit()" type='submit' class='search-btn' id='search-btn' class='btn btn-default'>Search</button>
+    
+    <br><br> 
+    <input ng-model='searchText' ng-change="searchSubmit()" type='text' name='plant-name' class='search-field' placeholder='Enter plant name' autocomplete='off'>
+    <button ng-click="searchSubmit()" type='submit' class='search-btn' id='search-btn' class='btn btn-default'>Search</button>
 
-  <div class='search-result-wrapper'>
-    <span ng-if="foundPlants === 'None'">
-        <li class='no-plants-found' ng-cloak>No plants found <i class="fa fa-frown-o fa-lg" aria-hidden="true"></i></li>
-    </span>
-    <ul class="search-results" ng-repeat='plant in foundPlants'>
-        <li class='search-results__item'><a class='search-results__link' ng-href='#plant/[[ plant.id ]]' ng-cloak>[[ plant.name ]]</a></li>
-    </ul>
+    <div class='search-result-wrapper'>
+      <span ng-if="foundPlants === 'None'">
+          <li class='no-plants-found' ng-cloak>No plants found <i class="fa fa-frown-o fa-lg" aria-hidden="true"></i></li>
+      </span>
+      <ul class="search-results" ng-repeat='plant in foundPlants'>
+          <li class='search-results__item'><a class='search-results__link' ng-href='#plant/[[ plant.id ]]' ng-cloak>[[ plant.name ]]</a></li>
+      </ul>
+    </div>
   </div>
-
 </div>

@@ -7,7 +7,8 @@
   display: inline-block;
   position: absolute;
   float: right;
-  margin: 10px 0 0 25px;
+  right: -8%;
+  top: 25%;
 }
 
 .fa {
@@ -20,10 +21,19 @@
 
 .form-flickr-btn {
   @include pop-out-btn($border-bottom: 4px,
-                       $radius: 6px);
+                       $radius: 6px,
+                       $color: $blue);
   display: inline;
   font-size: 11px;
   padding: 15px 10px 10px 10px;  
+}
+
+.form-flickr-btn[disabled],
+.form-flickr-btn:active {
+  background-color: lighten($blue, 15%) !important;
+  border-color: lighten($blue, 5%) !important;
+  cursor: default;
+  color: $off-white !important;
 }
 
 .form-horizontal {
@@ -43,8 +53,11 @@ form .control-label {
 
 .form-submit,
 .form-reset {
-  @include pop-out-btn();
-  padding: 12px 20px;
+  margin-top: 10px;
+  @include pop-out-btn($border-bottom: 4px,
+                       $radius: 6px,
+                       $color: $blue);
+  padding: 8px 12px;
 }
 
 .form-validation {
@@ -76,10 +89,5 @@ form {
   padding-top: 60px;
   text-align: center;
   color: darken($gray, 10%);
+  font-weight: 300;
 }
-
-
-// fieldset + fieldset {
-//   border-top: 2px solid gold;
-// }
-

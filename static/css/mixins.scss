@@ -16,10 +16,19 @@
   background-color: lighten($color, 10%);
 
   &:hover,
-  &:focus {
-    background-color: lighten($color, 15%);
+  &:focus,
+  &:active,
+  &:active:focus {
+    background-color: lighten($color, 15%) !important;
+    border-color: lighten($color, 5%) !important;
     color: $off-white;
-    border-color: lighten($color, 5%);
+  }
+
+  &:disabled:hover {
+    background-color: lighten($color, 15%) !important;
+    border-color: lighten($color, 5%) !important;
+    cursor: default;
+    color: $off-white !important;
   }
 }
 

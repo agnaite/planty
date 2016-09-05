@@ -33,10 +33,9 @@
 .plant__add,
 .plant__remove {
   margin-top: 15px;
-  @include pop-out-btn($color:$turquoise,
+  @include pop-out-btn($color:darken($turquoise, 5%),
                        $border-bottom:4px,
                        $radius: 6px);
-  color: darken($gray, 30%);
 }
 
 .controls__edit,
@@ -47,6 +46,10 @@
                        $border-bottom:4px,
                        $radius: 6px);
   color: darken($gray, 30%);
+  
+  &:hover {
+    color: darken($gray, 30%);
+  }
   
   &:focus {
     outline: none !important;

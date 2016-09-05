@@ -72,14 +72,13 @@
         <div class="modal-body">
           <p>Select the days you want to receive a text reminder:</p>
           <form class='reminder-form' name='form' novalidate>
-            <input ng-click="addDay('Monday')" type="checkbox"> Monday
-            <input ng-click="addDay('Tuesday')" type="checkbox"> Tuesday
-            <input ng-click="addDay('Wednesday')" type="checkbox"> Wednesday
-            <input ng-click="addDay('Thursday')" type="checkbox"> Thursday
-            <input ng-click="addDay('Friday')" type="checkbox"> Friday
-            <input ng-click="addDay('Saturday')" type="checkbox"> Saturday
-            <input ng-click="addDay('Sunday')" type="checkbox"> Sunday
-
+            <div class='checkbox-wrapper'>
+              <span ng-repeat='day in daysOfWeek'>
+                <label ng-click='checkDay($event)' class='reminder-form__label'>
+                  <input class='checkbox' ng-click="addDay('[[ day ]]')" type="checkbox">[[ day ]]
+                </label>
+              </span>
+            </div>
             <div class="form-group modal-footer">
               <div class="col-sm-offset-2 col-sm-10">
                 <button ng-disabled="form.$invalid" ng-click='submitReminder()' data-dismiss="modal" class="btn btn-default form-submit">Add Reminder</button>

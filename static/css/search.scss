@@ -1,10 +1,14 @@
 .home-search {
   width: 80%;
-  margin: 120px auto 0 auto;
+  margin: 240px auto 0 auto;
 
   @media screen and (max-width: 560px) {
     margin-top: 100px;
   }
+}
+
+.home-search-filters {
+  margin: 140px auto 0 auto;
 }
 
 .filters-btn {
@@ -14,24 +18,36 @@
   .fa {
     color: white;
   }
+
+  .fa-sort-asc {
+    margin-left: -5px;
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari */
+    transform: rotate(90deg);
+  }
 }
 
 .filters legend {
-  color: $gray;
-  margin-top: 5px;
+  margin: 10px 0;
   font-size: 12px;
   text-transform: uppercase;
+  border: none;
+  color: darken($gray, 30%);
 }
 
 .filters__label {
   text-align: center;
   padding: 6px 0px;
   cursor: pointer;
-  color: gray;
   font-weight: 400;
   @include pop-out-btn($color:$gray,
                        $border-bottom:5px,
                        $radius: 8px)
+  color: darken($gray, 30%);
+  
+  &:hover {
+    color: darken($gray, 30%);
+  }
 }
 
 .filter__checked {
@@ -56,7 +72,7 @@
   font-size: 2em;
   border-radius: 5px;
   border: 3px solid $light-pink;
-  margin-top: 25px;
+  margin-top: 10px;
 
   &::-webkit-input-placeholder {
     color: lighten($pink, 15%);
@@ -73,12 +89,15 @@
   @media screen and (max-width: 1240px) {
     width: 85%;
   }
+
   @media screen and (max-width: 990px) {
     width: 80%;
   }
+
   @media screen and (max-width: 700px) {
     width: 75%;
   }
+
   @media screen and (max-width: 560px) {
     width: 100%;
     font-size: 1.2em;
@@ -92,7 +111,7 @@
   padding: 22px 20px;
   float: right;
   font-size: 1.25em;
-  margin-top: 25px;
+  margin-top: 10px;
 
   @media screen and (max-width: 560px) {
     float: none;
@@ -126,6 +145,7 @@
 
 .search-results__link {
   color: $gray;
+
   &:hover {
     text-decoration: none;
     color: $blue;

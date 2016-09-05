@@ -70,7 +70,14 @@ def search_for_plant():
                 results = Plant.query.filter(Plant.humidity == filter[0]).all()
                 filter_results.extend(results)
 
-    if search_term.strip() == 'undefined':
+    print '*' * 100
+    print search_term.strip()
+    print filter_results
+    print '*' * 100
+
+    if search_term.strip() == '' and filter_results == []:
+        return 'None'
+    elif search_term.strip() == '':
         results = Plant.query.all()
     else:
         # gets the user's search term from app.js and queries the db
@@ -299,16 +306,20 @@ def does_user_own_plant():
 def add_reminder():
     """Adds a watering reminder for a particular PlantUser"""
 
-    plant_id = int(request.form.getlist('plant_id')[0].encode('utf-8'))
     user_id = int(request.form.getlist('user_id')[0].encode('utf-8'))
-    days = request.form.getlist('days')[0].encode('utf-8')
 
-    plant_user = PlantUser.query.filter(PlantUser.user_id == user_id, PlantUser.plant_id == plant_id).first()
-    plant_user.watering_schedule = days
+    if User.query.get(user_id).phone:
+        plant_id = int(request.form.getlist('plant_id')[0].encode('utf-8'))
+        days = request.form.getlist('days')[0].encode('utf-8')
 
-    db.session.commit()
+        plant_user = PlantUser.query.filter(PlantUser.user_id == user_id, PlantUser.plant_id == plant_id).first()
+        plant_user.watering_schedule = days
 
-    return 'ok'
+        db.session.commit()
+
+        return 'ok'
+    else:
+        return 'phone number missing'
 
 
 @app.route('/delete_reminder', methods=['POST'])
