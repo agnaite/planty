@@ -3,6 +3,8 @@ Flask-Assets==0.11
 Flask-DebugToolbar==0.10.0
 Flask-Login==0.3.2
 Flask-SQLAlchemy==2.0
+Flask-Sass==0.9
+Flask-Testing==0.6.1
 Flask-WTF==0.12
 Jinja2==2.7.3
 MarkupSafe==0.23
@@ -42,6 +44,7 @@ python-dateutil==2.5.3
 pytz==2016.6.1
 requests==2.11.0
 schedule==0.3.2
+selenium==2.53.6
 simplejson==3.8.2
 six==1.10.0
 sqlalchemy-migrate==0.10.0
@@ -50,4 +53,3 @@ twilio==5.4.0
 wcwidth==0.1.7
 webassets==0.11.1
 wsgiref==0.1.2
-Flask-Sass==0.9

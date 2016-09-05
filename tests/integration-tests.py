@@ -19,7 +19,7 @@ class IntegrationTests(unittest.TestCase):
         """Checks if homepage loads"""
 
         driver = self.driver
-        driver.get("http://localhost:5001")
+        driver.get("http://localhost:5000")
         self.assertIn("planty", driver.title)
 
     def test_search_for_plant(self):
