@@ -53,19 +53,22 @@ def search_for_plant():
 
     # make dict out of the unicode string passed from angular
     filter_results = []
-    print filters
+
     if filters[1:]:
         for filter in filters:
             filter = filter.split('=')
             if filter[1] == 'water':
                 results = Plant.query.filter(Plant.water == filter[0]).all()
                 filter_results.extend(results)
-
-    # print 100 * '*'
-    # print filter_results
-    # print 100 * '*'
-
-    # for filter in decoded_filters.items():
+            elif filter[1] == 'sun':
+                results = Plant.query.filter(Plant.sun == filter[0]).all()
+                filter_results.extend(results)
+            elif filter[1] == 'temp':
+                results = Plant.query.filter(Plant.temperature == filter[0]).all()
+                filter_results.extend(results)
+            else:
+                results = Plant.query.filter(Plant.humidity == filter[0]).all()
+                filter_results.extend(results)
 
     if search_term.strip() == 'undefined':
         results = Plant.query.all()
@@ -85,10 +88,6 @@ def search_for_plant():
         for plant in results:
             plants_found[plant.plant_id] = {'id': plant.plant_id,
                                             'name': plant.name}
-
-    print 100 * '*'
-    print plants_found
-    print 100 * '*'
 
     if plants_found:
         return jsonify(plants_found)

@@ -6,45 +6,52 @@
   </button>
   <button ng-if="filters.show" ng-click="filters.show = false" class='btn btn-default filters-btn'>Hide Filters
     <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i></button>
-    <div ng-if='filters.show' class='filters'>
-      
-       <fieldset class='row'>
-  
-  <legend>Water</legend>
-  <span ng-repeat='spec in allWater' class="col-sm-3">
-    <label class="col-sm-10 control-label">
-      <input ng-click="applyFilter(spec['summary'], 'water')" type='checkbox' name='filter_water' value="[[ spec['summary'] ]]">
-      [[ spec['summary'] ]]
-    </label>
-  </span>
+    <div ng-if='filters.show' class='filters' class='row'> 
+       <br>
 
-  <legend>Sun</legend>
-  <span ng-repeat='spec in allSun' class="col-sm-3">
-    <label class="col-sm-10 control-label">
-      <input ng-click="applyFilter(spec['summary'], 'sun')" type='checkbox' name='filter_sun' value="[[ spec['summary'] ]]">
-      [[ spec['summary'] ]]
-    </label>
-  </span>
+       <fieldsets>
+        <span class="col-sm-3">
+          <legend>Water</legend>
+          <span ng-repeat='spec in allWater'>
+            <label ng-click="checkFilter($event)" class="col-sm-10 control-label filters__label">
+              <input ng-click="applyFilter(spec['summary'], 'water')" class='filters__checkbox' type='checkbox' name='filter_water' value="[[ spec['summary'] ]]">
+              [[ spec['summary'] ]]
+            </label>
+          </span>
+        </span>
 
-  <legend>Humidity</legend>
-  <span ng-repeat='spec in allHumid' class="col-sm-3">
-    <label class="col-sm-10 control-label">
-      <input ng-click="applyFilter(spec['summary'], 'humid')" type='checkbox' name='filter_humid' value="[[ spec['summary'] ]]">
-      [[ spec['summary'] ]]
-    </label>
-  </span>
+        <span class="col-sm-2">
+          <legend>Sun</legend>
+          <span ng-repeat='spec in allSun'>
+            <label ng-click="checkFilter($event)" class="col-sm-10 control-label filters__label">
+              <input ng-click="applyFilter(spec['summary'], 'sun')" type='checkbox' class='filters__checkbox' name='filter_sun' value="[[ spec['summary'] ]]">
+              [[ spec['summary'] ]]
+            </label>
+          </span>
+        </span>
 
-  <legend>Temperature</legend>
-  <span ng-repeat='spec in allTemp' class="col-sm-3">
-    <label class="col-sm-10 control-label">
-      <input ng-click="applyFilter(spec['summary'], 'temp')" type='checkbox' name='filter_temp' value="[[ spec['summary'] ]]">
-      [[ spec['summary'] ]]
-    </label>
-  </span> 
+        <span class="col-sm-3">
+          <legend>Humidity</legend>
+          <span ng-repeat='spec in allHumid'>
+            <label ng-click="checkFilter($event)" class="col-sm-10 control-label filters__label">
+              <input ng-click="applyFilter(spec['summary'], 'humid')" type='checkbox' class='filters__checkbox' name='filter_humid' value="[[ spec['summary'] ]]">
+              [[ spec['summary'] ]]
+            </label>
+          </span>
+        </span>
 
-</fieldset>
+        <span class="col-sm-4">
+          <legend>Temperature</legend>
+          <span ng-repeat='spec in allTemp'>
+            <label ng-click="checkFilter($event)" class="col-sm-10 control-label filters__label">
+              <input ng-click="applyFilter(spec['summary'], 'temp')" type='checkbox' class='filters__checkbox' name='filter_temp' value="[[ spec['summary'] ]]">
+              [[ spec['summary'] ]]
+            </label>
+          </span> 
+        </span>
+      </fieldset>
 
-
+      <br>
       <br>
     </div>
   

@@ -112,7 +112,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
 // SEARCH ***************************************************************
 
 app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routeParams, getPlantSpecsService) {
- 
+  
   $scope.searchSubmit = function() {
     console.log('im here!');
     var data = { 'name': $scope.searchText,
@@ -142,6 +142,10 @@ app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routePa
     }
     
     $scope.searchSubmit();
+  };
+
+  $scope.checkFilter = function(e) {
+    $(e.target).toggleClass('filter__checked');
   };
 
   getPlantSpecsService.getHumidity(function(response) {
