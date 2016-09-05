@@ -5176,6 +5176,7 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getP
           $scope.foundPlants = '';
         } else {
           $scope.foundPlants = response.data;
+          console.log($scope.foundPlants);
         }
       });
     console.log($scope.foundPlants);
