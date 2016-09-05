@@ -77,9 +77,9 @@ def search_for_plant():
         results = list(set(results).intersection(filter_results))
         print results
 
-    if results:
-        plants_found = {}
+    plants_found = {}
 
+    if results:
         # for each plant in the results, make dictionary using plant's id as key
         # and plant's other data as value
         for plant in results:

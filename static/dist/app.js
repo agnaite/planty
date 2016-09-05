@@ -5157,10 +5157,10 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
 
 // SEARCH ***************************************************************
 
-app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getPlantSpecsService) {
+app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routeParams, getPlantSpecsService) {
  
   $scope.searchSubmit = function() {
-
+    console.log('im here!');
     var data = { 'name': $scope.searchText,
                  'filters': $.param($scope.filters)
                };
@@ -5170,16 +5170,8 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getP
       data: $.param(data),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(function (response) {
-        // this callback will be called asynchronously
-        // when the response is available
-        if (response.data === 'None') {
-          $scope.foundPlants = '';
-        } else {
-          $scope.foundPlants = response.data;
-          console.log($scope.foundPlants);
-        }
+        $scope.foundPlants = response.data;
       });
-    console.log($scope.foundPlants);
   };
 
   $scope.resetFilters = function() {
@@ -5191,14 +5183,11 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getP
     
     if (index === -1) {
       $scope.filters[filter] = spec;
-      console.log($scope.filters);
     } else {
         delete $scope.filters[filter];
-        console.log($scope.filters);
     }
-
+    
     $scope.searchSubmit();
-
   };
 
   getPlantSpecsService.getHumidity(function(response) {
@@ -5219,11 +5208,14 @@ app.controller('homeCtrl', function($scope, $http, $location, $routeParams, getP
     
 });
 
-app.directive('filters', function() {
-  return {
-    templateUrl: '/html_for_angular/filters.html'
-    };
-});
+// app.directive('filters', function() {
+//   return {
+//     templateUrl: '/html_for_angular/filters.html'
+//     },
+//     scope: {
+//       searchSubmit: '&'
+//     };
+// });
 // USER SETTINGS ***************************************************************
 
 app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
