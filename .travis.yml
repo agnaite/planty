@@ -4,6 +4,7 @@ python:
 before_install: "mv secret.testing.py secret.py"
 # command to install dependencies
 install: "pip install -r requirements.txt"
+before_script: "createdb plants"
 before_script: "python model.py"
 # command to run tests
 script: nosetests
