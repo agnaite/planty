@@ -1,8 +1,10 @@
 #  🌱 planty  [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
 
+
+
 Planty takes the mystery out of keeping plants alive! Intended for both the novice and the seasoned professional, this app provides concise, user-friendly guidance on how to take care of houseplants. Users can search for plants by name or plant profile, add new plants to the database, edit current plants, and schedule watering reminders for plants🍃 they own.
 
-## Table of Contents
+## Table of Contents🐛
 
 * [Tech Stack](#tech-stack)
 * [Features](#features)
@@ -12,7 +14,7 @@ Planty takes the mystery out of keeping plants alive! Intended for both the novi
 
 ## <a name="tech-stack"></a>Tech Stack 📡
 
-__Frontend:__ HTML5, Sass, AngularJS, Javascript, jQuery, Bootstrap <br/>
+__Frontend:__ HTML5, Sass, AngularJS💕, Javascript, jQuery, Bootstrap <br/>
 __Backend:__ Python, Flask, PostgreSQL, SQLAlchemy, Scrapy <br/>
 __APIs:__ Flickr, Twilio <br/>
 
@@ -48,19 +50,19 @@ Clone repository:
 ```
 $ git clone https://github.com/agnaite/planty.git
 ```
-Create a virtual environment:
+Create a virtual environment🔮:
 ```
 $ virtualenv env
 ```
-Activate the virtual environment.
+Activate the virtual environment:
 ```
 $ source env/bin/activate
 ```
-Install dependencies.
+Install dependencies🔗:
 ```
 $ pip install -r requirements.txt
 ```
-Get your own secret keys for [Flickr](https://www.flickr.com/services/developer) and [Twilio](https://www.twilio.com/doers). Save them to a file <kbd>secrets.py</kbd>. Your file should look something like this:
+Get your own secret keys🔑 for [Flickr](https://www.flickr.com/services/developer) and [Twilio](https://www.twilio.com/doers). Save them to a file <kbd>secrets.py</kbd>. Your file should look something like this:
 ```
 APP_KEY = 'xyz'
 FLICKR_API_KEY = 'abc'
@@ -72,7 +74,7 @@ Create database 'plants'🌿.
 ```
 $ createdb plants
 ```
-Create your database tables and seed example data.
+Create your database tables and seed🌱 example data.
 ```
 $ python model.py
 ```
