@@ -2,8 +2,9 @@
 
 Planty takes the mystery out of keeping plants alive! Intended for both the novice and the seasoned professional, this app provides concise, user-friendly guidance on how to take care of houseplants. Users can search for plants by name or plant profile, add new plants to the database, edit current plants, and schedule watering reminders for plants they own.
 
+## Table of Contents
+
 * [Tech Stack](#tech-stack)
-* [Requirements](#requirements)
 * [Features](#features)
 * [Setup/Installation](#installation)
 * [Version 2.0](#future)
@@ -15,20 +16,23 @@ __Frontend:__ HTML5, Sass, AngularJS, Javascript, jQuery, Bootstrap <br/>
 __Backend:__ Python, Flask, PostgreSQL, SQLAlchemy, Scrapy <br/>
 __APIs:__ Flickr, Twilio <br/>
 
-## <a name="requirements"></a>Requirements
-
-- Python (2.7)
-- PostgreSQL
-- Node.JS
-
 ## <a name="features"></a>Features
 
-1. Search for plants by:
-  * Name
-  * Plant's water, sun, temperature, or humidity needs
-  * User account registration not required
-
+#### Search for plants by name, water, sun, temperature, or humidity needs. User account registration not required.
+  
 ![Plant Search Logged out](/static/img/_readme-img/search-loggedout.gif)
+
+#### Register or login to edit a plant.
+  
+![Edit Plant](/static/img/_readme-img/edit-plant.gif)
+
+#### Add and remove plants from your account.
+  
+![Add Plant](/static/img/_readme-img/adding-plant.gif)
+
+#### Schedule watering reminders for your plants.
+  
+![Schedule Reminder](/static/img/_readme-img/scheduling-reminder.gif)
 
 ## <a name="installation"></a>Setup/Installation
 
