@@ -24,9 +24,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav nav-pills navbar-right">
 
-            <li ng-show="isLoggedIn()" ng-cloak><a ng-href="#add_plant">Add Plant</a></li>
+            <li ng-show="isLoggedIn()" ng-cloak><a ng-class="getClass('/add_plant')" ng-href="#add_plant">Add Plant</a></li>
             <li ng-show="isLoggedIn()" role="presentation" class="dropdown" ng-cloak>
-              <a ng-click='getProfileImg()' class="dropdown-toggle" data-toggle="dropdown" ng-href="" role="button" aria-haspopup="true" aria-expanded="false">
+              <a ng-click='getProfileImg()' ng-class="getClass('/user')" class="dropdown-toggle" data-toggle="dropdown" ng-href="" role="button" aria-haspopup="true" aria-expanded="false">
                 Account<span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -41,8 +41,8 @@
               </ul>
             </li>
 
-            <li ng-show="!isLoggedIn()" ng-cloak><a ng-href="#login">Login</a></li>
-            <li ng-show="!isLoggedIn()" ng-cloak><a ng-href="#register">Register</a></li>
+            <li ng-show="!isLoggedIn()" ng-cloak><a ng-class="getClass('/login')" ng-href="#login">Login</a></li>
+            <li ng-show="!isLoggedIn()" ng-cloak><a ng-class="getClass('/register')" ng-href="#register">Register</a></li>
           </ul>
         </div> <!-- /.navbar-collapse -->
       </div> <!-- /.container-fluid -->

@@ -5098,6 +5098,10 @@ app.config(function($routeProvider, $interpolateProvider, $locationProvider) {
 // LOGIN ***************************************************************
 
 app.controller('userCtrl', function($scope, $http, $location, $route, $routeParams, $rootScope, $cookies) {
+    // adds active class to navbar link if user on specific page 
+    $scope.getClass = function (path) {
+    return ($location.path().substr(0, path.length) === path) ? 'selected' : '';
+  };
 
   // Verifies credentials via Flask in db and sets js cookie to logged in
   $scope.submitLogin = function() {
@@ -5248,7 +5252,6 @@ app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
 
 app.controller('addUserCtrl', function($scope, $http, $route, $location, $cookies) {
   $scope.master = {};
-
   // on register button click, send user filled data to Flask 
   $scope.update = function(user) {
     $scope.master = angular.copy(user);

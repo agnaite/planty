@@ -1,3 +1,7 @@
+.selected {
+  color: $light-yellow !important;
+}
+
 .navbar {
   border: none;
   background-color: lighten($turquoise, 10%);

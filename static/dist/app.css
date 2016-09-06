@@ -7187,6 +7187,9 @@ body {
       display: inline;
       font-size: 0.85em; }
 
+.selected {
+  color: #fff89a !important; }
+
 .navbar {
   border: none;
   background-color: #91e9d5;
