@@ -1,21 +1,42 @@
-# 🌱  planty  [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
+#  🌱 planty  [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
 
-Plant is a web app that helps you take better care of your house plants.
+Planty takes the mystery out of keeping plants alive! Intended for both the novice and the seasoned professional, this app provides concise, user-friendly guidance on how to take care of houseplants. Users can search for plants by name or plant profile, add new plants to the database, edit current plants, and schedule watering reminders for plants they own.
 
-## Requirements
+* [Tech Stack](#tech-stack)
+* [Requirements](#requirements)
+* [Features](#features)
+* [Setup/Installation](#installation)
+* [Version 2.0](#future)
+* [License](#license)
+
+## <a name="tech-stack"></a>Tech Stack
+
+__Frontend:__ HTML5, Sass, AngularJS, Javascript, jQuery, Bootstrap <br/>
+__Backend:__ Python, Flask, PostgreSQL, SQLAlchemy, Scrapy <br/>
+__APIs:__ Flickr, Twilio <br/>
+
+## <a name="requirements"></a>Requirements
 
 - Python (2.7)
 - PostgreSQL
 - Node.JS
 
-## Setup/Installation
+## <a name="features"></a>Features
+
+__Look up plants by profile and name without registering/logging in.__
+
+<img src="https://www.dropbox.com/s/wabxy082r5sb17g/search-loggedout.gif" alt="search for image without logging in">
+
+## <a name="installation"></a>Setup/Installation
 
 Instructions to install/setup the app go here.
 
-## License
+## <a name="future"></a>Version 2.0
+
+## <a name="license"></a>License
 
 The MIT License (MIT)
-Copyright (c) 2016 Agnes Jones Klimaite 
+Copyright (c) 2016 Agne Klimaite 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
