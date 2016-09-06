@@ -1,5 +1,4 @@
-#  🌱 planty  [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
-
+# <img src="/static/img/planty.png" width="60"> planty  [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
 
 
 Planty takes the mystery out of keeping plants alive! Intended for both the novice and the seasoned professional, this app provides concise, user-friendly guidance on how to take care of houseplants. Users can search for plants by name or plant profile, add new plants to the database, edit current plants, and schedule watering reminders for plants🍃 they own.
