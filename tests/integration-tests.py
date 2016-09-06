@@ -17,7 +17,7 @@ class IntegrationTests(unittest.TestCase):
 
         driver = self.driver
 
-        self.assertIn("planty", driver.title)
+        assert "planty" in driver.title
 
     def test_search_for_plant(self):
         """Checks if able to search for a plant by name"""
