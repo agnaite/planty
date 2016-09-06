@@ -7,6 +7,5 @@ install: "pip install -r requirements.txt"
 before_script:
     - "createdb plants"
     - "python model.py"
-    - "python server.py"
 # command to run tests
 script: nosetests
