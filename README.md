@@ -23,9 +23,12 @@ __APIs:__ Flickr, Twilio <br/>
 
 ## <a name="features"></a>Features
 
-__Look up plants by profile and name without registering/logging in.__
+1. Search for plants by:
+  * Name
+  * Plant's water, sun, temperature, or humidity needs
+  * User account registration not required
 
-<img src="https://www.dropbox.com/s/wabxy082r5sb17g/search-loggedout.gif" alt="search for image without logging in">
+![Plant Search Logged out](/static/img/_readme-img/search-loggedout.gif)
 
 ## <a name="installation"></a>Setup/Installation
 
