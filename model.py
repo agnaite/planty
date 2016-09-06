@@ -88,11 +88,11 @@ class User(db.Model):
 
     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
 
     # User authentication information
     username = db.Column(db.String(64), nullable=False, unique=True)
-    password = db.Column(db.Integer, nullable=False, server_default='')
+    password = db.Column(db.Integer, nullable=False)
 
     # User email information
     email = db.Column(db.String(255), nullable=False, unique=True)
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     # Create our tables and some sample data
-    db.create_all()
-    example_data()
+    # db.create_all()
+    # example_data()
 
     print "Connected to DB."
