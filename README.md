@@ -87,6 +87,11 @@ $ python -i model.py
 ```
 
 ## <a name="future"></a>Version 2.0✨
+* Add ability for users to communicate
+* Add rating system for plants
+* Show recently added plants
+* Show popular plants by geographic location
+* Add custom plant fields
 
 ## <a name="license"></a>License
 
