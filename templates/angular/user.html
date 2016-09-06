@@ -75,7 +75,7 @@
             <div class='checkbox-wrapper'>
               <span ng-repeat='day in daysOfWeek'>
                 <label ng-click='checkDay($event)' class='reminder-form__label'>
-                  <input class='checkbox' ng-click="addDay('[[ day ]]')" type="checkbox">[[ day ]]
+                  <input class='checkbox' ng-click="addDay(day)" type="checkbox">[[ day ]]
                 </label>
               </span>
             </div>
