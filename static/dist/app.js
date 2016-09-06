@@ -5643,7 +5643,6 @@ app.service('getPlantSpecsService', function($http){
 },{"./flash":28,"angular-cookies":2,"angular-route":4,"bootstrap":5,"sweetalert":26}],28:[function(require,module,exports){
 module.exports = function flash(flashMsg) {
   $('.flash').html(flashMsg);
-
   setTimeout(function() {
     $('.flash').empty();
   }, 3000);

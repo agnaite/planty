@@ -7763,9 +7763,6 @@ body {
   cursor: default;
   color: #f8f7f4 !important; }
 
-.form-horizontal {
-  margin-top: 140px; }
-
 .form-control {
   height: 45px;
   border-color: #8f90fc; }
@@ -7813,11 +7810,9 @@ form input.ng-valid.ng-touched {
 form form input.ng-invalid.ng-touched {
   border-color: #ed91c5; }
 
-.settings-form {
-  margin-top: 50px; }
-
-.user-update__instructions {
-  padding-top: 60px;
+.form__greeting {
+  margin: 80px auto 40px auto;
+  max-width: 45%;
   text-align: center;
   color: #a1a19d;
   font-weight: 300; }

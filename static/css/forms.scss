@@ -36,10 +36,6 @@
   color: $off-white !important;
 }
 
-.form-horizontal {
-  margin-top: 140px;
-}
-
 .form-control {
   height: 45px;
   border-color: lighten($blue, 20%);
@@ -79,14 +75,9 @@ form {
   }
 }
 
-// USER SETTINGS ****************************************
-
-.settings-form {
-  margin-top: 50px;
-}
-
-.user-update__instructions {
-  padding-top: 60px;
+.form__greeting {
+  margin: 80px auto 40px auto;
+  max-width: 45%;
   text-align: center;
   color: darken($gray, 10%);
   font-weight: 300;
