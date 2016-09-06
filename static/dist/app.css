@@ -7191,6 +7191,9 @@ body {
   border: none;
   background-color: #91e9d5;
   padding-bottom: 10px; }
+  @media screen and (max-width: 520px) {
+    .navbar {
+      padding-bottom: 20px; } }
 
 .navbar-default .navbar-nav > li > a {
   font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
@@ -7205,19 +7208,32 @@ body {
 .navbar-default .navbar-brand {
   font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
   color: #FFF;
-  font-size: 2em;
+  font-size: 1.75em;
   font-weight: 700;
   letter-spacing: 2px; }
   .navbar-default .navbar-brand:hover {
     color: #fff89a; }
   .navbar-default .navbar-brand:focus {
     color: #FFF; }
+  @media screen and (max-width: 320px) {
+    .navbar-default .navbar-brand {
+      margin-top: -5px; } }
 
 .navbar-brand .brand-img {
   display: inline-block;
   width: 20px;
   margin-right: 10px;
-  padding-bottom: 22px; }
+  padding-bottom: 24px; }
+
+.navbar-default .navbar-toggle {
+  border-color: #f8f7f4; }
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #FFF !important; }
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #66e1c5 !important; }
 
 .user-menu-img__crop {
   display: inline-block;
@@ -7242,6 +7258,9 @@ body {
 
 .home-search-filters {
   margin: 140px auto 0 auto; }
+
+.home-search fieldset {
+  margin-top: 15px; }
 
 .filters-btn {
   border: none;
@@ -7276,8 +7295,10 @@ body {
   color: #6e6e6a; }
 
 .filters__label {
+  width: auto;
   text-align: center;
-  padding: 6px 0px;
+  padding: 6px 10px;
+  margin-right: 10px;
   cursor: pointer;
   font-weight: 400;
   border: none;
@@ -7379,6 +7400,12 @@ body {
 .search-result-wrapper {
   width: 60%;
   margin-top: 20px; }
+  @media screen and (max-width: 520px) {
+    .search-result-wrapper {
+      width: 80%; } }
+  @media screen and (max-width: 320px) {
+    .search-result-wrapper {
+      width: 90%; } }
 
 .no-plants-found {
   list-style: none;
@@ -7393,6 +7420,12 @@ body {
   list-style: none;
   line-height: 1.5;
   font-size: 1.5em; }
+  @media screen and (max-width: 520px) {
+    .search-results__item {
+      font-size: 18px; } }
+  @media screen and (max-width: 320px) {
+    .search-results__item {
+      font-size: 16px; } }
 
 .search-results__link {
   color: #babab7; }
@@ -7412,6 +7445,9 @@ body {
   .plant__edit-img .plant-img__field {
     width: 70%;
     display: inline; }
+    @media screen and (max-width: 768px) {
+      .plant__edit-img .plant-img__field {
+        width: 50%; } }
 
 .plant-img__loader {
   display: inline-block;
@@ -7484,6 +7520,16 @@ body {
   .controls__save:focus,
   .controls__delete:focus {
     outline: none !important; }
+  @media screen and (max-width: 520px) {
+    .controls__edit,
+    .controls__save,
+    .controls__delete {
+      display: none; } }
+  @media screen and (max-width: 768px) {
+    .controls__edit,
+    .controls__save,
+    .controls__delete {
+      margin-top: 10px; } }
 
 .plant-info__label {
   display: block; }
@@ -7494,6 +7540,9 @@ body {
 .plant__table {
   margin-top: 40px;
   font-size: 1.15em; }
+  @media screen and (max-width: 520px) {
+    .plant__table {
+      display: none; } }
 
 .table-head {
   font-weight: 700; }

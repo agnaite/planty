@@ -13,6 +13,10 @@
   .plant-img__field {
     width: 70%;
     display: inline;
+
+    @media screen and (max-width: 768px) {
+      width: 50%;
+    }
   }
 }
 
@@ -54,6 +58,14 @@
   &:focus {
     outline: none !important;
   }
+
+  @media screen and (max-width: 520px) {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 10px;
+  }
 }
 
 .plant-info__label {
@@ -67,6 +79,10 @@
 .plant__table {
   margin-top: 40px;
   font-size: 1.15em;
+
+  @media screen and (max-width: 520px) {
+    display: none;
+  }
 }
 
 .table-head {

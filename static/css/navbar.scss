@@ -2,6 +2,10 @@
   border: none;
   background-color: lighten($turquoise, 10%);
   padding-bottom: 10px;
+
+  @media screen and (max-width: 520px) {
+    padding-bottom: 20px;
+  }
 }
 
 .navbar-default .navbar-nav>li>a {
@@ -15,11 +19,16 @@
 
 .navbar-default .navbar-brand {
   @include Maison-Bold;
-  @include links(2em);
+  @include links(1.75em);
   font-weight: 700;
   letter-spacing: 2px;
+
   &:focus {
     color: $white;
+  }
+
+  @media screen and (max-width: 320px) {
+    margin-top: -5px;
   }
 }
 
@@ -27,8 +36,31 @@
   display: inline-block;
   width: 20px;
   margin-right: 10px; 
-  padding-bottom: 22px;
+  padding-bottom: 24px;
 }
+
+.navbar-default .navbar-toggle {
+  border-color: $off-white;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: $white !important;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: $turquoise !important;
+}
+
+// .navbar-collapse {
+//   margin-top: 16px;
+//   margin-bottom: -15px;
+// }
+
+// .nav-pills > li {
+//   font-size: 12px;
+//   margin-top: 0;
+// }
 
 .user-menu-img__crop {
   display: inline-block;

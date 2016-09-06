@@ -33,7 +33,7 @@
     </div>
 
     <!-- delete and edit plant buttons -->
-    <div ng-if='isLoggedIn()' class='controls col-offset-8 col-sm-4'>
+    <div ng-if='isLoggedIn()' class='controls md-col-offset-8 col-sm-6 col-md-4'>
       <button ng-show='!plant.editing' class='btn btn-default controls__edit' ng-click="plant.editing = true">Edit</button>
       <button ng-show='plant.editing' class='btn btn-default controls__edit' ng-click="plant.editing = false">Cancel</button>
       <button ng-show='plant.editing' ng-click="saveEdits()" class='btn btn-default controls__save' ng-disabled="!plant.edited">Save</button>

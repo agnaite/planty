@@ -11,6 +11,10 @@
   margin: 140px auto 0 auto;
 }
 
+.home-search fieldset {
+  margin-top: 15px;
+}
+
 .filters-btn {
   @include pop-out-btn($border-bottom: 4px,
                        $radius: 6px,
@@ -36,15 +40,17 @@
 }
 
 .filters__label {
+  width: auto;
   text-align: center;
-  padding: 6px 0px;
+  padding: 6px 10px;
+  margin-right: 10px;
   cursor: pointer;
   font-weight: 400;
   @include pop-out-btn($color:$gray,
                        $border-bottom:5px,
                        $radius: 8px)
   color: darken($gray, 30%);
-  
+
   &:hover {
     color: darken($gray, 30%);
   }
@@ -124,6 +130,14 @@
 .search-result-wrapper {
   width: 60%;
   margin-top: 20px; 
+
+  @media screen and (max-width: 520px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 90%;
+  }
 }
 
 .no-plants-found {
@@ -141,6 +155,14 @@
   list-style: none;
   line-height: 1.5;
   font-size: 1.5em;
+
+  @media screen and (max-width: 520px) {
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 320px) {
+    font-size: 16px;
+  }
 }
 
 .search-results__link {
