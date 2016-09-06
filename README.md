@@ -1,6 +1,6 @@
 #  🌱 planty  [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
 
-Planty takes the mystery out of keeping plants alive! Intended for both the novice and the seasoned professional, this app provides concise, user-friendly guidance on how to take care of houseplants. Users can search for plants by name or plant profile, add new plants to the database, edit current plants, and schedule watering reminders for plants they own.
+Planty takes the mystery out of keeping plants alive! Intended for both the novice and the seasoned professional, this app provides concise, user-friendly guidance on how to take care of houseplants. Users can search for plants by name or plant profile, add new plants to the database, edit current plants, and schedule watering reminders for plants🍃 they own.
 
 ## Table of Contents
 
@@ -10,13 +10,13 @@ Planty takes the mystery out of keeping plants alive! Intended for both the novi
 * [Version 2.0](#future)
 * [License](#license)
 
-## <a name="tech-stack"></a>Tech Stack
+## <a name="tech-stack"></a>Tech Stack 📡
 
 __Frontend:__ HTML5, Sass, AngularJS, Javascript, jQuery, Bootstrap <br/>
 __Backend:__ Python, Flask, PostgreSQL, SQLAlchemy, Scrapy <br/>
 __APIs:__ Flickr, Twilio <br/>
 
-## <a name="features"></a>Features
+## <a name="features"></a>Features 📽
 
 Search for plants by name, water, sun, temperature, or humidity needs. User account registration not required.
   
@@ -30,17 +30,17 @@ Add and remove plants from your account.
   
 ![Add Plant](/static/img/_readme-img/adding-plant.gif)
 
-Schedule watering reminders for your plants.
+Schedule watering💦 reminders for your plants.
   
 ![Schedule Reminder](/static/img/_readme-img/scheduling-reminder.gif)
 
-## <a name="installation"></a>Setup/Installation
+## <a name="installation"></a>Setup/Installation ⌨️
 
 ####Requirements:
 
 - Install PostgreSQL
 - Python 2.7
-- Flickr and Twilio API keys
+- Flickr📸 and Twilio📞 API keys
 
 To have this app running on your local computer, please follow the below steps:
 
@@ -60,7 +60,7 @@ Install dependencies.
 ```
 $ pip install -r requirements.txt
 ```
-Get your own secret keys for [Flickr](http://developer.etsy.com) and [Twilio](www.ebay.com). Save them to a file <kbd>secrets.py</kbd>. Your file should look something like this:
+Get your own secret keys for [Flickr](https://www.flickr.com/services/developer) and [Twilio](https://www.twilio.com/doers). Save them to a file <kbd>secrets.py</kbd>. Your file should look something like this:
 ```
 APP_KEY = 'xyz'
 FLICKR_API_KEY = 'abc'
@@ -68,7 +68,7 @@ FLICKR_API_SECRET = 'abc'
 TWILIO_SID = 'abc'
 TWILIO_AUTH = 'abc'
 ```
-Create database 'plants'.
+Create database 'plants'🌿.
 ```
 $ createdb plants
 ```
@@ -85,7 +85,7 @@ If you want to use SQLAlchemy to query the database, run in interactive mode
 $ python -i model.py
 ```
 
-## <a name="future"></a>Version 2.0
+## <a name="future"></a>Version 2.0✨
 
 ## <a name="license"></a>License
 
