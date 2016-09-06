@@ -23,6 +23,10 @@ __APIs:__ Flickr, Twilio <br/>
 
 ## <a name="features"></a>Features
 
+__Look up plants by profile and name without registering/logging in.__
+
+<img src="https://www.dropbox.com/s/wabxy082r5sb17g/search-loggedout.gif" alt="search for image without logging in">
+
 ## <a name="installation"></a>Setup/Installation
 
 Instructions to install/setup the app go here.
