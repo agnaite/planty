@@ -32,7 +32,7 @@ __APIs:__ Flickr, Twilio <br/>
 
 #### Schedule watering reminders for your plants.
   
-![Schedule Reminder](/static/img/_readme-img/schedule-reminder.gif)
+![Schedule Reminder](/static/img/_readme-img/scheduling-reminder.gif)
 
 ## <a name="installation"></a>Setup/Installation
 
