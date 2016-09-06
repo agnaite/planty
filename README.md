@@ -18,31 +18,31 @@ __APIs:__ Flickr, Twilio <br/>
 
 ## <a name="features"></a>Features
 
-#### Search for plants by name, water, sun, temperature, or humidity needs. User account registration not required.
+Search for plants by name, water, sun, temperature, or humidity needs. User account registration not required.
   
 ![Plant Search Logged out](/static/img/_readme-img/search-loggedout.gif)
 
-#### Register or login to edit a plant.
+Register or login to edit a plant.
   
 ![Edit Plant](/static/img/_readme-img/edit-plant.gif)
 
-#### Add and remove plants from your account.
+Add and remove plants from your account.
   
 ![Add Plant](/static/img/_readme-img/adding-plant.gif)
 
-#### Schedule watering reminders for your plants.
+Schedule watering reminders for your plants.
   
 ![Schedule Reminder](/static/img/_readme-img/scheduling-reminder.gif)
 
 ## <a name="installation"></a>Setup/Installation
-
-To have this app running on your local computer, please follow the below steps:
 
 ####Requirements:
 
 - Install PostgreSQL
 - Python 2.7
 - Flickr and Twilio API keys
+
+To have this app running on your local computer, please follow the below steps:
 
 Clone repository:
 ```
