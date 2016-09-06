@@ -36,7 +36,54 @@ __APIs:__ Flickr, Twilio <br/>
 
 ## <a name="installation"></a>Setup/Installation
 
-Instructions to install/setup the app go here.
+To have this app running on your local computer, please follow the below steps:
+
+####Requirements:
+
+- Install PostgreSQL
+- Python 2.7
+- Flickr and Twilio API keys
+
+Clone repository:
+```
+$ git clone https://github.com/agnaite/planty.git
+```
+Create a virtual environment:
+```
+$ virtualenv env
+```
+Activate the virtual environment.
+```
+$ source env/bin/activate
+```
+Install dependencies.
+```
+$ pip install -r requirements.txt
+```
+Get your own secret keys for [Flickr](http://developer.etsy.com) and [Twilio](www.ebay.com). Save them to a file <kbd>secrets.py</kbd>. Your file should look something like this:
+```
+APP_KEY = 'xyz'
+FLICKR_API_KEY = 'abc'
+FLICKR_API_SECRET = 'abc'
+TWILIO_SID = 'abc'
+TWILIO_AUTH = 'abc'
+```
+Create database 'plants'.
+```
+$ createdb plants
+```
+Create your database tables and seed example data.
+```
+$ python model.py
+```
+Run the app from the command line.
+```
+$ python server.py
+```
+If you want to use SQLAlchemy to query the database, run in interactive mode
+```
+$ python -i model.py
+```
 
 ## <a name="future"></a>Version 2.0
 
