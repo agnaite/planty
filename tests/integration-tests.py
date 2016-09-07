@@ -4,36 +4,39 @@ from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 import unittest
 
+
 class IntegrationTests(unittest.TestCase):
     """Tests overall app functionality"""
 
     def setUp(self):
         self.driver = webdriver.PhantomJS()
-        self.driver.get("http://localhost:5000")
-        
+
+    def test_webserver_works(self):
+        self.assertNotEqual(self.driver.get("http://localhost:5000").page_source, '')
 
     def test_homepage_loads(self):
         """Checks if homepage loads"""
 
-        driver = self.driver
-
+        self.driver.get("http://localhost:5000")
         self.assertIn("planty", driver.title)
+
 
     def test_search_for_plant(self):
         """Checks if able to search for a plant by name"""
 
-        driver = self.driver
+        self.driver.get("http://localhost:5000")
 
-        element = driver.find_element_by_name("plant-name")
+        element = self.driver.find_element_by_name("plant-name")
         element.send_keys("orchid")
         element.send_keys(Keys.RETURN)
 
-        self.assertIn("Orchid Plant", driver.page_source)
-        self.assertNotIn("No plants found.", driver.page_source)
-        links = driver.find_elements_by_link_text('Orchid')
+        self.assertIn("Orchid Plant", self.driver.page_source)
+        self.assertNotIn("No plants found.", self.driver.page_source)
+        links = self.driver.find_elements_by_link_text('Orchid')
 
         links[0].click()
-        assert "Orchidaceae" in driver.page_source
+        self.assertIn("Orchidaceae", self.driver.page_source)
+
 
     def tearDown(self):
         self.driver.quit()
