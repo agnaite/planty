@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, jsonify, flash, session
+from flask import Flask, render_template, request, jsonify, session
 from flask_assets import Environment
 import simplejson
 import random
-import secret
 import flickr_api
 from flickr_api.api import flickr
 from jinja2 import StrictUndefined
 from datetime import datetime
 
 from model import connect_to_db, db, Plant, User, PlantUser
+import secret
 
 app = Flask(__name__)
 
@@ -26,20 +26,20 @@ flickr_api_secret = secret.FLICKR_API_SECRET
 flickr_api.set_keys(api_key=flickr_api_key,
                     api_secret=flickr_api_secret)
 
-# ************************* ROUTES *********************************
 
 # Basic Routes *********************************
-
 
 @app.route('/')
 def index_page():
     """Show index page."""
+
     return render_template("base.html")
 
 
-# sends static html files to angular
 @app.route('/html_for_angular/<filename>')
 def html_for_angular(filename):
+    """Sends html to angular."""
+
     return render_template('angular/{}'.format(filename))
 
 
@@ -69,11 +69,6 @@ def search_for_plant():
             else:
                 results = Plant.query.filter(Plant.humidity == filter[0]).all()
                 filter_results.extend(results)
-
-    print '*' * 100
-    print search_term.strip()
-    print filter_results
-    print '*' * 100
 
     if search_term.strip() == '' and filter_results == []:
         return 'None'
@@ -118,6 +113,8 @@ def get_user_info(user_id):
 
     user['plants'] = user_plants
 
+    # adds a key to dictionary that has a value of true/false depending on
+    # whether reminder was set
     for plant in user['plants']:
         user['plants'][plant]['reminder_status'] = str(get_reminder_status(user['user_id'], user['plants'][plant]['plant_id']))
 
@@ -293,9 +290,6 @@ def does_user_own_plant():
 
     plant = Plant.query.get(int(request.form.get('plantId')))
 
-    print plant
-    print user.plants
-
     if plant in user.plants:
         return 'true'
     else:
@@ -394,6 +388,7 @@ def process_new_plant():
     # if user did not add image url, get one from flickr
     name = request.form.get('name')
     image = request.form.get('image')
+
     if not image:
         image = get_flickr_image(name)
 
@@ -409,8 +404,6 @@ def process_new_plant():
     # adds plant to the database and saves
     db.session.add(new_plant)
     db.session.commit()
-
-    flash('Added plant!')
 
     # returns plant ID to angular's callback
     return str(new_plant.plant_id)
@@ -430,8 +423,6 @@ def update_plant():
     plant.humidity = request.form.get('humidity')
     plant.temperature = request.form.get('temperature')
 
-    print plant
-
     db.session.commit()
 
     return 'plant updated'
@@ -440,12 +431,10 @@ def update_plant():
 @app.route('/process_delete', methods=['POST'])
 def process_delete():
     """Deletes plant from the database"""
-    print '*' * 100
-    print request.form.get('plant_id')
+
     plant_id = int(request.form.get('plant_id'))
     plant = Plant.query.get(plant_id)
 
-    print plant.name + "deleting"
     db.session.delete(plant)
     db.session.commit()
 
@@ -502,7 +491,7 @@ def get_plant_specs(plant, spec, key='description'):
 
 def get_flickr_image(tag):
     """Get a random image from Flickr using the passed in term as a tag"""
-    # tag = (tag + u', plant').encode('utf-8')
+
     r = flickr.photos.search(api_key=flickr_api_key, tags=tag.encode('utf-8'), format='json',
                              nojsoncallback=1, per_page=40)
 
