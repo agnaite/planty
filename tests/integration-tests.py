@@ -3,15 +3,12 @@
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 import unittest
-from server import app
-
 
 class IntegrationTests(unittest.TestCase):
     """Tests overall app functionality"""
 
     def setUp(self):
         self.driver = webdriver.PhantomJS()
-        self.app.run(host="localhost", port=6969)
         self.driver.get("http://localhost:6969")
         
 
@@ -40,7 +37,6 @@ class IntegrationTests(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-        self.app.quit()
 
 
 # runs the unit tests in the module
