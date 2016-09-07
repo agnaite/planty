@@ -9,7 +9,7 @@ class IntegrationTests(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.PhantomJS()
-        self.driver.get("http://localhost:6969")
+        self.driver.get("http://localhost:5000")
         
 
     def test_homepage_loads(self):
