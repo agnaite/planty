@@ -17,7 +17,7 @@ class IntegrationTests(unittest.TestCase):
 
         driver = self.driver
 
-        assert "planty" in driver.title
+        self.assertIn("planty", driver.title)
 
     def test_search_for_plant(self):
         """Checks if able to search for a plant by name"""
@@ -28,8 +28,8 @@ class IntegrationTests(unittest.TestCase):
         element.send_keys("orchid")
         element.send_keys(Keys.RETURN)
 
-        assert "Orchid Plant" in driver.page_source
-        assert "No plants found." not in driver.page_source
+        self.assertIn("Orchid Plant", driver.page_source)
+        self.assertNotIn("No plants found.", driver.page_source)
         links = driver.find_elements_by_link_text('Orchid')
 
         links[0].click()
