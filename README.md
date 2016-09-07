@@ -9,7 +9,7 @@ Planty takes the mystery out of keeping plants alive! Intended for both the novi
 * [Tech Stack](#tech-stack)
 * [Features](#features)
 * [Setup/Installation](#installation)
-* [Version 2.0](#future)
+* [To-Do](#future)
 * [License](#license)
 
 ## <a name="tech-stack"></a>Tech Stack
@@ -23,15 +23,15 @@ __APIs:__ Flickr, Twilio <br/>
 Search for plants by name, water, sun, temperature, or humidity needs. User account registration not required.
   
 ![Plant Search Logged out](/static/img/_readme-img/search-loggedout.gif)
-
+<br/><br/><br/>
 Register or login to edit a plant.
   
 ![Edit Plant](/static/img/_readme-img/edit-plant.gif)
-
+<br/><br/><br/>
 Add and remove plants from your account.
   
 ![Add Plant](/static/img/_readme-img/adding-plant.gif)
-
+<br/><br/><br/>
 Schedule watering💦 reminders for your plants.
   
 ![Schedule Reminder](/static/img/_readme-img/scheduling-reminder.gif)
@@ -42,7 +42,7 @@ Schedule watering💦 reminders for your plants.
 
 - Install PostgreSQL
 - Python 2.7
-- Flickr📸 and Twilio📞 API keys
+- Flickr and Twilio API keys
 
 To have this app running on your local computer, please follow the below steps:
 
@@ -62,7 +62,7 @@ Install dependencies🔗:
 ```
 $ pip install -r requirements.txt
 ```
-Get your own secret keys🔑 for [Flickr](https://www.flickr.com/services/developer) and [Twilio](https://www.twilio.com/doers). Save them to a file <kbd>secrets.py</kbd>. Your file should look something like this:
+Get your own secret keys🔑 for [Flickr](https://www.flickr.com/services/developer) and [Twilio](https://www.twilio.com/doers). Save them to a file `secrets.py`. Your file should look something like this:
 ```
 APP_KEY = 'xyz'
 FLICKR_API_KEY = 'abc'
@@ -87,7 +87,7 @@ If you want to use SQLAlchemy to query the database, run in interactive mode
 $ python -i model.py
 ```
 
-## <a name="future"></a>Version 2.0✨
+## <a name="future"></a>To-Do✨
 * Add ability for users to communicate
 * Add rating system for plants
 * Show recently added plants
