@@ -12,13 +12,14 @@ class IntegrationTests(unittest.TestCase):
         self.driver = webdriver.PhantomJS()
 
     def test_webserver_works(self):
-        self.assertNotEqual(self.driver.get("http://localhost:5000").page_source, '')
+        self.driver.get("http://localhost:5000")
+        self.assertNotEqual(self.driver.page_source, '')
 
     def test_homepage_loads(self):
         """Checks if homepage loads"""
 
         self.driver.get("http://localhost:5000")
-        self.assertIn("planty", driver.title)
+        self.assertIn("planty", self.driver.title)
 
 
     def test_search_for_plant(self):
