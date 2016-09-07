@@ -1,6 +1,6 @@
 .home-search {
   width: 80%;
-  margin: 240px auto 0 auto;
+  margin: 200px auto 0 auto;
 
   @media screen and (max-width: 560px) {
     margin-top: 100px;
@@ -8,7 +8,7 @@
 }
 
 .home-search-filters {
-  margin: 140px auto 0 auto;
+  margin: 80px auto 0 auto;
 }
 
 .home-search fieldset {
@@ -170,7 +170,7 @@
 
   &:hover {
     text-decoration: none;
-    color: $blue;
+    color: $dark-pink;
   }
 }
 

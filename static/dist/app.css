@@ -7161,7 +7161,8 @@ button.close {
   outline: none !important; }
 
 body {
-  background-color: #f8f7f4; }
+  background-color: #f8f7f4;
+  padding-bottom: 60px; }
 
 .container {
   font-family: "Menlo", sans-serif;
@@ -7254,13 +7255,13 @@ body {
 
 .home-search {
   width: 80%;
-  margin: 240px auto 0 auto; }
+  margin: 200px auto 0 auto; }
   @media screen and (max-width: 560px) {
     .home-search {
       margin-top: 100px; } }
 
 .home-search-filters {
-  margin: 140px auto 0 auto; }
+  margin: 80px auto 0 auto; }
 
 .home-search fieldset {
   margin-top: 15px; }
@@ -7434,7 +7435,7 @@ body {
   color: #babab7; }
   .search-results__link:hover {
     text-decoration: none;
-    color: #2b2dfa; }
+    color: #c782a2; }
 
 .plant__wrapper {
   width: 90%;
@@ -7582,7 +7583,7 @@ body {
   margin: 60px auto; }
 
 .user__img {
-  width: 40%; }
+  width: 30%; }
 
 .user-info__text {
   width: 40%; }
@@ -7811,7 +7812,8 @@ form form input.ng-invalid.ng-touched {
   border-color: #ed91c5; }
 
 .form__greeting {
-  margin: 80px auto 4r0px auto;
+  padding-right: 15px;
+  margin: 80px auto 40px auto;
   max-width: 45%;
   text-align: center;
   color: #a1a19d;
