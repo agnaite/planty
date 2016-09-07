@@ -1,4 +1,4 @@
-# <img src="/static/img/_readme-img/readme-logo.png" width="300">
+# <img src="/static/img/_readme-img/readme-logo.png">
 
 [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
 
