@@ -5,9 +5,9 @@ import json
 
 db = SQLAlchemy()
 
-
 ####################################################################
 # Model definitions
+
 
 class Plant(db.Model):
     """Plant. A plant has many users"""
@@ -79,9 +79,6 @@ class Plant(db.Model):
         if self.humidity:
             return Plant.HUMIDITY[self.humidity][key]
 
-    # def __repr__(self):
-    #     return "<{}, {}.>".format(self.name.encode('utf-8').strip(), self.species.encode('utf-8').strip())
-
 
 class User(db.Model):
     """User. A user has many plants."""
@@ -138,14 +135,6 @@ def example_data():
                       misc=plant['value'][0].encode('utf-8').strip())
             ]
             db.session.add_all(plants_411)
-
-    test_plants = [
-        Plant(name='Baby Donkey Tail',
-              species='Succulent',
-              image="http://worldofsucculents.com/wp-content/uploads/2013/09/Sedum-burrito-Burro’s-Tail-Baby-Donkey-Tail1.jpg",
-              water="Moderately Moist",
-              sun="Bright Light")
-    ]
 
     db.session.commit()
 

@@ -312,7 +312,6 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
     loadUserPage();
     $scope.days = new Set();
     clearModal();
-
   };
 
   $scope.removeReminder = function(plant_id) {

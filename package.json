@@ -11,7 +11,7 @@
     "build-js": "browserify static/js/app.js > static/dist/app.js",
     "build-css": "node-sass static/css/app.scss static/dist/app.css",
     "build": "npm run lint && npm run build-js",
-    "lint": "jshint static/js/*.js",
+    "lint": " static/js/*.js",
     "watch-css": "nodemon -L -e scss --ignore node_modules/ --watch 'static/css/*.scss' -x \"npm run build-css\"",
     "watch-js": "nodemon -L -e js  --ignore node_modules/ --ignore static/dist --watch 'static/js/*.js' -x \"npm run build-js\"",
     "watch": "npm run watch-js & npm run watch-css"
@@ -35,7 +35,7 @@
     "maxcomplexity": 10,
     "maxerr": 10,
     "maxlen": 115,
-    "maxparams": 8,
+    "maxparams": 6,
     "node": true,
     "sub": true,
     "supernew": true,
@@ -64,5 +64,5 @@
     "nodemon": "~1.10.2",
     "sweetalert": "~1.1.3",
     "phantomjs": "~2.1.7"
-  }
+   }
 }

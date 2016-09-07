@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from model import connect_to_db, User, Plant, PlantUser
 from twilio.rest import TwilioRestClient
 import secret
