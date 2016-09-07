@@ -1,5 +1,6 @@
-# <img src="/static/img/planty-tiny.png" width="30"> planty  [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
+# <img src="/static/img/_readme-img/readme-logo.png" width="280">
 
+[![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
 
 Planty takes the mystery out of keeping plants alive! Intended for both the novice and the seasoned professional, this app provides concise, user-friendly guidance on how to take care of houseplants. Users can search for plants by name or plant profile, add new plants to the database, edit current plants, and schedule watering reminders for plants🍃 they own.
 
@@ -11,7 +12,7 @@ Planty takes the mystery out of keeping plants alive! Intended for both the novi
 * [Version 2.0](#future)
 * [License](#license)
 
-## <a name="tech-stack"></a>Tech Stack 📡
+## <a name="tech-stack"></a>Tech Stack
 
 __Frontend:__ HTML5, Sass, AngularJS💕, Javascript, jQuery, Bootstrap <br/>
 __Backend:__ Python, Flask, PostgreSQL, SQLAlchemy, Scrapy <br/>
@@ -69,7 +70,7 @@ FLICKR_API_SECRET = 'abc'
 TWILIO_SID = 'abc'
 TWILIO_AUTH = 'abc'
 ```
-Create database 'plants'🌿.
+Create database 'plants'.
 ```
 $ createdb plants
 ```
