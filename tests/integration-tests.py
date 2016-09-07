@@ -3,6 +3,7 @@
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 import unittest
+from server import app
 
 
 class IntegrationTests(unittest.TestCase):
@@ -10,7 +11,9 @@ class IntegrationTests(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.PhantomJS()
-        self.driver.get("http://localhost:5000")
+        self.app.run(host="localhost", port=6969)
+        self.driver.get("http://localhost:6969")
+        
 
     def test_homepage_loads(self):
         """Checks if homepage loads"""
@@ -37,6 +40,7 @@ class IntegrationTests(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
+        self.app.quit()
 
 
 # runs the unit tests in the module
