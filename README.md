@@ -87,7 +87,7 @@ If you want to use SQLAlchemy to query the database, run in interactive mode
 $ python -i model.py
 ```
 
-## <a name="future"></a>To-Do✨
+## <a name="future"></a>TODO✨
 * Add ability for users to communicate
 * Add rating system for plants
 * Show recently added plants
