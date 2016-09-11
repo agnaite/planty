@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from system import os
+import os
 from flask import Flask, render_template, request, jsonify, session
 from flask_assets import Environment
 import simplejson

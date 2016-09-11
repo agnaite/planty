@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from model import connect_to_db, User, Plant, PlantUser
-from system import os
+import os
 from twilio.rest import TwilioRestClient
 import secret
 import datetime
