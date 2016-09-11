@@ -73,16 +73,12 @@
 
 .user-plants__thumb {
   height: 340px;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .user-plants__crop {
   max-height: 212px;
   overflow: hidden; 
-}
-
-.user-plants__img {
-  @include crop-img();
 }
 
 .checkbox-wrapper {

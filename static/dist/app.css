@@ -7655,18 +7655,11 @@ body {
 
 .user-plants__thumb {
   height: 340px;
-  overflow: scroll; }
+  overflow: hidden; }
 
 .user-plants__crop {
   max-height: 212px;
   overflow: hidden; }
-
-.user-plants__img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto !important;
-  -ms-interpolation-mode: bicubic; }
 
 .checkbox-wrapper {
   width: 75%;
