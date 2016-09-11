@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from system import os
 from flask import Flask, render_template, request, jsonify, session
 from flask_assets import Environment
 import simplejson
@@ -518,6 +519,9 @@ def get_flickr_image(tag):
 if __name__ == "__main__":
 
     connect_to_db(app)
-    app.debug = True
+    # app.debug = False
 
-    app.run(host="0.0.0.0")
+    DEBUG = "NO_DEBUG" not in os.environ
+
+    PORT = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
