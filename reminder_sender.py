@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from model import connect_to_db, User, Plant, PlantUser
+from system import os
 from twilio.rest import TwilioRestClient
 import secret
 import datetime
 import pytz
 
-account_sid = secret.TWILIO_SID
-auth_token = secret.TWILIO_AUTH
+account_sid = os.environ.get("TWILIO_SID", secret.TWILIO_SID)
+auth_token = os.environ.get("TWILIO_TOKEN", secret.TWILIO_AUTH)
 _client = TwilioRestClient(account_sid, auth_token)
 
 

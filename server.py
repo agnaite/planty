@@ -19,10 +19,10 @@ assets = Environment(app)
 
 app.jinja_env.undefined = StrictUndefined
 assets.url = app.static_url_path
-app.config['ASSETS_DEBUG'] = True
-app.secret_key = secret.APP_KEY
-flickr_api_key = secret.FLICKR_API_KEY
-flickr_api_secret = secret.FLICKR_API_SECRET
+# app.config['ASSETS_DEBUG'] = True
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", secret.APP_KEY)
+flickr_api_key = os.environ.get("FLICKR_API_KEY", secret.FLICKR_API_KEY)
+flickr_api_secret = os.environ.get("FLICKR_API_SECRET", secret.FLICKR_API_SECRET)
 
 flickr_api.set_keys(api_key=flickr_api_key,
                     api_secret=flickr_api_secret)
@@ -518,7 +518,7 @@ def get_flickr_image(tag):
 
 if __name__ == "__main__":
 
-    connect_to_db(app)
+    connect_to_db(app, os.environ.get("DATABASE_URL"))
     # app.debug = False
 
     DEBUG = "NO_DEBUG" not in os.environ

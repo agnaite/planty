@@ -143,11 +143,12 @@ def example_data():
 # Helper functions
 
 
-def connect_to_db(app):
+def connect_to_db(app, db_uri=None):
     """Connect the database to the Flask app."""
 
     # Configure to use our database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///plants'
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgresql:///plants'
+
     app.config['SQLALCHEMY_ECHO'] = True
     db.app = app
     db.init_app(app)
