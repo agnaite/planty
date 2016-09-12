@@ -514,7 +514,6 @@ def get_flickr_image(tag):
     secret = random_img['secret']
 
     url = 'https://farm{}.staticflickr.com/{}/{}_{}.jpg'.format(farm_id, server_id, img_id, secret).encode('utf-8')
-    print url
 
     return url
 
@@ -527,4 +526,4 @@ if __name__ == "__main__":
     DEBUG = "NO_DEBUG" not in os.environ
 
     PORT = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", p
+    app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
