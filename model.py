@@ -157,6 +157,7 @@ def connect_to_db(app, db_uri=None):
 if __name__ == "__main__":
 
     from server import app
+    import os
     connect_to_db(app, os.getenv('DATABASE_URL'))
 
     # Create our tables and some sample data
