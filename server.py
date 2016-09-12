@@ -214,6 +214,9 @@ def process_registration():
                     confirmed_at=datetime.now())
 
     # adds the new user instance to the database and saves
+
+    print new_user
+
     db.session.add(new_user)
     db.session.commit()
 
