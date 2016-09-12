@@ -1,6 +1,6 @@
 node_modules
 env
 *.pyc
-secret.py
+secrets.sh
 .DS_Store
 ghostdriver.log

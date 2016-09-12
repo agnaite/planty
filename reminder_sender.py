@@ -3,12 +3,11 @@
 from model import connect_to_db, User, Plant, PlantUser
 import os
 from twilio.rest import TwilioRestClient
-import secret
 import datetime
 import pytz
 
-account_sid = os.environ.get("TWILIO_SID", secret.TWILIO_SID)
-auth_token = os.environ.get("TWILIO_TOKEN", secret.TWILIO_AUTH)
+account_sid = os.environ.get("TWILIO_SID", "LOCAL_TWILIO_SID")
+auth_token = os.environ.get("TWILIO_TOKEN", "LOCAL_TWILIO_AUTH")
 _client = TwilioRestClient(account_sid, auth_token)
 
 
