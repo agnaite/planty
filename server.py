@@ -511,6 +511,7 @@ def get_flickr_image(tag):
     secret = random_img['secret']
 
     url = 'https://farm{}.staticflickr.com/{}/{}_{}.jpg'.format(farm_id, server_id, img_id, secret).encode('utf-8')
+    print url
 
     return url
 
