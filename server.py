@@ -171,10 +171,6 @@ def process_login():
     username = request.form.get('username')
     user = User.query.filter_by(username=username).first()
 
-    print "Username is {}".format(username)
-    print "Hashed PW is {}".format(user.password)
-    print "Entered PW is {}".format(bcrypt.hashpw(request.form.get('password').encode('utf-8'), user.password.encode('utf-8'))).decode()
-
     # if username entered exists in db, gets the password entered and compares
     # it to the one in the database
     if user:
@@ -241,7 +237,7 @@ def update_user():
     user_id = request.form.get('id')
     user_to_update = User.query.get(int(user_id))
 
-    if user_to_update.password == str(hash(request.form.get('password'))):
+    if bcrypt.hashpw(request.form.get('password').encode('utf-8'), user_to_update.password.encode('utf-8')).decode() == user_to_update.password:
         if request.form.get('email'):
             user_to_update.email = request.form.get('email')
         if request.form.get('phone'):
