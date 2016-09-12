@@ -494,11 +494,18 @@ def get_plant_specs(plant, spec, key='description'):
 def get_flickr_image(tag):
     """Get a random image from Flickr using the passed in term as a tag"""
 
+    print '*' * 60
+    print tag
+    print flickr_api_key
+
     r = flickr.photos.search(api_key=flickr_api_key, tags=tag.encode('utf-8'), format='json',
                              nojsoncallback=1, per_page=40)
 
     output = simplejson.loads(r)
     image_lst = output.items()[0][1]['photo']
+
+    print image_lst
+    print '*' * 60
 
     if len(image_lst) == 1:
         random_img = image_lst[0]
