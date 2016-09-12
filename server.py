@@ -9,6 +9,7 @@ import flickr_api
 from flickr_api.api import flickr
 from jinja2 import StrictUndefined
 from datetime import datetime
+import bcrypt
 
 from model import connect_to_db, db, Plant, User, PlantUser
 
@@ -177,9 +178,8 @@ def process_login():
     # if username entered exists in db, gets the password entered and compares
     # it to the one in the database
     if user:
-        password = hash(request.form.get('password'))
         # if password is correct, adds user to the current session and redirects to home page
-        if user.password == str(password):
+        if user.password == bcrypt.hashpw(request.form.get('password'), user.password):
             session['logged_in'] = user.user_id
             print 'logged in'
             return jsonify(session)
@@ -208,7 +208,7 @@ def process_registration():
     new_user = User(username=request.form.get('username'),
                     first_name=request.form.get('fname'),
                     last_name=request.form.get('lname'),
-                    password=hash(request.form.get('password')),
+                    password=bcrypt.hashpw(request.form.get('password'), bcrypt.gensalt()),
                     email=request.form.get('email'),
                     image=request.form.get('image'),
                     phone=request.form.get('phone'),
