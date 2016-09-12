@@ -502,6 +502,8 @@ def get_flickr_image(tag):
                              nojsoncallback=1, per_page=40)
 
     output = simplejson.loads(r)
+    print r
+
     image_lst = output.items()[0][1]['photo']
 
     print image_lst
