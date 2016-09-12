@@ -173,13 +173,13 @@ def process_login():
 
     print "Username is {}".format(username)
     print "Hashed PW is {}".format(user.password)
-    print "Entered PW is {}".format(hash(request.form.get('password')))
+    print "Entered PW is {}".format(bcrypt.hashpw(request.form.get('password').encode('utf-8'), user.password.encode('utf-8'))).decode()
 
     # if username entered exists in db, gets the password entered and compares
     # it to the one in the database
     if user:
         # if password is correct, adds user to the current session and redirects to home page
-        if user.password == bcrypt.hashpw(request.form.get('password'), user.password):
+        if bcrypt.hashpw(request.form.get('password').encode('utf-8'), user.password.encode('utf-8')).decode() == user.password:
             session['logged_in'] = user.user_id
             print 'logged in'
             return jsonify(session)
@@ -203,12 +203,11 @@ def process_logout():
 @app.route('/process_registration', methods=['POST'])
 def process_registration():
     """Processes user registration form"""
-
     # creates a new user instance
     new_user = User(username=request.form.get('username'),
                     first_name=request.form.get('fname'),
                     last_name=request.form.get('lname'),
-                    password=bcrypt.hashpw(request.form.get('password'), bcrypt.gensalt()),
+                    password=bcrypt.hashpw(request.form.get('password').encode('utf-8'), bcrypt.gensalt()),
                     email=request.form.get('email'),
                     image=request.form.get('image'),
                     phone=request.form.get('phone'),
@@ -528,4 +527,4 @@ if __name__ == "__main__":
     DEBUG = "NO_DEBUG" not in os.environ
 
     PORT = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
+    app.run(host="0.0.0.0", p
