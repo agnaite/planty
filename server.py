@@ -170,6 +170,10 @@ def process_login():
     username = request.form.get('username')
     user = User.query.filter_by(username=username).first()
 
+    print "Username is {}".format(username)
+    print "Hashed PW is {}".format(user.password)
+    print "Entered PW is {}".format(hash(request.form.get('password')))
+
     # if username entered exists in db, gets the password entered and compares
     # it to the one in the database
     if user:

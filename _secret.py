@@ -1,5 +1,0 @@
-APP_KEY = '123'
-FLICKR_API_KEY = 'abc'
-FLICKR_API_SECRET = 'abc'
-TWILIO_SID = 'abc'
-TWILIO_AUTH = 'abc'
