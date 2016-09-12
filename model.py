@@ -89,7 +89,7 @@ class User(db.Model):
 
     # User authentication information
     username = db.Column(db.String(64), nullable=False, unique=True)
-    password = db.Column(db.Integer, nullable=False)
+    password = db.Column(db.String, nullable=False)
 
     # User email information
     email = db.Column(db.String(255), nullable=False, unique=True)
