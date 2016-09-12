@@ -3,6 +3,7 @@
 from flask_sqlalchemy import SQLAlchemy
 import json
 
+# needs to connect to os.getenv('DATABASE_URL')
 db = SQLAlchemy()
 
 ####################################################################
@@ -161,7 +162,7 @@ if __name__ == "__main__":
     connect_to_db(app, os.getenv('DATABASE_URL'))
 
     # Create our tables and some sample data
-    db.create_all()
-    example_data()
+    # db.create_all()
+    # example_data()
 
     print "Connected to DB."
