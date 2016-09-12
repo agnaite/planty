@@ -292,7 +292,7 @@ def does_user_own_plant():
 
     plant = Plant.query.get(int(request.form.get('plantId')))
 
-    if plant in user.plants:
+    if user.plants and plant in user.plants:
         return 'true'
     else:
         return 'false'

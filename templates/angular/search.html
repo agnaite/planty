@@ -62,7 +62,7 @@
           <li class='no-plants-found' ng-cloak>No plants found <i class="fa fa-frown-o fa-lg" aria-hidden="true"></i></li>
       </span>
       <ul class="search-results" ng-repeat='plant in foundPlants'>
-          <li class='search-results__item'><a class='search-results__link' ng-href='#plant/[[ plant.id ]]' ng-cloak>[[ plant.name ]]</a></li>
+          <li class='search-results__item'><a class='search-results__link' ng-click='loadPlant(plant.id)' ng-href='#plant/[[ plant.id ]]' ng-cloak>[[ plant.name ]]</a></li>
       </ul>
     </div>
   </div>
