@@ -417,34 +417,34 @@ app.controller('viewPlantCtrl', function($http,
   var plant_id = $routeParams.plantId;
 
   // gets data about plant specs for easy in-place editing
-  $scope.loadPlant = function(plantId) {
-    $http.get('/plant/' + plantId)
-    .then(function(response) {
-      $scope.plant = response.data;
-      $scope.plant.edited = false;
-      $scope.userHasPlant();
 
-      getPlantSpecsService.getHumidity(function(response) {
-        $scope.allHumid = response.data;
-        $scope.humidity = response.data[$scope.plant.humidity];
-      });
+  $http.get('/plant/' + plant_id)
+  .then(function(response) {
+    $scope.plant = response.data;
+    $scope.plant.edited = false;
+    $scope.userHasPlant();
 
-      getPlantSpecsService.getTemp(function(response) {
-        $scope.allTemp = response.data;
-        $scope.temperature = response.data[$scope.plant.temperature];
-      });
-
-      getPlantSpecsService.getSun(function(response) {
-        $scope.allSun = response.data;
-        $scope.sun = response.data[$scope.plant.sun];
-      });
-
-      getPlantSpecsService.getWater(function(response) {
-        $scope.allWater = response.data;
-        $scope.water = response.data[$scope.plant.water];
-      });
+    getPlantSpecsService.getHumidity(function(response) {
+      $scope.allHumid = response.data;
+      $scope.humidity = response.data[$scope.plant.humidity];
     });
-  };
+
+    getPlantSpecsService.getTemp(function(response) {
+      $scope.allTemp = response.data;
+      $scope.temperature = response.data[$scope.plant.temperature];
+    });
+
+    getPlantSpecsService.getSun(function(response) {
+      $scope.allSun = response.data;
+      $scope.sun = response.data[$scope.plant.sun];
+    });
+
+    getPlantSpecsService.getWater(function(response) {
+      $scope.allWater = response.data;
+      $scope.water = response.data[$scope.plant.water];
+    });
+  });
+
 
   //get flickr image url on click of button from Flask
   $scope.getFlickrImg = function() {

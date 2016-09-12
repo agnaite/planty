@@ -5463,6 +5463,7 @@ app.controller('viewPlantCtrl', function($http,
   var plant_id = $routeParams.plantId;
 
   // gets data about plant specs for easy in-place editing
+
   $http.get('/plant/' + plant_id)
   .then(function(response) {
     $scope.plant = response.data;
@@ -5488,8 +5489,8 @@ app.controller('viewPlantCtrl', function($http,
       $scope.allWater = response.data;
       $scope.water = response.data[$scope.plant.water];
     });
-
   });
+
 
   //get flickr image url on click of button from Flask
   $scope.getFlickrImg = function() {
