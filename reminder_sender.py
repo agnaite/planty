@@ -6,8 +6,8 @@ from twilio.rest import TwilioRestClient
 import datetime
 import pytz
 
-account_sid = os.environ.get("TWILIO_SID", "LOCAL_TWILIO_SID")
-auth_token = os.environ.get("TWILIO_TOKEN", "LOCAL_TWILIO_AUTH")
+account_sid = os.environ.get("TWILIO_SID")
+auth_token = os.environ.get("TWILIO_TOKEN")
 _client = TwilioRestClient(account_sid, auth_token)
 
 

@@ -19,9 +19,9 @@ assets = Environment(app)
 app.jinja_env.undefined = StrictUndefined
 assets.url = app.static_url_path
 # app.config['ASSETS_DEBUG'] = True
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "LOCAL_APP_KEY")
-flickr_api_key = os.environ.get("FLICKR_API_KEY", "LOCAL_FLICKR_API_KEY")
-flickr_api_secret = os.environ.get("FLICKR_API_SECRET", "LOCAL_FLICKR_API_SECRET")
+app.secret_key = os.environ.get("FLASK_SECRET_KEY")
+flickr_api_key = os.environ.get("FLICKR_API_KEY")
+flickr_api_secret = os.environ.get("FLICKR_API_SECRET")
 
 flickr_api.set_keys(api_key=flickr_api_key,
                     api_secret=flickr_api_secret)
