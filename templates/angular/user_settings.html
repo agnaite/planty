@@ -1,7 +1,7 @@
-<div ng-controller='userSettingsCtrl'>
+<div class='form__wrapper' ng-controller='userSettingsCtrl'>
   <h4 class='form__greeting'>Update fields below and enter your password to confirm changes ✍️</h4>
   <form class='form-horizontal col-sm-offset-2 settings-form' name='form' novalidate>
-    
+
     <div class='form-group'>
       <label for="username_field" class="col-sm-3 control-label">✉️ Update email</label>
       <div class="col-sm-4">
@@ -21,19 +21,19 @@
         </span>
       </div>
     </div>
-    
+
     <div class='form-group'>
       <label for="password_field" class="col-sm-3 control-label">Confirm password</label>
       <div class="col-sm-4">
         <input ng-model='updating.password' type="password" class="form-control" id="password_field" required>
       </div>
     </div>
-    
+
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-10">
         <button ng-disabled="form.$invalid" ng-click='submitUserUpdate()' class="btn btn-default form-submit">Update</button>
       </div>
     </div>
-    
+
   </form>
 </div>

@@ -1,4 +1,4 @@
-<div ng-controller='addUserCtrl'>
+<div class='form__wrapper' ng-controller='addUserCtrl'>
   <h4 class='form__greeting'>Fill out to register 🍃</h4>
   <form class='form-horizontal col-sm-offset-3 user-form' name='form' nonvalidate>
 
@@ -17,7 +17,7 @@
     </div>
 
     <div class='form-group'>
-      <label for="img_field" class="col-sm-2 control-label">Planty icon</label>
+      <label for="img_field" class="col-sm-2 control-label form__planty-icon">Planty icon</label>
       <input ng-model='user.image'type='radio' name='image' value='/static/img/nature.svg' required>
       <img class='user__icon' src="/static/img/nature.svg">
       <input ng-model='user.image' type='radio' name='image' value='/static/img/plant-1.svg'>
@@ -57,7 +57,7 @@
         </span>
       </div>
     </div>
-    
+
     <div class='form-group'>
       <label for="password_field" class="col-sm-2 control-label">Password</label>
       <div class="col-sm-4">

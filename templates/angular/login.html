@@ -1,4 +1,4 @@
-<div ng-controller='userCtrl'>
+<div class='form__wrapper' ng-controller='userCtrl'>
   <h4 class='form__greeting'>Hi there!</h4>
   <form class='form-horizontal col-sm-offset-3 login-form' name='form' novalidate>
     <div class='form-group'>
@@ -7,7 +7,7 @@
         <input ng-model='user.username' type="text" class="form-control" id="username_field" required>
       </div>
     </div>
-    
+
     <div class='form-group'>
       <label for="password_field" class="col-sm-2 control-label">Password</label>
       <div class="col-sm-4">
@@ -20,6 +20,6 @@
         <button ng-disabled="form.$invalid" ng-click='submitLogin()' class="btn btn-default form-submit">Login</button>
       </div>
     </div>
-    
+
   </form>
 </div>

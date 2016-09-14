@@ -7714,6 +7714,11 @@ body {
   position: absolute;
   width: 1px; }
 
+@media screen and (max-width: 760px) {
+  .form__wrapper {
+    width: 90%;
+    margin: 0 auto; } }
+
 .form-img-field {
   width: 58%;
   display: inline; }
@@ -7730,6 +7735,11 @@ body {
 
 .user__icon {
   width: 50px; }
+
+@media screen and (max-width: 760px) {
+  .form__planty-icon::after {
+    content: "\A";
+    white-space: pre; } }
 
 .form-flickr-btn {
   border: none;
@@ -7811,3 +7821,7 @@ form form input.ng-invalid.ng-touched {
   text-align: center;
   color: #a1a19d;
   font-weight: 300; }
+  @media screen and (max-width: 760px) {
+    .form__greeting {
+      max-width: 90%;
+      padding: 0; } }
