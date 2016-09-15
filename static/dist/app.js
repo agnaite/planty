@@ -5466,6 +5466,7 @@ app.controller('viewPlantCtrl', function($http,
 
   $http.get('/plant/' + plant_id)
   .then(function(response) {
+    $route.reload();
     $scope.plant = response.data;
     $scope.plant.edited = false;
     $scope.userHasPlant();
@@ -5496,15 +5497,20 @@ app.controller('viewPlantCtrl', function($http,
   $scope.getFlickrImg = function() {
     var attempts = 0;
 
+    function error() {
+      console.log('attempt:', attempts);
+      attempts < 5 ? setTimeout(attempt, 100) : flash("Flickr could not find this plant" + " 🙄");
+    }
+
     function attempt() {
+      attempts++;
       $scope.loading = true;
       $http.get('/get_flickr_img/' + $scope.plant.name)
       .success(function(data) {
         console.log(arguments);
         $scope.loading = false;
         if (data === 'No image found.') {
-          console.log('attempt:', attempts)
-          ++attempts < 5 ? setTimeout(attempt, 100) : flash("Flickr could not find this plant" + " 🙄");
+          error();
         } else {
           $scope.plant.image = data;
           $scope.plant.edited = true;
@@ -5512,7 +5518,7 @@ app.controller('viewPlantCtrl', function($http,
       })
       .error(function(data) {
         console.log(arguments);
-        ++attempts < 5 && setTimeout(attempt, 100);
+        error();
       });
     }
 
