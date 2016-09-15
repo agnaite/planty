@@ -5509,6 +5509,10 @@ app.controller('viewPlantCtrl', function($http,
           $scope.plant.image = data;
           $scope.plant.edited = true;
         }
+      })
+      .error(function(data) {
+        console.log(arguments);
+        ++attempts < 5 && setTimeout(attempt, 100);
       });
     }
 
