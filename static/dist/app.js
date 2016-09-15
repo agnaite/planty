@@ -5494,20 +5494,25 @@ app.controller('viewPlantCtrl', function($http,
 
   //get flickr image url on click of button from Flask
   $scope.getFlickrImg = function() {
-    $scope.loading = true;
-    $http.get('/get_flickr_img/' + $scope.plant.name)
-    .success(function(data) {
-      $scope.loading = false;
-      if (data === 'No image found.') {
-        flash("Flickr could not find this plant" + " 🙄");
-      } else {
-        $scope.plant.image = data;
-        $scope.plant.edited = true;
-      }
-    })
-    .error(function(data) {
-      console.log(arguments)
-    });
+    var attempts = 0;
+
+    function attempt() {
+      $scope.loading = true;
+      $http.get('/get_flickr_img/' + $scope.plant.name)
+      .success(function(data) {
+        console.log(arguments);
+        $scope.loading = false;
+        if (data === 'No image found.') {
+          console.log('attempt:', attempts)
+          ++attempts < 5 ? setTimeout(attempt, 100) : flash("Flickr could not find this plant" + " 🙄");
+        } else {
+          $scope.plant.image = data;
+          $scope.plant.edited = true;
+        }
+      });
+    }
+
+    attempt();
   };
 
   // on click of the save button, sends all the data in the fields to flask to update db
