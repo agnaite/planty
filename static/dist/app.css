@@ -7166,7 +7166,7 @@ body {
 
 .container {
   font-family: "Menlo", sans-serif;
-  font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
+  font-family: 'Menlo', monospace;
   width: 100%;
   padding: 0; }
 
@@ -7200,7 +7200,7 @@ body {
       padding-bottom: 20px; } }
 
 .navbar-default .navbar-nav > li > a {
-  font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
+  font-family: 'Menlo', monospace;
   color: #FFF;
   font-size: 1.2em;
   margin-top: 20px; }
@@ -7210,7 +7210,7 @@ body {
     color: #FFF; }
 
 .navbar-default .navbar-brand {
-  font-family: 'Maison Neue TRIAL', 'Menlo', sans-serif;
+  font-family: 'Menlo', monospace;
   color: #FFF;
   font-size: 1.75em;
   font-weight: 700;
@@ -7733,13 +7733,21 @@ body {
 .fa {
   color: #ed91c5; }
 
-.user__icon {
-  width: 50px; }
+.radio-image {
+  display: inline-block; }
 
-@media screen and (max-width: 760px) {
-  .form__planty-icon::after {
-    content: "\A";
-    white-space: pre; } }
+.radio-image__image {
+  width: 50px;
+  opacity: 0.5; }
+
+.radio-image__input:enabled + .radio-image__image {
+  cursor: pointer; }
+
+.radio-image__input:focus + .radio-image__image {
+  opacity: .75; }
+
+.radio-image__input:checked + .radio-image__image {
+  opacity: 1; }
 
 .form-flickr-btn {
   border: none;

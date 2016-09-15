@@ -5098,7 +5098,7 @@ app.config(function($routeProvider, $interpolateProvider, $locationProvider) {
 // LOGIN ***************************************************************
 
 app.controller('userCtrl', function($scope, $http, $location, $route, $routeParams, $rootScope, $cookies) {
-    // adds active class to navbar link if user on specific page 
+    // adds active class to navbar link if user on specific page
     $scope.getClass = function (path) {
     return ($location.path().substr(0, path.length) === path) ? 'selected' : '';
   };
@@ -5122,7 +5122,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
       }
     });
   };
-  
+
   // Checks if a user is currently logged in
   $scope.isLoggedIn = function() {
     return $cookies.get('logged_in');
@@ -5162,7 +5162,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
 // SEARCH ***************************************************************
 
 app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routeParams, getPlantSpecsService) {
-  
+
   $scope.searchSubmit = function() {
     console.log('im here!');
     var data = { 'name': $scope.searchText,
@@ -5184,13 +5184,13 @@ app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routePa
 
   $scope.applyFilter = function(filter, spec) {
     var index = $.inArray(filter, Object.keys($scope.filters));
-    
+
     if (index === -1) {
       $scope.filters[filter] = spec;
     } else {
         delete $scope.filters[filter];
     }
-    
+
     $scope.searchSubmit();
   };
 
@@ -5213,13 +5213,13 @@ app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routePa
     getPlantSpecsService.getWater(function(response) {
       $scope.allWater = response.data;
     });
-    
+
 });
 
 // USER SETTINGS ***************************************************************
 
 app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
-  
+
   function loadUserSettings() {
     $http.get('/user/' + $scope.isLoggedIn())
     .then(function(response) {
@@ -5252,7 +5252,7 @@ app.controller('userSettingsCtrl', function($scope, $http, $location, $route) {
 
 app.controller('addUserCtrl', function($scope, $http, $route, $location, $cookies) {
   $scope.master = {};
-  // on register button click, send user filled data to Flask 
+  // on register button click, send user filled data to Flask
   $scope.update = function(user) {
     $scope.master = angular.copy(user);
      $http({
@@ -5289,7 +5289,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
   $scope.days = new Set();
 
   loadUserPage();
-  
+
   $scope.propertyName = 'name';
   $scope.reverse = false;
 
@@ -5316,7 +5316,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
     });
   }
 
-  // Reminders ****************************** 
+  // Reminders ******************************
 
   $scope.checkDay = function(e) {
     $(e.target).toggleClass('day__checked');
@@ -5353,7 +5353,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
       } else {
         flash("Please add a phone number in user settings to schedule reminders 🙃");
       }
-        
+
     });
     loadUserPage();
     $scope.days = new Set();
@@ -5396,7 +5396,7 @@ app.controller('userProfileCtrl', function($scope, $http, $route, $location, $ro
 app.controller('addPlantCtrl', function($scope, $http, $location, $route, getPlantSpecsService) {
   $scope.master = {};
 
-  // on add plant button click, send user filled data to Flask 
+  // on add plant button click, send user filled data to Flask
   $scope.update = function(plant) {
     $scope.master = angular.copy(plant);
      $http({
@@ -5504,6 +5504,9 @@ app.controller('viewPlantCtrl', function($http,
         $scope.plant.image = data;
         $scope.plant.edited = true;
       }
+    })
+    .error(function(data) {
+      console.log(arguments)
     });
   };
 
@@ -5595,7 +5598,7 @@ app.controller('viewPlantCtrl', function($http,
     });
   };
 
-  // asks flask if logged in user has already added the plant 
+  // asks flask if logged in user has already added the plant
   $scope.userHasPlant = function(){
      var data = {
         'userId': $scope.isLoggedIn(),
@@ -5640,6 +5643,7 @@ app.service('getPlantSpecsService', function($http){
 });
 
 })(window.angular);
+
 },{"./flash":28,"angular-cookies":2,"angular-route":4,"bootstrap":5,"sweetalert":26}],28:[function(require,module,exports){
 module.exports = function flash(flashMsg) {
   $('.flash').html(flashMsg);

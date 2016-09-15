@@ -22,15 +22,29 @@
   color: $pink;
 }
 
-.user__icon {
-  width: 50px;
+.radio-image {
+  display: inline-block;
 }
 
-@media screen and (max-width: 760px) {
-  .form__planty-icon::after {
-    content: "\A";
-    white-space: pre;
-  }
+.radio-image__input {
+
+}
+
+.radio-image__image {
+  width: 50px;
+  opacity: 0.5;
+}
+
+.radio-image__input:enabled + .radio-image__image {
+  cursor: pointer;
+}
+
+.radio-image__input:focus + .radio-image__image {
+  opacity: .75;
+}
+
+.radio-image__input:checked + .radio-image__image {
+  opacity: 1;
 }
 
 .form-flickr-btn {
