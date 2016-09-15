@@ -22,12 +22,17 @@
   color: $pink;
 }
 
+.form__legend {
+  border: none;
+  font-weight: 600;
+}
+
 .radio-image {
   display: inline-block;
 }
 
-.radio-image__input {
-
+.radio-image__image {
+  margin: 0 8px;
 }
 
 .radio-image__image {

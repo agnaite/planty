@@ -5164,7 +5164,6 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
 app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routeParams, getPlantSpecsService) {
 
   $scope.searchSubmit = function() {
-    console.log('im here!');
     var data = { 'name': $scope.searchText,
                  'filters': $.param($scope.filters)
                };
@@ -5466,7 +5465,6 @@ app.controller('viewPlantCtrl', function($http,
 
   $http.get('/plant/' + plant_id)
   .then(function(response) {
-    $route.reload();
     $scope.plant = response.data;
     $scope.plant.edited = false;
     $scope.userHasPlant();
@@ -5499,7 +5497,7 @@ app.controller('viewPlantCtrl', function($http,
 
     function error() {
       console.log('attempt:', attempts);
-      attempts < 5 ? setTimeout(attempt, 100) : flash("Flickr could not find this plant" + " 🙄");
+      attempts < 5 ? setTimeout(attempt, 1) : flash("Flickr could not find this plant" + " 🙄");
     }
 
     function attempt() {

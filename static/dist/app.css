@@ -7733,8 +7733,15 @@ body {
 .fa {
   color: #ed91c5; }
 
+.form__legend {
+  border: none;
+  font-weight: 600; }
+
 .radio-image {
   display: inline-block; }
+
+.radio-image__image {
+  margin: 0 8px; }
 
 .radio-image__image {
   width: 50px;
