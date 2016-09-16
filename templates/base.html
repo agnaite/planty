@@ -5,6 +5,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href='/static/dist/app.css'>
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 
 </head>
 <body ng-app='planty'>
@@ -37,7 +38,7 @@
                   <br>View Profile
                 </a></li>
                 <li><a ng-href='#user/settings/[[ isLoggedIn() ]]'>Settings</a></li>
-                <li><a ng-href='' ng-click="logout()">Logout</a></li>
+                <li><a class='btn__logout' ng-href='#' ng-click="logout()">Logout</a></li>
               </ul>
             </li>
 
@@ -55,13 +56,13 @@
     <div class='templateView' ng-view></div>
 
   </div><!-- /.container -->
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://use.fontawesome.com/4bf6806d57.js"></script>
-  
+
   <script src='/static/dist/app.js'></script>
   <script src='/static/js/validations.js'></script>
-  
+
 </body>
 </html>

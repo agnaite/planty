@@ -7165,8 +7165,7 @@ body {
   padding-bottom: 60px; }
 
 .container {
-  font-family: "Menlo", sans-serif;
-  font-family: 'Menlo', monospace;
+  font-family: 'Inconsolata', monospace;
   width: 100%;
   padding: 0; }
 
@@ -7200,21 +7199,23 @@ body {
       padding-bottom: 20px; } }
 
 .navbar-default .navbar-nav > li > a {
-  font-family: 'Menlo', monospace;
   color: #FFF;
-  font-size: 1.2em;
+  font-size: 1.4em;
+  cursor: pointer;
   margin-top: 20px; }
   .navbar-default .navbar-nav > li > a:hover {
     color: #fff89a; }
   .navbar-default .navbar-nav > li > a:focus {
     color: #FFF; }
 
+.btn__logout {
+  cursor: pointer; }
+
 .navbar-default .navbar-brand {
-  font-family: 'Menlo', monospace;
   color: #FFF;
-  font-size: 1.75em;
-  font-weight: 700;
-  letter-spacing: 2px; }
+  font-size: 2em;
+  cursor: pointer;
+  font-weight: 700; }
   .navbar-default .navbar-brand:hover {
     color: #fff89a; }
   .navbar-default .navbar-brand:focus {
@@ -7293,12 +7294,13 @@ body {
 
 .filters legend {
   margin: 10px 0;
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   border: none;
   color: #6e6e6a; }
 
 .filters__label {
+  font-size: 15px;
   width: auto;
   text-align: center;
   padding: 6px 10px;
@@ -7381,9 +7383,9 @@ body {
   color: #f8f7f4;
   border-radius: 10px;
   background-color: #f4bddc;
-  padding: 22px 20px;
+  padding: 22px;
   float: right;
-  font-size: 1.25em;
+  font-size: 1.4em;
   margin-top: 10px; }
   .search-btn:hover, .search-btn:focus, .search-btn:active, .search-btn:active:focus {
     background-color: #f8d3e8 !important;
@@ -7551,9 +7553,12 @@ body {
 .table-head {
   font-weight: 700; }
 
+.btn {
+  font-size: 16px; }
+
 .sorting-text {
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: #6e6e6a; }
 
@@ -7594,7 +7599,7 @@ body {
 
 .user-info__plants {
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: #babab7; }
 
@@ -7735,7 +7740,8 @@ body {
 
 .form__legend {
   border: none;
-  font-weight: 600; }
+  font-weight: 600;
+  font-size: 1.1em; }
 
 .radio-image {
   display: inline-block; }
@@ -7763,8 +7769,9 @@ body {
   border-radius: 6px;
   background-color: #5d5efb;
   display: inline;
-  font-size: 11px;
-  padding: 15px 10px 10px 10px; }
+  font-size: 12px;
+  padding: 15px 15px 10px 15px;
+  width: 100%; }
   .form-flickr-btn:hover, .form-flickr-btn:focus, .form-flickr-btn:active, .form-flickr-btn:active:focus {
     background-color: #7677fc !important;
     border-color: #4446fb !important;

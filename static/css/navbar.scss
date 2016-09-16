@@ -13,19 +13,21 @@
 }
 
 .navbar-default .navbar-nav>li>a {
-  @include Maison-Bold;
-  @include links(1.2em);
+  @include links(1.4em);
   margin-top: 20px;
   &:focus {
     color: $white;
   }
 }
 
+.btn__logout {
+  cursor: pointer;
+}
+
 .navbar-default .navbar-brand {
-  @include Maison-Bold;
-  @include links(1.75em);
+  @include links(2em);
   font-weight: 700;
-  letter-spacing: 2px;
+  // letter-spacing: 1px;
 
   &:focus {
     color: $white;
@@ -39,7 +41,7 @@
 .navbar-brand .brand-img {
   display: inline-block;
   width: 20px;
-  margin-right: 10px; 
+  margin-right: 10px;
   padding-bottom: 24px;
 }
 
@@ -81,4 +83,3 @@
   height: 100%;
   margin-left: 0px;
 }
-

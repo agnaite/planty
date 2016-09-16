@@ -1,6 +1,10 @@
+.btn {
+  font-size: 16px;
+}
+
 .sorting-text {
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: darken($gray, 30%);
 }
@@ -36,9 +40,9 @@
   color: darken($gray, 5%);
 }
 
-.user-info__plants {  
+.user-info__plants {
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: $gray;
 }
@@ -58,7 +62,7 @@
                        $border-bottom:4px,
                        $radius: 6px);
   color: darken($gray, 30%);
-  
+
   &:hover {
     color: darken($gray, 30%);
   }
@@ -78,7 +82,7 @@
 
 .user-plants__crop {
   max-height: 212px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .checkbox-wrapper {
@@ -96,7 +100,7 @@
                        $border-bottom:5px,
                        $radius: 8px)
   color: darken($gray, 30%);
-  
+
   &:hover {
     color: darken($gray, 30%);
   }
@@ -115,6 +119,5 @@
   overflow: hidden;
   padding: 0;
   position: absolute;
-  width: 1px; 
+  width: 1px;
 }
-

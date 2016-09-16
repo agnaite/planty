@@ -25,6 +25,7 @@
 .form__legend {
   border: none;
   font-weight: 600;
+  font-size: 1.1em;
 }
 
 .radio-image {
@@ -57,8 +58,9 @@
                        $radius: 6px,
                        $color: $blue);
   display: inline;
-  font-size: 11px;
-  padding: 15px 10px 10px 10px;
+  font-size: 12px;
+  padding: 15px 15px 10px 15px;
+  width: 100%;
 }
 
 .form-flickr-btn[disabled],

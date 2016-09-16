@@ -13,8 +13,7 @@ body {
 }
 
 .container {
-  font-family: $menlo;
-  @include Maison-Bold;
+  font-family: 'Inconsolata', monospace;
   width: 100%;
   padding: 0;
 }
