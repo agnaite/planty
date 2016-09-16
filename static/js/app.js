@@ -458,7 +458,7 @@ app.controller('viewPlantCtrl', function($http,
       attempts++;
       $scope.loading = true;
       $http.get('/get_flickr_img/' + $scope.plant.name)
-      .success(function(data) {
+      .then(function(data) {
         console.log(arguments);
         $scope.loading = false;
         if (data === 'No image found.') {
@@ -467,9 +467,9 @@ app.controller('viewPlantCtrl', function($http,
           $scope.plant.image = data;
           $scope.plant.edited = true;
         }
-      })
-      .error(function(data) {
-        console.log(arguments);
+      }, function(response) {
+        console.log(response.data);
+        console.log(response.status);
         error();
       });
     }
