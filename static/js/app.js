@@ -458,13 +458,13 @@ app.controller('viewPlantCtrl', function($http,
       attempts++;
       $scope.loading = true;
       $http.get('/get_flickr_img/' + $scope.plant.name)
-      .then(function(data) {
+      .then(function(response) {
         console.log(arguments);
         $scope.loading = false;
         if (data === 'No image found.') {
           error();
         } else {
-          $scope.plant.image = data;
+          $scope.plant.image = response.data;
           $scope.plant.edited = true;
         }
       }, function(response) {
