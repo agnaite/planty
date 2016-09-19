@@ -461,7 +461,7 @@ app.controller('viewPlantCtrl', function($http,
       .then(function(response) {
         console.log(arguments);
         $scope.loading = false;
-        if (data === 'No image found.') {
+        if (response.data === 'No image found.') {
           error();
         } else {
           $scope.plant.image = response.data;
