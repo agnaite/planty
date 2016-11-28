@@ -40,7 +40,7 @@ Schedule watering💦 reminders for your plants.
 
 ####Requirements:
 
-- Install PostgreSQL
+- PostgreSQL
 - Python 2.7
 - Flickr and Twilio API keys
 

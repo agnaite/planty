@@ -5161,7 +5161,7 @@ app.controller('userCtrl', function($scope, $http, $location, $route, $routePara
 
 // SEARCH ***************************************************************
 
-app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routeParams, getPlantSpecsService) {
+app.controller('homeCtrl', function($scope, $http, $location, $timeout, $route, $routeParams, getPlantSpecsService) {
 
   $scope.searchSubmit = function() {
     var data = { 'name': $scope.searchText,
@@ -5212,6 +5212,10 @@ app.controller('homeCtrl', function($scope, $http, $location, $timeout, $routePa
     getPlantSpecsService.getWater(function(response) {
       $scope.allWater = response.data;
     });
+
+    $scope.viewPlant = function() {
+      $route.reload();
+    };
 
 });
 
