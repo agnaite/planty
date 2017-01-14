@@ -106,7 +106,7 @@ angular.module("planty")
     link: function(scope, elm, attrs, ctrl) {
 
       ctrl.$asyncValidators.phone = function(modelValue, viewValue) {
-
+        console.log(modelValue);
         if (ctrl.$isEmpty(modelValue)) {
           // consider empty model valid
           return $q.when();
@@ -117,11 +117,17 @@ angular.module("planty")
         $timeout(function() {
           // Mock a delayed response
 
-          if ((modelValue.length == 10) && (/^[0-9]+$/.test(modelValue))) {
-            def.resolve();
-          } else {
-            def.reject();
-          }
+          $http.get('/is_phone_number/' + modelValue)
+            .then(function(results) {
+              
+              console.log(results);
+
+            if ((modelValue.length == 10) && (/^[0-9]+$/.test(modelValue)) && (results.data == 'False')) {
+              def.resolve();
+            } else {
+              def.reject();
+            }
+          });
         }, 500);
 
         return def.promise;

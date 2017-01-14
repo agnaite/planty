@@ -138,6 +138,23 @@ def check_if_username_is_taken(username):
         return "False"
 
 
+@app.route('/is_phone_number/<phone>')
+def check_if_phone_is_taken(phone):
+    """Checks if a phone number is already in the database"""
+
+    phone = phone
+    user = User.query.filter_by(phone=phone).first()
+
+    print '-' * 40
+
+    if user:
+        print '*' * 40
+        return "True"
+    else:
+        print '*' * 40
+        return "False"
+
+
 @app.route('/get_profile_img', methods=['POST'])
 def retrieve_user_image():
     """Gets the profile image of the current user."""
@@ -199,6 +216,7 @@ def process_logout():
 @app.route('/process_registration', methods=['POST'])
 def process_registration():
     """Processes user registration form"""
+
     # creates a new user instance
     new_user = User(username=request.form.get('username'),
                     first_name=request.form.get('fname'),
