@@ -19,7 +19,7 @@ assets = Environment(app)
 
 app.jinja_env.undefined = StrictUndefined
 assets.url = app.static_url_path
-# app.config['ASSETS_DEBUG'] = True
+app.config['ASSETS_DEBUG'] = True
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 flickr_api_key = os.environ.get("FLICKR_API_KEY")
 flickr_api_secret = os.environ.get("FLICKR_API_SECRET")
@@ -194,8 +194,8 @@ def process_login():
         # if password is correct, adds user to the current session and redirects to home page
         if bcrypt.hashpw(request.form.get('password').encode('utf-8'), user.password.encode('utf-8')).decode() == user.password:
             session['logged_in'] = user.user_id
-            print 'logged in'
-            return jsonify(session)
+            response = {'logged_in': user.user_id}
+            return jsonify(response)
         # if password is incorrect, redirects to login page
         else:
             return 'error'
