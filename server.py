@@ -5,8 +5,7 @@ from flask import Flask, render_template, request, jsonify, session
 from flask_assets import Environment
 import simplejson
 import random
-import flickr_api
-from flickr_api.api import flickr
+import flickrapi 
 from jinja2 import StrictUndefined
 from datetime import datetime
 import bcrypt
@@ -22,11 +21,11 @@ assets.url = app.static_url_path
 app.config['ASSETS_DEBUG'] = False
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
+
 flickr_api_key = os.environ.get("FLICKR_API_KEY")
 flickr_api_secret = os.environ.get("FLICKR_API_SECRET")
 
-flickr_api.set_keys(api_key=flickr_api_key,
-                    api_secret=flickr_api_secret)
+flickr = flickrapi.FlickrAPI(flickr_api_key, flickr_api_secret)
 
 
 # Basic Routes *********************************
@@ -513,20 +512,12 @@ def get_plant_specs(plant, spec, key='description'):
 def get_flickr_image(tag):
     """Get a random image from Flickr using the passed in term as a tag"""
 
-    print('*' * 60)
-    print(tag)
-    print(flickr_api_key)
-
     r = flickr.photos.search(api_key=flickr_api_key, tags=tag.encode('utf-8'), format='json',
                              nojsoncallback=1, per_page=40)
 
     output = simplejson.loads(r)
-    print(r)
 
     image_lst = list(output.items())[0][1]['photo']
-
-    print(image_lst)
-    print('*' * 60)
 
     if len(image_lst) == 1:
         random_img = image_lst[0]
@@ -535,15 +526,12 @@ def get_flickr_image(tag):
     else:
         random_img = image_lst[random.randint(0, len(image_lst)-1)]
 
-    print(random_img)
-
     farm_id = random_img['farm']
     server_id = random_img['server']
     img_id = random_img['id']
     secret = random_img['secret']
 
     url = "https://farm{}.staticflickr.com/{}/{}_{}.jpg".format(farm_id, server_id, img_id, secret)
-    print(url)
 
     return url
 
