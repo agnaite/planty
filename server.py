@@ -19,7 +19,8 @@ assets = Environment(app)
 
 app.jinja_env.undefined = StrictUndefined
 assets.url = app.static_url_path
-app.config['ASSETS_DEBUG'] = True
+app.config['ASSETS_DEBUG'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 flickr_api_key = os.environ.get("FLICKR_API_KEY")
 flickr_api_secret = os.environ.get("FLICKR_API_SECRET")
