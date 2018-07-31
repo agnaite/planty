@@ -19,7 +19,8 @@ assets = Environment(app)
 
 app.jinja_env.undefined = StrictUndefined
 assets.url = app.static_url_path
-app.config['ASSETS_DEBUG'] = True
+app.config['ASSETS_DEBUG'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 flickr_api_key = os.environ.get("FLICKR_API_KEY")
 flickr_api_secret = os.environ.get("FLICKR_API_SECRET")
@@ -81,7 +82,7 @@ def search_for_plant():
 
     if filter_results:
         results = list(set(results).intersection(filter_results))
-        print results
+        print(results)
 
     plants_found = {}
 
@@ -145,13 +146,13 @@ def check_if_phone_is_taken(phone):
     phone = phone
     user = User.query.filter_by(phone=phone).first()
 
-    print '-' * 40
+    print('-' * 40)
 
     if user:
-        print '*' * 40
+        print('*' * 40)
         return "True"
     else:
-        print '*' * 40
+        print('*' * 40)
         return "False"
 
 
@@ -229,7 +230,7 @@ def process_registration():
 
     # adds the new user instance to the database and saves
 
-    print new_user
+    print(new_user)
 
     db.session.add(new_user)
     db.session.commit()
@@ -512,20 +513,20 @@ def get_plant_specs(plant, spec, key='description'):
 def get_flickr_image(tag):
     """Get a random image from Flickr using the passed in term as a tag"""
 
-    print '*' * 60
-    print tag
-    print flickr_api_key
+    print('*' * 60)
+    print(tag)
+    print(flickr_api_key)
 
     r = flickr.photos.search(api_key=flickr_api_key, tags=tag.encode('utf-8'), format='json',
                              nojsoncallback=1, per_page=40)
 
     output = simplejson.loads(r)
-    print r
+    print(r)
 
-    image_lst = output.items()[0][1]['photo']
+    image_lst = list(output.items())[0][1]['photo']
 
-    print image_lst
-    print '*' * 60
+    print(image_lst)
+    print('*' * 60)
 
     if len(image_lst) == 1:
         random_img = image_lst[0]
@@ -534,7 +535,7 @@ def get_flickr_image(tag):
     else:
         random_img = image_lst[random.randint(0, len(image_lst)-1)]
 
-    print random_img
+    print(random_img)
 
     farm_id = random_img['farm']
     server_id = random_img['server']
@@ -542,7 +543,7 @@ def get_flickr_image(tag):
     secret = random_img['secret']
 
     url = "https://farm{}.staticflickr.com/{}/{}_{}.jpg".format(farm_id, server_id, img_id, secret)
-    print url
+    print(url)
 
     return url
 

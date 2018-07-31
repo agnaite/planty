@@ -2,16 +2,15 @@
 
 from model import connect_to_db, User, Plant, PlantUser
 import os
-from twilio.rest import TwilioRestClient
+from twilio.rest import Client 
 import datetime
 import pytz
 
 account_sid = os.environ.get("TWILIO_SID")
 auth_token = os.environ.get("TWILIO_TOKEN")
-_client = TwilioRestClient(account_sid, auth_token)
+_client = Client(account_sid, auth_token)
 
-
-def send_sms(day, name, num):
+def send_sms(name, num):
 
     message = _client.messages.create(
         to='+1'+num,
@@ -32,7 +31,7 @@ def schedule_reminders(plant_user):
 
     for day in plant_user.get_watering_days():
         if today == day:
-            send_sms(day, plant_name, user_num)
+            send_sms(plant_name, user_num)
 
 
 def main():
