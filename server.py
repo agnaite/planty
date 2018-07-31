@@ -29,6 +29,12 @@ flickr_api_secret = os.environ.get("FLICKR_API_SECRET")
 print("*" * 20)
 print(sys.version_info[0])
 
+print("*" * 20)
+assert isinstance(flickr_api_key, str), "nope"
+
+print("*" * 20)
+print("type is %r" % (type(flickr_api_key)))
+
 flickr = flickrapi.FlickrAPI(flickr_api_key, flickr_api_secret)
 
 
