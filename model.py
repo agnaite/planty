@@ -128,12 +128,12 @@ def example_data():
         data = json.load(data_file)
 
     for plant in data:
-        if plant['name'] and plant['species']:
+        if plant['name'] and plant['species'] and len(plant['species']) < 64:
 
             plants_411 = [
-                Plant(name=plant['name'][0].encode('utf-8').strip(),
-                      species=plant['species'][0].encode('utf-8').strip(),
-                      misc=plant['value'][0].encode('utf-8').strip())
+                Plant(name=plant['name'][0].strip(),
+                      species=plant['species'][0].strip(),
+                      misc=plant['value'][0].strip())
             ]
             db.session.add_all(plants_411)
 
