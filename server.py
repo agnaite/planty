@@ -25,6 +25,9 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 flickr_api_key = os.environ.get("FLICKR_API_KEY")
 flickr_api_secret = os.environ.get("FLICKR_API_SECRET")
 
+print("*" * 20)
+print(sys.system_version[0]
+
 flickr = flickrapi.FlickrAPI(flickr_api_key, flickr_api_secret)
 
 
