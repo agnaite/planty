@@ -222,7 +222,7 @@ def process_registration():
     new_user = User(username=request.form.get('username'),
                     first_name=request.form.get('fname'),
                     last_name=request.form.get('lname'),
-                    password=bcrypt.hashpw(request.form.get('password').encode('utf-8'), bcrypt.gensalt()),
+                    password=bcrypt.hashpw(request.form.get('password').encode('utf-8'), bcrypt.gensalt()).decode('utf-8'),
                     email=request.form.get('email'),
                     image=request.form.get('image'),
                     phone=request.form.get('phone'),
