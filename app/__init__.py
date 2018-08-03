@@ -33,12 +33,9 @@ db.create_all()
 #     return render_template('404.html'), 404
 
 # Import a module / component using its blueprint handler variable (mod_auth)
-from app.server import server as server_module
+from app import server 
 
 # Register blueprint(s)
-app.register_blueprint(server_module)
+# app.register_blueprint(server_module)
 # app.register_blueprint(xyz_module)
-# ..
 
-# Build the database:
-# This will create the database file using SQLAlchemy

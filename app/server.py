@@ -14,7 +14,7 @@ from app import app
 
 flickr = flickrapi.FlickrAPI(app.config['FLICKR_API_KEY'], app.config['FLICKR_API_SECRET'])
 
-server = Blueprint('server', __name__, template_folder='templates')
+# server = Blueprint('server', __name__, template_folder='templates')
 
 # Basic Routes *********************************
 
