@@ -8,12 +8,12 @@
     "test": "tests"
   },
   "scripts": {
-    "build-js": "browserify static/js/app.js > static/dist/app.js",
-    "build-css": "node-sass static/css/app.scss static/dist/app.css",
+    "build-js": "browserify app/static/js/app.js > app/static/dist/app.js",
+    "build-css": "node-sass app/static/css/app.scss> app/static/dist/app.css",
     "build": "npm run lint && npm run build-js",
-    "lint": " static/js/*.js",
-    "watch-css": "nodemon -L -e scss --ignore node_modules/ --watch 'static/css/*.scss' -x \"npm run build-css\"",
-    "watch-js": "nodemon -L -e js  --ignore node_modules/ --ignore static/dist --watch 'static/js/*.js' -x \"npm run build-js\"",
+    "lint": "app/static/js/*.js",
+    "watch-css": "nodemon -L -e scss --ignore node_modules/ --watch 'app/static/css/*.scss' -x \"npm run build-css\"",
+    "watch-js": "nodemon -L -e js  --ignore node_modules/ --ignore app/static/dist --watch 'static/js/*.js' -x \"npm run build-js\"",
     "watch": "npm run watch-js & npm run watch-css"
   },
   "jshintConfig": {

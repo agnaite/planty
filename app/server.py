@@ -1,40 +1,28 @@
 # -*- coding: utf-8 -*-
-
+from flask import Blueprint, request, render_template, \
+                  jsonify, session, redirect, url_for
 import sys
 import os
-from flask import Flask, render_template, request, jsonify, session
-from flask_assets import Environment
 import simplejson
 import random
 import flickrapi 
-from jinja2 import StrictUndefined
 from datetime import datetime
 import bcrypt
 
-from model import connect_to_db, db, Plant, User, PlantUser
+from app.model import db, Plant, User, PlantUser
+from app import app
 
-app = Flask(__name__)
+flickr = flickrapi.FlickrAPI(app.config['FLICKR_API_KEY'], app.config['FLICKR_API_SECRET'])
 
-assets = Environment(app)
-
-app.jinja_env.undefined = StrictUndefined
-assets.url = app.static_url_path
-app.config['ASSETS_DEBUG'] = False
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = os.environ.get("FLASK_SECRET_KEY")
-
-flickr_api_key = os.environ.get("FLICKR_API_KEY")
-flickr_api_secret = os.environ.get("FLICKR_API_SECRET")
-
-flickr = flickrapi.FlickrAPI(flickr_api_key, flickr_api_secret)
-
+server = Blueprint('server', __name__, template_folder='templates')
 
 # Basic Routes *********************************
 
 @app.route('/')
 def index_page():
     """Show index page."""
-
+    print("in route")
+            
     return render_template("base.html")
 
 
@@ -50,7 +38,7 @@ def search_for_plant():
     """Retrieves search results from database."""
 
     search_term = request.form.get('name')
-    filters = '&' + request.form.get('filters').encode('utf-8')
+    filters = '&' + request.form.get('filters')
     filters = filters.replace('%20', " ").split('&')[1:]
 
     # make dict out of the unicode string passed from angular
@@ -513,7 +501,7 @@ def get_plant_specs(plant, spec, key='description'):
 def get_flickr_image(tag):
     """Get a random image from Flickr using the passed in term as a tag"""
 
-    r = flickr.photos.search(api_key=flickr_api_key, tags=tag.encode('utf-8'), format='json',
+    r = flickr.photos.search(api_key=app.config['FLICKR_API_KEY'], tags=tag.encode('utf-8'), format='json',
                              nojsoncallback=1, per_page=40)
 
     output = simplejson.loads(r)

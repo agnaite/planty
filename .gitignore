@@ -3,4 +3,4 @@ env
 *.pyc
 secrets.*
 .DS_Store
-ghostdriver.log
+*cache*
