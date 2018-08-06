@@ -1,0 +1,38 @@
+{
+  "name": "planty",
+  "scripts": {
+  },
+  "env": {
+    "DEBUG": "1",
+    "FLASK_SECRET_KEY": {
+      "required": true
+    },
+    "FLICKR_API_KEY": {
+      "required": true
+    },
+    "FLICKR_API_SECRET": {
+      "required": true
+    },
+    "TWILIO_SID": {
+      "required": true
+    },
+    "TWILIO_TOKEN": {
+      "required": true
+    },
+    "DATABASE_URL": "postgresql://plants"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "scheduler"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
