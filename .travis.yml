@@ -6,4 +6,4 @@ before_script:
 - createdb plants
 - python model.py
 - python server.py &
-script: nosetests
+  #script: nosetests
