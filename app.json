@@ -1,0 +1,13 @@
+{
+  "name": "Planty",
+  "description": "Keep your plants alive.",
+  "website": "http://planty.untz.club",
+  "success_url": "/",
+  "addons": ["heroku-postgresql:hobby-dev", "papertrail"],
+  "env": {
+    "FLASK_SECRET_KEY": "review",
+    "DEBUG": "1"
+  },
+  "scripts": {
+  }
+}
