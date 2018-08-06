@@ -7,3 +7,8 @@ before_script:
 - python model.py
 - python server.py &
 script: nosetests
+
+# safelist
+branches:
+  only:
+  - master
