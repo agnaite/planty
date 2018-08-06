@@ -1,12 +1,6 @@
 language: python
 python:
-- 3.6.5
-install: pip install -r requirements.txt
-before_script:
-- createdb plants
-- python model.py
-- python server.py &
-script: nosetests
+- 3.6.6
 
 # safelist
 branches:

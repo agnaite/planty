@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from flask_sqlalchemy import SQLAlchemy
-import json
+from app import db
 
-# needs to connect to os.getenv('DATABASE_URL')
-db = SQLAlchemy()
+import json
 
 ####################################################################
 # Model definitions
@@ -30,28 +28,28 @@ class Plant(db.Model):
     def get_water_specs():
         """Get water json."""
 
-        with open('static/data/specs/water_specs.json') as data_file:
+        with open('app/static/data/specs/water_specs.json') as data_file:
             data = json.load(data_file)
         return data
 
     def get_sun_specs():
         """Get sun json."""
 
-        with open('static/data/specs/sun_specs.json') as data_file:
+        with open('app/static/data/specs/sun_specs.json') as data_file:
             data = json.load(data_file)
         return data
 
     def get_humid_specs():
         """Get sun json."""
 
-        with open('static/data/specs/humidity_specs.json') as data_file:
+        with open('app/static/data/specs/humidity_specs.json') as data_file:
             data = json.load(data_file)
         return data
 
     def get_temp_specs():
         """Get sun json."""
 
-        with open('static/data/specs/temp_specs.json') as data_file:
+        with open('app/static/data/specs/temp_specs.json') as data_file:
             data = json.load(data_file)
         return data
 
@@ -124,7 +122,7 @@ def example_data():
     """Create some sample data."""
 
     # convert json file into dictionary
-    with open('static/data/plant_results_with_child_nodes.json') as data_file:
+    with open('app/static/data/plant_results_with_child_nodes.json') as data_file:
         data = json.load(data_file)
 
     for plant in data:
@@ -144,13 +142,9 @@ def example_data():
 # Helper functions
 
 
-def connect_to_db(app, db_uri=None):
+def connect_to_db(app):
     """Connect the database to the Flask app."""
 
-    # Configure to use our database
-    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgresql:///plants'
-
-    app.config['SQLALCHEMY_ECHO'] = True
     db.app = app
     db.init_app(app)
 
