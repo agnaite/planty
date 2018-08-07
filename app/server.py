@@ -9,8 +9,8 @@ import flickrapi
 from datetime import datetime
 import bcrypt
 
-from app.model import db, Plant, User, PlantUser
-from app import app
+from app.model import Plant, User, PlantUser
+from app import app, db
 
 flickr = flickrapi.FlickrAPI(app.config['FLICKR_API_KEY'], app.config['FLICKR_API_SECRET'])
 

@@ -2,7 +2,7 @@ import os
 
 # Statement for enabling the development environment
 DEBUG = os.environ.get("DEBUG")
-DEVELOPMENT = os.environ.get("DEVELOPMENT")
+FLASK_ENV = os.environ.get("FLASK_ENV", "development")
 
 # Define the application directory
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
