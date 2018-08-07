@@ -1,7 +1,8 @@
 import os
 
 # Statement for enabling the development environment
-DEBUG = True
+DEBUG = os.environ.get("DEBUG")
+DEVELOPMENT = os.environ.get("DEVELOPMENT")
 
 # Define the application directory
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
@@ -20,5 +21,5 @@ FLICKR_API_KEY    = os.environ.get("FLICKR_API_KEY")
 FLICKR_API_SECRET = os.environ.get("FLICKR_API_SECRET")
 
 # TwilioAPI
-account_sid = os.environ.get("TWILIO_SID")
-auth_token  = os.environ.get("TWILIO_TOKEN")
+ACCOUNT_SID = os.environ.get("TWILIO_SID")
+AUTH_TOKEN  = os.environ.get("TWILIO_TOKEN")

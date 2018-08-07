@@ -6,7 +6,7 @@ from twilio.rest import Client
 import datetime
 import pytz
 
-_client = Client(account_sid, auth_token)
+_client = Client(app.config["TWILIO_SID"], app.config["TWILIO_TOKEN"])
 
 def send_sms(name, num):
 

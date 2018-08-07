@@ -7,6 +7,8 @@ from jinja2 import StrictUndefined
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
+from model import example_data
+
 # Define the WSGI application object
 app = Flask(__name__)
 
@@ -25,7 +27,9 @@ db = SQLAlchemy()
 db.app = app
 db.init_app(app)
 
-db.create_all()
+if app.config['DEVELOPMENT']:
+    db.create_all()
+    example_data()
 
 # Sample HTTP error handling
 # @app.errorhandler(404)
