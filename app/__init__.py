@@ -7,7 +7,7 @@ from jinja2 import StrictUndefined
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
-from model import example_data
+from app.model import example_data
 
 # Define the WSGI application object
 app = Flask(__name__)
