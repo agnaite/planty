@@ -25,11 +25,11 @@ db = SQLAlchemy()
 db.app = app
 db.init_app(app)
 
-if app.config['FLASK_ENV'] == "development":
-    from app.model import example_data
-    
-    db.create_all()
-    example_data()
+#if app.config['FLASK_ENV'] == "development":
+#    from app.model import example_data
+#    
+#    db.create_all()
+#    example_data()
 
 # Sample HTTP error handling
 # @app.errorhandler(404)
