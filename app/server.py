@@ -14,29 +14,23 @@ from app import app, db
 
 flickr = flickrapi.FlickrAPI(app.config['FLICKR_API_KEY'], app.config['FLICKR_API_SECRET'])
 
-# server = Blueprint('server', __name__, template_folder='templates')
-
 # Basic Routes *********************************
 
 @app.route('/')
 def index_page():
     """Show index page."""
-    print("in route")
-            
     return render_template("base.html")
 
 
 @app.route('/html_for_angular/<filename>')
 def html_for_angular(filename):
     """Sends html to angular."""
-
     return render_template('angular/{}'.format(filename))
 
 
 @app.route('/search', methods=['POST'])
 def search_for_plant():
     """Retrieves search results from database."""
-
     search_term = request.form.get('name')
     filters = '&' + request.form.get('filters')
     filters = filters.replace('%20', " ").split('&')[1:]
@@ -70,7 +64,6 @@ def search_for_plant():
 
     if filter_results:
         results = list(set(results).intersection(filter_results))
-        print(results)
 
     plants_found = {}
 
@@ -92,7 +85,6 @@ def search_for_plant():
 @app.route('/user/<user_id>')
 def get_user_info(user_id):
     """Retrieves user data based on the user ID."""
-
     user = User.query.get(user_id)
     user = user.__dict__
 
@@ -116,7 +108,6 @@ def check_if_username_is_taken(username):
     """Checks if a username has already been taken.
 
        Returns true if username exists, and false otherwise.
-
     """
     username = username.lower()
     user = User.query.filter_by(username=username).first()
@@ -130,26 +121,18 @@ def check_if_username_is_taken(username):
 @app.route('/is_phone_number/<phone>')
 def check_if_phone_is_taken(phone):
     """Checks if a phone number is already in the database"""
-
-    phone = phone
     user = User.query.filter_by(phone=phone).first()
 
-    print('-' * 40)
-
     if user:
-        print('*' * 40)
         return "True"
     else:
-        print('*' * 40)
         return "False"
 
 
 @app.route('/get_profile_img', methods=['POST'])
 def retrieve_user_image():
     """Gets the profile image of the current user."""
-
     user = User.query.get(request.form.get('user_id'))
-
     return user.image
 
 
@@ -158,7 +141,6 @@ def check_if_email_is_taken(email):
     """Checks if a email is already in use.
 
        Returns true if email exists, and false otherwise.
-
     """
     email = email.lower()
     user = User.query.filter_by(email=email).first()
@@ -171,7 +153,7 @@ def check_if_email_is_taken(email):
 
 @app.route('/process_login', methods=['POST'])
 def process_login():
-    """Processes user input and either logs user in if input is in database"""
+    """Processes user input and logs user in, if user exists and has the correct password."""
 
     # gets the user input from the username field and looks it up in the database
     username = request.form.get('username')
@@ -186,6 +168,7 @@ def process_login():
             response = {'logged_in': user.user_id}
             return jsonify(response)
         # if password is incorrect, redirects to login page
+        # TODO: differentiate between the two errors below
         else:
             return 'error'
     # if username is not in the database, redirects to the registration form
@@ -196,16 +179,13 @@ def process_login():
 @app.route('/process_logout')
 def process_logout():
     """Processes user logout"""
-
     del session['logged_in']
-
     return 'logged out'
 
 
 @app.route('/process_registration', methods=['POST'])
 def process_registration():
     """Processes user registration form"""
-
     # creates a new user instance
     new_user = User(username=request.form.get('username'),
                     first_name=request.form.get('fname'),
@@ -217,15 +197,11 @@ def process_registration():
                     confirmed_at=datetime.now())
 
     # adds the new user instance to the database and saves
-
-    print(new_user)
-
     db.session.add(new_user)
     db.session.commit()
 
     # logs new user in
     session['logged_in'] = new_user.user_id
-
     new_user = new_user.__dict__
 
     if '_sa_instance_state' in new_user:
@@ -240,7 +216,6 @@ def process_registration():
 @app.route('/process_user_update', methods=['POST'])
 def update_user():
     """Saves updated user info."""
-
     user_id = request.form.get('id')
     user_to_update = User.query.get(int(user_id))
 
@@ -262,7 +237,6 @@ def update_user():
 @app.route('/add_user_plant', methods=['POST'])
 def add_plant_to_user():
     """Add a plant to a User's account."""
-
     user_id = int(request.form.get('userId'))
     plant_id = int(request.form.get('plantId'))
 
@@ -277,7 +251,6 @@ def add_plant_to_user():
 @app.route('/remove_user_plant', methods=['POST'])
 def remove_plant_from_user():
     """Delete a plant from a User's account."""
-
     user_id = int(request.form.get('userId'))
     plant_id = int(request.form.get('plantId'))
 
@@ -308,7 +281,6 @@ def does_user_own_plant():
 @app.route('/process_new_reminder', methods=['POST'])
 def add_reminder():
     """Adds a watering reminder for a particular PlantUser"""
-
     user_id = int(request.form.getlist('user_id')[0].encode('utf-8'))
 
     if User.query.get(user_id).phone:
@@ -328,7 +300,6 @@ def add_reminder():
 @app.route('/delete_reminder', methods=['POST'])
 def delete_reminder():
     """Deletes a watering reminder for a particular PlantUser"""
-
     plant_id = int(request.form.getlist('plant_id')[0].encode('utf-8'))
     user_id = int(request.form.getlist('user_id')[0].encode('utf-8'))
 
@@ -346,12 +317,10 @@ def delete_reminder():
 @app.route('/plant/<plant_id>')
 def show_plant_details(plant_id):
     """Show individual plant's page"""
-
     found_plant = Plant.query.get(plant_id)
 
     if not found_plant.image:
         found_plant.image = "/static/img/placeholder-image.png"
-
         db.session.commit()
 
     found_plant = found_plant.__dict__
@@ -381,7 +350,6 @@ def get_all_plant_names(plant_name):
 @app.route('/get_flickr_img/<plant_name>')
 def get_flickr_img_url(plant_name):
     """Gets link for flickr image and returns to angular."""
-
     url = get_flickr_image(plant_name)
 
     if url:
@@ -440,7 +408,6 @@ def update_plant():
 @app.route('/process_delete', methods=['POST'])
 def process_delete():
     """Deletes plant from the database"""
-
     plant_id = int(request.form.get('plant_id'))
     plant = Plant.query.get(plant_id)
 
@@ -454,7 +421,6 @@ def process_delete():
 
 def get_reminder_status(user_id, plant_id):
     """Checks if PlantUser has an active reminder."""
-
     plant_user = PlantUser.query.filter(PlantUser.user_id == user_id, PlantUser.plant_id == plant_id).first()
 
     if plant_user.watering_schedule:
@@ -465,7 +431,6 @@ def get_reminder_status(user_id, plant_id):
 
 def get_user_plants(user_id):
     """Returns a list of plants a user has added."""
-
     user_plants = User.query.get(user_id).plants
 
     unpacked_user_plants = {}
@@ -485,7 +450,6 @@ def get_all_users():
 
 def get_plant_specs(plant, spec, key='description'):
     """Returns a specific plant attribute for a specific plant"""
-
     if spec == 'water':
         return plant.get_water(key)
     elif spec == 'sun':
@@ -500,7 +464,6 @@ def get_plant_specs(plant, spec, key='description'):
 
 def get_flickr_image(tag):
     """Get a random image from Flickr using the passed in term as a tag"""
-
     r = flickr.photos.search(api_key=app.config['FLICKR_API_KEY'], tags=tag.encode('utf-8'), format='json',
                              nojsoncallback=1, per_page=40)
 
