@@ -3,4 +3,6 @@ env
 *.pyc
 secrets.*
 .DS_Store
+*cache*
 ghostdriver.log
+package-lock.json

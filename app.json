@@ -19,7 +19,9 @@
     "TWILIO_TOKEN": {
       "required": true
     },
-    "DATABASE_URL": "postgresql://plants"
+    "DATABASE_URL": {
+      "required": true
+    }
   },
   "formation": {
     "web": {
