@@ -24,7 +24,6 @@ db = SQLAlchemy()
 
 db.app = app
 db.init_app(app)
-db.create_all()
 
 #if app.config['FLASK_ENV'] == "development":
 #    from app.model import example_data
