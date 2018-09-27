@@ -282,11 +282,11 @@ def does_user_own_plant():
 @app.route('/process_new_reminder', methods=['POST'])
 def add_reminder():
     """Adds a watering reminder for a particular PlantUser"""
-    user_id = int(request.form.getlist('user_id')[0].encode('utf-8'))
+    user_id = int(request.form.getlist('user_id')[0])
 
     if User.query.get(user_id).phone:
-        plant_id = int(request.form.getlist('plant_id')[0].encode('utf-8'))
-        days = request.form.getlist('days')[0].encode('utf-8')
+        plant_id = int(request.form.getlist('plant_id')[0])
+        days = request.form.getlist('days')[0]
 
         plant_user = PlantUser.query.filter(PlantUser.user_id == user_id, PlantUser.plant_id == plant_id).first()
         plant_user.watering_schedule = days
