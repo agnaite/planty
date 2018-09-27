@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from app import db
+from planty import db
 
 import json
 
@@ -28,28 +28,28 @@ class Plant(db.Model):
     def get_water_specs():
         """Get water json."""
 
-        with open('app/static/data/specs/water_specs.json') as data_file:
+        with open('planty/static/data/specs/water_specs.json') as data_file:
             data = json.load(data_file)
         return data
 
     def get_sun_specs():
         """Get sun json."""
 
-        with open('app/static/data/specs/sun_specs.json') as data_file:
+        with open('planty/static/data/specs/sun_specs.json') as data_file:
             data = json.load(data_file)
         return data
 
     def get_humid_specs():
         """Get sun json."""
 
-        with open('app/static/data/specs/humidity_specs.json') as data_file:
+        with open('planty/static/data/specs/humidity_specs.json') as data_file:
             data = json.load(data_file)
         return data
 
     def get_temp_specs():
         """Get sun json."""
 
-        with open('app/static/data/specs/temp_specs.json') as data_file:
+        with open('planty/static/data/specs/temp_specs.json') as data_file:
             data = json.load(data_file)
         return data
 
@@ -122,7 +122,7 @@ def example_data():
     """Create some sample data."""
 
     # convert json file into dictionary
-    with open('app/static/data/plant_results_with_child_nodes.json') as data_file:
+    with open('planty/static/data/plant_results_with_child_nodes.json') as data_file:
         data = json.load(data_file)
 
     for plant in data:

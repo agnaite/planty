@@ -37,7 +37,8 @@ db.init_app(app)
 #     return render_template('404.html'), 404
 
 # Import a module / component using its blueprint handler variable (mod_auth)
-from app import server 
+import planty.views
+import planty.reminder_sender
 
 # Register blueprint(s)
 # app.register_blueprint(server_module)

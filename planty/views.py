@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, request, render_template, \
+from flask import request, render_template, \
                   jsonify, session, redirect, url_for
 import sys
 import os
@@ -9,8 +9,9 @@ import flickrapi
 from datetime import datetime
 import bcrypt
 
-from app.model import Plant, User, PlantUser
-from app import app, db
+from planty.models import Plant, User, PlantUser
+from planty import app, db
+from planty import reminder_sender
 
 flickr = flickrapi.FlickrAPI(app.config['FLICKR_API_KEY'], app.config['FLICKR_API_SECRET'])
 

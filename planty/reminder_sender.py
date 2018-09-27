@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from model import connect_to_db, User, Plant, PlantUser
 import os
-from twilio.rest import Client 
 import datetime
 import pytz
+
+from planty import app
+from planty.models import connect_to_db, User, Plant, PlantUser
+from twilio.rest import Client 
 
 _client = Client(app.config["TWILIO_SID"], app.config["TWILIO_TOKEN"])
 
@@ -40,7 +42,6 @@ def main():
 
 if __name__ == '__main__':
 
-    from server import app
-    connect_to_db(app, os.environ.get("DATABASE_URL"))
+    connect_to_db(app, app.config("DATABASE_URL"))
 
     main()

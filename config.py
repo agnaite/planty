@@ -21,5 +21,5 @@ FLICKR_API_KEY    = os.environ.get("FLICKR_API_KEY")
 FLICKR_API_SECRET = os.environ.get("FLICKR_API_SECRET")
 
 # TwilioAPI
-ACCOUNT_SID = os.environ.get("TWILIO_SID")
-AUTH_TOKEN  = os.environ.get("TWILIO_TOKEN")
+TWILIO_SID = os.environ.get("TWILIO_SID")
+TWILIO_TOKEN  = os.environ.get("TWILIO_TOKEN")
