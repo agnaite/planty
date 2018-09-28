@@ -9,8 +9,8 @@ import flickrapi
 from datetime import datetime
 import bcrypt
 
-from planty.models import Plant, User, PlantUser
-from planty import app, db
+from planty.models import db, Plant, User, PlantUser
+from planty import app
 from planty import reminder_sender
 
 flickr = flickrapi.FlickrAPI(app.config['FLICKR_API_KEY'], app.config['FLICKR_API_SECRET'])
