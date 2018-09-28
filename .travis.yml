@@ -3,12 +3,9 @@ python:
 - 3.6.6
 install: pip install -r requirements.txt
 before_script:
-- createdb plants
 - createdb planty-test
-- python tests/planty_tests.py 
-- python run.py &
-script: nosetests
-
+script: python tests/planty_tests.py 
+ 
 # safelist
 branches:
   only:
