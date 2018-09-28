@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from planty import db
-
+# Import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 import json
+
+db = SQLAlchemy()
 
 ####################################################################
 # Model definitions
-
 
 class Plant(db.Model):
     """Plant. A plant has many users"""
@@ -142,8 +143,11 @@ def example_data():
 # Helper functions
 
 
-def connect_to_db(app):
+def connect_to_db(app, db_uri=None):
     """Connect the database to the Flask app."""
+    
+    if db_uri:
+        app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 
     db.app = app
     db.init_app(app)
