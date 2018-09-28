@@ -1,4 +1,4 @@
-# <img src="/static/img/_readme-img/readme-logo.png">
+# <img src="/planty/static/img/_readme-img/readme-logo.png">
 
 [![Build Status](https://travis-ci.org/agnaite/planty.svg?branch=master)](https://travis-ci.org/agnaite/planty)
 
@@ -22,19 +22,19 @@ __APIs:__ Flickr, Twilio <br/>
 
 Search for plants by name, water, sun, temperature, or humidity needs. User account registration not required.
   
-![Plant Search Logged out](/static/img/_readme-img/search-loggedout.gif)
+![Plant Search Logged out](/planty/static/img/_readme-img/search-loggedout.gif)
 <br/><br/><br/>
 Register or login to edit a plant.
   
-![Edit Plant](/static/img/_readme-img/edit-plant.gif)
+![Edit Plant](/planty/static/img/_readme-img/edit-plant.gif)
 <br/><br/><br/>
 Add and remove plants from your account.
   
-![Add Plant](/static/img/_readme-img/adding-plant.gif)
+![Add Plant](/planty/static/img/_readme-img/adding-plant.gif)
 <br/><br/><br/>
 Schedule watering💦 reminders for your plants.
   
-![Schedule Reminder](/static/img/_readme-img/scheduling-reminder.gif)
+![Schedule Reminder](/planty/static/img/_readme-img/scheduling-reminder.gif)
 
 ## <a name="installation"></a>Setup/Installation ⌨️
 
