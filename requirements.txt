@@ -9,7 +9,7 @@ Flask-Assets==0.12
 Flask-SQLAlchemy==2.3.2
 flickrapi==2.4.0
 future==0.16.0
-httplib2==0.11.3
+httplib2==0.18.0
 idna==2.7
 itsdangerous==0.24
 Jinja2==2.10
