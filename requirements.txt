@@ -30,6 +30,6 @@ simplejson==3.16.0
 six==1.11.0
 SQLAlchemy==1.2.10
 twilio==6.15.2
-urllib3==1.23
+urllib3==1.26.5
 webassets==0.12.1
 Werkzeug==0.14.1
